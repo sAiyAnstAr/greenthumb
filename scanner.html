@@ -118,6 +118,13 @@
             90% { opacity: 1; }
             100% { top: 100%; opacity: 0; }
         }
+        .processing-pulse {
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(.33); }
+            80%, 100% { opacity: 0; }
+        }
     </style>
 <style>
         body {
@@ -132,58 +139,51 @@
 <span class="material-symbols-outlined text-emerald-800" data-icon="close">close</span>
 </a>
 <h1 class="font-plus-jakarta-sans font-semibold tracking-tight text-emerald-800 text-lg">Plant Identifier</h1>
-<button class="hover:bg-stone-200/50 rounded-full transition-colors p-2 active:scale-95 transition-transform duration-150 flex items-center justify-center" id="toggle-flash">
-<span class="material-symbols-outlined text-emerald-800" data-icon="flash_on">flash_on</span>
-</button>
+<div class="w-10 h-10 flex items-center justify-center"></div>
 </header>
-<!-- Main Content: Scanner Canvas -->
+<!-- Main Content -->
 <main class="relative w-full h-[884px] flex flex-col">
 <!-- Viewfinder Section -->
-<section class="relative w-full h-[574px] md:h-[530px] bg-black overflow-hidden">
-<video autoplay="" class="absolute inset-0 w-full h-full object-cover hidden" id="camera-stream" muted="true" playsinline=""></video>
-<!-- Manual UI Overlay (Default State) -->
-<div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-40 p-8 text-center" id="camera-standby">
-<div class="bg-surface/10 p-8 rounded-[40px] backdrop-blur-xl border border-white/10 max-w-xs w-full">
-<div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-<span class="material-symbols-outlined text-primary-fixed text-4xl">photo_camera</span>
+<section class="relative w-full h-[574px] md:h-[530px] bg-stone-200 overflow-hidden">
+<!-- Background Image (Optional/Placeholder) -->
+<img alt="Plant identifier background" class="w-full h-full object-cover opacity-30 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoM_ue4eVmQpYRNFecADKlDafp6LN7L7xHWEXKiMEy5_Hub6BWciv3tY6op0uNGYvBj7Ly4DPV3cKRSLGTMdCnkB7seri2bOEe6XuXFM1lBBohs6Oc8mv7bFcSH3o4VUMGlJ_ZhNH87y51wGwSiD7c3k4vHJiOLA3ZAHbv4BsxIk1d9XO6jPc280MEeds3dgszSKCld0Re1N-YZd3vc6P7OCCvyPsnBgnLjeYy1XPiyyG9xcbSI8an1SHswMIKhX_l-8Te01n31w"/>
+<!-- Upload UI Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center" id="upload-container">
+<label class="group relative flex flex-col items-center justify-center bg-white/60 hover:bg-white/80 p-12 rounded-[40px] backdrop-blur-xl border-2 border-dashed border-primary/20 w-full max-w-xs cursor-pointer transition-all active:scale-95" for="camera-upload">
+<div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-5xl">photo_camera</span>
 </div>
-<h3 class="text-white font-headline-md mb-2">Camera Standby</h3>
-<p class="text-white/70 font-label-lg mb-8" id="camera-status-msg">Tap to activate your camera or upload a photo to identify.</p>
-<div class="flex flex-col gap-4">
-<button class="bg-primary text-on-primary px-6 py-4 rounded-full font-label-lg flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg shadow-primary/20" id="start-camera-manual">
-<span class="material-symbols-outlined">videocam</span>
-                            Start Camera
-                        </button>
-<div class="relative">
-<input accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="take-photo-fallback" type="file"/>
-<button class="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-label-lg flex items-center justify-center gap-2 border border-white/20 transition-colors">
-<span class="material-symbols-outlined">upload_file</span>
-                                Upload from Gallery
-                            </button>
+<h3 class="text-on-surface font-headline-md mb-2 leading-tight">Tap to take or upload a photo of your plant</h3>
+<p class="text-on-surface-variant font-label-lg opacity-70">Supports JPG, PNG</p>
+<input accept="image/*" capture="camera" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="camera-upload" type="file"/>
+</label>
+<div class="mt-8">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" onclick="document.getElementById('camera-upload').click()">
+<span class="material-symbols-outlined">camera</span>
+                    Take Photo
+                </button>
 </div>
 </div>
+<!-- Processing Overlay (Hidden by default) -->
+<div class="absolute inset-0 bg-white/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
+<div class="relative w-32 h-32 mb-8">
+<div class="absolute inset-0 bg-primary/20 rounded-full processing-pulse"></div>
+<div class="absolute inset-0 border-4 border-primary rounded-full animate-spin border-t-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl">eco</span>
 </div>
 </div>
-<div class="absolute inset-0 bg-white opacity-0 pointer-events-none z-50 transition-opacity duration-100" id="camera-flash"></div>
-<!-- Simulated Background -->
-<img alt="Plant being scanned" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoM_ue4eVmQpYRNFecADKlDafp6LN7L7xHWEXKiMEy5_Hub6BWciv3tY6op0uNGYvBj7Ly4DPV3cKRSLGTMdCnkB7seri2bOEe6XuXFM1lBBohs6Oc8mv7bFcSH3o4VUMGlJ_ZhNH87y51wGwSiD7c3k4vHJiOLA3ZAHbv4BsxIk1d9XO6jPc280MEeds3dgszSKCld0Re1N-YZd3vc6P7OCCvyPsnBgnLjeYy1XPiyyG9xcbSI8an1SHswMIKhX_l-8Te01n31w"/>
-<!-- Scanning Overlay -->
-<div class="absolute inset-0 flex items-center justify-center p-md pointer-events-none opacity-0 transition-opacity duration-500" id="scanning-grid">
+<h3 class="font-headline-md text-primary animate-pulse">Analyzing...</h3>
+<p class="text-on-surface-variant font-body-md mt-2">Our AI is identifying your plant</p>
+</div>
+<!-- Scanning Animation (Overlayed during processing) -->
+<div class="absolute inset-0 flex items-center justify-center p-md pointer-events-none opacity-0 transition-opacity duration-300" id="scanning-grid">
 <div class="relative w-full max-w-[320px] aspect-square">
-<!-- Glowing Corners -->
-<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-xl shadow-[0_0_15px_rgba(188,240,174,0.6)]"></div>
-<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-xl shadow-[0_0_15px_rgba(188,240,174,0.6)]"></div>
-<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-xl shadow-[0_0_15px_rgba(188,240,174,0.6)]"></div>
-<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-fixed rounded-br-xl shadow-[0_0_15px_rgba(188,240,174,0.6)]"></div>
-<!-- Scan Line Animation -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-xl"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-xl"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-xl"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-fixed rounded-br-xl"></div>
 <div class="scan-line"></div>
-</div>
-</div>
-<!-- Scan Status Badge -->
-<div class="absolute top-24 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 pointer-events-none hidden" id="status-badge">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
-<span class="text-white font-label-lg text-sm" id="badge-text">Analyzing leaf texture...</span>
 </div>
 </div>
 </section>
@@ -223,11 +223,11 @@
 </div>
 <!-- Primary Actions -->
 <div class="flex flex-col gap-4">
-<a class="w-full bg-primary text-on-primary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="scanner-result.html" id="capture-btn">
+<a class="w-full bg-primary text-on-primary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="scanner-result.html">
 <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
                         Add to My Garden
                     </a>
-<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="window.location.reload()">
+<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-upload').click()">
 <span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
                         Retake Photo
                     </button>
@@ -251,92 +251,23 @@
 </div>
 </nav>
 <script>
-        const video = document.getElementById('camera-stream');
-        const flash = document.getElementById('camera-flash');
-        const captureBtn = document.getElementById('capture-btn');
-        const standbyUI = document.getElementById('camera-standby');
-        const statusMsg = document.getElementById('camera-status-msg');
-        const startBtn = document.getElementById('start-camera-manual');
-        const photoFallbackInput = document.getElementById('take-photo-fallback');
+        const uploadInput = document.getElementById('camera-upload');
+        const processingOverlay = document.getElementById('processing-overlay');
         const scanningGrid = document.getElementById('scanning-grid');
-        const statusBadge = document.getElementById('status-badge');
 
-        async function initCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { 
-                        facingMode: 'environment',
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
-                    }
-                });
-                
-                video.srcObject = stream;
-                video.classList.remove('hidden');
-                
-                const playPromise = video.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        standbyUI.classList.add('hidden');
-                        scanningGrid.classList.remove('opacity-0');
-                        statusBadge.classList.remove('hidden');
-                    }).catch(err => {
-                        console.log('Autoplay blocked:', err);
-                        statusMsg.innerText = "Camera ready. Tap 'Start Camera' to begin streaming.";
-                    });
-                }
-            } catch (err) {
-                console.error("Camera error:", err);
-                if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                    statusMsg.innerText = 'Camera access denied. Please enable permissions in settings or use the upload option.';
-                } else {
-                    statusMsg.innerText = 'Could not access camera. Please use manual upload.';
-                }
-            }
-        }
-
-        // Manual Start
-        if (startBtn) {
-            startBtn.addEventListener('click', () => {
-                initCamera();
-            });
-        }
-
-        // Handle Manual File Upload
-        if (photoFallbackInput) {
-            photoFallbackInput.addEventListener('change', (e) => {
+        if (uploadInput) {
+            uploadInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
-                    standbyUI.classList.add('hidden');
-                    statusBadge.classList.remove('hidden');
-                    document.getElementById('badge-text').innerText = 'Processing uploaded photo...';
+                    // Show processing state
+                    processingOverlay.classList.remove('hidden');
+                    scanningGrid.classList.remove('opacity-0');
+                    
+                    // Simulate processing for 1.5 seconds
                     setTimeout(() => {
                         window.location.href = 'scanner-result.html';
-                    }, 1200);
+                    }, 1500);
                 }
             });
         }
-
-        // Shutter Logic
-        if (captureBtn) {
-            captureBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const href = captureBtn.getAttribute('href');
-                
-                captureBtn.style.transform = 'scale(0.95)';
-                flash.classList.remove('opacity-0');
-                flash.classList.add('opacity-100');
-                
-                setTimeout(() => {
-                    flash.classList.remove('opacity-100');
-                    flash.classList.add('opacity-0');
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 150);
-                }, 100);
-            });
-        }
-
-        // Manual start logic only - no automatic initCamera() on DOMContentLoaded
     </script>
 </body></html>
