@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenthumb - Budget &amp; Supplies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dbdad6",
+                        "secondary-container": "#fed3c7",
+                        "primary-fixed-dim": "#a1d494",
+                        "primary-container": "#2d5a27",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-primary-fixed": "#002201",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "tertiary-container": "#8d3220",
+                        "inverse-on-surface": "#f2f1ed",
+                        "surface-bright": "#faf9f5",
+                        "secondary": "#77574d",
+                        "secondary-fixed-dim": "#e7bdb1",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface": "#faf9f5",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#a1d494",
+                        "surface-tint": "#3b6934",
+                        "on-primary-container": "#9dd090",
+                        "on-tertiary-container": "#ffaf9e",
+                        "on-background": "#1b1c1a",
+                        "on-secondary-fixed-variant": "#5d4037",
+                        "surface-container-high": "#e9e8e4",
+                        "on-tertiary-fixed": "#3e0500",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c2c9bb",
+                        "tertiary-fixed": "#ffdad3",
+                        "on-tertiary-fixed-variant": "#802918",
+                        "surface-variant": "#e3e2df",
+                        "on-surface-variant": "#42493e",
+                        "on-secondary-container": "#795950",
+                        "surface-container": "#efeeea",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2f312e",
+                        "primary": "#154212",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1b1c1a",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#bcf0ae",
+                        "outline": "#72796e",
+                        "on-secondary-fixed": "#2c160e",
+                        "surface-container-low": "#f4f4f0",
+                        "surface-container-highest": "#e3e2df",
+                        "background": "#faf9f5",
+                        "tertiary": "#6e1c0c",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "container-margin": "20px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #faf9f5; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tap-highlight-none { -webkit-tap-highlight-color: transparent; }
+    </style>
+</head>
+<body class="font-body-md text-on-background min-h-screen pb-32">
+<!-- TopAppBar Component -->
+<header class="sticky top-0 w-full z-40 flex justify-between items-center px-6 py-4 bg-stone-50/90 dark:bg-stone-950/90 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-800 dark:text-green-400" data-icon="eco">eco</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-xl font-extrabold text-green-800 dark:text-green-400">Greenthumb</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container/20">
+<img class="w-full h-full object-cover" data-alt="A high-quality professional headshot of a friendly urban gardener in her 30s wearing a simple linen apron. The lighting is soft and natural, coming from a nearby greenhouse window. The overall aesthetic is clean, modern, and warm, featuring a soft-focus background of lush green indoor plants and organic textures." src="https://lh3.googleusercontent.com/aida/ADBb0ujpwsNtQuzZJ6KwFHjglmhe1vM-eqG5Cn-e5vH7kteAjBYVGqq8CbMOPNzADH85woRngVRWZxD6m1LMw75avoWZQj8X_Z10RKczGIofOc0p01mepdpmSPHOejxkxOpx3SDUwwTpM2x7-AbOB4F-SSQxBUIjcs3hY2LEfn3p8xEMj2JnfCYNhNaT5b44lZoOrRpii8rvCiV6l-eH8TcTY7iOE7RZ18mjnLnIm9hbiAEfcO7rBGETYHhfYzeLTO0OW6v7xxx8Nso0OA"/>
+</div>
+</header>
+<main class="px-container-margin py-base max-w-4xl mx-auto">
+<!-- Page Headline -->
+<div class="mb-lg mt-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary">Budget &amp; Supplies</h2>
+<p class="font-body-md text-on-surface-variant">Track your gardening investments and plan upcoming projects.</p>
+</div>
+<!-- 1. Budget Overview Section -->
+<section class="mb-lg">
+<div class="bg-surface-container-lowest rounded-3xl p-md shadow-[0_-8px_24px_rgba(45,90,39,0.06)] border border-surface-container-high">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Monthly Budget</p>
+<p class="font-headline-md text-headline-md text-on-surface">$450.00</p>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Remaining</p>
+<p class="font-headline-md text-headline-md text-primary">$124.50</p>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="relative w-full h-4 bg-surface-container rounded-full overflow-hidden mb-sm">
+<div class="absolute top-0 left-0 h-full bg-primary-container rounded-full" style="width: 72.3%"></div>
+</div>
+<div class="flex items-center justify-between font-label-lg text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="payments">payments</span>
+                        Spent: $325.50
+                    </span>
+<span>72% Utilized</span>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- 2. Project Costs Section -->
+<section class="mb-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Project Costs</h3>
+<button class="font-label-lg text-secondary flex items-center gap-1 hover:opacity-80 transition-opacity">
+                        View All
+                    </button>
+</div>
+<div class="space-y-sm">
+<!-- Project Card 1 -->
+<div class="flex items-center gap-md bg-white rounded-3xl p-sm shadow-sm border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A beautifully crafted cedar wood garden trellis leaning against a weathered brick wall. The wood has a warm, natural grain visible. Soft morning sunlight filters through nearby oak leaves, creating dappled shadows. The mood is calm and rustic, emphasizing high-quality natural materials in a modern garden setting." src="https://lh3.googleusercontent.com/aida/ADBb0ugl5T0LsY5iitCMqgJ92nKu5OflQ4ywtzBNWDvR-QzsWmCXXUIqJkXpY9Jyv8UeolEqrvlgTq_6PDvXjr_GciqwWpaCJD8XAtgTWVz0Ve4cjdLA39P8LBCCVfukuaOxhcMLs7CmCr_3cUgUqLtsNSlbLWtBpwxWhCfr3kBPoEhP0GosKyS72fqVFNmr8Ibluh5wngdf2CYWcTjcBeTW3EUeGpxhz1ppo21w-uDJ-FFFjqvhUe87sK-qwMcpsEkDr3VrJpD1cqH6"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface">Cedar Trellis</h4>
+<p class="font-label-sm text-on-surface-variant">Estimated: $85.00</p>
+</div>
+<div class="text-right pr-sm">
+<p class="font-label-lg text-primary font-bold">$72.40</p>
+<p class="text-[10px] uppercase font-bold text-green-600">Active</p>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="flex items-center gap-md bg-white rounded-3xl p-sm shadow-sm border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a modern raised vegetable bed filled with rich, dark organic soil. Small green sprouts are just beginning to emerge. The wooden frame is clean and contemporary. The lighting is bright and even, highlighting the texture of the soil and the vibrancy of the new growth." src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface">Raised Vegetable Bed</h4>
+<p class="font-label-sm text-on-surface-variant">Estimated: $210.00</p>
+</div>
+<div class="text-right pr-sm">
+<p class="font-label-lg text-secondary font-bold">$195.00</p>
+<p class="text-[10px] uppercase font-bold text-stone-400">Planned</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Shopping List Section -->
+<section class="mb-lg">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Shopping List</h3>
+<button class="p-2 bg-primary-container text-white rounded-full flex items-center justify-center hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="space-y-base bg-surface-container-low rounded-3xl p-sm">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-sm bg-white rounded-2xl border border-surface-container shadow-sm">
+<div class="flex items-center gap-md">
+<input class="w-5 h-5 rounded-lg border-stone-300 text-primary focus:ring-primary-container" type="checkbox"/>
+<div>
+<p class="font-label-lg text-on-surface">Organic Fertilizer</p>
+<p class="font-label-sm text-on-surface-variant">$24.99 • 2.5kg</p>
+</div>
+</div>
+<a class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_cart">shopping_cart</span>
+</a>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-sm bg-white rounded-2xl border border-surface-container shadow-sm">
+<div class="flex items-center gap-md">
+<input checked="" class="w-5 h-5 rounded-lg border-stone-300 text-primary focus:ring-primary-container" type="checkbox"/>
+<div>
+<p class="font-label-lg text-on-surface line-through text-on-surface-variant">Heirloom Seeds</p>
+<p class="font-label-sm text-on-surface-variant">$12.50 • Variety Pack</p>
+</div>
+</div>
+<a class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-sm bg-white rounded-2xl border border-surface-container shadow-sm">
+<div class="flex items-center gap-md">
+<input class="w-5 h-5 rounded-lg border-stone-300 text-primary focus:ring-primary-container" type="checkbox"/>
+<div>
+<p class="font-label-lg text-on-surface">Wood Screws</p>
+<p class="font-label-sm text-on-surface-variant">$8.20 • 100pk</p>
+</div>
+</div>
+<a class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="store">store</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+<!-- Add Item Prompt (Visual Alternative for FAB area) -->
+<div class="mt-lg p-md bg-tertiary-fixed rounded-3xl border border-tertiary-fixed-dim/30 flex items-center justify-between gap-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-2xl bg-tertiary text-white flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</div>
+<div>
+<p class="font-label-lg text-on-tertiary-fixed-variant">Missing something?</p>
+<p class="font-label-sm text-on-tertiary-fixed-variant/70">Quickly add a supply or cost to your tracker.</p>
+</div>
+</div>
+<button class="bg-tertiary text-white px-6 py-2 rounded-full font-label-lg shadow-lg hover:opacity-90 active:scale-95 transition-all">
+                Add New
+            </button>
+</div>
+</main>
+<!-- FAB for adding items (Floating) -->
+<div class="fixed bottom-32 right-6 z-40 md:hidden">
+<button class="w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="post_add">post_add</span>
+</button>
+</div>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/95 dark:bg-stone-900/95 backdrop-blur-lg border-t border-stone-100 dark:border-stone-800 shadow-[0_-8px_24px_rgba(45,90,39,0.08)] rounded-t-[32px]">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-5 py-2 hover:text-green-700 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider">Home</span>
+</a>
+<!-- Garden -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-5 py-2 hover:text-green-700 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="potted_plant">potted_plant</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider">Garden</span>
+</a>
+<!-- Budget (Active) -->
+<a class="flex flex-col items-center justify-center bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-2xl px-5 py-2 hover:text-green-700 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider">Budget</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-5 py-2 hover:text-green-700 transition-all active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>
