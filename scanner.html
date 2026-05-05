@@ -8,27 +8,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#2D5A27",
-                        "primary-fixed": "#bcf0ae",
-                        "on-primary": "#ffffff",
-                        "surface": "#faf9f5",
-                        "background": "#faf9f5",
-                        "on-background": "#1b1c1a",
-                        "surface-container-highest": "#e3e2df",
-                        "surface-container-low": "#f4f4f0",
-                        "outline-variant": "#c2c9bb",
-                        "secondary": "#77574d"
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
+        const cameraInput = document.getElementById('camera-capture-input');
+        const takePhotoButton = document.getElementById('take-photo-btn');
+        const processingOverlay = document.getElementById('processing-overlay');
+        const scanningGrid = document.getElementById('scanning-grid');
+
+        const mockPlants = [
+            {
+                name: "Monstera Deliciosa",
+                family: "Aroid Family",
+                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
+                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
+            },
+            {
+                name: "Peace Lily",
+                family: "Araceae Family",
+                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
+                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
+            },
+            {
+                name: "Echeveria Succulent",
+                family: "Crassulaceae",
+                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
+                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
             }
+        ];
+
+        // Trigger native camera
+        takePhotoButton.addEventListener('click', () => {
+            cameraInput.click();
+        });
+
+        // Engine Logic: Handle file capture and simulate AI identification
+        if (cameraInput) {
+            cameraInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    // Show processing state
+                    if (processingOverlay) processingOverlay.classList.remove('hidden');
+                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
+                    
+                    // Simulate processing (AI identification) for 2 seconds
+                    setTimeout(() => {
+                        // Pick a random plant
+                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
+                        
+                        // Update UI
+                        document.querySelector('h2').textContent = plant.name;
+                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
+                        document.querySelector('p.text-gray-600').textContent = plant.description;
+                        
+                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
+                        careLabels[0].textContent = plant.care.water;
+                        careLabels[1].textContent = plant.care.light;
+                        careLabels[2].textContent = plant.care.temp;
+
+                        // Hide overlay
+                        if (processingOverlay) processingOverlay.classList.add('hidden');
+                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
+                    }, 2000);
+                }
+            });
         }
     </script>
 <style>
@@ -175,12 +214,33 @@
         const processingOverlay = document.getElementById('processing-overlay');
         const scanningGrid = document.getElementById('scanning-grid');
 
+        const mockPlants = [
+            {
+                name: "Monstera Deliciosa",
+                family: "Aroid Family",
+                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
+                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
+            },
+            {
+                name: "Peace Lily",
+                family: "Araceae Family",
+                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
+                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
+            },
+            {
+                name: "Echeveria Succulent",
+                family: "Crassulaceae",
+                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
+                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
+            }
+        ];
+
         // Trigger native camera
         takePhotoButton.addEventListener('click', () => {
             cameraInput.click();
         });
 
-        // Engine Logic: Handle file capture and redirect
+        // Engine Logic: Handle file capture and simulate AI identification
         if (cameraInput) {
             cameraInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
@@ -190,7 +250,22 @@
                     
                     // Simulate processing (AI identification) for 2 seconds
                     setTimeout(() => {
-                        window.location.href = 'scanner-result.html';
+                        // Pick a random plant
+                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
+                        
+                        // Update UI
+                        document.querySelector('h2').textContent = plant.name;
+                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
+                        document.querySelector('p.text-gray-600').textContent = plant.description;
+                        
+                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
+                        careLabels[0].textContent = plant.care.water;
+                        careLabels[1].textContent = plant.care.light;
+                        careLabels[2].textContent = plant.care.temp;
+
+                        // Hide overlay
+                        if (processingOverlay) processingOverlay.classList.add('hidden');
+                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
                     }, 2000);
                 }
             });
