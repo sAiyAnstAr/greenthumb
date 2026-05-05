@@ -8,73 +8,98 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        const cameraInput = document.getElementById('camera-capture-input');
-        const takePhotoButton = document.getElementById('take-photo-btn');
-        const processingOverlay = document.getElementById('processing-overlay');
-        const scanningGrid = document.getElementById('scanning-grid');
-
-        const mockPlants = [
-            {
-                name: "Monstera Deliciosa",
-                family: "Aroid Family",
-                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
-                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#faf9f5",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2f312e",
+                    "on-primary-container": "#9dd090",
+                    "secondary-container": "#fed3c7",
+                    "secondary": "#77574d",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-tertiary-container": "#ffaf9e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#2d5a27",
+                    "surface": "#faf9f5",
+                    "background": "#faf9f5",
+                    "primary": "#154212",
+                    "on-secondary-container": "#795950",
+                    "surface-variant": "#e3e2df",
+                    "tertiary-container": "#8d3220",
+                    "surface-tint": "#3b6934",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-dim": "#dbdad6",
+                    "on-surface-variant": "#42493e",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "inverse-primary": "#a1d494",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "surface-container-high": "#e9e8e4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f4f4f0",
+                    "outline-variant": "#c2c9bb",
+                    "inverse-on-surface": "#f2f1ed",
+                    "surface-container-highest": "#e3e2df",
+                    "secondary-fixed": "#ffdbd0",
+                    "on-surface": "#1b1c1a",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#002201",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "on-secondary-fixed": "#2c160e",
+                    "primary-fixed": "#bcf0ae",
+                    "surface-container": "#efeeea",
+                    "on-error": "#ffffff",
+                    "outline": "#72796e",
+                    "on-background": "#1b1c1a",
+                    "primary-fixed-dim": "#a1d494"
             },
-            {
-                name: "Peace Lily",
-                family: "Araceae Family",
-                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
-                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
             },
-            {
-                name: "Echeveria Succulent",
-                family: "Crassulaceae",
-                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
-                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
+            "spacing": {
+                    "sm": "12px",
+                    "container-margin": "20px",
+                    "md": "24px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
             }
-        ];
-
-        // Trigger native camera
-        takePhotoButton.addEventListener('click', () => {
-            cameraInput.click();
-        });
-
-        // Engine Logic: Handle file capture and simulate AI identification
-        if (cameraInput) {
-            cameraInput.addEventListener('change', (e) => {
-                if (e.target.files && e.target.files[0]) {
-                    // Show processing state
-                    if (processingOverlay) processingOverlay.classList.remove('hidden');
-                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
-                    
-                    // Simulate processing (AI identification) for 2 seconds
-                    setTimeout(() => {
-                        // Pick a random plant
-                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
-                        
-                        // Update UI
-                        document.querySelector('h2').textContent = plant.name;
-                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
-                        document.querySelector('p.text-gray-600').textContent = plant.description;
-                        
-                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
-                        careLabels[0].textContent = plant.care.water;
-                        careLabels[1].textContent = plant.care.light;
-                        careLabels[2].textContent = plant.care.temp;
-
-                        // Hide overlay
-                        if (processingOverlay) processingOverlay.classList.add('hidden');
-                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
-                    }, 2000);
-                }
-            });
-        }
+          },
+        },
+      }
     </script>
 <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100dvh;
-        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -100,25 +125,30 @@
             0% { transform: scale(.33); }
             80%, 100% { opacity: 0; }
         }
+        body {
+            min-height: max(884px, 100dvh);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen overflow-x-hidden">
-<!-- Top App Bar - Match Home Screen Color Palette -->
-<header class="fixed top-0 w-full z-50 bg-[#16a34a] text-white flex justify-between items-center px-6 py-4 rounded-b-3xl shadow-lg">
-<a class="hover:bg-white/20 rounded-full p-2 active:scale-95 transition-all flex items-center justify-center" href="index.html">
-<span class="material-symbols-outlined" data-icon="close">close</span>
+<!-- Top App Bar - Vibrant Green Style -->
+<header class="fixed top-0 w-full z-50 bg-primary/95 backdrop-blur-md flex justify-between items-center px-6 py-4 shadow-sm">
+<a class="hover:bg-white/10 rounded-full transition-colors p-2 active:scale-95 flex items-center justify-center" href="index.html">
+<span class="material-symbols-outlined text-white" data-icon="close">close</span>
 </a>
-<h1 class="font-bold tracking-tight text-lg">Plant Identifier</h1>
+<h1 class="font-headline-md text-white text-lg">Plant Identifier</h1>
 <div class="w-10 h-10 flex items-center justify-center"></div>
 </header>
 <!-- Main Content -->
-<main class="relative w-full min-h-screen flex flex-col pt-20">
+<main class="relative w-full h-[884px] flex flex-col pt-14">
 <!-- Viewfinder Section -->
-<section class="relative w-full h-[50vh] overflow-hidden bg-black">
+<section class="relative w-full h-[574px] md:h-[530px] bg-surface-dim overflow-hidden">
 <!-- Background Image -->
-<img alt="Plant identifier background" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
-<!-- Processing Overlay (Hidden by default) -->
-<div class="absolute inset-0 bg-white/95 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
+<img alt="Plant identifier background" class="w-full h-full object-cover opacity-40 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoM_ue4eVmQpYRNFecADKlDafp6LN7L7xHWEXKiMEy5_Hub6BWciv3tY6op0uNGYvBj7Ly4DPV3cKRSLGTMdCnkB7seri2bOEe6XuXFM1lBBohs6Oc8mv7bFcSH3o4VUMGlJ_ZhNH87y51wGwSiD7c3k4vHJiOLA3ZAHbv4BsxIk1d9XO6jPc280MEeds3dgszSKCld0Re1N-YZd3vc6P7OCCvyPsnBgnLjeYy1XPiyyG9xcbSI8an1SHswMIKhX_l-8Te01n31w"/>
+<input accept="image/*" capture="environment" class="hidden" id="camera-upload" type="file"/>
+<!-- Processing Overlay -->
+<div class="absolute inset-0 bg-surface/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
 <div class="relative w-32 h-32 mb-8">
 <div class="absolute inset-0 bg-primary/20 rounded-full processing-pulse"></div>
 <div class="absolute inset-0 border-4 border-primary rounded-full animate-spin border-t-transparent"></div>
@@ -126,12 +156,12 @@
 <span class="material-symbols-outlined text-primary text-4xl">eco</span>
 </div>
 </div>
-<h3 class="text-2xl font-bold text-primary animate-pulse">Analyzing...</h3>
-<p class="text-gray-500 mt-2">Our AI is identifying your plant</p>
+<h3 class="font-headline-md text-primary animate-pulse">Analyzing...</h3>
+<p class="text-on-surface-variant font-body-md mt-2">Our AI is identifying your plant</p>
 </div>
 <!-- Scanning Animation -->
-<div class="absolute inset-0 flex items-center justify-center p-6 pointer-events-none opacity-0 transition-opacity duration-300" id="scanning-grid">
-<div class="relative w-full max-w-[280px] aspect-square">
+<div class="absolute inset-0 flex items-center justify-center p-md pointer-events-none opacity-0 transition-opacity duration-300" id="scanning-grid">
+<div class="relative w-full max-w-[320px] aspect-square">
 <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-xl"></div>
 <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-xl"></div>
 <div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-xl"></div>
@@ -140,133 +170,85 @@
 </div>
 </div>
 </section>
-<!-- Result Card: Sliding Up Layout with 3xl rounded corners -->
-<section class="flex-grow bg-surface relative -mt-10 rounded-t-[40px] shadow-[0_-8px_30px_rgba(0,0,0,0.1)] z-10 px-6 pt-8 pb-32">
+<!-- Result Card -->
+<section class="flex-grow bg-surface relative -mt-12 rounded-t-[40px] shadow-[0_-8px_30px_rgba(0,0,0,0.08)] z-10 px-container-margin pt-10 pb-32">
 <div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-8"></div>
 <div class="max-w-md mx-auto">
-<div class="flex items-center justify-between mb-6">
+<div class="flex items-center justify-between mb-4">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
-<span class="text-primary font-semibold">98% match found</span>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-primary font-label-lg">98% match found</span>
 </div>
-<span class="text-secondary text-xs font-bold uppercase tracking-widest opacity-70">Aroid Family</span>
+<span class="text-secondary font-label-sm uppercase tracking-wider">Aroid Family</span>
 </div>
-<h2 class="text-3xl font-bold text-on-surface text-center mb-2">Monstera Deliciosa</h2>
-<p class="text-gray-600 text-center mb-8 px-2">Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.</p>
-<div class="grid grid-cols-3 gap-4 mb-10">
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+<h2 class="font-headline-lg text-on-surface mb-2">Monstera Deliciosa</h2>
+<p class="text-on-surface-variant font-body-md mb-8">Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.</p>
+<!-- Info Grid -->
+<div class="grid grid-cols-3 gap-sm mb-10">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center">
 <span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
 </div>
-<span class="text-sm font-medium text-gray-700">Weekly</span>
+<span class="font-label-sm text-on-surface">Weekly</span>
 </div>
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center">
 <span class="material-symbols-outlined text-primary" data-icon="light_mode">light_mode</span>
 </div>
-<span class="text-sm font-medium text-gray-700">Indirect</span>
+<span class="font-label-sm text-on-surface">Indirect</span>
 </div>
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center">
 <span class="material-symbols-outlined text-primary" data-icon="thermostat">thermostat</span>
 </div>
-<span class="text-sm font-medium text-gray-700">18-30°C</span>
+<span class="font-label-sm text-on-surface">18-30°C</span>
 </div>
 </div>
-<div class="flex flex-col gap-4 px-2">
-<button class="w-full bg-[#2D5A27] text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
+<!-- Primary Actions -->
+<div class="flex flex-col gap-4">
+<a class="w-full bg-primary text-on-primary py-4 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="scanner-result.html">
 <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
                         Add to My Garden
-                    </button>
-<!-- Take Photo Button: Triggers Scanner Engine -->
-<button class="w-full border-2 border-outline-variant text-[#77574d] py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-gray-50 active:scale-95 transition-all" id="take-photo-btn">
+                    </a>
+<button class="w-full bg-[#2D5A27] text-white py-4 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20 active:scale-95 transition-all" onclick="document.getElementById('camera-upload').click()">
 <span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
                         Take Photo
                     </button>
 </div>
 </div>
 </section>
-<!-- Hidden File Input for Native Camera -->
-<input accept="image/*" capture="environment" class="hidden" id="camera-capture-input" type="file"/>
 </main>
-<!-- Bottom Navigation Bar - Match Home Screen Style -->
-<nav class="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 flex justify-around items-center px-4 pb-8 pt-3 shadow-none">
-<a class="flex flex-col items-center text-gray-400 p-2" href="index.html">
-<span class="material-symbols-outlined text-[28px]" data-icon="home">home</span>
-<span class="text-[10px]">Home</span>
+<!-- Bottom Navigation Bar - Consistent with index.html -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white flex justify-around items-center px-4 pb-8 pt-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex items-center justify-center text-on-surface-variant p-3 hover:text-primary transition-all active:scale-90" href="index.html">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
 </a>
-<div class="flex flex-col items-center text-primary bg-green-50 rounded-2xl p-2 px-4">
-<span class="material-symbols-outlined text-[28px]" data-icon="center_focus_weak">center_focus_weak</span>
-<span class="text-[10px]">Identify</span>
+<div class="flex items-center justify-center bg-primary-container/10 text-primary rounded-2xl p-3 active:scale-90 transition-all">
+<span class="material-symbols-outlined" data-icon="center_focus_weak" style="font-variation-settings: 'FILL' 1;">center_focus_weak</span>
 </div>
-<div class="flex flex-col items-center text-gray-400 p-2">
-<span class="material-symbols-outlined text-[28px]" data-icon="groups">groups</span>
-<span class="text-[10px]">Community</span>
+<div class="flex items-center justify-center text-on-surface-variant p-3 hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
 </div>
-<div class="flex flex-col items-center text-gray-400 p-2">
-<span class="material-symbols-outlined text-[28px]" data-icon="shopping_basket">shopping_basket</span>
-<span class="text-[10px]">Budget</span>
+<div class="flex items-center justify-center text-on-surface-variant p-3 hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="person">person</span>
 </div>
 </nav>
 <script>
-        const cameraInput = document.getElementById('camera-capture-input');
-        const takePhotoButton = document.getElementById('take-photo-btn');
+        const uploadInput = document.getElementById('camera-upload');
         const processingOverlay = document.getElementById('processing-overlay');
         const scanningGrid = document.getElementById('scanning-grid');
 
-        const mockPlants = [
-            {
-                name: "Monstera Deliciosa",
-                family: "Aroid Family",
-                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
-                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
-            },
-            {
-                name: "Peace Lily",
-                family: "Araceae Family",
-                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
-                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
-            },
-            {
-                name: "Echeveria Succulent",
-                family: "Crassulaceae",
-                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
-                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
-            }
-        ];
-
-        // Trigger native camera
-        takePhotoButton.addEventListener('click', () => {
-            cameraInput.click();
-        });
-
-        // Engine Logic: Handle file capture and simulate AI identification
-        if (cameraInput) {
-            cameraInput.addEventListener('change', (e) => {
+        if (uploadInput) {
+            uploadInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
                     // Show processing state
-                    if (processingOverlay) processingOverlay.classList.remove('hidden');
-                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
+                    processingOverlay.classList.remove('hidden');
+                    scanningGrid.classList.remove('opacity-0');
                     
-                    // Simulate processing (AI identification) for 2 seconds
+                    // Simulate processing for 1.5 seconds
                     setTimeout(() => {
-                        // Pick a random plant
-                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
-                        
-                        // Update UI
-                        document.querySelector('h2').textContent = plant.name;
-                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
-                        document.querySelector('p.text-gray-600').textContent = plant.description;
-                        
-                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
-                        careLabels[0].textContent = plant.care.water;
-                        careLabels[1].textContent = plant.care.light;
-                        careLabels[2].textContent = plant.care.temp;
-
-                        // Hide overlay
-                        if (processingOverlay) processingOverlay.classList.add('hidden');
-                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
-                    }, 2000);
+                        window.location.href = 'scanner-result.html';
+                    }, 1500);
                 }
             });
         }
