@@ -16,9 +16,12 @@
                     if (processingOverlay) processingOverlay.classList.remove('hidden');
                     if (scanningGrid) scanningGrid.classList.remove('opacity-0');
                     
+                    const destinations = ['scanner-result.html', 'pest-doctor.html', 'soil-lab.html'];
+                    const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+
                     // Simulate processing and redirect
                     setTimeout(() => {
-                        window.location.href = 'scanner-result.html';
+                        window.location.href = randomDest;
                     }, 1500);
                 }
             });
@@ -34,13 +37,14 @@
         if (cameraInput) {
             cameraInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
-                    // Show processing state
                     if (processingOverlay) processingOverlay.classList.remove('hidden');
                     if (scanningGrid) scanningGrid.classList.remove('opacity-0');
                     
-                    // Simulate processing and redirect
+                    const destinations = ['scanner-result.html', 'pest-doctor.html', 'soil-lab.html'];
+                    const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+
                     setTimeout(() => {
-                        window.location.href = 'scanner-result.html';
+                        window.location.href = randomDest;
                     }, 1500);
                 }
             });
@@ -91,9 +95,9 @@
 <!-- Main Content -->
 <main class="relative w-full h-[884px] flex flex-col">
 <!-- Viewfinder Section -->
-<section class="relative w-full h-[574px] md:h-[530px] bg-stone-200 overflow-hidden">
+<section class="relative w-full h-[574px] md:h-[530px] overflow-hidden bg-black">
 <!-- Background Image (Optional/Placeholder) -->
-<img alt="Plant identifier background" class="w-full h-full object-cover opacity-30 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoM_ue4eVmQpYRNFecADKlDafp6LN7L7xHWEXKiMEy5_Hub6BWciv3tY6op0uNGYvBj7Ly4DPV3cKRSLGTMdCnkB7seri2bOEe6XuXFM1lBBohs6Oc8mv7bFcSH3o4VUMGlJ_ZhNH87y51wGwSiD7c3k4vHJiOLA3ZAHbv4BsxIk1d9XO6jPc280MEeds3dgszSKCld0Re1N-YZd3vc6P7OCCvyPsnBgnLjeYy1XPiyyG9xcbSI8an1SHswMIKhX_l-8Te01n31w"/>
+<img alt="Plant identifier background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
 <!-- Upload UI Overlay -->
 <!-- Processing Overlay (Hidden by default) -->
 <div class="absolute inset-0 bg-white/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
@@ -119,60 +123,64 @@
 </div>
 </section>
 <!-- Result Card: Sliding Up Layout -->
-<section class="flex-grow bg-surface relative -mt-12 rounded-t-[40px] shadow-[0_-8px_30px_rgba(0,0,0,0.08)] z-10 px-container-margin pt-10 pb-32">
+<section class="flex-grow bg-surface relative -mt-16 rounded-t-[40px] z-10 px-container-margin pt-10 pb-32">
 <div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-8"></div>
 <div class="max-w-md mx-auto">
-<div class="flex items-center justify-between mb-4">
+<div class="flex items-center justify-between mb-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-primary font-label-lg">98% match found</span>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 0;">check_circle</span>
+<span class="text-primary font-body-md">98% match found</span>
 </div>
-<span class="text-secondary font-label-sm uppercase tracking-wider">Aroid Family</span>
+<span class="text-secondary font-label-lg uppercase tracking-widest opacity-70">Aroid Family</span>
 </div>
-<h2 class="font-headline-lg text-on-surface mb-2">Monstera Deliciosa</h2>
-<p class="text-on-surface-variant font-body-md mb-8">Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.</p>
-<!-- Info Grid: Bento-style -->
-<div class="grid grid-cols-3 gap-sm mb-10">
-<div class="bg-surface-container-low p-4 rounded-3xl flex flex-col items-center gap-2">
-<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center">
+<h2 class="font-headline-lg text-on-surface text-center mb-2">Monstera Deliciosa</h2>
+<p class="text-on-surface-variant font-body-md text-center mb-8 px-2">Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.</p>
+<div class="grid grid-cols-3 gap-4 mb-10">
+<div class="bg-surface-container-low p-6 flex flex-col items-center gap-3 rounded-[32px]">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
 <span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
 </div>
-<span class="font-label-sm text-secondary">Weekly</span>
+<span class="font-body-md text-on-secondary-container">Weekly</span>
 </div>
-<div class="bg-surface-container-low p-4 rounded-3xl flex flex-col items-center gap-2">
-<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center">
+<div class="bg-surface-container-low p-6 flex flex-col items-center gap-3 rounded-[32px]">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
 <span class="material-symbols-outlined text-primary" data-icon="light_mode">light_mode</span>
 </div>
-<span class="font-label-sm text-secondary">Indirect</span>
+<span class="font-body-md text-on-secondary-container">Indirect</span>
 </div>
-<div class="bg-surface-container-low p-4 rounded-3xl flex flex-col items-center gap-2">
-<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center">
+<div class="bg-surface-container-low p-6 flex flex-col items-center gap-3 rounded-[32px]">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
 <span class="material-symbols-outlined text-primary" data-icon="thermostat">thermostat</span>
 </div>
-<span class="font-label-sm text-secondary">18-30°C</span>
+<span class="font-body-md text-on-secondary-container">18-30°C</span>
 </div>
 </div>
-<!-- Primary Actions -->
-<div class="flex flex-col gap-4">
-<a class="w-full bg-primary text-on-primary py-4 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="#"><span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>Add to My Garden</a>
-<button class="w-full border-2 border-primary text-primary py-4 rounded-full font-headline-md flex items-center justify-center gap-2 hover:bg-primary/5 active:scale-95 transition-all" onclick="document.getElementById('camera-capture-input').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>Take Photo</button>
+<div class="flex flex-col gap-4 px-2">
+<a class="w-full bg-[#154212] text-white py-5 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-xl shadow-primary/20 active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+        Add to My Garden
+    </a>
+<button class="w-full border border-outline-variant text-[#77574d] py-5 rounded-full font-headline-md flex items-center justify-center gap-2 hover:bg-surface-container-highest active:scale-95 transition-all" onclick="document.getElementById('camera-capture-input').click()">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+        Take Photo
+    </button>
 </div>
 </div>
 </section>
 <input accept="image/*" capture="camera" class="hidden" id="camera-capture-input" type="file"/></main>
 <!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 bg-white flex justify-around items-center px-4 pb-8 pt-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
-<div class="flex items-center justify-center text-stone-400 p-3 hover:text-emerald-600 transition-all active:scale-90">
-<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md flex justify-around items-center px-4 pb-8 pt-4 shadow-none">
+<div class="flex items-center justify-center text-on-surface-variant/40 p-3 hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[28px]" data-icon="eco">eco</span>
 </div>
-<div class="flex items-center justify-center bg-emerald-50 text-emerald-700 rounded-2xl p-3 active:scale-90 transition-all">
-<span class="material-symbols-outlined" data-icon="center_focus_weak" style="font-variation-settings: 'FILL' 1;">center_focus_weak</span>
+<div class="flex items-center justify-center bg-primary-fixed/30 text-primary rounded-2xl p-3 px-5 active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[28px]" data-icon="center_focus_weak" style="font-variation-settings: 'FILL' 0;">center_focus_weak</span>
 </div>
-<div class="flex items-center justify-center text-stone-400 p-3 hover:text-emerald-600 transition-all active:scale-90">
-<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<div class="flex items-center justify-center text-on-surface-variant/40 p-3 hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[28px]" data-icon="calendar_today">calendar_today</span>
 </div>
-<div class="flex items-center justify-center text-stone-400 p-3 hover:text-emerald-600 transition-all active:scale-90">
-<span class="material-symbols-outlined" data-icon="person">person</span>
+<div class="flex items-center justify-center text-on-surface-variant/40 p-3 hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[28px]" data-icon="person">person</span>
 </div>
 </nav>
 <script>
@@ -187,9 +195,12 @@
                     if (processingOverlay) processingOverlay.classList.remove('hidden');
                     if (scanningGrid) scanningGrid.classList.remove('opacity-0');
                     
+                    const destinations = ['scanner-result.html', 'pest-doctor.html', 'soil-lab.html'];
+                    const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+
                     // Simulate processing and redirect
                     setTimeout(() => {
-                        window.location.href = 'scanner-result.html';
+                        window.location.href = randomDest;
                     }, 1500);
                 }
             });
