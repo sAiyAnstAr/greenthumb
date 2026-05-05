@@ -4,293 +4,204 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-bright": "#faf9f5",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-surface": "#2f312e",
-                    "on-primary-container": "#9dd090",
-                    "secondary-container": "#fed3c7",
-                    "secondary": "#77574d",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "error": "#ba1a1a",
-                    "on-primary": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface": "#faf9f5",
-                    "background": "#faf9f5",
-                    "primary": "#154212",
-                    "on-secondary-container": "#795950",
-                    "surface-variant": "#e3e2df",
-                    "primary-fixed": "#bcf0ae",
-                    "on-surface": "#1b1c1a",
-                    "on-background": "#1b1c1a",
-                    "outline": "#72796e",
-                    "surface-container-low": "#f4f4f0",
-                    "surface-container": "#efeeea",
-                    "surface-container-high": "#e9e8e4",
-                    "surface-container-highest": "#e3e2df",
-                    "outline-variant": "#c2c9bb",
-                    "inverse-on-surface": "#f2f1ed"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "2xl": "1rem",
-                    "3xl": "1.5rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "gutter": "16px",
-                    "base": "8px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "lg": "40px",
-                    "container-margin": "20px",
-                    "sm": "12px",
-                    "xl": "64px"
-            },
-            "fontFamily": {
-                    "sans": ["Plus Jakarta Sans", "ui-sans-serif", "system-ui"],
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
-            }
-          },
-        },
-      }
-    </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .scanner-frame {
-            position: relative;
-            overflow: hidden;
-        }
-        .scanner-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #bcf0ae, transparent);
-            animation: scan 3s linear infinite;
-        }
-        @keyframes scan {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(320px); }
-            100% { transform: translateY(0); }
-        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100dvh;
+            background-color: #faf9f5;
         }
     </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf9f5",
+                        "surface": "#faf9f5",
+                        "secondary": "#77574d",
+                        "on-secondary-container": "#795950",
+                        "inverse-primary": "#a1d494",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e3e2df",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface-dim": "#dbdad6",
+                        "surface-bright": "#faf9f5",
+                        "secondary-container": "#fed3c7",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#5d4037",
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#802918",
+                        "on-surface-variant": "#42493e",
+                        "tertiary-fixed": "#ffdad3",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-primary-fixed-variant": "#23501e",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "outline": "#72796e",
+                        "primary": "#154212",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e7bdb1",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "primary-container": "#2d5a27",
+                        "inverse-surface": "#2f312e",
+                        "on-primary-container": "#9dd090",
+                        "on-tertiary-fixed": "#3e0500",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#efeeea",
+                        "on-background": "#1b1c1a",
+                        "on-primary-fixed": "#002201",
+                        "outline-variant": "#c2c9bb",
+                        "tertiary-container": "#8d3220",
+                        "surface-tint": "#3b6934",
+                        "surface-container-high": "#e9e8e4",
+                        "surface-container-highest": "#e3e2df",
+                        "on-tertiary-container": "#ffaf9e",
+                        "on-secondary-fixed": "#2c160e",
+                        "primary-fixed": "#bcf0ae",
+                        "on-surface": "#1b1c1a",
+                        "tertiary": "#6e1c0c",
+                        "surface-container-low": "#f4f4f0",
+                        "error-container": "#ffdad6"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
 </head>
-<body class="bg-surface text-on-surface pb-32">
-<!-- Top App Bar -->
-<header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 w-full z-50 px-container-margin py-4 flex justify-between items-center">
-<div class="flex items-center gap-3">
-<button class="text-primary p-1 rounded-full">
-<span class="material-symbols-outlined">menu</span>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-stone-50/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200/50 shadow-sm shadow-emerald-900/5 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4"><a class="hover:bg-stone-100 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center" href="index.html">
+<span class="material-symbols-outlined text-emerald-800" data-icon="arrow_back">arrow_back</span>
+</a>
+<button class="hover:bg-stone-100 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined text-emerald-800" data-icon="menu">menu</span>
 </button>
-<h1 class="text-primary font-bold tracking-tight text-xl italic">BloomGuide</h1>
+<h1 class="text-xl font-extrabold tracking-tight text-emerald-900">Bloom &amp; Grow</h1>
 </div>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-surface-container">
-<img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVbYssCDn3rvr4WzM3MmDmul0oRmpPHebUQOfGKS2R2blt-BcFAItsXEfK93MJ7TGBpxKaZCYJwqPSjs1duIvODcCnEKUqEEi6lExaHKu2QWLmtGTXaH9yuboDeOeumWTtmtStD-mpfIZFuppGW89TBwuW0AqSxb3FteEeOUCgVjQ4CTItV15nK7DGex8fKRu5XwnrtklWjMGFCB879GeVmurwL1744Qm0m9dSERgO4mx-1fIyL4KWy-gFbUg_9QVVYN2_X7svfIk"/>
+<div class="flex items-center gap-4">
+<span class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-emerald-800">Map Tool</span>
+<div class="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-200 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a friendly individual with soft natural lighting, set against a warm neutral background that aligns with the organic and approachable digital gardening brand aesthetic. The lighting is bright and modern, suggesting a high-end app user profile experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg7_To4K1mWQ5aDu2TF6xDNfEBsxmcoM66wPzyZyA4nW7aBiZznClpv9se0La7c8XlIMRl08_uS5tWAhm9IOIKqhteWpmYu3mUuzujy9-dk2gxiDoUnjtfMHyQ_k28hEsabtYTYGq02MUIzOCjZePbhdeTUdBUisgeI4AOq4PPKwXbQdm7QeEmwvDqob5q9wIBLkMDHSKciETVAF1Ln9FuoYsqwtfLhsoCYaalRRXMmTqS5_lCQhTMX8eaPHnI4ocLIGdtF3U9TiI"/>
+</div>
 </div>
 </header>
-<main class="pt-24 px-container-margin max-w-lg mx-auto space-y-md">
-<!-- Header Section -->
-<div class="flex justify-between items-start">
-<div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface">Soil Analysis</h2>
-<p class="font-body-md text-on-surface-variant">Real-time nutrient and texture detection</p>
+<!-- Main Map Canvas -->
+<main class="relative flex-1 w-full overflow-hidden">
+<!-- Satellite Map View -->
+<div class="absolute inset-0 w-full h-full">
+<img class="w-full h-full object-cover" data-alt="A high-resolution satellite top-down view of a lush residential backyard in Austin, Texas. The scene shows a vibrant green lawn, mature trees casting soft shadows, and a clear stone patio. The image is crisp and detailed, providing a perfect base for a digital garden planning tool with a modern organic aesthetic and bright natural lighting." data-location="Austin, Texas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATdGfo5InEpDTvqJfYtk9CdPB1NV4R2UpS62QM2tqzM7AKabK8n8nuCgSlIXTaOv127S-iaJ1K24i5yGo7G2cTQnfEJ9w_X6EXGKxW6xOuM4oqIlM9kNSWFd0zmO1SfUcX-Rcb1yhibhpV9Ed3eFnl_lMFjsgkpuEpmNjyXM-RjHE5zYHDzqKLVdKqMV8d06iHCG5kEq94WdMH8hqaSebSeosJqpY3SmFvJIl4YTVlOtG1GvNxRSDLtbbic6Knw6eA95Q7L07iQl0"/>
+<!-- Overlaid Digital Layers -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 1000">
+<!-- Heat Map Zone (High Sun) -->
+<circle cx="400" cy="450" fill="url(#sun-gradient)" opacity="0.4" r="280"></circle>
+<defs>
+<radialgradient id="sun-gradient">
+<stop offset="0%" stop-color="#ffb4a5"></stop>
+<stop offset="100%" stop-color="#ffb4a5" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<!-- Garden Bed Outline 1 -->
+<rect class="pointer-events-auto cursor-move" fill="rgba(21, 66, 18, 0.2)" height="60" rx="4" stroke="#154212" stroke-dasharray="4 2" stroke-width="2" width="120" x="350" y="400"></rect>
+<!-- Garden Bed Outline 2 -->
+<rect class="pointer-events-auto cursor-move" fill="rgba(21, 66, 18, 0.2)" height="180" rx="4" stroke="#154212" stroke-dasharray="4 2" stroke-width="2" width="80" x="520" y="380"></rect>
+<!-- Planned Orchard Zone -->
+<path d="M650,200 Q750,250 700,400 T600,550" fill="none" opacity="0.6" stroke="#77574d" stroke-dasharray="8 4" stroke-width="3"></path>
+</svg>
 </div>
-<div class="bg-primary-fixed text-on-primary-fixed px-3 py-1.5 rounded-full font-label-lg flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">sensors</span>
-                Live Analysis
-            </div>
+<!-- Floating Toolbar -->
+<div class="absolute top-6 right-6 flex flex-col gap-3">
+<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
+<div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-md group-hover:bg-emerald-800">
+<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
 </div>
-<!-- Camera Scanner Card -->
-<div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden bg-stone-900 shadow-lg border-4 border-white">
-<img alt="Soil sample scan" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjlPg4K4qlR_YoEWoOoe7xml2L4SkKKtVjKtRbSLx71SkUOTZ4u1m6knrl78UUhvea77AfC9Kic-7USanH4Slj5OCiZfrNszvbrurCsaKEmXoyeG-QN1Pk4jIqGJEMoUU4v5XBgY5gHrirDzqrRx36P-cWb5paWHby8tCHcAYpNaC5hLazdbWDqBdZ3KzKmwzL4GtO8NXUNIhc_BNJ5s7FPtYINItVcs5wTLkAXoVjLP1eOl5SXQM1Ki5KnfrzBxWtThJbe4gsdXM"/>
-<div class="scanner-line"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<!-- Overlay UI -->
-<div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-<div class="flex items-center gap-3 bg-stone-800/80 backdrop-blur-md p-3 pr-5 rounded-2xl border border-white/20">
-<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
-<span class="material-symbols-outlined">analytics</span>
+<div class="text-left pr-2">
+<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Place Bed</p>
+<p class="text-[10px] text-stone-500">Add new layout</p>
 </div>
-<div>
-<p class="text-white/70 text-[10px] uppercase font-bold tracking-wider">Current Detection</p>
-<p class="text-white font-headline-md text-lg leading-tight">Sandy Loam detected</p>
+</button>
+<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
+<div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-white shadow-md group-hover:bg-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
 </div>
+<div class="text-left pr-2">
+<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Check Sun Exposure</p>
+<p class="text-[10px] text-stone-500">View solar mapping</p>
 </div>
-<button class="bg-primary hover:bg-primary-container text-white p-4 rounded-full shadow-lg active:scale-95 transition-transform">
-<span class="material-symbols-outlined">photo_camera</span>
+</button>
+<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest border border-stone-200 flex items-center justify-center text-secondary shadow-sm group-hover:bg-stone-200">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+</div>
+<div class="text-left pr-2">
+<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Calculate Soil Needs</p>
+<p class="text-[10px] text-stone-500">Estimate volume</p>
+</div>
 </button>
 </div>
-</div>
-<!-- Soil Composition Card -->
-<div class="bg-white rounded-3xl p-6 shadow-sm border border-outline-variant">
-<div class="flex items-center gap-3 mb-6">
-<div class="p-2 rounded-xl bg-surface-container">
-<span class="material-symbols-outlined text-secondary">layers</span>
-</div>
-<h3 class="font-headline-md text-on-surface">Soil Composition</h3>
-</div>
-<div class="space-y-6">
-<div class="space-y-2">
-<div class="flex justify-between font-label-lg">
-<span class="text-on-surface-variant">Sand</span>
-<span class="text-on-surface font-bold">60%</span>
-</div>
-<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[60%] rounded-full"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between font-label-lg">
-<span class="text-on-surface-variant">Silt</span>
-<span class="text-on-surface font-bold">30%</span>
-</div>
-<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-on-primary-container w-[30%] rounded-full"></div>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between font-label-lg">
-<span class="text-on-surface-variant">Clay</span>
-<span class="text-on-surface font-bold">10%</span>
-</div>
-<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-tertiary-container w-[10%] rounded-full"></div>
-</div>
-</div>
-</div>
-<p class="mt-8 font-body-md text-on-surface-variant italic border-t border-dashed border-outline-variant pt-4">
-                "Perfect for root vegetables and drainage-sensitive perennials."
-            </p>
-</div>
-<!-- Health Status Card -->
-<div class="bg-surface-container-low rounded-3xl p-6">
-<div class="flex items-center gap-3 mb-6">
-<div class="p-2 rounded-xl bg-white shadow-sm">
-<span class="material-symbols-outlined text-tertiary">vital_signs</span>
-</div>
-<h3 class="font-headline-md text-on-surface">Health Status</h3>
-</div>
-<div class="space-y-3">
-<div class="bg-white p-4 rounded-2xl flex items-center justify-between border border-outline-variant/50">
+<!-- Bottom Info Card -->
+<div class="absolute bottom-32 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-md">
+<div class="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-[24px] p-6 border border-white flex items-center justify-between">
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-error">arrow_downward</span>
+<div class="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-700 text-2xl" data-icon="location_on">location_on</span>
+</div>
 <div>
-<p class="font-label-lg text-on-surface">Nitrogen Level</p>
-<p class="text-sm text-error font-medium">Critical: Low</p>
+<h3 class="text-emerald-900 font-bold text-lg leading-tight">Current Location</h3>
+<p class="text-stone-500 text-sm font-medium">Backyard (High Sun)</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-[10px] font-bold uppercase">
+<span class="material-symbols-outlined text-xs" data-icon="wb_sunny">wb_sunny</span>
+                        Optimal
+                    </div>
 </div>
 </div>
 </div>
-<div class="bg-white p-4 rounded-2xl flex items-center justify-between border border-outline-variant/50">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-tertiary-fixed-variant">arrow_upward</span>
-<div>
-<p class="font-label-lg text-on-surface">Soil pH</p>
-<p class="text-sm text-on-tertiary-fixed-variant font-medium">High: 8.2 (Alkaline)</p>
-</div>
-</div>
-</div>
-<div class="bg-white p-4 rounded-2xl flex items-center justify-between border border-outline-variant/50">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<div>
-<p class="font-label-lg text-on-surface">Moisture</p>
-<p class="text-sm text-primary font-medium">Optimal</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Treatment Plan Section -->
-<section class="bg-primary text-on-primary rounded-3xl p-6 md:p-8 space-y-6">
-<div class="space-y-2">
-<h3 class="font-headline-lg text-on-primary">Treatment Plan</h3>
-<p class="font-body-md text-on-primary/80">Follow these steps to restore your soil to its peak nutritional state.</p>
-</div>
-<button class="w-full bg-white text-primary py-4 rounded-full font-label-lg shadow-lg">
-                Order Supplies
-            </button>
-<div class="space-y-4 pt-4">
-<div class="flex gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10">
-<div class="w-10 h-10 flex-shrink-0 bg-white/20 rounded-full flex items-center justify-center font-bold text-on-primary">1</div>
-<div class="space-y-1">
-<h4 class="font-bold text-lg">Add organic compost</h4>
-<p class="text-sm text-on-primary/70 leading-relaxed">Improve water retention and provide slow-release nitrogen boost.</p>
-</div>
-</div>
-<div class="flex gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10">
-<div class="w-10 h-10 flex-shrink-0 bg-white/20 rounded-full flex items-center justify-center font-bold text-on-primary">2</div>
-<div class="space-y-1">
-<h4 class="font-bold text-lg">Apply elemental sulfur</h4>
-<p class="text-sm text-on-primary/70 leading-relaxed">Targeted to lower pH. Apply 5lbs per 100 sq ft.</p>
-</div>
-</div>
-<div class="flex gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10">
-<div class="w-10 h-10 flex-shrink-0 bg-white/20 rounded-full flex items-center justify-center font-bold text-on-primary">3</div>
-<div class="space-y-1">
-<h4 class="font-bold text-lg">Mulch for Moisture</h4>
-<p class="text-sm text-on-primary/70 leading-relaxed">Protect your sandy loam from drying with organic pine bark.</p>
-</div>
-</div>
-</div>
-</section>
 </main>
-<!-- Navigation Shell -->
-<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/95 backdrop-blur-lg border-t border-outline-variant px-2 pb-6 pt-2 flex justify-around items-center rounded-t-[20px] shadow-lg">
-<a class="flex flex-col items-center justify-center text-on-surface-variant/60 px-3 py-1.5" href="#">
-<span class="material-symbols-outlined">yard</span>
-<span class="text-[10px] font-bold uppercase tracking-widest mt-1">My Garden</span>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-8 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-stone-100 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+<!-- My Garden -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-1.5 hover:text-emerald-600 transition-all" href="index.html">
+<span class="material-symbols-outlined text-2xl" data-icon="yard">yard</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">My Garden</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-primary-fixed text-on-primary-fixed rounded-xl px-4 py-1.5" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
-<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Soil</span>
+<!-- Map Tool (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-emerald-50 text-emerald-800 rounded-2xl px-5 py-1.5 transform scale-110 transition-all duration-300" href="map-tool.html">
+<span class="material-symbols-outlined text-2xl" data-icon="map_search" style="font-variation-settings: 'FILL' 1;">map_search</span>
+<span class="font-plus-jakarta-sans text-[11px] font-bold mt-1">Map Tool</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant/60 px-3 py-1.5" href="#">
-<span class="material-symbols-outlined">photo_camera</span>
-<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Identify</span>
+<!-- Compost -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-1.5 hover:text-emerald-600 transition-all" href="budget.html">
+<span class="material-symbols-outlined text-2xl" data-icon="recycling">recycling</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Compost</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant/60 px-3 py-1.5" href="#">
-<span class="material-symbols-outlined">bug_report</span>
-<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Pests</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant/60 px-3 py-1.5" href="#">
-<span class="material-symbols-outlined">groups</span>
-<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Community</span>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-1.5 hover:text-emerald-600 transition-all" href="learn.html">
+<span class="material-symbols-outlined text-2xl" data-icon="menu_book">menu_book</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Learn</span>
 </a>
 </nav>
 </body></html>
