@@ -1,181 +1,104 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Greenthumb - Categories</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-bright": "#faf9f5",
-                        "tertiary": "#6e1c0c",
-                        "on-tertiary-fixed-variant": "#802918",
-                        "surface-container-lowest": "#ffffff",
-                        "inverse-surface": "#2f312e",
-                        "on-primary-container": "#9dd090",
-                        "secondary-container": "#fed3c7",
-                        "secondary": "#77574d",
-                        "on-tertiary-fixed": "#3e0500",
-                        "on-tertiary-container": "#ffaf9e",
-                        "on-primary-fixed-variant": "#23501e",
-                        "error": "#ba1a1a",
-                        "on-primary": "#ffffff",
-                        "primary-container": "#2d5a27",
-                        "surface": "#faf9f5",
-                        "background": "#faf9f5",
-                        "primary": "#154212",
-                        "on-secondary-container": "#795950",
-                        "surface-variant": "#e3e2df",
-                        "tertiary-container": "#8d3220",
-                        "surface-tint": "#3b6934",
-                        "tertiary-fixed": "#ffdad3",
-                        "surface-dim": "#dbdad6",
-                        "on-surface-variant": "#42493e",
-                        "on-secondary": "#ffffff",
-                        "on-tertiary": "#ffffff",
-                        "on-secondary-fixed-variant": "#5d4037",
-                        "inverse-primary": "#a1d494",
-                        "tertiary-fixed-dim": "#ffb4a5",
-                        "surface-container-high": "#e9e8e4",
-                        "error-container": "#ffdad6",
-                        "surface-container-low": "#f4f4f0",
-                        "outline-variant": "#c2c9bb",
-                        "inverse-on-surface": "#f2f1ed",
-                        "surface-container-highest": "#e3e2df",
-                        "secondary-fixed": "#ffdbd0",
-                        "on-surface": "#1b1c1a",
-                        "on-error-container": "#93000a",
-                        "on-primary-fixed": "#002201",
-                        "secondary-fixed-dim": "#e7bdb1",
-                        "on-secondary-fixed": "#2c160e",
-                        "primary-fixed": "#bcf0ae",
-                        "surface-container": "#efeeea",
-                        "on-error": "#ffffff",
-                        "outline": "#72796e",
-                        "on-background": "#1b1c1a",
-                        "primary-fixed-dim": "#a1d494"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "2xl": "1rem",
-                        "3xl": "1.5rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "sans": ["Plus Jakarta Sans", "sans-serif"]
-                    }
-                },
-            },
-        }
-    </script>
 <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .nav-active { color: #154212; }
-        .nav-inactive { color: #72796e; }
     </style>
 </head>
-<body class="pb-24 bg-surface-bright text-on-surface">
-<!-- Top App Bar - Matched to Core Design -->
-<header class="sticky top-0 z-50 flex items-center justify-between px-container-margin py-4 bg-surface-container-lowest border-b border-outline-variant">
-<a class="p-2 -ml-2 text-primary" href="index.html">
+<body class="pb-24">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white border-b border-stone-100 shadow-sm">
+<a class="p-2 -ml-2 text-green-800" href="index.html">
 <span class="material-symbols-outlined">arrow_back</span>
 </a>
-<h1 class="text-lg font-bold text-on-surface tracking-tight">Plant Categories</h1>
-<button class="p-2 text-outline">
+<h1 class="text-xl font-bold text-stone-900 tracking-tight">Plant Categories</h1>
+<button class="p-2 text-stone-400">
 <span class="material-symbols-outlined">search</span>
 </button>
 </header>
-<main class="px-container-margin pt-8 space-y-6">
+<main class="px-6 pt-8 space-y-8">
 <!-- Category Grid -->
 <div class="grid grid-cols-1 gap-6">
-<!-- Category Card 1: Vegetables -->
-<div class="relative rounded-3xl overflow-hidden aspect-[16/10] shadow-sm group">
-<img alt="Vegetables" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsjoDSnnjPKH6z2WuWIjQOhzNdDMmTNQLzKawMNKzFn4CHPTdBpq4u8seTK_ufucXk8ZsCLCrHfb93eX3pXUGDbJk3YB59yWCWol82oGSL_Ru_fg_UceuYlX4wdIMQdbgh0Kjzk5NVqCmUP5qCZRfPx5HdEUA7YGGUjXWCJQYexNSFLgy_jQXCtXtMmDV60hejYJDjgPFMyQVrhfzxqQcLgEbNAkl2uxLPTNJcA-HFE-aI_sbm8qAj4EZ1tFZcoe_mG19tOntsHvA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-6">
+<!-- Category Card 1 -->
+<div class="relative rounded-[32px] overflow-hidden aspect-[16/10] shadow-lg group">
+<img alt="Vegetables" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD89SWwkGB6QJ2qyFqQjlqBuwZXugvrj6orM4TVpyGmoFc1ukaTWpNM7cZfCDpqwIMafs2lXfE4wIMP_U5aFlKaOx2Vw9IicOHSVmzOpJf8ufua4MqaVhhDeZeGmRj5CBxDtsywsIBXSrsG2xUe4vYUpsqvQq7UE91R9ciBWcFLuyW1diQ8TvyVNKYR0iaTucsuoeOTO_8_sreaCLDyNRrvTP5qjhV_ZHxJO508kY2-HZZui3VB4rXScHtM1KNyOuLNAHKk4zorzao"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
 <div class="flex justify-between items-end">
 <div>
-<span class="inline-block bg-primary-container text-on-primary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">12 Species</span>
-<h3 class="text-2xl font-bold text-white">Vegetables</h3>
+<span class="inline-block bg-green-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2">12 Species</span>
+<h3 class="text-3xl font-black text-white">Vegetables</h3>
 </div>
-<div class="bg-white/20 backdrop-blur-md p-2 rounded-full text-white">
-<span class="material-symbols-outlined text-2xl block">arrow_forward</span>
-</div>
+<span class="material-symbols-outlined text-white text-3xl mb-1">arrow_forward</span>
 </div>
 </div>
 </div>
-<!-- Category Card 2: Fruit Trees -->
-<div class="relative rounded-3xl overflow-hidden aspect-[16/10] shadow-sm group">
-<img alt="Fruit Trees" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9SNBeCPVspaf3sVZGen5ORgCtu_jPg93u6cPQ4_so_gyZ0mJYoMmoxZKMcEkKAb1OxHjOAu0CL3alciL528V7E9MityPDTMo4CXsqaxNyAsox11VyQgic4WYAJ_PfOCcMr4yeNZw3L-exQ_0P5xBYDuF5n4Mfzur5BCa_WFd32GbtX4EJ6nY03xgYZY-E9JLqYyFu0tC3VpAguAKe9a1M1wVkA0uaQVx5s12zrMaGx8zGapeKkThpIz2LCElgvPNUX1U9V0iAGiM"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-6">
+<!-- Category Card 2 -->
+<div class="relative rounded-[32px] overflow-hidden aspect-[16/10] shadow-lg group">
+<img alt="Fruit Trees" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZlceGVBmgSkLuZEIHAK81dQeD1dwZt9Wqar94URsdNBFIOmsDAJ_ZCGdt9Ff9nD3qhBT4PXYOSo9WFHKk7Tt62ro3CcZUrbZ9R1Wo7GSZj3ek1OdZesP3T4PXFtsEeJVI6fvp1vNuPzMNUSHBiIk7T5SQYNR6yLqLxyeDWZDN4dWouyUmdgyXvTlHB4INzYsvFqfCOJYRRttUiq3SZDwa4LNJfwmPRsHxtZ9Ea6yuFSNrFQFawD3khGn6F3QEnwJlZk2w0GWXROk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
 <div class="flex justify-between items-end">
 <div>
-<span class="inline-block bg-secondary-container text-on-secondary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">4 Species</span>
-<h3 class="text-2xl font-bold text-white">Fruit Trees</h3>
+<span class="inline-block bg-orange-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2">4 Species</span>
+<h3 class="text-3xl font-black text-white">Fruit Trees</h3>
 </div>
-<div class="bg-white/20 backdrop-blur-md p-2 rounded-full text-white">
-<span class="material-symbols-outlined text-2xl block">arrow_forward</span>
-</div>
+<span class="material-symbols-outlined text-white text-3xl mb-1">arrow_forward</span>
 </div>
 </div>
 </div>
-<!-- Category Card 3: Cacti -->
-<div class="relative rounded-3xl overflow-hidden aspect-[16/10] shadow-sm group">
-<img alt="Cacti" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_ESPsxpm9slU3ZiVhTc3If9ynQOvoKAU6SZQ_aEdLf-dh2L0uo0vNNYsL0niX3ZtDWf3xRUV1DZW_rfwDAdg4DAntXYRKpvX6whfm_1EZw2AGHzYPFSHLV03ZI3CPT-fHgLN_6AXvy8stJUuO-DJsR92cjwweASATvYllOc2Gc2es2gTHQxtyUQfPshcdxg-6Eo18bARz7_WTkBbASTwEc3t4RntQtM8i3SjCwUgBTxvHMKcr2z91uh3H32FMw1ySfS8yzKQItLA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-6">
+<!-- Category Card 3 -->
+<div class="relative rounded-[32px] overflow-hidden aspect-[16/10] shadow-lg group">
+<img alt="Cacti" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtekIsJSGztVVerR-wwaE7tG0Q9rJC7qeFS3Y0glnhsso5MZBkCwmfJaPGWwV8btj7d4q6BV2yiR0uh5QVcEpWBW_P9MYRwKTJsBImqSA_62SqEC5_a_g7L9ipghf_LEKj5ycsJa26G1IykrKtoHSl6pbu0AeiyZaRiQDhEok4mp4bPTcxECtJvJKnUiKxRtImL6R91ou8Z4nB3yDm0gOx9lBk8h_3H5N05IySNZH9vogcG8EVmBOxX9EOH7_qqQkik6L1-PJTVUY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
 <div class="flex justify-between items-end">
 <div>
-<span class="inline-block bg-tertiary-container text-on-tertiary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">8 Species</span>
-<h3 class="text-2xl font-bold text-white">Cacti</h3>
+<span class="inline-block bg-blue-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2">8 Species</span>
+<h3 class="text-3xl font-black text-white">Cacti</h3>
 </div>
-<div class="bg-white/20 backdrop-blur-md p-2 rounded-full text-white">
-<span class="material-symbols-outlined text-2xl block">arrow_forward</span>
-</div>
+<span class="material-symbols-outlined text-white text-3xl mb-1">arrow_forward</span>
 </div>
 </div>
 </div>
-<!-- Category Card 4: Herbs -->
-<div class="relative rounded-3xl overflow-hidden aspect-[16/10] shadow-sm group">
-<img alt="Herbs" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEn5-ejTSIHqFyD2GA5emz4BmtHitbqhO8UST462whhN3AtGrcWx_Z-AXPfK8BrteVkF1xt-KC7ISJmb64agfHs-5SYSvjcvmetp2grWD1ke_0orqmp-mXHeQ720-g8BdodGI3srh_yuLQjfhB0sgaVp-IzhyoI7Lw4xkRhxDfBg29Sxob1ijuYRxQKd1GApyverO-5mDKpNyt1v-2DOHZ9OvvDGtxyxM1tmCwUSI00dHPxm0k6A-cK-cLhZYhsQcbYOOR06Ur274"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-6">
+<!-- Category Card 4 -->
+<div class="relative rounded-[32px] overflow-hidden aspect-[16/10] shadow-lg group">
+<img alt="Herbs" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjDh7QqjajVA0GqIfllTFhr8uGUT3HitGAHdkC8NXB2T1XjoGPUYcC-_BW_bDkWzlzu5ky01OC7zrbhwSsnzsW8tXi2eV_uNCx86obKlbcv_m2l7fzl3HeagiQjLryruuhO0Ai3XhIWkzPE9ObinF_knR9QGz-dxuxZS4oeDayjVhHJkFIR3V6vqbp1x-s-uAjOiLHnKje_IZ6o8h8-Htb_B9J5K_qzQch8rhvjlX3yf1QuYtJXHAAwWo3KcEkKc2Cqi2BH_-MVw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
 <div class="flex justify-between items-end">
 <div>
-<span class="inline-block bg-primary text-on-primary text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">15 Species</span>
-<h3 class="text-2xl font-bold text-white">Herbs</h3>
+<span class="inline-block bg-purple-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2">15 Species</span>
+<h3 class="text-3xl font-black text-white">Herbs</h3>
 </div>
-<div class="bg-white/20 backdrop-blur-md p-2 rounded-full text-white">
-<span class="material-symbols-outlined text-2xl block">arrow_forward</span>
-</div>
+<span class="material-symbols-outlined text-white text-3xl mb-1">arrow_forward</span>
 </div>
 </div>
 </div>
 </div>
 </main>
-<!-- Bottom Navigation Bar - Matched to Core Design -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-surface-container-lowest border-t border-outline-variant shadow-lg">
-<a class="flex flex-col items-center justify-center nav-inactive" href="index.html">
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white border-t border-stone-100 shadow-2xl">
+<a class="flex flex-col items-center justify-center text-stone-400" href="index.html">
 <span class="material-symbols-outlined">home</span>
-<span class="text-[11px] font-semibold mt-1">Home</span>
+<span class="text-[11px] font-medium">Home</span>
 </a>
-<a class="flex flex-col items-center justify-center nav-inactive" href="harvest.html">
+<a class="flex flex-col items-center justify-center text-stone-400" href="harvest.html">
 <span class="material-symbols-outlined">eco</span>
-<span class="text-[11px] font-semibold mt-1">Harvest</span>
+<span class="text-[11px] font-medium">Harvest</span>
 </a>
-<a class="flex flex-col items-center justify-center nav-inactive" href="community.html">
+<a class="flex flex-col items-center justify-center text-stone-400" href="community.html">
 <span class="material-symbols-outlined">groups</span>
-<span class="text-[11px] font-semibold mt-1">Community</span>
+<span class="text-[11px] font-medium">Community</span>
 </a>
-<a class="flex flex-col items-center justify-center nav-inactive" href="budget.html">
+<a class="flex flex-col items-center justify-center text-stone-400" href="budget.html">
 <span class="material-symbols-outlined">shopping_basket</span>
-<span class="text-[11px] font-semibold mt-1">Budget</span>
+<span class="text-[11px] font-medium">Budget</span>
 </a>
 </nav>
-</body></html>
+</body>
+</html>
