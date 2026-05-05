@@ -4,7 +4,26 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Plant Identifier - Scanner</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+        const cameraInput = document.getElementById('camera-capture-input');
+        const processingOverlay = document.getElementById('processing-overlay');
+        const scanningGrid = document.getElementById('scanning-grid');
+
+        if (cameraInput) {
+            cameraInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    // Show processing state if elements exist
+                    if (processingOverlay) processingOverlay.classList.remove('hidden');
+                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
+                    
+                    // Simulate processing and redirect
+                    setTimeout(() => {
+                        window.location.href = 'scanner-result.html';
+                    }, 1500);
+                }
+            });
+        }
+    </script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -135,16 +154,12 @@
 </div>
 <!-- Primary Actions -->
 <div class="flex flex-col gap-4">
-<a class="w-full bg-primary text-on-primary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="scanner-result.html">
-<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
-                        Add to My Garden
-                    </a>
-<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-capture-input').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
-                        Take Photo</button>
+<a class="w-full bg-primary text-on-primary py-4 rounded-full font-headline-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" href="#"><span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>Add to My Garden</a>
+<button class="w-full border-2 border-primary text-primary py-4 rounded-full font-headline-md flex items-center justify-center gap-2 hover:bg-primary/5 active:scale-95 transition-all" onclick="document.getElementById('camera-capture-input').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>Take Photo</button>
 </div>
 </div>
 </section>
-<input accept="image/*" capture="environment" class="hidden" id="camera-capture-input" type="file"/></main>
+<input accept="image/*" capture="camera" class="hidden" id="camera-capture-input" type="file"/></main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 bg-white flex justify-around items-center px-4 pb-8 pt-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
 <div class="flex items-center justify-center text-stone-400 p-3 hover:text-emerald-600 transition-all active:scale-90">
@@ -168,7 +183,7 @@
         if (cameraInput) {
             cameraInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
-                    // Show processing state
+                    // Show processing state if elements exist
                     if (processingOverlay) processingOverlay.classList.remove('hidden');
                     if (scanningGrid) scanningGrid.classList.remove('opacity-0');
                     
