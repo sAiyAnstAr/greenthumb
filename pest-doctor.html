@@ -7,59 +7,60 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "surface-bright": "#faf9f5",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-surface": "#2f312e",
                     "on-primary-container": "#9dd090",
-                    "secondary-container": "#fed3c7",
-                    "secondary": "#77574d",
-                    "on-tertiary-fixed": "#3e0500",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#bcf0ae",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#2d5a27",
+                    "on-surface-variant": "#42493e",
+                    "on-primary": "#ffffff",
+                    "outline": "#72796e",
+                    "primary-fixed-dim": "#a1d494",
                     "on-tertiary-container": "#ffaf9e",
                     "on-primary-fixed-variant": "#23501e",
-                    "error": "#ba1a1a",
-                    "on-primary": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface": "#faf9f5",
-                    "background": "#faf9f5",
-                    "primary": "#154212",
-                    "on-secondary-container": "#795950",
-                    "surface-variant": "#e3e2df",
-                    "tertiary-container": "#8d3220",
-                    "surface-tint": "#3b6934",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-dim": "#dbdad6",
-                    "on-surface-variant": "#42493e",
-                    "on-secondary": "#ffffff",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "inverse-primary": "#a1d494",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "surface-container-high": "#e9e8e4",
-                    "error-container": "#ffdad6",
-                    "surface-container-low": "#f4f4f0",
-                    "outline-variant": "#c2c9bb",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-highest": "#e3e2df",
-                    "secondary-fixed": "#ffdbd0",
-                    "on-surface": "#1b1c1a",
-                    "on-error-container": "#93000a",
-                    "on-primary-fixed": "#002201",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "on-secondary-fixed": "#2c160e",
-                    "primary-fixed": "#bcf0ae",
-                    "surface-container": "#efeeea",
-                    "on-error": "#ffffff",
-                    "outline": "#72796e",
                     "on-background": "#1b1c1a",
-                    "primary-fixed-dim": "#a1d494"
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container-high": "#e9e8e4",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "surface-tint": "#3b6934",
+                    "surface-container": "#efeeea",
+                    "secondary-fixed": "#ffdbd0",
+                    "inverse-on-surface": "#f2f1ed",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#3e0500",
+                    "surface-variant": "#e3e2df",
+                    "primary": "#154212",
+                    "surface-container-low": "#f4f4f0",
+                    "on-secondary-fixed": "#2c160e",
+                    "inverse-primary": "#a1d494",
+                    "surface-bright": "#faf9f5",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad3",
+                    "tertiary-container": "#8d3220",
+                    "secondary": "#77574d",
+                    "surface": "#faf9f5",
+                    "surface-dim": "#dbdad6",
+                    "outline-variant": "#c2c9bb",
+                    "on-primary-fixed": "#002201",
+                    "inverse-surface": "#2f312e",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fed3c7",
+                    "background": "#faf9f5"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -68,31 +69,32 @@
                     "full": "9999px"
             },
             "spacing": {
-                    "sm": "12px",
-                    "container-margin": "20px",
-                    "md": "24px",
                     "gutter": "16px",
-                    "xl": "64px",
+                    "base": "8px",
                     "xs": "4px",
+                    "md": "24px",
                     "lg": "40px",
-                    "base": "8px"
+                    "container-margin": "20px",
+                    "sm": "12px",
+                    "xl": "64px"
             },
             "fontFamily": {
+                    "plus-jakarta": ["Plus Jakarta Sans", "sans-serif"],
                     "label-sm": ["Plus Jakarta Sans"],
                     "headline-md": ["Plus Jakarta Sans"],
                     "display-lg": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
                     "body-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
                     "label-lg": ["Plus Jakarta Sans"]
             },
             "fontSize": {
                     "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
                     "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
                     "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
                     "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
                     "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
             }
           },
@@ -105,30 +107,35 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .pest-scanner-overlay {
-            background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
         }
     </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
 </head>
 <body class="bg-surface text-on-surface min-h-screen pb-32">
-<!-- TopAppBar Shell - Greenthumb Core Styled -->
-<header class="bg-primary text-on-primary docked full-width top-0 z-50 flex justify-between items-center w-full px-6 py-4 sticky">
+<!-- TopAppBar Shell -->
+<header class="bg-stone-50/80 backdrop-blur-md text-emerald-800 font-plus-jakarta text-lg font-bold tracking-tight docked full-width top-0 z-50 border-b border-stone-200 flex justify-between items-center w-full px-6 py-4 sticky">
 <div class="flex items-center gap-3">
-<span class="material-symbols-outlined hover:bg-white/10 p-2 rounded-full transition-colors cursor-pointer" data-icon="menu">menu</span>
-<span class="font-bold text-xl tracking-tighter italic">BloomGuide</span>
+<a href="index.html"><span class="material-symbols-outlined hover:bg-stone-200/50 p-2 rounded-full transition-colors cursor-pointer" data-icon="arrow_back">arrow_back</span></a>
+<span class="text-emerald-900 font-black italic tracking-tighter">BloomGuide</span>
 </div>
-<div class="h-10 w-10 rounded-full bg-primary-container overflow-hidden border border-on-primary-container/20">
-<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFxTs6cVZI651zPwrcJ4YpvskF8lmHewdvAPflthUj-Yw_UBi5XPrMaEWJ4x2iPeuNmjVeJ-78cWCySILtOLuQvaZb1GZVIXkfzZtgHQ4SckUyQm6ZVFkMldyAzYMFMKuf2680GSPBVSBFo73sXVZo3gaBTai5m4o_T_RLjee0rLdstsZz6Y1fDulFxqAmVeziOwUO765qvdIwlqK6D-o3vYTW9RBPXQMq1qm_MdQm6cdcjP5qMKgFfjUFkixd13xbS7M_O5XcoKg"/>
+<div class="h-10 w-10 rounded-full bg-emerald-100 overflow-hidden border border-emerald-200">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional and friendly headshot of a female gardener in her late 20s. She is smiling warmly against a soft-focus background of lush green nursery plants. The lighting is natural and bright, capturing a clean, modern aesthetic with a soft organic feel that matches the digital gardening brand identity. The photo is high-resolution and high-key." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFxTs6cVZI651zPwrcJ4YpvskF8lmHewdvAPflthUj-Yw_UBi5XPrMaEWJ4x2iPeuNmjVeJ-78cWCySILtOLuQvaZb1GZVIXkfzZtgHQ4SckUyQm6ZVFkMldyAzYMFMKuf2680GSPBVSBFo73sXVZo3gaBTai5m4o_T_RLjee0rLdstsZz6Y1fDulFxqAmVeziOwUO765qvdIwlqK6D-o3vYTW9RBPXQMq1qm_MdQm6cdcjP5qMKgFfjUFkixd13xbS7M_O5XcoKg"/>
 </div>
 </header>
 <main class="max-w-4xl mx-auto px-container-margin py-8">
 <!-- AI Diagnosis Section -->
-<section class="relative rounded-xl overflow-hidden mb-8 shadow-sm group">
+<section class="relative rounded-3xl overflow-hidden mb-10 shadow-lg group">
 <div class="aspect-video w-full relative">
-<img alt="Aphids on leaf" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpDN8g1im-u7WHgVpqhwQkJk-V_72DphdeH17gdnLNcxf3IvD1uycj97SBh5wVOs75s9XCp9_hc69PZ1dy2AmJhtbb1z7grqj7udmRVycF8XIRnIkwLwEhJ44j_p3s6c_mWkPmKzjOfE6PFY8XhYI-USpijjjRJr2vlHyJEDB521YODlEe2hZww_jhmTTzjkUyLXtsSSF_5w4SPlEmJ-Pajr3g1ohllSjd0g6xbV_TtTIfJQnD8vInPEemg68jRJcF9Ug62tyZSA"/>
-<div class="absolute inset-0 border-2 border-dashed border-white/50 rounded-lg m-4 animate-pulse pointer-events-none"></div>
-<div class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-2 border border-outline-variant">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-label-sm text-on-surface">98% confidence</span>
+<img alt="Aphids on leaf" class="w-full h-full object-cover" data-alt="A macro close-up photograph of a bright green plant leaf infested with small, pale green aphids. The lighting is professional and sharp, revealing the texture of the leaf and the detail of the insects. The image uses a shallow depth of field to keep the focus strictly on the pest colony, set against a blurred, organic garden background. The overall aesthetic is educational and high-end botanical photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpDN8g1im-u7WHgVpqhwQkJk-V_72DphdeH17gdnLNcxf3IvD1uycj97SBh5wVOs75s9XCp9_hc69PZ1dy2AmJhtbb1z7grqj7udmRVycF8XIRnIkwLwEhJ44j_p3s6c_mWkPmKzjOfE6PFY8XhYI-USpijjjRJr2vlHyJEDB521YODlEe2hZww_jhmTTzjkUyLXtsSSF_5w4SPlEmJ-Pajr3g1ohllSjd0g6xbV_TtTIfJQnD8vInPEemg68jRJcF9Ug62tyZSA"/>
+<div class="absolute inset-0 border-2 border-dashed border-emerald-400/50 rounded-2xl m-4 animate-pulse pointer-events-none"></div>
+<div class="absolute top-6 right-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full flex items-center gap-2 border border-emerald-100">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-label-lg text-emerald-900 text-label-lg">98% confidence</span>
 </div>
 <div class="absolute bottom-0 left-0 right-0 p-6 pest-scanner-overlay text-white">
 <h1 class="font-headline-lg text-headline-lg mb-1">Aphids detected</h1>
@@ -136,11 +143,11 @@
 </div>
 </div>
 </section>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- Left Column: Details & Treatment -->
-<div class="md:col-span-2 space-y-6">
+<div class="md:col-span-2 space-y-8">
 <!-- Pest Information -->
-<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm">
+<div class="bg-surface-container-lowest p-md rounded-3xl border border-stone-100 shadow-sm">
 <div class="flex items-center gap-3 mb-4">
 <span class="material-symbols-outlined text-tertiary" data-icon="bug_report">bug_report</span>
 <h2 class="font-headline-md text-headline-md text-on-surface">About this Pest</h2>
@@ -149,43 +156,43 @@
                         Aphids are small, sap-sucking insects that can rapidly multiply and cause stunted growth, leaf curling, and the spread of plant viruses. They secrete 'honeydew', a sticky substance that encourages the growth of black sooty mold.
                     </p>
 <div class="grid grid-cols-2 gap-4">
-<div class="bg-surface-container-low p-4 rounded-lg">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Impact Level</span>
-<span class="text-tertiary font-headline-md text-headline-md">High</span>
+<div class="bg-surface-container p-4 rounded-2xl border border-stone-50">
+<span class="text-label-sm font-label-sm text-stone-500 block mb-1">Impact Level</span>
+<span class="text-tertiary-container font-headline-md text-headline-md">High</span>
 </div>
-<div class="bg-surface-container-low p-4 rounded-lg">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Spread Rate</span>
-<span class="text-on-secondary-fixed-variant font-headline-md text-headline-md">Rapid</span>
+<div class="bg-surface-container p-4 rounded-2xl border border-stone-50">
+<span class="text-label-sm font-label-sm text-stone-500 block mb-1">Spread Rate</span>
+<span class="text-secondary-container font-headline-md text-headline-md">Rapid</span>
 </div>
 </div>
 </div>
 <!-- Organic Repellent Section -->
-<div class="bg-surface-container-lowest p-md rounded-xl border-2 border-primary-container shadow-sm">
+<div class="bg-surface-container-lowest p-md rounded-3xl border-2 border-primary-container shadow-sm">
 <div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary-container" data-icon="eco">eco</span>
+<span class="material-symbols-outlined text-primary" data-icon="eco">eco</span>
 <h2 class="font-headline-md text-headline-md text-on-surface">Organic Repellents</h2>
 </div>
 <div class="space-y-4">
-<div class="flex items-start gap-4 p-4 rounded-lg bg-surface-container-low">
-<div class="p-2.5 bg-surface-container-lowest rounded-lg shadow-sm border border-outline-variant">
-<span class="material-symbols-outlined text-primary-container" data-icon="opacity">opacity</span>
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-primary-fixed/20">
+<div class="p-3 bg-white rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="opacity">opacity</span>
 </div>
 <div>
-<h3 class="font-label-lg text-label-lg text-on-surface mb-1">Neem Oil Spray</h3>
+<h3 class="font-label-lg text-label-lg text-primary mb-1">Neem Oil Spray</h3>
 <p class="font-body-md text-body-md text-on-surface-variant">Mix 2 tsp of cold-pressed neem oil with 1 tsp of mild soap in a quart of water. Spray directly on the undersides of leaves.</p>
 </div>
 </div>
-<div class="flex items-start gap-4 p-4 rounded-lg bg-surface-container-low">
-<div class="p-2.5 bg-surface-container-lowest rounded-lg shadow-sm border border-outline-variant">
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-secondary-container/20">
+<div class="p-3 bg-white rounded-xl shadow-sm">
 <span class="material-symbols-outlined text-secondary" data-icon="ladybug">bugfood</span>
 </div>
 <div>
-<h3 class="font-label-lg text-label-lg text-on-surface mb-1">Introduce Ladybugs</h3>
+<h3 class="font-label-lg text-label-lg text-secondary mb-1">Introduce Ladybugs</h3>
 <p class="font-body-md text-body-md text-on-surface-variant">Ladybugs are natural predators that can consume up to 50 aphids a day. Release them in the cool of the evening.</p>
 </div>
 </div>
-<div class="flex items-start gap-4 p-4 rounded-lg bg-surface-container-low">
-<div class="p-2.5 bg-surface-container-lowest rounded-lg shadow-sm border border-outline-variant">
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container">
+<div class="p-3 bg-white rounded-xl shadow-sm">
 <span class="material-symbols-outlined text-on-surface-variant" data-icon="water_drop">water_drop</span>
 </div>
 <div>
@@ -197,80 +204,77 @@
 </div>
 </div>
 <!-- Right Column: Community & Votes -->
-<div class="space-y-6">
+<div class="space-y-8">
 <!-- Community Consensus -->
-<div class="bg-surface-container-high p-md rounded-xl shadow-sm">
-<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-6">Community Consensus</h2>
-<div class="space-y-4">
-<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant">
+<div class="bg-surface-container-high p-md rounded-3xl shadow-sm">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest mb-6">Community Consensus</h2>
+<div class="space-y-6">
+<div class="bg-white p-5 rounded-2xl border border-stone-200">
 <div class="flex justify-between items-start mb-3">
-<span class="inline-block px-2 py-0.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-bold uppercase tracking-wide">Most Effective</span>
-<div class="flex items-center gap-1 text-primary-container">
-<span class="material-symbols-outlined text-[18px]" data-icon="thumb_up" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
-<span class="font-label-sm text-label-sm">1.2k</span>
+<span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-label-sm font-label-sm">Most Effective</span>
+<div class="flex items-center gap-1 text-emerald-700">
+<span class="material-symbols-outlined text-sm" data-icon="thumb_up" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="font-label-lg text-label-lg">1.2k</span>
 </div>
 </div>
 <h3 class="font-label-lg text-label-lg text-on-surface mb-2">Castile Soap Solution</h3>
 <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">"Works every time for my roses. Use Dr. Bronner's Peppermint soap for extra repellent kick!"</p>
 <div class="flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-surface-container overflow-hidden">
-<img alt="Community Member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxa9L4_c6k5YuqQO-v0ipdLgNJ0JZVGuAKWShtHxgLYEOVhMKE1puZlk50eIG_vFcD4NepH32dMa5TKzPGi4v6jzAgVmh0N2hg004skn0Idl_8lD_IYQ7zeFw3-bTy0wPv86H9ExFvkSE5RePgGrC_bs1qRfrblVN9Xb4fPnt_z2cwMHmjFuNUiJjeqzZ9kl7t1XvFaK6Brd9TLUUCNP_BMQxF4QUj5o2zqG1TdRMETugdi1TotQInBkUqhD8dviW0qAC7gjru1bY"/>
+<div class="w-6 h-6 rounded-full bg-stone-200 overflow-hidden">
+<img alt="Community Member" data-alt="Close-up headshot of an experienced male organic gardener with a short beard, wearing a rustic linen apron. He is in a sun-drenched garden greenhouse, with golden hour sunlight highlighting his face and creating a professional yet warm and approachable aesthetic. High resolution portrait with natural tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxa9L4_c6k5YuqQO-v0ipdLgNJ0JZVGuAKWShtHxgLYEOVhMKE1puZlk50eIG_vFcD4NepH32dMa5TKzPGi4v6jzAgVmh0N2hg004skn0Idl_8lD_IYQ7zeFw3-bTy0wPv86H9ExFvkSE5RePgGrC_bs1qRfrblVN9Xb4fPnt_z2cwMHmjFuNUiJjeqzZ9kl7t1XvFaK6Brd9TLUUCNP_BMQxF4QUj5o2zqG1TdRMETugdi1TotQInBkUqhD8dviW0qAC7gjru1bY"/>
 </div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">James Garden-Pro</span>
+<span class="text-label-sm font-label-sm text-stone-500">James Garden-Pro</span>
 </div>
 </div>
-<div class="space-y-2">
-<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
-<span class="font-body-md text-body-md text-on-surface">Garlic Water</span>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-white/60 rounded-xl">
+<span class="font-body-md text-body-md">Garlic Water</span>
 <div class="flex items-center gap-2">
-<span class="text-label-sm font-label-sm text-on-surface-variant">458</span>
-<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary-container transition-colors" data-icon="thumb_up">thumb_up</span>
+<span class="text-label-sm font-label-sm text-stone-500">458 votes</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-emerald-600 transition-colors" data-icon="thumb_up">thumb_up</span>
 </div>
 </div>
-<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
-<span class="font-body-md text-body-md text-on-surface">Sticky Traps</span>
+<div class="flex items-center justify-between p-3 bg-white/60 rounded-xl">
+<span class="font-body-md text-body-md">Sticky Traps</span>
 <div class="flex items-center gap-2">
-<span class="text-label-sm font-label-sm text-on-surface-variant">211</span>
-<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary-container transition-colors" data-icon="thumb_up">thumb_up</span>
+<span class="text-label-sm font-label-sm text-stone-500">211 votes</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-emerald-600 transition-colors" data-icon="thumb_up">thumb_up</span>
 </div>
 </div>
 </div>
 </div>
 </div>
 <!-- Ad/Tip Placeholder -->
-<div class="relative rounded-xl overflow-hidden aspect-square bg-tertiary-container group">
-<img alt="Organic Garden Supplies" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB252JcyH5n7uwyHflzok6X_-P1_fTq_a9f50O1NngyptpjhEwVvqYiYLvxe7S5-GJysfLnw7z_uA_ySwdcizMyqUCnKYvnlo6nVrWxWtO6M19_94x5kCjrsk3hBZlzfBS-4vbGNge_Da3byEQJCcuLLrV1QrlJ9h6qgF_15XlbjlBm1Dnn3ZZ6rtrsH4F9OkHRvwt7JMPpRPNBFiRrG3LY4I5VXXe83bA1hZJvfTWRoMNxe5fdIQzmSm-NLVwVEXWioWaEVlBCcB4"/>
-<div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-tertiary-container via-transparent to-transparent">
-<span class="text-on-tertiary text-label-sm font-label-sm mb-1">Sustainable Choice</span>
-<h4 class="text-on-tertiary font-headline-md text-headline-md mb-4 leading-tight">Shop 100% Cold Pressed Neem Oil</h4>
-<button class="bg-primary-container text-on-primary-container font-label-lg text-label-lg py-3 px-6 rounded-lg w-full hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">View Garden Shop</button>
+<div class="relative rounded-3xl overflow-hidden aspect-square bg-tertiary-container group">
+<img alt="Organic Garden Supplies" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-500" data-alt="A premium, lifestyle-focused shot of organic neem oil in a stylish glass bottle sitting on a stone garden table. Next to it are fresh green leaves and a ceramic bowl. The lighting is soft and artistic, using natural shadows to create depth. The color palette is earthy with warm terracotta and sage green tones, evoking a sense of high-quality organic gardening supplies." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB252JcyH5n7uwyHflzok6X_-P1_fTq_a9f50O1NngyptpjhEwVvqYiYLvxe7S5-GJysfLnw7z_uA_ySwdcizMyqUCnKYvnlo6nVrWxWtO6M19_94x5kCjrsk3hBZlzfBS-4vbGNge_Da3byEQJCcuLLrV1QrlJ9h6qgF_15XlbjlBm1Dnn3ZZ6rtrsH4F9OkHRvwt7JMPpRPNBFiRrG3LY4I5VXXe83bA1hZJvfTWRoMNxe5fdIQzmSm-NLVwVEXWioWaEVlBCcB4"/>
+<div class="absolute inset-0 p-6 flex flex-col justify-end">
+<span class="text-white/80 text-label-sm font-label-sm mb-2">Sustainable Choice</span>
+<h4 class="text-white font-headline-md text-headline-md mb-4">Shop 100% Cold Pressed Neem Oil</h4>
+<button class="bg-white text-tertiary font-label-lg text-label-lg py-3 px-6 rounded-full w-full hover:bg-stone-100 transition-colors">View Garden Shop</button>
 </div>
 </div>
 </div>
 </div>
 </main>
-<!-- BottomNavBar Shell - Greenthumb Core Styled -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-primary text-on-primary rounded-t-2xl border-t border-on-primary/10 shadow-[0_-4px_20px_0_rgba(0,0,0,0.15)]">
-<a class="flex flex-col items-center justify-center opacity-70 px-3 py-1 hover:opacity-100 transition-opacity" href="#">
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/90 dark:bg-stone-900/90 backdrop-blur-lg rounded-t-2xl border-t border-stone-100 shadow-[0_-4px_20px_0_rgba(45,90,39,0.06)]">
+<a class="flex flex-col items-center justify-center text-stone-400 px-3 py-1.5 hover:text-emerald-600 transition-colors" href="index.html">
 <span class="material-symbols-outlined" data-icon="yard">yard</span>
-<span class="font-label-sm text-[10px] font-bold uppercase tracking-widest mt-1">My Garden</span>
+<span class="font-plus-jakarta text-[10px] font-semibold uppercase tracking-widest mt-1">My Garden</span>
 </a>
-<a class="flex flex-col items-center justify-center opacity-70 px-3 py-1 hover:opacity-100 transition-opacity" href="#">
+<a class="flex flex-col items-center justify-center text-stone-400 px-3 py-1.5 hover:text-emerald-600 transition-colors" href="soil.html">
 <span class="material-symbols-outlined" data-icon="layers">layers</span>
-<span class="font-label-sm text-[10px] font-bold uppercase tracking-widest mt-1">Soil</span>
+<span class="font-plus-jakarta text-[10px] font-semibold uppercase tracking-widest mt-1">Soil</span>
 </a>
-<a class="flex flex-col items-center justify-center opacity-70 px-3 py-1 hover:opacity-100 transition-opacity" href="#">
+<a class="flex flex-col items-center justify-center text-stone-400 px-3 py-1.5 hover:text-emerald-600 transition-colors" href="identify.html">
 <span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
-<span class="font-label-sm text-[10px] font-bold uppercase tracking-widest mt-1">Identify</span>
+<span class="font-plus-jakarta text-[10px] font-semibold uppercase tracking-widest mt-1">Identify</span>
 </a>
 <!-- Active Tab: Pests -->
-<a class="flex flex-col items-center justify-center bg-on-primary/10 text-on-primary rounded-xl px-4 py-1.5 transition-all" href="#">
+<a class="flex flex-col items-center justify-center bg-emerald-50 text-emerald-800 rounded-xl px-3 py-1.5 tap-highlight-none transition-transform duration-200" href="pests.html">
 <span class="material-symbols-outlined" data-icon="bug_report" style="font-variation-settings: 'FILL' 1;">bug_report</span>
-<span class="font-label-sm text-[10px] font-bold uppercase tracking-widest mt-1">Pests</span>
+<span class="font-plus-jakarta text-[10px] font-semibold uppercase tracking-widest mt-1">Pests</span>
 </a>
-<a class="flex flex-col items-center justify-center opacity-70 px-3 py-1 hover:opacity-100 transition-opacity" href="#">
-<span class="material-symbols-outlined" data-icon="groups">groups</span>
-<span class="font-label-sm text-[10px] font-bold uppercase tracking-widest mt-1">Community</span>
-</a>
+<a class="flex flex-col items-center justify-center text-stone-400 px-3 py-1.5 hover:text-emerald-600 transition-colors" href="budget.html"><span class="material-symbols-outlined" data-icon="payments">payments</span><span class="font-plus-jakarta text-[10px] font-semibold uppercase tracking-widest mt-1">Budget</span></a>
 </nav>
 </body></html>
