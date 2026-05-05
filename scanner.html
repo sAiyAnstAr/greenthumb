@@ -148,22 +148,6 @@
 <!-- Background Image (Optional/Placeholder) -->
 <img alt="Plant identifier background" class="w-full h-full object-cover opacity-30 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoM_ue4eVmQpYRNFecADKlDafp6LN7L7xHWEXKiMEy5_Hub6BWciv3tY6op0uNGYvBj7Ly4DPV3cKRSLGTMdCnkB7seri2bOEe6XuXFM1lBBohs6Oc8mv7bFcSH3o4VUMGlJ_ZhNH87y51wGwSiD7c3k4vHJiOLA3ZAHbv4BsxIk1d9XO6jPc280MEeds3dgszSKCld0Re1N-YZd3vc6P7OCCvyPsnBgnLjeYy1XPiyyG9xcbSI8an1SHswMIKhX_l-8Te01n31w"/>
 <!-- Upload UI Overlay -->
-<div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center" id="upload-container">
-<label class="group relative flex flex-col items-center justify-center bg-white/60 hover:bg-white/80 p-12 rounded-[40px] backdrop-blur-xl border-2 border-dashed border-primary/20 w-full max-w-xs cursor-pointer transition-all active:scale-95" for="camera-upload">
-<div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-<span class="material-symbols-outlined text-primary text-5xl">photo_camera</span>
-</div>
-<h3 class="text-on-surface font-headline-md mb-2 leading-tight">Tap to take or upload a photo of your plant</h3>
-<p class="text-on-surface-variant font-label-lg opacity-70">Supports JPG, PNG</p>
-<input accept="image/*" capture="camera" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="camera-upload" type="file"/>
-</label>
-<div class="mt-8">
-<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all" onclick="document.getElementById('camera-upload').click()">
-<span class="material-symbols-outlined">camera</span>
-                    Take Photo
-                </button>
-</div>
-</div>
 <!-- Processing Overlay (Hidden by default) -->
 <div class="absolute inset-0 bg-white/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
 <div class="relative w-32 h-32 mb-8">
@@ -227,10 +211,8 @@
 <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
                         Add to My Garden
                     </a>
-<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-upload').click()">
-<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
-                        Retake Photo
-                    </button>
+<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-upload').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+                        Take Photo</button>
 </div>
 </div>
 </section>
