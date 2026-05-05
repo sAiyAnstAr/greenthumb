@@ -8,96 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-tint": "#3b6934",
-                    "on-secondary": "#ffffff",
-                    "tertiary": "#6e1c0c",
-                    "on-primary-fixed": "#002201",
-                    "surface-dim": "#dbdad6",
-                    "outline": "#72796e",
-                    "tertiary-fixed": "#ffdad3",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-background": "#1b1c1a",
-                    "surface": "#faf9f5",
-                    "primary": "#154212",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary": "#77574d",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "on-secondary-container": "#795950",
-                    "on-error-container": "#93000a",
-                    "surface-container-highest": "#e3e2df",
-                    "on-primary-fixed-variant": "#23501e",
-                    "secondary-container": "#fed3c7",
-                    "surface-container": "#efeeea",
-                    "on-primary-container": "#9dd090",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary-fixed": "#2c160e",
-                    "surface-bright": "#faf9f5",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface-container-low": "#f4f4f0",
-                    "on-tertiary-fixed": "#3e0500",
-                    "inverse-primary": "#a1d494",
-                    "outline-variant": "#c2c9bb",
-                    "primary-fixed-dim": "#a1d494",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "tertiary-container": "#8d3220",
-                    "background": "#faf9f5",
-                    "on-primary": "#ffffff",
-                    "on-surface": "#1b1c1a",
-                    "on-surface-variant": "#42493e",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "secondary-fixed": "#ffdbd0",
-                    "surface-variant": "#e3e2df",
-                    "error-container": "#ffdad6",
-                    "error": "#ba1a1a",
-                    "inverse-on-surface": "#f2f1ed",
-                    "inverse-surface": "#2f312e",
-                    "surface-container-high": "#e9e8e4",
-                    "on-error": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "primary-fixed": "#bcf0ae"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "base": "8px",
-                    "sm": "12px",
-                    "xs": "4px",
-                    "gutter": "16px",
-                    "xl": "64px",
-                    "lg": "40px",
-                    "md": "24px",
-                    "container-margin": "20px"
-            },
-            "fontFamily": {
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
+        const cameraInput = document.getElementById('camera-capture-input');
+        const processingOverlay = document.getElementById('processing-overlay');
+        const scanningGrid = document.getElementById('scanning-grid');
+
+        if (cameraInput) {
+            cameraInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    // Show processing state
+                    if (processingOverlay) processingOverlay.classList.remove('hidden');
+                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
+                    
+                    // Simulate processing and redirect
+                    setTimeout(() => {
+                        window.location.href = 'scanner-result.html';
+                    }, 1500);
+                }
+            });
+        }
     </script>
 <style>
         .material-symbols-outlined {
@@ -211,12 +139,12 @@
 <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
                         Add to My Garden
                     </a>
-<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-upload').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+<button class="w-full border-2 border-secondary/20 text-secondary py-5 rounded-full font-headline-md flex items-center justify-center gap-2 active:bg-secondary/5 transition-all" onclick="document.getElementById('camera-capture-input').click()"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
                         Take Photo</button>
 </div>
 </div>
 </section>
-</main>
+<input accept="image/*" capture="environment" class="hidden" id="camera-capture-input" type="file"/></main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 bg-white flex justify-around items-center px-4 pb-8 pt-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
 <div class="flex items-center justify-center text-stone-400 p-3 hover:text-emerald-600 transition-all active:scale-90">
@@ -233,18 +161,18 @@
 </div>
 </nav>
 <script>
-        const uploadInput = document.getElementById('camera-upload');
+        const cameraInput = document.getElementById('camera-capture-input');
         const processingOverlay = document.getElementById('processing-overlay');
         const scanningGrid = document.getElementById('scanning-grid');
 
-        if (uploadInput) {
-            uploadInput.addEventListener('change', (e) => {
+        if (cameraInput) {
+            cameraInput.addEventListener('change', (e) => {
                 if (e.target.files && e.target.files[0]) {
                     // Show processing state
-                    processingOverlay.classList.remove('hidden');
-                    scanningGrid.classList.remove('opacity-0');
+                    if (processingOverlay) processingOverlay.classList.remove('hidden');
+                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
                     
-                    // Simulate processing for 1.5 seconds
+                    // Simulate processing and redirect
                     setTimeout(() => {
                         window.location.href = 'scanner-result.html';
                     }, 1500);
