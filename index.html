@@ -1,70 +1,282 @@
-<html><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="m-0"><div class="min-h-screen bg-gray-50 pb-24">
-<!-- Header -->
-<header class="bg-green-600 text-white p-6 rounded-b-3xl shadow-lg">
-<div class="flex justify-between items-center mb-4">
-<h1 class="text-2xl font-bold">Greenthumb</h1>
-<span class="material-symbols-outlined">account_circle</span>
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenthumb Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e3e2df",
+                      "secondary-fixed": "#ffdbd0",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#154212",
+                      "on-tertiary-fixed-variant": "#802918",
+                      "error": "#ba1a1a",
+                      "surface": "#faf9f5",
+                      "on-surface-variant": "#42493e",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f4f4f0",
+                      "secondary-container": "#fed3c7",
+                      "inverse-primary": "#a1d494",
+                      "on-secondary-fixed": "#2c160e",
+                      "tertiary-fixed-dim": "#ffb4a5",
+                      "surface-variant": "#e3e2df",
+                      "secondary": "#77574d",
+                      "on-primary-fixed-variant": "#23501e",
+                      "inverse-on-surface": "#f2f1ed",
+                      "primary-fixed": "#bcf0ae",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e9e8e4",
+                      "secondary-fixed-dim": "#e7bdb1",
+                      "outline": "#72796e",
+                      "on-error-container": "#93000a",
+                      "on-background": "#1b1c1a",
+                      "inverse-surface": "#2f312e",
+                      "surface-container": "#efeeea",
+                      "on-secondary-container": "#795950",
+                      "tertiary-container": "#8d3220",
+                      "surface-tint": "#3b6934",
+                      "background": "#faf9f5",
+                      "primary-container": "#2d5a27",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#a1d494",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#5d4037",
+                      "on-primary-fixed": "#002201",
+                      "on-primary-container": "#9dd090",
+                      "surface-dim": "#dbdad6",
+                      "on-surface": "#1b1c1a",
+                      "tertiary": "#6e1c0c",
+                      "surface-bright": "#faf9f5",
+                      "on-tertiary-fixed": "#3e0500",
+                      "on-tertiary-container": "#ffaf9e",
+                      "outline-variant": "#c2c9bb",
+                      "tertiary-fixed": "#ffdad3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "container-margin": "20px",
+                      "lg": "40px",
+                      "xs": "4px",
+                      "md": "24px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "label-lg": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top Bar -->
+<header class="sticky top-0 w-full z-40 flex justify-between items-center px-6 py-4 bg-stone-50/90 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-800" data-icon="eco">eco</span>
+<h1 class="text-xl font-extrabold text-green-800 font-headline-md tracking-tight">Greenthumb</h1>
 </div>
-<p class="text-green-100">Welcome back, Gardener!</p>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6ak4K7qMM8fQIfDRe30QVAE4uC0sOrrnb30bYxcGeJB-CEUM85fvV5_XaCSOp7z5O-7EvhwYIdBwYsZQHeb-1ziD0SjF6duTWOeEbxy07uWPoPFF7o-FtmF2qp67CLm5E6cqmJNJ4gsRrKhsPoZmvCNGPqArdDOVwYqiR31fP3dTU5F603XNmNUMd3uc4vAcbtRi9Lw7RKDDI3e-o65u6gMsRlnYx-PogLKAgDmRlKv8Zg3LZz0SlclP60xaH7Y7i6tEl8ouQ2Zg"/>
+</div>
+</div>
 </header>
-<main class="p-4 space-y-6">
-<!-- Action Buttons Grid -->
-<div class="grid grid-cols-2 gap-4">
-<a class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100 transition-transform active:scale-95" href="scanner.html">
-<div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-2">
-<span class="material-symbols-outlined">center_focus_strong</span>
+<main class="px-container-margin mt-base space-y-lg max-w-2xl mx-auto">
+<!-- Weather Widget -->
+<section class="bg-surface-container-low rounded-[28px] p-md flex items-center justify-between shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="p-3 bg-secondary-container rounded-2xl">
+<span class="material-symbols-outlined text-on-secondary-container text-[32px]" data-icon="partly_cloudy_day">partly_cloudy_day</span>
 </div>
-<span class="text-sm font-medium text-gray-700 text-center">Identify Plant</span>
-</a>
-<a class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100 transition-transform active:scale-95" href="soil-lab.html">
-<div class="w-12 h-12 bg-brown-100 text-amber-700 rounded-full flex items-center justify-center mb-2">
-<span class="material-symbols-outlined">humidity_mid</span>
+<div>
+<h3 class="font-headline-md text-on-surface">24°C</h3>
+<p class="font-label-lg text-on-surface-variant">Sunny Intervals</p>
 </div>
-<span class="text-sm font-medium text-gray-700 text-center">Check Soil</span>
-</a>
-<a class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100 transition-transform active:scale-95" href="pest-doctor.html">
-<div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-2">
-<span class="material-symbols-outlined">pest_control</span>
 </div>
-<span class="text-sm font-medium text-gray-700 text-center">Diagnose Pest</span>
-</a>
-<a class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-sm border border-gray-100 transition-transform active:scale-95" href="qa-hub.html">
-<div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-2">
-<span class="material-symbols-outlined">help</span>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-2 rounded-xl flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-sm">Heat Alert</span>
 </div>
-<span class="text-sm font-medium text-gray-700 text-center">Ask a Question</span>
-</a>
-</div>
-<!-- Categories -->
+</section>
+<!-- Primary Action Button -->
 <section>
-<h2 class="text-lg font-bold text-gray-800 mb-3">Categories</h2>
-<div class="grid grid-cols-1 gap-4">
-<a class="relative h-32 rounded-2xl overflow-hidden shadow-md group transition-transform active:scale-95" href="categories.html">
-<img alt="Vegetables" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoKkmQS7_2ly3g4PRScFj7sZNzWS5g4CN4UzGPXCU0iZ9QCiI4Gwrdrs4JSWPLRtwSldOOytFRzIp2yFrsakeD2dtuF_JKIBSMyC-GSH42NcYdd4p6SKICAigs_GKFvZAHSdLgb82M7Ez1uRRDZVEiFZXZrh_01e-HPBjZt_O9WN3hzdHuF161Z3Dm3l7JrDTZjM0k02z9LGqGjQwmvUSIhiLmASd1TYdGeWalKv4tYsAyfFHmcQ0jpx216L5UzOfI2xwi_mOtF90"/>
-<div class="absolute inset-0 bg-black/30 flex items-end p-4">
-<span class="text-white font-bold text-xl">Vegetables</span>
+<button class="w-full bg-primary py-container-margin rounded-full flex items-center justify-center gap-sm text-on-primary shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="center_focus_weak">center_focus_weak</span>
+<span class="font-label-lg uppercase tracking-widest">Identify a Plant</span>
+</button>
+</section>
+<!-- My Garden Summary -->
+<section>
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-headline-md text-primary">My Garden</h2>
+<button class="text-tertiary font-label-lg">View All</button>
 </div>
-</a>
+<div class="flex gap-gutter overflow-x-auto hide-scrollbar pb-xs">
+<!-- Plant Card 1 -->
+<div class="min-w-[160px] bg-white rounded-[24px] p-base shadow-sm border border-surface-variant">
+<div class="h-40 w-full rounded-[18px] overflow-hidden mb-base">
+<img class="w-full h-full object-cover" data-alt="A lush, vibrant green tomato plant growing in a rustic terracotta pot, bathed in soft golden hour sunlight in a serene urban balcony garden. The scene feels warm and organic, with soft bokeh highlighting the delicate texture of the tomato leaves." src="https://lh3.googleusercontent.com/aida/ADBb0ugl5T0LsY5iitCMqgJ92nKu5OflQ4ywtzBNWDvR-QzsWmCXXUIqJkXpY9Jyv8UeolEqrvlgTq_6PDvXjr_GciqwWpaCJD8XAtgTWVz0Ve4cjdLA39P8LBCCVfukuaOxhcMLs7CmCr_3cUgUqLtsNSlbLWtBpwxWhCfr3kBPoEhP0GosKyS72fqVFNmr8Ibluh5wngdf2CYWcTjcBeTW3EUeGpxhz1ppo21w-uDJ-FFFjqvhUe87sK-qwMcpsEkDr3VrJpD1cqH6"/>
+</div>
+<div class="px-xs">
+<h4 class="font-label-lg text-on-surface">Tomato</h4>
+<div class="flex items-center gap-xs text-error mt-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="text-[10px] font-bold uppercase">Needs Water</span>
+</div>
+</div>
+</div>
+<!-- Plant Card 2 -->
+<div class="min-w-[160px] bg-white rounded-[24px] p-base shadow-sm border border-surface-variant">
+<div class="h-40 w-full rounded-[18px] overflow-hidden mb-base">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of fresh, bright green basil leaves growing densely in an indoor herb garden. The lighting is crisp and modern, reflecting off the subtle waxy texture of the herbs. The atmosphere is clean, healthy, and revitalizing." src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
+</div>
+<div class="px-xs">
+<h4 class="font-label-lg text-on-surface">Sweet Basil</h4>
+<div class="flex items-center gap-xs text-primary mt-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Thriving</span>
+</div>
+</div>
+</div>
+<!-- Plant Card 3 -->
+<div class="min-w-[160px] bg-white rounded-[24px] p-base shadow-sm border border-surface-variant">
+<div class="h-40 w-full rounded-[18px] overflow-hidden mb-base">
+<img class="w-full h-full object-cover" data-alt="A magnificent Monstera Deliciosa with large, split heart-shaped leaves positioned in a minimalist, bright living room corner. The soft natural light from a nearby window creates gentle shadows, evoking a sense of calm, digital gardening sanctuary and premium interior design." src="https://lh3.googleusercontent.com/aida/ADBb0ujpwsNtQuzZJ6KwFHjglmhe1vM-eqG5Cn-e5vH7kteAjBYVGqq8CbMOPNzADH85woRngVRWZxD6m1LMw75avoWZQj8X_Z10RKczGIofOc0p01mepdpmSPHOejxkxOpx3SDUwwTpM2x7-AbOB4F-SSQxBUIjcs3hY2LEfn3p8xEMj2JnfCYNhNaT5b44lZoOrRpii8rvCiV6l-eH8TcTY7iOE7RZ18mjnLnIm9hbiAEfcO7rBGETYHhfYzeLTO0OW6v7xxx8Nso0OA"/>
+</div>
+<div class="px-xs">
+<h4 class="font-label-lg text-on-surface">Monstera</h4>
+<div class="flex items-center gap-xs text-primary mt-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="spa" data-weight="fill" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Healthy</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Quick Access -->
+<section class="grid grid-cols-2 gap-gutter">
+<div class="col-span-2 bg-white rounded-[32px] p-md border border-surface-variant flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="compost">compost</span>
+</div>
+<div>
+<h4 class="font-label-lg text-on-surface">Compost Tracker</h4>
+<p class="text-label-sm text-on-surface-variant">70% Breakdown Complete</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="bg-surface-container-high rounded-[32px] p-md border border-surface-variant flex flex-col justify-between aspect-square">
+<div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[24px]" data-icon="grid_view">grid_view</span>
+</div>
+<div>
+<h4 class="font-label-lg text-on-surface">Map Tool</h4>
+<p class="text-label-sm text-on-surface-variant">2 Zones</p>
+</div>
+</div>
+<div class="bg-white rounded-[32px] p-md border border-surface-variant flex flex-col justify-between aspect-square">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-[24px]" data-icon="science">science</span>
+</div>
+<div>
+<h4 class="font-label-lg text-on-surface">Soil Health</h4>
+<p class="text-label-sm text-on-surface-variant">Optimal pH</p>
+</div>
+</div>
+</section>
+<!-- Community Snippet -->
+<section class="bg-primary-container rounded-[32px] p-md text-on-primary-container">
+<div class="flex items-center gap-sm mb-base">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="forum">forum</span>
+<span class="font-label-sm uppercase tracking-widest opacity-80">Question of the Day</span>
+</div>
+<p class="font-headline-md mb-md">"How often should I fertilize my indoor succulents during the winter months?"</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwylVU4wHGJHSz6GyW3co-Bjv9ZQRlhUmhEWVkd_GeWlAkCpy-DVRVa8TKb3wqDBNrN7pgUmWEeVgiEfo0xxAVBKeskNeYVy5btLZH88i1_bzJfY0p-5JndvFiTEWr3wDUtbM2RgRokDiBNT6FpfxWr0fy_0RmE57lFdnjefNOs-5R0AWRh0jKURhfGQwhogHt--dI5YEypJiFSzxkkQrx7m5vQkfGIqiXLAMXZXOejjL8RsHQ3PvVLBi4w3b2gs_Y1SbrjHgkhUU"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_kDK6RC5mFNMZ8xynysHbvZoE-4GRw0sUGd_Xl-UdZ5H_9QdU6DKWWuuAv2J8l3vE-3JE-E4E3F70ghrO2kE0lw8NuNmdzw0IE9dqqAUnc5tdyg3QfYKm7BsF2TeNWNBqp4LGiA1ImQYK-sMjeC4n5cAYf9Kq1aju754ovY1klyqOKonpzizU2JhVLCFiOhFPjhui6bpcKlyicf42eGknhhxzGmUVXc0iYPGt7E1MEgifFRkRGxRcKSTA19nEl_bJMZdMqMvaSv0"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq2R3R3bIjObm7fi2_k1pDTxDyN2MoS-XXrx9XcVuXCR_-t1sXPJWWcL7tXxsu8Q2OUABlMa8zqUFfBGqcQSEtJ5zhHeuJao28QpSd6NjOtmPLQakoccTzKGK8pi9PVKMi8LQWIeiUkSaz2gaviKIlkAMTiKwYwXAWHpOdoTivEjNE6kX--lB2D4mQB4mqqxgXgiCfehbfIjuoKz9ijT5SYimOw8gkkCX8mLd6UGfUQh9PAGzyx3DwKTkIO5mzjv3Mn3dGSY81eoY"/>
+<div class="w-8 h-8 rounded-full bg-on-primary-container/20 flex items-center justify-center text-[10px] font-bold border-2 border-primary-container">+12</div>
+</div>
+<button class="bg-white/10 hover:bg-white/20 py-2 px-md rounded-full font-label-lg transition-colors">Join Discussion</button>
 </div>
 </section>
 </main>
-<!-- Bottom Navigation -->
-<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-between items-center">
-<a class="flex flex-col items-center text-green-600" href="index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="text-xs">Home</span>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] shadow-[0_-8px_24px_rgba(45,90,39,0.08)] border-t border-stone-100">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-green-50 text-green-800 rounded-2xl px-5 py-2 active:scale-90 transition-transform duration-200" href="index.html">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Home</span>
 </a>
-<a class="flex flex-col items-center text-gray-400" href="harvest.html">
-<span class="material-symbols-outlined">eco</span>
-<span class="text-xs">Harvest</span>
+<!-- Identify -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-2 hover:text-green-700 active:scale-90 transition-all duration-200" href="scanner.html">
+<span class="material-symbols-outlined" data-icon="center_focus_weak">center_focus_weak</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Identify</span>
 </a>
-<a class="flex flex-col items-center text-gray-400" href="community.html">
-<span class="material-symbols-outlined">groups</span>
-<span class="text-xs">Community</span>
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-2 hover:text-green-700 active:scale-90 transition-all duration-200" href="qa-hub.html">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Community</span>
 </a>
-<a class="flex flex-col items-center text-gray-400" href="budget.html">
-<span class="material-symbols-outlined">shopping_basket</span>
-<span class="text-xs">Budget</span>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-2 hover:text-green-700 active:scale-90 transition-all duration-200" href="learn.html">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Learn</span>
+</a>
+<!-- Budget -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-2 hover:text-green-700 active:scale-90 transition-all duration-200" href="budget.html">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Budget</span>
 </a>
 </nav>
-</div></body></html>
+</body></html>
