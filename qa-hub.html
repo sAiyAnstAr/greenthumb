@@ -1,325 +1,230 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenthumb - Community Q&amp;A</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-bright": "#faf9f5",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-surface": "#2f312e",
-                    "on-primary-container": "#9dd090",
-                    "secondary-container": "#fed3c7",
-                    "secondary": "#77574d",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "error": "#ba1a1a",
-                    "on-primary": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface": "#faf9f5",
-                    "background": "#faf9f5",
-                    "primary": "#154212",
-                    "on-secondary-container": "#795950",
-                    "surface-variant": "#e3e2df",
-                    "surface-tint": "#3b6934",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-dim": "#dbdad6",
-                    "on-surface-variant": "#42493e",
-                    "on-secondary": "#ffffff",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "inverse-primary": "#a1d494",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "surface-container-high": "#e9e8e4",
-                    "error-container": "#ffdad6",
-                    "surface-container-low": "#f4f4f0",
-                    "outline-variant": "#c2c9bb",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-highest": "#e3e2df",
-                    "secondary-fixed": "#ffdbd0",
-                    "on-surface": "#1b1c1a",
-                    "on-error-container": "#93000a",
-                    "on-primary-fixed": "#002201",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "on-secondary-fixed": "#2c160e",
-                    "primary-fixed": "#bcf0ae",
-                    "surface-container": "#efeeea",
-                    "on-error": "#ffffff",
-                    "outline": "#72796e",
-                    "on-background": "#1b1c1a",
-                    "primary-fixed-dim": "#a1d494"
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#faf9f5",
+                        "tertiary": "#6e1c0c",
+                        "on-tertiary-fixed-variant": "#802918",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2f312e",
+                        "on-primary-container": "#9dd090",
+                        "secondary-container": "#fed3c7",
+                        "secondary": "#77574d",
+                        "on-tertiary-fixed": "#3e0500",
+                        "on-tertiary-container": "#ffaf9e",
+                        "on-primary-fixed-variant": "#23501e",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a27",
+                        "surface": "#faf9f5",
+                        "background": "#faf9f5",
+                        "primary": "#154212",
+                        "on-secondary-container": "#795950",
+                        "surface-variant": "#e3e2df",
+                        "tertiary-container": "#8d3220",
+                        "surface-tint": "#3b6934",
+                        "tertiary-fixed": "#ffdad3",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#42493e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5d4037",
+                        "inverse-primary": "#a1d494",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "surface-container-high": "#e9e8e4",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f4f4f0",
+                        "outline-variant": "#c2c9bb",
+                        "inverse-on-surface": "#f2f1ed",
+                        "surface-container-highest": "#e3e2df",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-surface": "#1b1c1a",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002201",
+                        "secondary-fixed-dim": "#e7bdb1",
+                        "on-secondary-fixed": "#2c160e",
+                        "primary-fixed": "#bcf0ae",
+                        "surface-container": "#efeeea",
+                        "on-error": "#ffffff",
+                        "outline": "#72796e",
+                        "on-background": "#1b1c1a",
+                        "primary-fixed-dim": "#a1d494"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "sans": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "spacing": {
+                        "container-margin": "20px"
+                    }
+                },
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "2xl": "1rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "sm": "12px",
-                    "container-margin": "20px",
-                    "md": "24px",
-                    "gutter": "16px",
-                    "xl": "64px",
-                    "xs": "4px",
-                    "lg": "40px",
-                    "base": "8px"
-            },
-            "fontFamily": {
-                    "sans": ["Plus Jakarta Sans", "sans-serif"],
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
-            }
-          },
-        },
-      }
+        }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            line-height: 1;
-            text-transform: none;
-            letter-spacing: normal;
-            word-wrap: normal;
-            white-space: nowrap;
-            direction: ltr;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .nav-active { color: #154212; }
+        .nav-inactive { color: #72796e; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body { min-height: max(884px, 100dvh); }
     </style>
 </head>
-<body class="bg-surface font-body-md text-on-surface min-h-screen pb-32">
-<!-- Top App Bar - Dashboard Green Style -->
-<header class="bg-surface/90 backdrop-blur-md border-b border-outline-variant sticky top-0 z-50 flex justify-between items-center w-full px-6 py-4">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" data-icon="local_florist">local_florist</span>
-<h1 class="text-xl font-bold text-primary font-headline-md tracking-tight">Q&amp;A Hub</h1>
+<body class="pb-32 bg-surface-bright text-on-surface">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex items-center justify-between px-container-margin py-4">
+<a class="p-2 -ml-2 text-primary" href="index.html">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<h1 class="text-lg font-bold text-on-surface tracking-tight">Community Forum</h1>
+<div class="w-10"></div> <!-- Spacer for centering title -->
 </div>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
-<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALTKkPauXpENCL9i83QxOGVQvpGCfZl4XUi8Q5mhTYzqv5lH7Hz1R0LPXKKCe6ZhyeXz2flYkjZOvdvTogU9rgIUdZsK1bqXZlheRj71sMn1Cd74_oWfhPwG2kC9wAXGNKCh59Cm2ly0RNfPttM9tFRoSwIB6I1EHOU1s3shNYnvb_7_0Em50ZiXD-KEjRfsJa9ievFenm9zA65gsulyX1AkXOXHbPVtDhevcVnLGSa9Ee4LtBcA_9Q91bpxz9Af6scPTAwpxB6pA"/>
+<!-- Search Bar -->
+<div class="px-container-margin pb-4">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-2xl text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-outline" placeholder="Search questions..." type="text"/>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto px-container-margin pb-4 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-2 bg-primary text-on-primary rounded-full text-sm font-semibold">Trending</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">Recent</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">My Questions</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-sm font-medium">Expert Advice</button>
 </div>
 </header>
-<main class="max-w-4xl mx-auto px-container-margin mt-md">
-<!-- Hero Section / Ask the Experts - Rounded 2xl & Primary Style -->
-<section class="mb-lg">
-<div class="relative overflow-hidden rounded-2xl bg-primary-container p-md md:p-lg text-on-primary">
-<div class="relative z-10 max-w-2xl">
-<h2 class="font-headline-lg text-headline-lg text-on-primary mb-xs">Ask the Experts</h2>
-<p class="font-body-md text-body-md text-on-primary-container mb-md">Got a stubborn pest or a wilting leaf? Our master gardeners are here to help your sanctuary thrive.</p>
-<div class="flex flex-col gap-sm">
-<div class="relative">
-<input class="w-full h-14 px-md rounded-2xl bg-surface text-on-surface border-none focus:ring-2 focus:ring-primary outline-none font-body-md shadow-sm" placeholder="How do I prune my Monstera?" type="text"/>
-</div>
-<button class="h-14 px-lg bg-primary text-on-primary rounded-2xl font-label-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
-<span>Ask Question</span>
-<span class="material-symbols-outlined" data-icon="send">send</span>
-</button>
-</div>
-</div>
-<!-- Decorative element -->
-<div class="absolute -right-10 -bottom-10 opacity-10 transform rotate-12">
-<span class="material-symbols-outlined text-[200px]" data-icon="eco">eco</span>
-</div>
-</div>
-</section>
-<!-- Filter Chips -->
-<div class="flex gap-sm overflow-x-auto hide-scrollbar mb-md py-xs">
-<button class="px-md py-2 bg-primary text-on-primary rounded-full font-label-lg whitespace-nowrap">All Questions</button>
-<button class="px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-colors flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]">person</span>My Questions
-            </button>
-<button class="px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-colors">Houseplants</button>
-<button class="px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-colors">Urban Gardening</button>
-<button class="px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-colors">Pest Control</button>
-<button class="px-md py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-colors">Seasonal Care</button>
-</div>
-<!-- My Questions Section -->
-<section class="mb-md">
-<div class="flex justify-between items-center mb-sm px-1">
-<h2 class="font-headline-md text-primary">My Questions</h2>
-<span class="text-label-sm text-outline">3 Total</span>
-</div>
-<div class="space-y-sm">
-<!-- Personal Question Card -->
-<div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant shadow-sm">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-label-lg text-on-surface leading-tight">Help! My peace lily is drooping after repotting...</h4>
-<span class="text-[10px] text-outline whitespace-nowrap ml-4">Yesterday</span>
-</div>
-<div class="flex gap-2 flex-wrap">
-<div class="flex items-center gap-1.5 px-3 py-1 bg-primary-container text-on-primary-container rounded-full border border-primary/20">
-<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="text-[11px] font-bold uppercase tracking-wider">1 Expert Answer</span>
-</div>
-<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full">
-<span class="material-symbols-outlined text-[14px]">groups</span>
-<span class="text-[11px] font-medium">5 Community</span>
-</div>
-</div>
-</div>
-<!-- Another Personal Question -->
-<div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant shadow-sm opacity-80">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-label-lg text-on-surface leading-tight">Best organic fertilizer for strawberries?</h4>
-<span class="text-[10px] text-outline whitespace-nowrap ml-4">3 days ago</span>
-</div>
-<div class="flex gap-2 flex-wrap">
-<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container text-outline rounded-full">
-<span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
-<span class="text-[11px] font-medium">Awaiting Expert</span>
-</div>
-<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full">
-<span class="material-symbols-outlined text-[14px]">groups</span>
-<span class="text-[11px] font-medium">2 Community</span>
-</div>
-</div>
-</div>
-</div>
-<div class="mt-md border-b border-outline-variant"></div>
-</section>
-<!-- Question Feed -->
-<div class="space-y-md">
+<main class="px-container-margin pt-6 space-y-4">
 <!-- Question Card 1 -->
-<article class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant">
-<div class="p-md md:p-gutter flex flex-col gap-sm">
-<div class="flex items-center gap-sm">
-<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="person">person</span>
-</div>
+<article class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<img alt="Sarah Miller" class="w-10 h-10 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbiT25y9lObZQiGLBi-EkPUG2OlDn7zQkK9z-TGWTpPiYh5AU8beUum1vdDc7GUEyux3L-b1IAuYLmhojTtMSpvQU1VSJwPTukeHxvVqpEbjNPArJbk5JKCFjZ9SEOUnxWRxCmrj3xjoMxS-y7sSx1kTB9PmxBX5Pz6AKpIsyHiARvHNEAOCssgrrO7RXaAq4l3EAJ5jKZKukUC0GYfEohC0vbC5VUHkiNC1PbwL3OqMujHJuQIKgTl37OC0WCBOuwaScitzKbb_U"/>
 <div>
-<p class="font-label-lg text-on-surface">Sarah Bloom</p>
-<p class="text-[12px] text-outline">Asked 2 hours ago • <span class="text-secondary font-medium">Succulents</span></p>
+<p class="font-bold text-sm text-on-surface">Sarah Miller</p>
+<p class="text-[11px] text-outline">2h ago</p>
 </div>
 </div>
-<h3 class="font-headline-md text-headline-md text-primary">Why are the lower leaves of my Echeveria turning translucent and mushy?</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">I haven't watered it in two weeks, but the base looks damp. Is this root rot or something else?</p>
-<div class="mt-sm flex flex-col border-t border-outline-variant pt-md">
-<!-- Custom Tabs -->
-<div class="flex gap-md mb-md">
-<button class="pb-2 border-b-2 border-primary text-primary font-label-lg flex items-center gap-2">
-<span class="material-symbols-outlined text-[20px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
-                                Expert Answer
-                            </button>
-<button class="pb-2 text-outline font-label-lg flex items-center gap-2 hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
-                                Community (12)
-                            </button>
+<h3 class="text-lg font-bold text-on-surface mb-3 leading-tight">Why are my tomato leaves turning yellow and curling at the edges?</h3>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold rounded-full uppercase tracking-wider">Vegetables</span>
+<span class="px-3 py-1 bg-error-container text-on-error-container text-[11px] font-bold rounded-full uppercase tracking-wider">Pests</span>
 </div>
-<!-- Active Tab Content: Expert -->
-<div class="bg-surface-container-low rounded-2xl p-md border-l-4 border-primary">
-<div class="flex items-center gap-sm mb-xs">
-<span class="bg-primary text-on-primary text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Master Gardener</span>
-<span class="font-label-lg text-on-surface">Dr. Silas Green</span>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span class="text-xs font-semibold">24</span>
 </div>
-<p class="font-body-md text-body-md text-on-surface">This sounds like classic overwatering leading to edema or early-stage root rot. Even if you haven't watered recently, the soil medium might be retaining too much moisture. Check the drainage holes and consider repotting in a 50/50 mix of cactus soil and perlite immediately.</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="text-xs font-semibold">12</span>
 </div>
 </div>
+<button class="text-primary text-xs font-bold flex items-center gap-1">
+                    View Details <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
 </div>
 </article>
 <!-- Question Card 2 -->
-<article class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant">
-<div class="p-md md:p-gutter flex flex-col gap-sm">
-<div class="flex items-center gap-sm">
-<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="person">person</span>
-</div>
+<article class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<img alt="Emma Green" class="w-10 h-10 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5yAoB3Tdys3cFyeEGWChXONAOLKIPKhvS9evPHJHE32IxbM-WQspgYIgBYI9tY1hYyKMaygICiCRi4rRKOT4_Hidm-ln6f8-osDkzv6BPoqw9n3lQfbmXDDSayIOXzkY3QcW26lVyXzp9fkZxgZpaGIwnOk68woLKYa_ZtWPa3SS7x0-o9QnvQsvQO1zZwCzZhNEUq7UN06jrEVPz_BxgpDx2kkuQ0pVj6Eb7pm-k1nd_900_iLkJXA4U8pWXL0w3J6qHDso3hMc"/>
 <div>
-<p class="font-label-lg text-on-surface">Oliver Roots</p>
-<p class="text-[12px] text-outline">Asked 5 hours ago • <span class="text-secondary font-medium">Vegetable Garden</span></p>
+<p class="font-bold text-sm text-on-surface">Emma Green</p>
+<p class="text-[11px] text-outline">5h ago</p>
 </div>
 </div>
-<h3 class="font-headline-md text-headline-md text-primary">Best way to protect young tomato plants from late frost?</h3>
-<div class="w-full h-48 rounded-2xl overflow-hidden my-xs">
-<img alt="Tomato plants" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqlTJk3q5MIc7imGD8NVKG1pnImQv8cJch5U-y4MUkniYtL6s4r97Os2qZtysDfZKgibUL1NVHiEZAaKY4Dc0AcGXljiBT0FcxZAXOTGmH_r9aTci3FRK5JATMUuOqAh9sfvo2grg79Zq8z4MI-OLyYZXLEZQYhNx3oYwuJqy4vhyHOhS7p5FoivJ5taFFV52n_h0E_YiJC-xKCrOb1BMv9DbjoU8cbVzF2URA8_7PHupp_kIWfG1cfIBz1OvzusKJrbtpC4LpXgI"/>
+<h3 class="text-lg font-bold text-on-surface mb-3 leading-tight">Best organic fertilizer recommendations for indoor herbs?</h3>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[11px] font-bold rounded-full uppercase tracking-wider">Herbs</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-[11px] font-bold rounded-full uppercase tracking-wider">Nutrients</span>
 </div>
-<div class="mt-sm flex flex-col border-t border-outline-variant pt-md">
-<!-- Custom Tabs -->
-<div class="flex gap-md mb-md">
-<button class="pb-2 text-outline font-label-lg flex items-center gap-2 hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-                                Expert Answer
-                            </button>
-<button class="pb-2 border-b-2 border-primary text-primary font-label-lg flex items-center gap-2">
-<span class="material-symbols-outlined text-[20px]" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
-                                Community (4)
-                            </button>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span class="text-xs font-semibold">15</span>
 </div>
-<!-- Active Tab Content: Community -->
-<div class="space-y-sm">
-<div class="bg-surface rounded-2xl p-md border border-outline-variant shadow-sm">
-<div class="flex justify-between items-start">
-<div class="flex items-center gap-2 mb-2">
-<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-[14px]" data-icon="psychiatry">psychiatry</span>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="text-xs font-semibold">8</span>
 </div>
-<span class="font-label-lg text-on-surface text-sm">Elena_Garden</span>
-<span class="text-[10px] bg-surface-container-highest px-2 py-0.5 rounded text-outline font-bold">TOP CONTRIBUTOR</span>
 </div>
-<div class="flex items-center bg-surface-container-low rounded-lg px-2 py-1 gap-2">
-<button class="text-primary hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-[18px]" data-icon="expand_less">expand_less</span>
+<button class="text-primary text-xs font-bold flex items-center gap-1">
+                    View Details <span class="material-symbols-outlined text-sm">chevron_right</span>
 </button>
-<span class="font-label-sm text-primary">24</span>
-<button class="text-outline hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
-</button>
-</div>
-</div>
-<p class="font-body-md text-sm text-on-surface-variant">I always use old glass jars or "cloches" for my young starts. If it gets really cold, throw an old burlap sack over them at night but remember to remove it as soon as the sun comes up!</p>
-</div>
-</div>
-</div>
 </div>
 </article>
+<!-- Question Card 3 -->
+<article class="bg-surface-container-lowest p-5 rounded-3xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<img alt="Marcus Chen" class="w-10 h-10 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgqedQgjfa04k8at7yObPfgPXS7uDQj-XhpEMvF6dfaRWVGnuxV3afE_rq3N9l0vPjmFD10GJfX44MU2Qcyg98WVLche57H6YX_5ucJnMwT7ZtVw9-rS2aMK-AHOrw9FOTTnii6WVyGIWegujrNbr6eBEvEBZHiTfgH-oO5cIavLgKgcFR-IpOOqOBfBqSIulrnRQauBhePB7BeunBL9fx5nek6A6s4KYf9u2nFhpfnVDqxwo0ciUhB7OguzpJNIZmLo--5fXyzMA"/>
+<div>
+<p class="font-bold text-sm text-on-surface">Marcus Chen</p>
+<p class="text-[11px] text-outline">Yesterday</p>
 </div>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-3 leading-tight">Can I move my lemon tree outside now that it's spring?</h3>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[11px] font-bold rounded-full uppercase tracking-wider">Fruit Trees</span>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span class="text-xs font-semibold">32</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span class="text-xs font-semibold">5</span>
+</div>
+</div>
+<button class="text-primary text-xs font-bold flex items-center gap-1">
+                    View Details <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</article>
 </main>
-<!-- Bottom Navigation Bar - Core Theme Style -->
-<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/95 backdrop-blur-lg border-t border-outline-variant shadow-lg flex justify-around items-center px-4 pb-8 pt-3 rounded-t-2xl">
-<a class="flex flex-col items-center justify-center text-outline px-5 py-1.5 transition-colors hover:text-primary" href="#">
-<span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label-sm text-[11px]">Home</span>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl flex items-center justify-center z-40 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-3xl">add_comment</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-surface-container-lowest border-t border-outline-variant shadow-lg">
+<a class="flex flex-col items-center justify-center nav-inactive" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-semibold mt-1">Home</span>
 </a>
-<a class="flex flex-col items-center justify-center text-outline px-5 py-1.5 transition-colors hover:text-primary" href="#">
-<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
-<span class="font-label-sm text-[11px]">Library</span>
+<a class="flex flex-col items-center justify-center nav-inactive" href="harvest.html">
+<span class="material-symbols-outlined">eco</span>
+<span class="text-[11px] font-semibold mt-1">Harvest</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-5 py-1.5" href="#">
-<span class="material-symbols-outlined" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
-<span class="font-label-sm text-[11px]">Community</span>
+<a class="flex flex-col items-center justify-center nav-active" href="community.html">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[11px] font-semibold mt-1">Community</span>
 </a>
-<a class="flex flex-col items-center justify-center text-outline px-5 py-1.5 transition-colors hover:text-primary" href="#">
-<span class="material-symbols-outlined" data-icon="yard">yard</span>
-<span class="font-label-sm text-[11px]">My Garden</span>
+<a class="flex flex-col items-center justify-center nav-inactive" href="budget.html">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="text-[11px] font-semibold mt-1">Budget</span>
 </a>
 </nav>
-<!-- Contextual FAB - Matching Core Theme -->
-<button class="fixed bottom-28 right-6 w-14 h-14 bg-tertiary-container text-on-tertiary-container rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95 z-40">
-<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
-</button>
 </body></html>
