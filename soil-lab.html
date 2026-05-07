@@ -5,7 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -14,6 +13,9 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #faf9f5;
         }
+        .n-bar { height: 65%; }
+        .p-bar { height: 40%; }
+        .k-bar { height: 85%; }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -83,103 +85,175 @@
             }
         }
     </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
 </head>
-<body class="bg-background text-on-background min-h-screen flex flex-col">
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-32">
 <!-- TopAppBar -->
 <header class="bg-stone-50/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200/50 shadow-sm shadow-emerald-900/5 flex justify-between items-center w-full px-6 py-4">
-<div class="flex items-center gap-4"><a class="hover:bg-stone-100 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center" href="index.html">
+<div class="flex items-center gap-4">
+<a class="hover:bg-stone-100 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center" href="index.html">
 <span class="material-symbols-outlined text-emerald-800" data-icon="arrow_back">arrow_back</span>
 </a>
 <button class="hover:bg-stone-100 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full">
 <span class="material-symbols-outlined text-emerald-800" data-icon="menu">menu</span>
 </button>
-<h1 class="text-xl font-extrabold tracking-tight text-emerald-900">Bloom &amp; Grow</h1>
+<h1 class="text-xl font-extrabold tracking-tight text-emerald-900">Soil Lab</h1>
 </div>
 <div class="flex items-center gap-4">
-<span class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-emerald-800">Map Tool</span>
+<span class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-emerald-800">Diagnostics</span>
 <div class="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-200 overflow-hidden">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a friendly individual with soft natural lighting, set against a warm neutral background that aligns with the organic and approachable digital gardening brand aesthetic. The lighting is bright and modern, suggesting a high-end app user profile experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg7_To4K1mWQ5aDu2TF6xDNfEBsxmcoM66wPzyZyA4nW7aBiZznClpv9se0La7c8XlIMRl08_uS5tWAhm9IOIKqhteWpmYu3mUuzujy9-dk2gxiDoUnjtfMHyQ_k28hEsabtYTYGq02MUIzOCjZePbhdeTUdBUisgeI4AOq4PPKwXbQdm7QeEmwvDqob5q9wIBLkMDHSKciETVAF1Ln9FuoYsqwtfLhsoCYaalRRXMmTqS5_lCQhTMX8eaPHnI4ocLIGdtF3U9TiI"/>
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg7_To4K1mWQ5aDu2TF6xDNfEBsxmcoM66wPzyZyA4nW7aBiZznClpv9se0La7c8XlIMRl08_uS5tWAhm9IOIKqhteWpmYu3mUuzujy9-dk2gxiDoUnjtfMHyQ_k28hEsabtYTYGq02MUIzOCjZePbhdeTUdBUisgeI4AOq4PPKwXbQdm7QeEmwvDqob5q9wIBLkMDHSKciETVAF1Ln9FuoYsqwtfLhsoCYaalRRXMmTqS5_lCQhTMX8eaPHnI4ocLIGdtF3U9TiI"/>
 </div>
 </div>
 </header>
-<!-- Main Map Canvas -->
-<main class="relative flex-1 w-full overflow-hidden">
-<!-- Satellite Map View -->
-<div class="absolute inset-0 w-full h-full">
-<img class="w-full h-full object-cover" data-alt="A high-resolution satellite top-down view of a lush residential backyard in Austin, Texas. The scene shows a vibrant green lawn, mature trees casting soft shadows, and a clear stone patio. The image is crisp and detailed, providing a perfect base for a digital garden planning tool with a modern organic aesthetic and bright natural lighting." data-location="Austin, Texas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATdGfo5InEpDTvqJfYtk9CdPB1NV4R2UpS62QM2tqzM7AKabK8n8nuCgSlIXTaOv127S-iaJ1K24i5yGo7G2cTQnfEJ9w_X6EXGKxW6xOuM4oqIlM9kNSWFd0zmO1SfUcX-Rcb1yhibhpV9Ed3eFnl_lMFjsgkpuEpmNjyXM-RjHE5zYHDzqKLVdKqMV8d06iHCG5kEq94WdMH8hqaSebSeosJqpY3SmFvJIl4YTVlOtG1GvNxRSDLtbbic6Knw6eA95Q7L07iQl0"/>
-<!-- Overlaid Digital Layers -->
-<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 1000">
-<!-- Heat Map Zone (High Sun) -->
-<circle cx="400" cy="450" fill="url(#sun-gradient)" opacity="0.4" r="280"></circle>
-<defs>
-<radialgradient id="sun-gradient">
-<stop offset="0%" stop-color="#ffb4a5"></stop>
-<stop offset="100%" stop-color="#ffb4a5" stop-opacity="0"></stop>
-</radialgradient>
-</defs>
-<!-- Garden Bed Outline 1 -->
-<rect class="pointer-events-auto cursor-move" fill="rgba(21, 66, 18, 0.2)" height="60" rx="4" stroke="#154212" stroke-dasharray="4 2" stroke-width="2" width="120" x="350" y="400"></rect>
-<!-- Garden Bed Outline 2 -->
-<rect class="pointer-events-auto cursor-move" fill="rgba(21, 66, 18, 0.2)" height="180" rx="4" stroke="#154212" stroke-dasharray="4 2" stroke-width="2" width="80" x="520" y="380"></rect>
-<!-- Planned Orchard Zone -->
-<path d="M650,200 Q750,250 700,400 T600,550" fill="none" opacity="0.6" stroke="#77574d" stroke-dasharray="8 4" stroke-width="3"></path>
-</svg>
+<main class="flex-1 w-full max-w-md mx-auto px-6 py-6 space-y-6">
+<!-- Active Soil Test Scanner -->
+<section class="relative rounded-[32px] overflow-hidden bg-stone-900 aspect-square shadow-2xl group">
+<img class="w-full h-full object-cover opacity-60" data-alt="Close up photo of nutrient rich dark garden soil being held in a hand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPy4k1GGTLQrFzHkTyPXo2P-9W72DJR45HSLW_M01O_3ptqQcfCRLT_c5g9ZxkooeFhGhQM-Ej7uZjrR1KiqshWij6Q8pjO5kDPxddrbpJXReyaxd6Xvi10GAmssPH8Q2wCro8S4qXhGai0HJrEuAoOzMQdxDm35LL1nFEGL16VltcgMHGZrGe0egXNUnbP_8uVJVIch_GKST70eHQsnCikR9i0Ltk7f7T6akSE4Mm9i2aEFPTY79r7oXB2v8tirOcYhMyUPOs-Pc"/>
+<!-- Scanner Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-white">
+<div class="w-full aspect-square border-2 border-emerald-400/50 rounded-2xl relative">
+<div class="absolute -top-1 -left-1 w-8 h-8 border-t-4 border-l-4 border-emerald-400 rounded-tl-xl"></div>
+<div class="absolute -top-1 -right-1 w-8 h-8 border-t-4 border-r-4 border-emerald-400 rounded-tr-xl"></div>
+<div class="absolute -bottom-1 -left-1 w-8 h-8 border-b-4 border-l-4 border-emerald-400 rounded-bl-xl"></div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 border-b-4 border-r-4 border-emerald-400 rounded-br-xl"></div>
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-emerald-400/30 animate-pulse"></div>
 </div>
-<!-- Floating Toolbar -->
-<div class="absolute top-6 right-6 flex flex-col gap-3">
-<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
-<div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-md group-hover:bg-emerald-800">
-<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
+<button class="mt-8 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-full flex items-center gap-2 transition-all active:scale-95 shadow-lg">
+<span class="material-symbols-outlined">photo_camera</span>
+                Scan New Sample
+            </button>
 </div>
-<div class="text-left pr-2">
-<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Place Bed</p>
-<p class="text-[10px] text-stone-500">Add new layout</p>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div>
+<p class="text-emerald-300 text-xs font-bold uppercase tracking-widest">Active Diagnosis</p>
+<h2 class="text-white text-xl font-bold">Scanning Sample #242</h2>
 </div>
-</button>
-<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
-<div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-white shadow-md group-hover:bg-on-secondary-container">
-<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<div class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+<p class="text-white text-[10px] font-bold">CALIBRATING...</p>
 </div>
-<div class="text-left pr-2">
-<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Check Sun Exposure</p>
-<p class="text-[10px] text-stone-500">View solar mapping</p>
 </div>
-</button>
-<button class="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-4 flex items-center gap-3 border border-emerald-100/50 hover:bg-emerald-50 transition-all active:scale-95 group">
-<div class="w-10 h-10 rounded-xl bg-surface-container-highest border border-stone-200 flex items-center justify-center text-secondary shadow-sm group-hover:bg-stone-200">
-<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+</section>
+<!-- NPK Results Hub -->
+<section class="bg-white rounded-[24px] p-6 shadow-sm border border-stone-100">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-emerald-900 font-bold text-lg">Nutrient Analysis</h2>
+<span class="text-stone-400 text-xs font-medium">Last updated: Today, 9:42 AM</span>
 </div>
-<div class="text-left pr-2">
-<p class="text-xs font-bold text-emerald-900 uppercase tracking-wider">Calculate Soil Needs</p>
-<p class="text-[10px] text-stone-500">Estimate volume</p>
+<div class="grid grid-cols-4 gap-4 items-end h-40 mb-4">
+<!-- N -->
+<div class="flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full bg-emerald-50 rounded-t-xl relative overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-emerald-600 n-bar transition-all duration-1000"></div>
 </div>
-</button>
+<span class="text-xs font-bold text-emerald-900">N</span>
 </div>
-<!-- Bottom Info Card -->
-<div class="absolute bottom-32 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-md">
-<div class="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-[24px] p-6 border border-white flex items-center justify-between">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center">
-<span class="material-symbols-outlined text-emerald-700 text-2xl" data-icon="location_on">location_on</span>
+<!-- P -->
+<div class="flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full bg-emerald-50 rounded-t-xl relative overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-orange-400 p-bar transition-all duration-1000"></div>
+</div>
+<span class="text-xs font-bold text-emerald-900">P</span>
+</div>
+<!-- K -->
+<div class="flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full bg-emerald-50 rounded-t-xl relative overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-emerald-600 k-bar transition-all duration-1000"></div>
+</div>
+<span class="text-xs font-bold text-emerald-900">K</span>
+</div>
+<!-- pH -->
+<div class="flex flex-col items-center gap-2 h-full justify-end">
+<div class="w-full aspect-square bg-emerald-100 rounded-full flex items-center justify-center border-2 border-emerald-200">
+<span class="text-emerald-800 font-extrabold text-lg">6.5</span>
+</div>
+<span class="text-xs font-bold text-emerald-900">pH</span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 bg-stone-50 rounded-xl p-3 border border-stone-100">
+<p class="text-[10px] text-stone-500 font-bold uppercase">Status</p>
+<p class="text-emerald-700 font-bold text-sm">Optimal Balance</p>
+</div>
+<div class="flex-1 bg-orange-50 rounded-xl p-3 border border-orange-100">
+<p class="text-[10px] text-orange-800 font-bold uppercase">Action</p>
+<p class="text-orange-900 font-bold text-sm">Add Phosphorus</p>
+</div>
+</div>
+</section>
+<!-- Soil Type Identification -->
+<section class="bg-emerald-900 rounded-[24px] p-6 text-white overflow-hidden relative">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-emerald-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-300">texture</span>
 </div>
 <div>
-<h3 class="text-emerald-900 font-bold text-lg leading-tight">Current Location</h3>
-<p class="text-stone-500 text-sm font-medium">Backyard (High Sun)</p>
+<p class="text-emerald-300 text-[10px] font-bold uppercase tracking-widest leading-none">Soil Texture</p>
+<h3 class="text-xl font-bold">Sandy Loam</h3>
 </div>
 </div>
-<div class="flex flex-col items-end">
-<div class="flex items-center gap-1 bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-[10px] font-bold uppercase">
-<span class="material-symbols-outlined text-xs" data-icon="wb_sunny">wb_sunny</span>
-                        Optimal
-                    </div>
+<p class="text-emerald-100/80 text-sm leading-relaxed mb-4">
+                Excellent drainage but requires regular organic matter to retain nutrients. Ideal for root vegetables and most flowering perennials.
+            </p>
+<button class="text-emerald-400 text-xs font-bold flex items-center gap-1 hover:text-emerald-300">
+                HOW TO IMPROVE
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-emerald-800/30 rounded-full blur-3xl"></div>
+</section>
+<!-- Historical Tracking -->
+<section class="bg-white rounded-[24px] p-6 shadow-sm border border-stone-100">
+<h2 class="text-emerald-900 font-bold text-lg mb-4">Soil History</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-2 border-b border-stone-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-600 text-xl">trending_up</span>
+</div>
+<div>
+<p class="text-sm font-bold text-emerald-900">Health Improved</p>
+<p class="text-[10px] text-stone-500">Post-compost application</p>
 </div>
 </div>
+<span class="text-xs text-stone-400 font-medium">Oct 12</span>
 </div>
+<div class="flex items-center justify-between py-2 border-b border-stone-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-400 text-xl">remove</span>
+</div>
+<div>
+<p class="text-sm font-bold text-emerald-900">Baseline Test</p>
+<p class="text-[10px] text-stone-500">Initial spring reading</p>
+</div>
+</div>
+<span class="text-xs text-stone-400 font-medium">Sep 05</span>
+</div>
+</div>
+</section>
+<!-- Soil Improvement Tips -->
+<section>
+<h2 class="text-emerald-900 font-bold text-lg mb-4 px-2">Seasonal Amendments</h2>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 no-scrollbar">
+<div class="min-w-[200px] bg-secondary-container rounded-2xl p-4 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-on-secondary-container mb-2">compost</span>
+<h4 class="font-bold text-on-secondary-container">Organic Compost</h4>
+<p class="text-[11px] text-on-secondary-container/80 mt-1">Boost N levels naturally.</p>
+</div>
+<button class="mt-4 bg-white/40 hover:bg-white/60 py-2 rounded-xl text-xs font-bold text-on-secondary-container">Apply Now</button>
+</div>
+<div class="min-w-[200px] bg-tertiary-fixed rounded-2xl p-4 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant mb-2">grass</span>
+<h4 class="font-bold text-on-tertiary-fixed-variant">Pine Bark Mulch</h4>
+<p class="text-[11px] text-on-tertiary-fixed-variant/80 mt-1">Acidify your soil (lowers pH).</p>
+</div>
+<button class="mt-4 bg-white/40 hover:bg-white/60 py-2 rounded-xl text-xs font-bold text-on-tertiary-fixed-variant">Learn More</button>
+</div>
+</div>
+</section>
 </main>
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-8 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-stone-100 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
@@ -188,10 +262,10 @@
 <span class="material-symbols-outlined text-2xl" data-icon="yard">yard</span>
 <span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">My Garden</span>
 </a>
-<!-- Map Tool (ACTIVE) -->
-<a class="flex flex-col items-center justify-center bg-emerald-50 text-emerald-800 rounded-2xl px-5 py-1.5 transform scale-110 transition-all duration-300" href="map-tool.html">
-<span class="material-symbols-outlined text-2xl" data-icon="map_search" style="font-variation-settings: 'FILL' 1;">map_search</span>
-<span class="font-plus-jakarta-sans text-[11px] font-bold mt-1">Map Tool</span>
+<!-- Map Tool -->
+<a class="flex flex-col items-center justify-center text-stone-400 px-5 py-1.5 hover:text-emerald-600 transition-all" href="map-tool.html">
+<span class="material-symbols-outlined text-2xl" data-icon="map_search">map_search</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Map Tool</span>
 </a>
 <!-- Compost -->
 <a class="flex flex-col items-center justify-center text-stone-400 px-5 py-1.5 hover:text-emerald-600 transition-all" href="compost.html">
