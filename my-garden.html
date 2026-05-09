@@ -1,235 +1,303 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Greenthumb - My Garden</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>My Garden - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          "colors": {
-                  "inverse-on-surface": "#f2f1ed",
-                  "on-surface": "#1b1c1a",
-                  "tertiary-container": "#8d3220",
-                  "secondary-container": "#fed3c7",
-                  "on-primary-fixed-variant": "#23501e",
-                  "surface-container-lowest": "#ffffff",
-                  "surface-container-high": "#e9e8e4",
-                  "on-tertiary-fixed": "#3e0500",
-                  "surface-bright": "#faf9f5",
-                  "error-container": "#ffdad6",
-                  "surface": "#faf9f5",
-                  "primary-fixed": "#bcf0ae",
-                  "on-secondary-fixed-variant": "#5d4037",
-                  "on-surface-variant": "#42493e",
-                  "on-primary-fixed": "#002201",
-                  "secondary-fixed": "#ffdbd0",
-                  "on-secondary-container": "#795950",
-                  "error": "#ba1a1a",
-                  "primary-container": "#2d5a27",
-                  "on-primary": "#ffffff",
-                  "inverse-surface": "#2f312e",
-                  "secondary-fixed-dim": "#e7bdb1",
-                  "tertiary-fixed-dim": "#ffb4a5",
-                  "background": "#faf9f5",
-                  "surface-container-highest": "#e3e2df",
-                  "surface-dim": "#dbdad6",
-                  "tertiary-fixed": "#ffdad3",
-                  "on-error": "#ffffff",
-                  "on-background": "#1b1c1a",
-                  "tertiary": "#6e1c0c",
-                  "on-tertiary-container": "#ffaf9e",
-                  "surface-container-low": "#f4f4f0",
-                  "on-tertiary": "#ffffff",
-                  "on-secondary-fixed": "#2c160e",
-                  "surface-container": "#efeeea",
-                  "on-tertiary-fixed-variant": "#802918",
-                  "secondary": "#77574d",
-                  "outline-variant": "#c2c9bb",
-                  "primary-fixed-dim": "#a1d494",
-                  "on-secondary": "#ffffff",
-                  "on-error-container": "#93000a",
-                  "surface-variant": "#e3e2df",
-                  "primary": "#154212",
-                  "outline": "#72796e",
-                  "on-primary-container": "#9dd090",
-                  "inverse-primary": "#a1d494",
-                  "surface-tint": "#3b6934"
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f4f4f0",
+                      "outline-variant": "#c2c9bb",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#2c160e",
+                      "surface-dim": "#dbdad6",
+                      "surface": "#faf9f5",
+                      "on-secondary-container": "#795950",
+                      "tertiary-container": "#8d3220",
+                      "primary-fixed": "#bcf0ae",
+                      "tertiary-fixed-dim": "#ffb4a5",
+                      "surface-tint": "#3b6934",
+                      "surface-container-highest": "#e3e2df",
+                      "surface-container-high": "#e9e8e4",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#faf9f5",
+                      "primary-fixed-dim": "#a1d494",
+                      "surface-variant": "#e3e2df",
+                      "secondary-fixed-dim": "#e7bdb1",
+                      "surface-container": "#efeeea",
+                      "on-primary-fixed": "#002201",
+                      "on-secondary-fixed-variant": "#5d4037",
+                      "outline": "#72796e",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#3e0500",
+                      "on-tertiary-container": "#ffaf9e",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#6e1c0c",
+                      "tertiary-fixed": "#ffdad3",
+                      "on-background": "#1b1c1a",
+                      "on-primary-container": "#9dd090",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2f312e",
+                      "primary": "#154212",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#a1d494",
+                      "background": "#faf9f5",
+                      "on-tertiary-fixed-variant": "#802918",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#23501e",
+                      "secondary-container": "#fed3c7",
+                      "secondary-fixed": "#ffdbd0",
+                      "inverse-on-surface": "#f2f1ed",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#42493e",
+                      "on-surface": "#1b1c1a",
+                      "secondary": "#77574d",
+                      "primary-container": "#2d5a27"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "container-margin": "20px",
+                      "sm": "12px",
+                      "md": "24px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "lg": "40px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "label-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
           },
-          "borderRadius": {
-                  "DEFAULT": "0.25rem",
-                  "lg": "0.5rem",
-                  "xl": "0.75rem",
-                  "full": "9999px"
-          },
-          "spacing": {
-                  "lg": "40px",
-                  "gutter": "16px",
-                  "xl": "64px",
-                  "md": "24px",
-                  "container-margin": "20px",
-                  "base": "8px",
-                  "xs": "4px",
-                  "sm": "12px"
-          },
-          "fontFamily": {
-                  "headline-md": ["Plus Jakarta Sans"],
-                  "body-md": ["Plus Jakarta Sans"],
-                  "label-sm": ["Plus Jakarta Sans"],
-                  "label-lg": ["Plus Jakarta Sans"],
-                  "display-lg": ["Plus Jakarta Sans"],
-                  "headline-lg": ["Plus Jakarta Sans"],
-                  "body-lg": ["Plus Jakarta Sans"]
-          }
         }
-      }
-    }
-  </script>
+    </script>
 <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    body {
-      background-color: #faf9f5;
-    }
-  </style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
-<body class="flex justify-center min-h-screen">
-<div class="relative flex min-h-screen w-full max-w-[480px] flex-col bg-background shadow-xl overflow-x-hidden">
-<!-- Top Bar -->
-<div class="flex items-center bg-background px-container-margin pt-sm pb-xs justify-between sticky top-0 z-20 border-b border-surface-container-highest">
-<div class="text-on-surface flex size-12 shrink-0 items-center" data-icon="List">
-<span class="material-symbols-outlined">list</span>
-</div>
-<h2 class="text-on-surface text-headline-md flex-1 text-center">My Garden</h2>
-<div class="flex w-12 items-center justify-end">
-<button class="flex size-12 cursor-pointer items-center justify-center rounded-full bg-transparent text-on-surface">
-<div data-icon="User">
-<span class="material-symbols-outlined">verified_user</span>
-</div>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#F5F5F4] sticky top-0 z-50 border-b border-stone-200">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-[#2D5A27] hover:bg-stone-100 p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
 </button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-semibold tracking-tight text-2xl font-bold text-[#2D5A27]">Greenthumb</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-[#2D5A27]/20">
+<img alt="Profile Avatar" class="w-full h-full object-cover" data-alt="A professional and friendly headshot of a young adult gardener with a warm smile, set against a blurred background of a lush greenhouse. The lighting is soft and natural, emphasizing a clean, modern aesthetic that fits perfectly into a premium mobile application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqvGu4zJB5rvBGMJJ4ljei2T-6MR2MBQOX3G5uxFziVo2JT2tcs61LLd4SCmdvlKouBE5GchanLUcasD72QvBs_F1f3w0PDtePhHVsEMcD1NqvnWQaG_e-t0XIOGqkXJiueXOU2ki_M7vnQdEQuitCxEADasd2ctKVuicAX9I1Xd57xCKqGElnqVzZG0DHaOpS54sN6QzcH9yw07vflSoeaHQ2Vk8aipQFcbMTTgn_91unjSvYKAntOK5nuoVuaGcrWCQyk5XoqqQ"/>
 </div>
 </div>
-<!-- Filters -->
-<div class="flex gap-3 p-container-margin overflow-x-auto no-scrollbar">
-<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-primary text-on-primary px-sm">
-<p class="text-label-lg">All</p>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin pt-base">
+<!-- Dashboard Welcome -->
+<section class="py-md">
+<div class="flex flex-col gap-xs">
+<p class="font-label-lg text-label-lg text-primary uppercase tracking-widest">My Sanctuary</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">My Garden</h2>
 </div>
-<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-surface-container px-sm text-on-surface-variant border border-outline-variant">
-<p class="text-label-lg">Needs Water</p>
-</div>
-<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-surface-container px-sm text-on-surface-variant border border-outline-variant">
-<p class="text-label-lg">Thriving</p>
-</div>
-<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-surface-container px-sm text-on-surface-variant border border-outline-variant">
-<p class="text-label-lg">Indoor</p>
-</div>
-</div>
-<!-- Plant List -->
-<div class="flex flex-col gap-md px-container-margin pb-xl">
-<!-- Plant Card: Tomato -->
-<div class="flex flex-col gap-sm rounded-xl bg-surface-container-lowest p-sm shadow-sm border border-surface-container-high">
-<div class="w-full aspect-[16/9] bg-center bg-no-repeat bg-cover rounded-lg" data-alt="A lush organic vegetable garden setting featuring a cluster of ripening red tomatoes on a vibrant green vine. The scene is bathed in golden hour sunlight, highlighting the dew drops on the leaves. The aesthetic is clean and modern, following a light-mode digital gardening style with natural tones. Deep green foliage contrasts beautifully against a soft, bright background." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0EQuWkMsqvaBHUIbo8De_U0zVqb_PTavALDW9L1xzgzktz0hPCvhIJFVhplCXSEiIKmpFERZVnFCQoOggRvud-BQltCwzs9qZxiNx4-TKM_MbWQ6G81P8kAraa2ix6foNsxVrYfaHJ3QOObndXV40K8usWhEanHP0-ZHjnWy1vwgHDHEIpqO8K1GlqzUObRs717K17IF3cHDBng8WYMT7LRdHEeoP2wwu6ygPcHS92ie2DFPeYHe4TnolFI2hEWdO58QzbUvSY3Y");'></div>
-<div class="flex justify-between items-start px-xs">
-<div class="flex flex-col">
-<p class="text-secondary text-label-sm uppercase tracking-wider">Vegetable</p>
-<p class="text-on-surface text-headline-md">Cherry Tomato</p>
-<div class="flex items-center gap-xs mt-xs text-tertiary">
-<span class="material-symbols-outlined text-[18px]">water_drop</span>
-<p class="text-label-lg font-bold">Needs Water</p>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-primary-container p-md rounded-2xl text-white flex flex-col justify-between aspect-square md:aspect-auto">
+<span class="material-symbols-outlined text-3xl" data-icon="potted_plant">potted_plant</span>
+<div>
+<p class="text-3xl font-bold">12</p>
+<p class="text-label-sm opacity-80">Active Plants</p>
 </div>
 </div>
-<button class="flex h-10 px-md items-center justify-center rounded-full bg-primary text-on-primary text-label-lg shadow-sm">
-            Water Now
-          </button>
+<div class="bg-surface-container-high p-md rounded-2xl flex flex-col justify-between aspect-square md:aspect-auto border border-outline-variant/30">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="water_drop">water_drop</span>
+<div>
+<p class="text-3xl font-bold text-on-surface">3</p>
+<p class="text-label-sm text-outline">Need Water</p>
 </div>
 </div>
-<!-- Plant Card: Sweet Basil -->
-<div class="flex flex-col gap-sm rounded-xl bg-surface-container-lowest p-sm shadow-sm border border-surface-container-high">
-<div class="w-full aspect-[16/9] bg-center bg-no-repeat bg-cover rounded-lg" data-alt="Close-up photography of fresh sweet basil leaves growing in a terracotta pot within a minimalist urban apartment. The lighting is soft and diffused through a nearby window, creating a serene and healthy atmosphere. The color palette emphasizes rich, earthy terracotta and vibrant lush greens. This modern organic visual perfectly matches the digital gardening interface and serene brand identity." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXRnQf1GucvX6gcy9tZ49eyplHYH5F7axyAN2JaCBEBtm9smp-4s2X2jFlK5wzAgVfTYFaVetDEbTSbzal27yoLA9UmpKib9peFlNOszFHWRX8J3xewweXqcG7MjlcKwfV6VkRWY6IZ2VIq9ue-fs9zRIgLOrdvZCyJkuMxhA4jMu88NbZFWOrKgV_4NqZ6zvOwzwczgo-kIeVu4JlDC4kuXsQuy05wfCTndjRnort7T-B_viTjtBf79EyZlAkhsCSMBD6-Lzz2Qo");'></div>
-<div class="flex justify-between items-start px-xs">
-<div class="flex flex-col">
-<p class="text-secondary text-label-sm uppercase tracking-wider">Herb</p>
-<p class="text-on-surface text-headline-md">Sweet Basil</p>
-<div class="flex items-center gap-xs mt-xs text-primary">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">eco</span>
-<p class="text-label-lg font-bold">Thriving</p>
+<div class="bg-white p-md rounded-2xl flex flex-col justify-between col-span-2 shadow-sm border border-stone-100">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<span class="bg-primary/10 text-primary text-label-sm px-2 py-1 rounded-full">+12% Health</span>
+</div>
+<div class="mt-base">
+<p class="font-headline-md text-headline-md">Thriving</p>
+<p class="text-label-lg text-outline">Your garden ecosystem is stabilized</p>
 </div>
 </div>
-<div class="flex size-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
-<span class="material-symbols-outlined">more_vert</span>
+</section>
+<!-- Plant Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<div class="bg-white rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-md border border-stone-100">
+<div class="h-64 relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of vibrant, juicy red cherry tomatoes growing on a vine in a rustic wooden planter. The lighting is warm morning sunlight creating a soft glow on the dew drops on the leaves. The background is a slightly blurred organic garden setting with earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxMytAFS97Qpcxqboskt2b5SbWEZxtYCyaEub4J1JoYpAy2HsKM4ormSpj84tvFRwBka2eYNzH9cPCSKuDLO41uKtrdLFCQvMOVOdWgtYh3OVA4L-x3onyLLNeQxEHJ4tzlKkP1pjf6obnQ-rQbTIlYISSwpasIFg35ruPARf3MG0Ft2_U8w8cOdwb9aQb7X4oyivu1AgPyS2MBCBSAOKC2aFjb_JJX9f0U0g8H84GBWh10NAutQIDBvclCIBUQ1ZIWNdP8SWxZdw"/>
+<div class="absolute top-4 right-4">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm bg-white/90">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+                            Needs Water
+                        </span>
 </div>
 </div>
-</div>
-<!-- Plant Card: Monstera -->
-<div class="flex flex-col gap-sm rounded-xl bg-surface-container-lowest p-sm shadow-sm border border-surface-container-high">
-<div class="w-full aspect-[16/9] bg-center bg-no-repeat bg-cover rounded-lg" data-alt="A majestic Monstera Deliciosa plant with large, fenestrated leaves standing in a bright, modern living room corner. The background is a clean, neutral stone color that complements the deep lush green of the foliage. Soft morning light casts subtle ambient shadows on the wall, creating depth and a sense of calm. The image is framed with a high-end editorial aesthetic consistent with the digital gardening philosophy." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_z6B0C-ZsIijKSPJfbMfh0QT48Dta7y_bVSbTSh0XwmY4FfctRBNYlTpCzIa0tU5Ne5Yi8jOwHn8wpKJu8CXtcThBZ5xsiO0uAH-5q9y8MTvK13izFo120SFKjtejG5UibQQvjMF5VTlw0WeS4lzq-kn9ZuSbX1jJ_nm6ewo3xdsfzuGO3zD4ky0KCzTjHM-y7EqWf1lBM1om_54daBnRy4L0i9L10Mj4oX_SIylygSLzeOqU_QCcQY3TytBCxNYXyjsVhQr4qIA");'></div>
-<div class="flex justify-between items-start px-xs">
-<div class="flex flex-col">
-<p class="text-secondary text-label-sm uppercase tracking-wider">Indoor Plant</p>
-<p class="text-on-surface text-headline-md">Monstera</p>
-<div class="flex items-center gap-xs mt-xs text-primary">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-<p class="text-label-lg font-bold">Healthy</p>
+<div class="p-md">
+<div class="flex justify-between items-start mb-base">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Cherry Tomato</h3>
+<p class="text-label-lg text-outline">Solanum lycopersicum</p>
 </div>
 </div>
-<div class="flex size-10 items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
-<span class="material-symbols-outlined">more_vert</span>
+<div class="flex gap-gutter mt-sm mb-md">
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="wb_sunny">wb_sunny</span>
+<span class="text-label-sm">Full Sun</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="text-label-sm">Every 2 days</span>
 </div>
 </div>
+<button class="w-full bg-primary text-white py-3 rounded-xl font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+                        Water Now
+                    </button>
 </div>
 </div>
-<!-- Floating Action Button -->
-<button class="fixed bottom-24 right-container-margin flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-lg z-30">
-<span class="material-symbols-outlined text-[32px]">add</span>
+<!-- Card 2 -->
+<div class="bg-white rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-md border border-stone-100">
+<div class="h-64 relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A lush, bushy sweet basil plant in a minimalist clay pot sitting on a clean white surface. Soft natural light illuminates the vibrant green serrated leaves. The atmosphere is clean, fresh, and modern, following a digital gardening aesthetic with earthy undertones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcfwU2SpUOaoxf81RmIBfQAD5wnxdQfHEE3qUDXkxacZOvTcvTBzSWr45rKzLwoglcYzq_o6Z88Od4UkKGW2KjegsKgpvPHnvxqSl7m7RvPmCkmgNl7HIHJPOmq7u1s-61Fs7Tg0_MwYX97X9YvbFn-IKGVVf9FcopC8ifpnBq5EvdcDEpqo8q6az8f4BZ2Hor1Ru2XmjFhablDsBIiKdQz1fDpl62SWe3FNgmpJ0XPCnwdBUtBQ625f85VlxsPCOrBSs0M-dUVdw"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm bg-white/90">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                            Thriving
+                        </span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-base">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Sweet Basil</h3>
+<p class="text-label-lg text-outline">Ocimum basilicum</p>
+</div>
+</div>
+<div class="flex gap-gutter mt-sm mb-md">
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+<span class="text-label-sm">Partial Shade</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="text-label-sm">Weekly</span>
+</div>
+</div>
+<button class="w-full border-2 border-outline-variant text-primary py-3 rounded-xl font-label-lg flex items-center justify-center gap-2 hover:bg-stone-50 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                        View Details
+                    </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-md border border-stone-100">
+<div class="h-64 relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A large Monstera Deliciosa with iconic split leaves, positioned in a bright corner of a modern living room. The plant is in a stylish white ceramic pot. High-key lighting highlights the glossy texture of the leaves, creating a serene and healthy interior plant aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEGsR_-g9QWse9T83bQDxEFVR5DHAEFJdeXBEYl4IuTADhpOaU5RTaRRUXcaft0jR_h4QeE-eqme9u3tNQMC2K7OJsBS3uFZyDxuXso7xNh7yrRJU38kGYkmIkkLW90rOelEKTKoMKWP90nM_1ul2iKcyMWGqJMjRihtQzQnra2lB81vlbn9LPMw9v-KLGrnos3x6tAgB5ffc2w7zT_V8KF6E30-GgpoTj2qYgDfFzsG_SkmVCpdXkuiU-fYVeltAG5BgNNyJuVfU"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm bg-white/90">
+<span class="material-symbols-outlined text-sm" data-icon="favorite">favorite</span>
+                            Healthy
+                        </span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-base">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Monstera</h3>
+<p class="text-label-lg text-outline">Monstera deliciosa</p>
+</div>
+</div>
+<div class="flex gap-gutter mt-sm mb-md">
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="filter_drama">filter_drama</span>
+<span class="text-label-sm">Indirect Light</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="text-label-sm">Every 10 days</span>
+</div>
+</div>
+<button class="w-full border-2 border-outline-variant text-primary py-3 rounded-xl font-label-lg flex items-center justify-center gap-2 hover:bg-stone-50 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                        View Details
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-28 right-6 w-16 h-16 bg-primary text-white rounded-2xl shadow-xl flex items-center justify-center z-40 transition-transform active:scale-90 hover:bg-primary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
 </button>
-<!-- Bottom Navigation Bar (Shared Component) -->
-<div class="sticky bottom-0 flex h-auto w-full flex-col bg-surface border-t border-surface-container-highest z-40">
-<div class="flex gap-2 bg-surface px-4 pb-3 pt-2">
-<a class="flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-on-surface" href="#">
-<div class="text-on-surface flex h-8 items-center justify-center" data-icon="Leaf" data-size="24px" data-weight="fill">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49A101.72,101.72,0,0,0,46.7,175.2a4,4,0,0,0,6.61,1.43l85-86.3a8,8,0,0,1,11.32,11.32L56.74,195.94,42.55,210.13a8.2,8.2,0,0,0-.6,11.1,8,8,0,0,0,11.71.43l16.79-16.79c14.14,6.84,28.41,10.57,42.56,11.07q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07Z"></path>
-</svg>
-</div>
-<p class="text-on-surface text-xs font-bold leading-normal tracking-[0.015em]">My Garden</p>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white border-t border-stone-100 shadow-[0_-4px_12px_rgba(45,90,39,0.06)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-stone-400 hover:bg-stone-50 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Dashboard</span>
 </a>
-<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant opacity-70" href="#">
-<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-</svg>
-</div>
-<p class="text-on-surface-variant text-xs font-medium leading-normal tracking-[0.015em]">Discover</p>
+<a class="flex flex-col items-center justify-center bg-[#2D5A27]/10 text-[#2D5A27] rounded-xl px-3 py-1.5 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="potted_plant" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">My Garden</span>
 </a>
-<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant opacity-70" href="#">
-<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="Bell" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
-</svg>
-</div>
-<p class="text-on-surface-variant text-xs font-medium leading-normal tracking-[0.015em]">Reminders</p>
+<a class="flex flex-col items-center justify-center text-stone-400 hover:bg-stone-50 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="center_focus_strong">center_focus_strong</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Identify</span>
 </a>
-<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant opacity-70" href="#">
-<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="Gear" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path>
-</svg>
-</div>
-<p class="text-on-surface-variant text-xs font-medium leading-normal tracking-[0.015em]">Settings</p>
+<a class="flex flex-col items-center justify-center text-stone-400 hover:bg-stone-50 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Community</span>
 </a>
-</div>
-</div>
-</div>
+<a class="flex flex-col items-center justify-center text-stone-400 hover:bg-stone-50 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Learn</span>
+</a>
+</nav>
 </body></html>
