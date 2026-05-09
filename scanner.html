@@ -1,278 +1,191 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Plant Identifier - Scanner</title>
+<title>Plant Identifier</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        const cameraInput = document.getElementById('camera-capture-input');
-        const takePhotoButton = document.getElementById('take-photo-btn');
-        const processingOverlay = document.getElementById('processing-overlay');
-        const scanningGrid = document.getElementById('scanning-grid');
-
-        const mockPlants = [
-            {
-                name: "Monstera Deliciosa",
-                family: "Aroid Family",
-                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
-                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
-            },
-            {
-                name: "Peace Lily",
-                family: "Araceae Family",
-                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
-                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
-            },
-            {
-                name: "Echeveria Succulent",
-                family: "Crassulaceae",
-                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
-                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
-            }
-        ];
-
-        // Trigger native camera
-        takePhotoButton.addEventListener('click', () => {
-            cameraInput.click();
-        });
-
-        // Engine Logic: Handle file capture and simulate AI identification
-        if (cameraInput) {
-            cameraInput.addEventListener('change', (e) => {
-                if (e.target.files && e.target.files[0]) {
-                    // Show processing state
-                    if (processingOverlay) processingOverlay.classList.remove('hidden');
-                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
-                    
-                    // Simulate processing (AI identification) for 2 seconds
-                    setTimeout(() => {
-                        // Pick a random plant
-                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
-                        
-                        // Update UI
-                        document.querySelector('h2').textContent = plant.name;
-                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
-                        document.querySelector('p.text-gray-600').textContent = plant.description;
-                        
-                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
-                        careLabels[0].textContent = plant.care.water;
-                        careLabels[1].textContent = plant.care.light;
-                        careLabels[2].textContent = plant.care.temp;
-
-                        // Hide overlay
-                        if (processingOverlay) processingOverlay.classList.add('hidden');
-                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
-                    }, 2000);
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-surface": "#1b1c1a",
+                        "tertiary-container": "#8d3220",
+                        "secondary-container": "#fed3c7",
+                        "on-primary-fixed-variant": "#23501e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e9e8e4",
+                        "on-tertiary-fixed": "#3e0500",
+                        "surface-bright": "#faf9f5",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9f5",
+                        "primary-fixed": "#bcf0ae",
+                        "on-secondary-fixed-variant": "#5d4037",
+                        "on-surface-variant": "#42493e",
+                        "on-primary-fixed": "#002201",
+                        "secondary-fixed": "#ffdbd0",
+                        "on-secondary-container": "#795950",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d5a27",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2f312e",
+                        "secondary-fixed-dim": "#e7bdb1",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "background": "#faf9f5",
+                        "surface-container-highest": "#e3e2df",
+                        "surface-dim": "#dbdad6",
+                        "tertiary-fixed": "#ffdad3",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1c1a",
+                        "tertiary": "#6e1c0c",
+                        "on-tertiary-container": "#ffaf9e",
+                        "surface-container-low": "#f4f4f0",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#2c160e",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-fixed-variant": "#802918",
+                        "secondary": "#77574d",
+                        "outline-variant": "#c2c9bb",
+                        "primary-fixed-dim": "#a1d494",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e3e2df",
+                        "primary": "#154212",
+                        "outline": "#72796e",
+                        "on-primary-container": "#9dd090",
+                        "inverse-primary": "#a1d494",
+                        "surface-tint": "#3b6934"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "12px"
+                    }
                 }
-            });
+            }
         }
     </script>
 <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100dvh;
-        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .scan-line {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #bcf0ae, transparent);
-            box-shadow: 0 0 15px #bcf0ae;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            animation: scan 3s infinite linear;
-        }
-        @keyframes scan {
-            0% { top: 0%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-        .processing-pulse {
-            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(.33); }
-            80%, 100% { opacity: 0; }
+        .viewfinder-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.3) 100%);
         }
     </style>
-</head>
-<body class="bg-background text-on-background min-h-screen overflow-x-hidden">
-<!-- Top App Bar - Match Home Screen Color Palette -->
-<header class="fixed top-0 w-full z-50 bg-[#16a34a] text-white flex justify-between items-center px-6 py-4 rounded-b-3xl shadow-lg">
-<a class="hover:bg-white/20 rounded-full p-2 active:scale-95 transition-all flex items-center justify-center" href="index.html">
-<span class="material-symbols-outlined" data-icon="close">close</span>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-['Plus_Jakarta_Sans'] text-on-surface">
+<div class="relative flex h-screen w-full flex-col bg-background overflow-hidden">
+<!-- Minimal Header for Focused View -->
+<div class="flex items-center justify-between px-gutter pt-sm pb-xs z-20">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-white text-label-lg font-bold">Plant Identifier</h1>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">bolt</span>
+</button>
+</div>
+<!-- Camera Viewfinder Section -->
+<div class="absolute inset-0 z-0">
+<div class="h-full w-full bg-center bg-no-repeat bg-cover flex items-center justify-center" data-alt="A high-resolution, close-up photograph of a lush Monstera Deliciosa leaf with intricate natural perforations. The scene is set in a sun-drenched urban apartment with soft morning light filtering through a sheer curtain, creating a peaceful digital gardening atmosphere. The aesthetic is clean and modern, highlighting vibrant lush greens against a soft-focus interior background. The lighting is bright and natural, consistent with a premium mobile application interface." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCeZtDFVaWcaCcUsTtSe08JcnhYgo9wse93Ojr49avTWNDGJAKjZd4xHR_1u46LgZzd_9p2hiUpuIOCP2IYwBYYzS_iZDQ8_r7ZCkW1b37XltfbWEJgsUTwgxRgcaCMGovFDWuanOZz5FzY_vg8yhbmDgG4p_HSrz9wYQuQwT8ZU-VLlkK-WQIR5-evdSFId9xuzHQ6GLmeebJOAlzL_5A07XNX5-tyNBJrQSaFSxNkfQ_TVRAdNw-z6ceLmpOIJ6WpaP0AWrvsXgQ");'>
+<!-- Viewfinder Guides -->
+<div class="viewfinder-overlay absolute inset-0"></div>
+<div class="relative w-64 h-64 border-2 border-white/50 rounded-xl">
+<div class="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-white rounded-tl-lg"></div>
+<div class="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-white rounded-tr-lg"></div>
+<div class="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-white rounded-bl-lg"></div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-white rounded-br-lg"></div>
+</div>
+<div class="absolute bottom-40 text-center px-lg">
+<p class="text-white text-label-lg drop-shadow-md">Center the plant in the frame</p>
+</div>
+</div>
+</div>
+<!-- Controls Overlay -->
+<div class="mt-auto relative z-10 px-gutter pb-lg pt-md bg-gradient-to-t from-black/60 to-transparent">
+<div class="flex items-center justify-between mb-8">
+<!-- Gallery Button -->
+<button class="flex flex-col items-center gap-1 text-white">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-md">
+<span class="material-symbols-outlined">image</span>
+</div>
+<span class="text-xs font-medium">Gallery</span>
+</button>
+<!-- Shutter Button -->
+<div class="relative flex items-center justify-center">
+<div class="absolute size-24 border-4 border-white rounded-full"></div>
+<button class="size-16 rounded-full bg-white shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<div class="size-14 rounded-full border-2 border-primary"></div>
+</button>
+</div>
+<!-- Tips/Help Button -->
+<button class="flex flex-col items-center gap-1 text-white">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-md">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<span class="text-xs font-medium">Tips</span>
+</button>
+</div>
+</div>
+<!-- Shared Bottom Navigation -->
+<div class="z-20 bg-surface border-t border-outline-variant">
+<div class="flex gap-2 bg-surface px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-primary" href="#">
+<div class="text-primary flex h-8 items-center justify-center" data-icon="Scan" data-size="24px" data-weight="fill">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,40V80a8,8,0,0,1-16,0V48H176a8,8,0,0,1,0-16h40A8,8,0,0,1,224,40ZM80,208H48V176a8,8,0,0,0-16,0v40a8,8,0,0,0,8,8H80a8,8,0,0,0,0-16Zm136-40a8,8,0,0,0-8,8v32H176a8,8,0,0,0,0,16h40a8,8,0,0,0,8-8V176A8,8,0,0,0,216,168ZM40,88a8,8,0,0,0,8-8V48H80a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V80A8,8,0,0,0,40,88Zm144,80V88a16,16,0,0,0-16-16H88A16,16,0,0,0,72,88v80a16,16,0,0,0,16,16h80A16,16,0,0,0,184,168Z"></path>
+</svg>
+</div>
+<p class="text-primary text-xs font-bold leading-normal tracking-[0.015em]">Identify</p>
 </a>
-<h1 class="font-bold tracking-tight text-lg">Plant Identifier</h1>
-<div class="w-10 h-10 flex items-center justify-center"></div>
-</header>
-<!-- Main Content -->
-<main class="relative w-full min-h-screen flex flex-col pt-20">
-<!-- Viewfinder Section -->
-<section class="relative w-full h-[50vh] overflow-hidden bg-black">
-<!-- Background Image -->
-<img alt="Plant identifier background" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
-<!-- Processing Overlay (Hidden by default) -->
-<div class="absolute inset-0 bg-white/95 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden" id="processing-overlay">
-<div class="relative w-32 h-32 mb-8">
-<div class="absolute inset-0 bg-primary/20 rounded-full processing-pulse"></div>
-<div class="absolute inset-0 border-4 border-primary rounded-full animate-spin border-t-transparent"></div>
-<div class="absolute inset-0 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-4xl">eco</span>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline" href="#">
+<div class="text-outline flex h-8 items-center justify-center" data-icon="Leaf" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z"></path>
+</svg>
 </div>
-</div>
-<h3 class="text-2xl font-bold text-primary animate-pulse">Analyzing...</h3>
-<p class="text-gray-500 mt-2">Our AI is identifying your plant</p>
-</div>
-<!-- Scanning Animation -->
-<div class="absolute inset-0 flex items-center justify-center p-6 pointer-events-none opacity-0 transition-opacity duration-300" id="scanning-grid">
-<div class="relative w-full max-w-[280px] aspect-square">
-<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-xl"></div>
-<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-xl"></div>
-<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-xl"></div>
-<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-fixed rounded-br-xl"></div>
-<div class="scan-line"></div>
-</div>
-</div>
-</section>
-<!-- Result Card: Sliding Up Layout with 3xl rounded corners -->
-<section class="flex-grow bg-surface relative -mt-10 rounded-t-[40px] shadow-[0_-8px_30px_rgba(0,0,0,0.1)] z-10 px-6 pt-8 pb-32">
-<div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-8"></div>
-<div class="max-w-md mx-auto">
-<div class="flex items-center justify-between mb-6">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
-<span class="text-primary font-semibold">98% match found</span>
-</div>
-<span class="text-secondary text-xs font-bold uppercase tracking-widest opacity-70">Aroid Family</span>
-</div>
-<h2 class="text-3xl font-bold text-on-surface text-center mb-2">Monstera Deliciosa</h2>
-<p class="text-gray-600 text-center mb-8 px-2">Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.</p>
-<div class="grid grid-cols-3 gap-4 mb-10">
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-primary" data-icon="water_drop">water_drop</span>
-</div>
-<span class="text-sm font-medium text-gray-700">Weekly</span>
-</div>
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-primary" data-icon="light_mode">light_mode</span>
-</div>
-<span class="text-sm font-medium text-gray-700">Indirect</span>
-</div>
-<div class="bg-surface-container-low p-5 flex flex-col items-center gap-2 rounded-3xl border border-gray-100">
-<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-primary" data-icon="thermostat">thermostat</span>
-</div>
-<span class="text-sm font-medium text-gray-700">18-30°C</span>
-</div>
-</div>
-<div class="flex flex-col gap-4 px-2">
-<button class="w-full bg-[#2D5A27] text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
-<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
-                        Add to My Garden
-                    </button>
-<!-- Take Photo Button: Triggers Scanner Engine -->
-<button class="w-full border-2 border-outline-variant text-[#77574d] py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-gray-50 active:scale-95 transition-all" id="take-photo-btn">
-<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
-                        Take Photo
-                    </button>
-</div>
-</div>
-</section>
-<!-- Hidden File Input for Native Camera -->
-<input accept="image/*" capture="environment" class="hidden" id="camera-capture-input" type="file"/>
-</main>
-<!-- Bottom Navigation Bar - Match Home Screen Style -->
-<nav class="fixed bottom-0 left-0 w-full z-50 border-t border-gray-200 flex justify-around items-center px-4 pb-8 pt-3 shadow-none bg-surface">
-<a class="flex flex-col items-center text-on-surface-variant p-2 transition-colors" href="index.html">
-<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
-<span class="text-[12px] font-medium">Home</span>
+<p class="text-outline text-xs font-medium leading-normal tracking-[0.015em]">My Plants</p>
 </a>
-<a class="flex flex-col items-center text-on-surface-variant p-2 transition-colors" href="harvest.html">
-<span class="material-symbols-outlined text-[24px]" data-icon="eco">eco</span>
-<span class="text-[12px] font-medium">Harvest</span>
-</a>
-<div class="flex flex-col items-center text-primary bg-primary-fixed/30 rounded-2xl p-2 px-4">
-<span class="material-symbols-outlined text-[28px]" data-icon="center_focus_weak">center_focus_weak</span>
-<span class="text-[12px] font-bold">Identify</span>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline" href="#">
+<div class="text-outline flex h-8 items-center justify-center" data-icon="Compass" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z"></path>
+</svg>
 </div>
-<a class="flex flex-col items-center text-on-surface-variant p-2 transition-colors" href="qa-hub.html">
-<span class="material-symbols-outlined text-[24px]" data-icon="groups">groups</span>
-<span class="text-[12px] font-medium">Community</span>
+<p class="text-outline text-xs font-medium leading-normal tracking-[0.015em]">Explore</p>
 </a>
-<a class="flex flex-col items-center text-on-surface-variant p-2 transition-colors" href="budget.html">
-<span class="material-symbols-outlined text-[24px]" data-icon="shopping_basket">shopping_basket</span>
-<span class="text-[12px] font-medium">Budget</span>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline" href="#">
+<div class="text-outline flex h-8 items-center justify-center" data-icon="Gear" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path>
+</svg>
+</div>
+<p class="text-outline text-xs font-medium leading-normal tracking-[0.015em]">Settings</p>
 </a>
-</nav>
-<script>
-        const cameraInput = document.getElementById('camera-capture-input');
-        const takePhotoButton = document.getElementById('take-photo-btn');
-        const processingOverlay = document.getElementById('processing-overlay');
-        const scanningGrid = document.getElementById('scanning-grid');
-
-        const mockPlants = [
-            {
-                name: "Monstera Deliciosa",
-                family: "Aroid Family",
-                description: "Commonly known as the Swiss Cheese Plant, this tropical beauty is famous for its unique natural leaf holes.",
-                care: { water: "Weekly", light: "Indirect", temp: "18-30°C" }
-            },
-            {
-                name: "Peace Lily",
-                family: "Araceae Family",
-                description: "Elegant white flowers and lush green leaves. It is known for its air-purifying qualities and easy-care nature.",
-                care: { water: "2x Weekly", light: "Low Light", temp: "16-24°C" }
-            },
-            {
-                name: "Echeveria Succulent",
-                family: "Crassulaceae",
-                description: "A stunning rosette-shaped succulent that thrives in bright light and requires very little water.",
-                care: { water: "Bi-weekly", light: "Full Sun", temp: "20-35°C" }
-            }
-        ];
-
-        // Trigger native camera
-        takePhotoButton.addEventListener('click', () => {
-            cameraInput.click();
-        });
-
-        // Engine Logic: Handle file capture and simulate AI identification
-        if (cameraInput) {
-            cameraInput.addEventListener('change', (e) => {
-                if (e.target.files && e.target.files[0]) {
-                    // Show processing state
-                    if (processingOverlay) processingOverlay.classList.remove('hidden');
-                    if (scanningGrid) scanningGrid.classList.remove('opacity-0');
-                    
-                    // Simulate processing (AI identification) for 2 seconds
-                    setTimeout(() => {
-                        // Pick a random plant
-                        const plant = mockPlants[Math.floor(Math.random() * mockPlants.length)];
-                        
-                        // Update UI
-                        document.querySelector('h2').textContent = plant.name;
-                        document.querySelector('.text-secondary.text-xs.font-bold').textContent = plant.family;
-                        document.querySelector('p.text-gray-600').textContent = plant.description;
-                        
-                        const careLabels = document.querySelectorAll('.grid.grid-cols-3 .text-sm');
-                        careLabels[0].textContent = plant.care.water;
-                        careLabels[1].textContent = plant.care.light;
-                        careLabels[2].textContent = plant.care.temp;
-
-                        // Hide overlay
-                        if (processingOverlay) processingOverlay.classList.add('hidden');
-                        if (scanningGrid) scanningGrid.classList.add('opacity-0');
-                    }, 2000);
-                }
-            });
-        }
-    </script>
+</div>
+</div>
+</div>
 </body></html>
