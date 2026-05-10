@@ -3,9 +3,10 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Greenthumb Dashboard</title>
+<title>Greenthumb - Home Dashboard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
@@ -13,53 +14,53 @@
         theme: {
           extend: {
             "colors": {
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "on-background": "#1b1c1a",
-                    "surface-tint": "#3b6934",
-                    "on-secondary-fixed": "#2c160e",
-                    "surface-container-low": "#f4f4f0",
-                    "surface-bright": "#faf9f5",
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary-container": "#fed3c7",
                     "primary-fixed-dim": "#a1d494",
-                    "on-primary-container": "#9dd090",
-                    "primary": "#154212",
-                    "on-primary-fixed": "#002201",
-                    "inverse-surface": "#2f312e",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-container": "#795950",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-tertiary": "#ffffff",
-                    "inverse-primary": "#a1d494",
-                    "tertiary-fixed": "#ffdad3",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "surface": "#faf9f5",
-                    "on-error": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface-variant": "#e3e2df",
-                    "on-secondary": "#ffffff",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f2f1ed",
                     "surface-container-high": "#e9e8e4",
-                    "outline-variant": "#c2c9bb",
-                    "on-primary-fixed-variant": "#23501e",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "primary-fixed": "#bcf0ae",
                     "background": "#faf9f5",
-                    "tertiary-container": "#8d3220",
+                    "on-tertiary-container": "#ffaf9e",
                     "on-secondary-fixed-variant": "#5d4037",
                     "error-container": "#ffdad6",
-                    "tertiary": "#6e1c0c",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "surface-variant": "#e3e2df",
+                    "outline-variant": "#c2c9bb",
                     "surface-container-lowest": "#ffffff",
-                    "surface-container": "#efeeea",
-                    "secondary-container": "#fed3c7",
+                    "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
                     "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
                     "outline": "#72796e",
-                    "inverse-on-surface": "#f2f1ed",
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary": "#77574d",
-                    "primary-fixed": "#bcf0ae",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
                     "on-primary": "#ffffff",
                     "on-surface-variant": "#42493e",
-                    "on-error-container": "#93000a",
-                    "surface-dim": "#dbdad6"
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -68,46 +69,44 @@
                     "full": "9999px"
             },
             "spacing": {
-                    "gutter": "16px",
-                    "container-margin": "20px",
-                    "sm": "12px",
-                    "base": "8px",
-                    "md": "24px",
                     "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
                     "xs": "4px",
-                    "lg": "40px"
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
             },
             "fontFamily": {
                     "label-sm": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
                     "headline-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
                     "headline-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"]
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
             },
             "fontSize": {
                     "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
                     "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                     "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
             }
           },
         },
       }
     </script>
 <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        ::-webkit-scrollbar {
-            display: none;
         }
     </style>
 <style>
@@ -116,7 +115,7 @@
     }
   </style>
   </head>
-<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<body class="bg-surface text-on-surface pb-32">
 <!-- Top AppBar -->
 <header class="bg-background dark:bg-background w-full top-0 sticky z-40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
@@ -129,111 +128,154 @@
 </div>
 </div>
 </header>
-<main class="px-container-margin mt-md space-y-lg max-w-2xl mx-auto">
-<!-- Garden Health Index - Bento Style -->
-<section>
-<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 flex items-center justify-between overflow-hidden relative">
-<div class="space-y-base relative z-10">
-<h2 class="text-on-surface-variant font-label-lg text-label-lg uppercase tracking-wider">Garden Health Index</h2>
-<div class="flex items-baseline gap-xs">
-<span class="text-display-lg font-display-lg text-primary">88</span>
-<span class="text-headline-md font-headline-md text-primary-container">%</span>
+<main class="px-container-margin mt-lg space-y-lg max-w-5xl mx-auto">
+<!-- Welcome Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary">Good morning, Gardener!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Your urban sanctuary is waiting for you today.</p>
 </div>
-<p class="text-on-surface-variant font-body-md">Your garden is thriving today!</p>
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center gap-md shadow-sm border border-surface-variant/30">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
 </div>
-<div class="relative w-32 h-32 flex items-center justify-center">
-<svg class="w-full h-full transform -rotate-90">
-<circle class="text-surface-container-high" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-primary-container rounded-full" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="43.7" stroke-width="10"></circle>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Local Weather</p>
+<p class="font-headline-md text-headline-md text-on-surface">Sunny, 24°C</p>
+</div>
+</div>
+</section>
+<!-- Status Overviews -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Today's Schedule Card -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-sm py-1 rounded-full font-label-lg text-label-lg">Today's Schedule</span>
+<a class="text-secondary font-label-lg hover:underline flex items-center" href="calendar.html">
+                            Task Calendar <span class="material-symbols-outlined text-[18px] ml-1">arrow_forward</span>
+</a>
+</div>
+<div class="flex items-center gap-md">
+<div class="text-primary">
+<span class="material-symbols-outlined text-[48px]">event_upcoming</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">3 tasks remaining</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Next: Water the Monstera Deliciosa</p>
+</div>
+</div>
+</div>
+<!-- Mini Progress Track -->
+<div class="mt-lg">
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 66%;"></div>
+</div>
+</div>
+</div>
+<!-- Garden Health Card -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-sm py-1 rounded-full font-label-lg text-label-lg">Garden Health</span>
+<span class="material-symbols-outlined text-secondary">analytics</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative flex items-center justify-center">
+<svg class="w-16 h-16 transform -rotate-90">
+<circle class="text-surface-container" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="28.1" stroke-width="6"></circle>
 </svg>
-<span class="material-symbols-outlined absolute text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="absolute font-label-lg text-primary">84%</span>
 </div>
-<!-- Background Organic Shape -->
-<div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary-fixed opacity-10 rounded-full blur-3xl"></div>
-</div>
-</section>
-<!-- Urgent Care - Asymmetric Layout -->
-<section class="space-y-md">
-<div class="flex items-center justify-between">
-<h3 class="font-headline-md text-headline-md text-primary">Urgent Care</h3>
-<button class="text-secondary font-label-lg text-label-lg hover:underline transition-all">View All</button>
-</div>
-<div class="grid grid-cols-2 gap-md">
-<!-- Plant Card 1 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group active:scale-95 transition-transform">
-<div class="h-40 w-full relative">
-<img class="w-full h-full object-cover" data-alt="A close-up shot of a drooping Peace Lily plant in a terracotta pot, showing slightly wilted leaves that need hydration. The background is a minimalist, brightly lit urban apartment with soft morning sunlight streaming through a window. The overall mood is helpful and urgent, calling for the user's attention to care for the plant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6AODGYGy6P_MqJrTTWFCcyRpxZjQu18JFMePG3v617k6deQsIe1WHyiv-wLPNDIo70XkEXjvLDMj1a065VbGTVM2SCN_j04UdH2faT-xaprM8QCst_iGuBswjADuqxYilGQct1P1sW2l6dMcist_W2Y2hBkE8vXd-HloJSLSs1KNNjbNJGMyDSpDHImH9oVcptF1TBU_In_VuUKakKVePRqjBpnS4tkOe-c0OxpMCAtU6MAZeeA-v32A83hDwsqD0u1bQqdIS6Q"/>
-<div class="absolute top-2 right-2 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-sm font-label-sm shadow-md">Thirsty</div>
-</div>
-<div class="p-md space-y-xs">
-<h4 class="font-label-lg text-label-lg text-on-surface">Peace Lily</h4>
-<div class="flex items-center gap-xs text-on-surface-variant">
-<span class="material-symbols-outlined text-sm">water_drop</span>
-<span class="text-label-sm font-label-sm">Water now</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">84% Healthy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">2 plants need attention</p>
 </div>
 </div>
 </div>
-<!-- Plant Card 2 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group active:scale-95 transition-transform">
-<div class="h-40 w-full relative">
-<img class="w-full h-full object-cover" data-alt="A vibrant Fiddle Leaf Fig tree standing in a bright corner of a modern room. One leaf is showing slight yellowing at the edge, indicating a need for nutrient adjustment. The lighting is soft and airy, maintaining a high-end editorial feel. The image is crisp and clear, focused on the plant's health detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_Ow6gLQNlFo1sAK1uxjJiz6sY08ynPiI8haR0Co_dk4eG_N9jU0UGoHC_gki9lxTKYwXC8pdeCcNrPS6iB7iMiwe94u70m6dNWyxB7ZxVBZxFVFDY0SCE2vaT2Nm5_7VbfwIBRVHHiQjp8ntZRsn3xfsoTN0SGfqBq3Ub21or9WjM29UUra6gC5MZTghYDQvyIDglM5nKdcWWpiW4Ks_g3v1Fwpedyn-Nuq03YhPCL93FS2nTegI0NhYyr7BJVVQcYKAK3oB2mRw"/>
-<div class="absolute top-2 right-2 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-sm font-label-sm shadow-md">Nutrients</div>
+<div class="mt-lg flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a vibrant green succulent in a minimalist white ceramic pot, representing garden health and growth in a modern bright setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiQnYihP7C7BotZ9ZYiBPjAe1_7whMTlGjCM_M7rNlh6lvcRagTfmO5-wc0Z7O9t0g_EO8QNvHI9KOLE0CpRhCHZMcvsZh68WZhlGE_ZaHDGPDn-uEAlNCSIctMHXoIWK_umbrBfqJk6W_QKMohOJ7TpFT5SJfL1ycFy4e7hF_34zigteg3lkCXTPvs0Jze__85384EuTzg8nEtqoj2jwGkCkLAqjttvZKsb698uBDiK_BnfjzkRP_adOvgKgwiwDKG9TVcq4Tegs"/>
 </div>
-<div class="p-md space-y-xs">
-<h4 class="font-label-lg text-label-lg text-on-surface">Fiddle Leaf Fig</h4>
-<div class="flex items-center gap-xs text-on-surface-variant">
-<span class="material-symbols-outlined text-sm">nutrition</span>
-<span class="text-label-sm font-label-sm">Feeding due</span>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A lush peace lily with broad green leaves, photographed with soft cinematic lighting to emphasize its organic texture and healthy glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOfWrs7Kfl-2QPHIqf5HtTeHT-0sOwsweBOva9W_ha8JVBG6VRj0S93pS2GlpiOcGY7HUTvp5XC0DN3qI5Sm5oePmQILDv0JF4Nl4Ej2ezw6J75OrxHTVuQE0LPPeXWj7tuLMUl3cZu4uacaI_ThykrWgZ6-aXG99XZI9hOH14ogYzY8_fGx1iSJTtfXx_pXTaJHs2AiAVREODj1oKAo7eN7TQndTQl_25J1P4O0eUDysJYv9vUcSmYLF-c31yB13uiJLWMF5wSMY"/>
 </div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Macro detail of a Monstera leaf showing beautiful vein patterns and deep green color, set against a clean minimalist light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7nhBYRkczKVoycWC5j1cw-9V1_Atzc11jZRn1JHQBJC6NDs8ziVjGOxn1Gzlj1Y5rIJ3ZYQ8jIB_BtwgVxgPFih3b4w0Sajf-ujxSmExwCq0gisdaYOConT_eMzQohbUrpSlYAlPMbCcbJHba3j0RjnMaqf4iJKpXDuroirDp3FMdO15ffcxr44jZg8gc82HkwUCgP0rSTMGSgR48C4pnz5p6rLPrfLvKudNpACSui0hvL5yaYx35MRfEec0j4CbfUGdmQO_SCA"/>
 </div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center font-label-sm">+9</div>
 </div>
 </div>
 </section>
-<!-- Community Growth highlight -->
-<section class="space-y-md">
-<h3 class="font-headline-md text-headline-md text-primary">Community Growth</h3>
-<div class="relative rounded-xl overflow-hidden h-48 group shadow-sm">
-<img class="w-full h-full object-cover" data-alt="A sprawling, lush community garden in a city center during the golden hour. Sun rays filter through tall sunflowers and vegetable patches, where diverse people are seen tending to plants in the background. The scene is warm, inviting, and full of life, representing a thriving gardening community. The colors are rich greens and warm oranges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDosA5NkPnpW_5zsl2s90EQImQszNk176deZAhRBYRLdUms8a6mofVJfezp2yJOpGpB1XHnAiFXlG8BeH7SS5O3G9zM9wtyL1qwb2-KfrAIVmvHibOaSJvL7S1lcOG0WoiadCGGzw_XwrIVwEoAiCmAUfS-zIvgKqN-ZTsPpMiKhPHJ0Ub2Lj9ediwEiJ8NgoRLosQUmTB66EziCbcSo566kknmEFjgkEhtyBsyT2-OQlbKReHFOXbESBE1N1qx5scpDPmOLroINEQ"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-md text-on-primary">
-<p class="font-label-sm text-label-sm uppercase opacity-90">Trending This Week</p>
-<h4 class="font-headline-md text-headline-md">The Urban Composting Revolution</h4>
-<div class="flex items-center gap-base mt-base">
-<div class="flex -space-x-2">
-<div class="w-6 h-6 rounded-full border-2 border-primary bg-surface-variant"></div>
-<div class="w-6 h-6 rounded-full border-2 border-primary bg-surface-container-high"></div>
-<div class="w-6 h-6 rounded-full border-2 border-primary bg-secondary-container"></div>
+<!-- Quick Action Bento Grid -->
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-gutter">Quick Actions</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Identify Plant (Primary) -->
+<a class="col-span-2 group relative overflow-hidden bg-primary p-md rounded-xl h-48 flex flex-col justify-end text-on-primary active:scale-95 duration-200" href="scanner.html">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" data-alt="A wide-angle, atmospheric shot of a person using a smartphone to identify a rare tropical plant in a sunlit greenhouse. The lighting is golden and ethereal, highlighting the dust motes and the vibrant green foliage. The style is modern, editorial, and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_cPYEqlZqxQ6epMUd7PgsVyiSNrpvEu-iWfjRz3YGeMUgzMPvmo_IqKFDnxV0RYs-Rs6cB1MoFpjntTAXfD-b0o-X-gAhr9nEghlr1ahlcXuoK7_vC26hklbF0L3jlK8PQnpp7_ySt0jVGvSppqiBk71OBH7YOMw4C_5hUIE-gnmfbZ6gHT50ki0LDqd8s-_5kHgtmMHK1WivAF-uY_-r9Ef1ZWhG7tIaDT-u_zlZfe_gDNBwZYg-RENCrWbq1cvayJ3hT7n6kAw"/>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-[32px] mb-2" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+<h4 class="font-headline-md text-headline-md">Identify Plant</h4>
+<p class="font-label-lg text-label-lg opacity-90">AI-powered scanning</p>
 </div>
-<span class="text-label-sm font-label-sm">+1.2k joined discussion</span>
+</a>
+<!-- Add New Plant -->
+<a class="bg-surface-container-highest p-md rounded-xl flex flex-col justify-between hover:bg-surface-container-high transition-colors active:scale-95 duration-200" href="add-plant.html">
+<span class="material-symbols-outlined text-primary text-[32px]">add_circle</span>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface">Add New Plant</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Grow your garden</p>
+</div>
+</a>
+<!-- Ask Community -->
+<a class="bg-secondary-fixed p-md rounded-xl flex flex-col justify-between hover:bg-secondary-fixed-dim transition-colors active:scale-95 duration-200" href="community.html">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-[32px]">forum</span>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-secondary-fixed-variant">Ask Community</h4>
+<p class="font-label-sm text-label-sm text-on-secondary-fixed-variant opacity-80">Get expert advice</p>
+</div>
+</a>
+<!-- Search Guides (Last item in 4-column row or 2-col row) -->
+<a class="col-span-2 md:col-span-4 bg-tertiary-container p-md rounded-xl flex items-center justify-between text-on-tertiary-container hover:bg-tertiary transition-colors active:scale-95 duration-200" href="learn.html">
+<div class="flex items-center gap-md">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-2 rounded-full">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Search Guides</h4>
+<p class="font-body-md text-body-md">Find care tips for over 10,000 species</p>
 </div>
 </div>
+<span class="material-symbols-outlined text-[24px]">search</span>
+</a>
 </div>
 </section>
-<!-- Task Progress -->
-<section class="space-y-md">
-<h3 class="font-headline-md text-headline-md text-primary">Weekly Bloom Status</h3>
-<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/30 space-y-md">
-<div class="flex items-center justify-between">
-<span class="font-label-lg text-label-lg text-on-surface">Pruning Schedule</span>
-<span class="text-primary font-bold">3/5 Completed</span>
+<!-- Recommended Learning -->
+<section class="pb-10">
+<div class="flex justify-between items-center mb-gutter">
+<h3 class="font-headline-md text-headline-md text-primary">Recommended for You</h3>
+<a class="text-on-surface-variant font-label-lg hover:text-primary" href="learn.html">View All</a>
 </div>
-<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden flex">
-<div class="bg-primary-container h-full w-[60%] transition-all duration-500"></div>
+<div class="flex gap-md overflow-x-auto pb-4 scrollbar-hide -mx-container-margin px-container-margin">
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0">
+<img class="w-full h-40 object-cover" data-alt="A beautifully composed flat lay of gardening tools—a vintage copper watering can, wooden-handled trowel, and organic fertilizer—on a clean stone surface with soft morning light, evoking a sense of calm and organized preparation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBud8GpHBL6lCVNxDiqtXTezuKHpeKLmBcSz-s1AX_KIuxTiAnUPMC53iNkFD_tzdn7zfjtXg8WKmqz4MUK0NgjecIAKWDn9-sqM4ZqYrZGLNc76JmjK6e3KhmkJQOCKCm078DqF2MaOB_MQ9mWhIKjZtzFjJNnT4t6aBfWMxQgMRRVWilnsD-di_c2aYOmYBJvfqRVzA2TRBT-nBI6cFxaNRrLHdvY0qDNKLkog4TEPS-20Yt8PBPDY1sPXuzMjYQBAgz4sn9U4lc"/>
+<div class="p-md">
+<span class="font-label-sm text-label-sm text-secondary uppercase">Essential Care</span>
+<h4 class="font-label-lg text-label-lg text-on-surface mt-1">Mastering Soil pH for Beginners</h4>
 </div>
-<div class="flex justify-between items-center px-xs">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
-<span class="material-symbols-outlined text-outline-variant">eco</span>
-<span class="material-symbols-outlined text-outline-variant">eco</span>
+</div>
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0">
+<img class="w-full h-40 object-cover" data-alt="A modern, high-end living room featuring a spectacular indoor plant wall, with indirect warm lighting highlighting the variety of textures and leaf shapes, creating a lush and serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbkjP8W-gcsyUv_AGAigsSTOa393s-cFOvX7QsMC3vISQqTbaHifuGnTbbfp0E13T2xZ7H9dfruIqWhbIk6fOFWKq2Ep1_zIGSxm7MZ6YjmjMLF-ni1t9VSR5mS0nSMj6tCXjn9JKbZWoHoo7Il32RDWb2eAGMs3T9rITQNwwmWTkuGZusq4kgIh-iuKtFW2Xivdxk2H2fGyD992o_-P6svJhQxAQRefxRG1LnCRbhmT3pfnKi7x-frWLYjyNtQwXdSzPgMKOMRzg"/>
+<div class="p-md">
+<span class="font-label-sm text-label-sm text-secondary uppercase">Indoor Jungle</span>
+<h4 class="font-label-lg text-label-lg text-on-surface mt-1">Top 10 Low-Light Bedroom Plants</h4>
+</div>
 </div>
 </div>
 </section>
 </main>
-<!-- Floating Action Button - Identify -->
-<button class="fixed bottom-24 right-container-margin w-16 h-16 bg-primary-container text-on-primary-container rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-all duration-200 z-50">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">filter_center_focus</span>
-</button>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full px-base py-sm">
