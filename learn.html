@@ -5,106 +5,118 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Learn Hub - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-secondary-container": "#795950",
-                        "secondary": "#77574d",
-                        "on-background": "#1b1c1a",
-                        "surface-container": "#efeeea",
-                        "on-secondary": "#ffffff",
-                        "surface-container-low": "#f4f4f0",
-                        "surface-container-highest": "#e3e2df",
-                        "primary-fixed": "#bcf0ae",
-                        "secondary-fixed": "#ffdbd0",
-                        "primary": "#154212",
-                        "surface-variant": "#e3e2df",
-                        "on-tertiary-fixed": "#3e0500",
-                        "inverse-surface": "#2f312e",
-                        "surface-dim": "#dbdad6",
-                        "secondary-fixed-dim": "#e7bdb1",
-                        "tertiary-fixed": "#ffdad3",
-                        "tertiary-container": "#8d3220",
-                        "on-error": "#ffffff",
-                        "on-primary-fixed-variant": "#23501e",
-                        "inverse-primary": "#a1d494",
-                        "error": "#ba1a1a",
-                        "tertiary": "#6e1c0c",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary-fixed": "#002201",
-                        "on-primary": "#ffffff",
-                        "surface-container-high": "#e9e8e4",
-                        "on-surface": "#1b1c1a",
-                        "on-primary-container": "#9dd090",
-                        "secondary-container": "#fed3c7",
-                        "background": "#faf9f5",
-                        "surface": "#faf9f5",
-                        "outline-variant": "#c2c9bb",
-                        "surface-bright": "#faf9f5",
-                        "error-container": "#ffdad6",
-                        "primary-container": "#2d5a27",
-                        "on-error-container": "#93000a",
-                        "on-tertiary-container": "#ffaf9e",
-                        "outline": "#72796e",
-                        "tertiary-fixed-dim": "#ffb4a5",
-                        "primary-fixed-dim": "#a1d494",
-                        "inverse-on-surface": "#f2f1ed",
-                        "surface-tint": "#3b6934",
-                        "on-secondary-fixed": "#2c160e",
-                        "on-surface-variant": "#42493e",
-                        "on-secondary-fixed-variant": "#5d4037",
-                        "on-tertiary": "#ffffff",
-                        "on-tertiary-fixed-variant": "#802918"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "md": "24px",
-                        "lg": "40px",
-                        "container-margin": "20px",
-                        "xs": "4px",
-                        "xl": "64px",
-                        "sm": "12px",
-                        "gutter": "16px",
-                        "base": "8px"
-                    },
-                    "fontFamily": {
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "label-lg": ["Plus Jakarta Sans"],
-                        "label-sm": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "body-lg": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface-container-low": "#f4f4f0",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#002201",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-variant": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#795950",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "surface-container-highest": "#e3e2df",
+                    "on-primary-fixed-variant": "#23501e",
+                    "on-background": "#1b1c1a",
+                    "secondary-container": "#fed3c7",
+                    "tertiary": "#6e1c0c",
+                    "surface-tint": "#3b6934",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-container": "#ffaf9e",
+                    "error": "#ba1a1a",
+                    "secondary": "#77574d",
+                    "primary-fixed": "#bcf0ae",
+                    "outline-variant": "#c2c9bb",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f312e",
+                    "surface": "#faf9f5",
+                    "secondary-fixed": "#ffdbd0",
+                    "primary-container": "#2d5a27",
+                    "surface-bright": "#faf9f5",
+                    "on-tertiary": "#ffffff",
+                    "background": "#faf9f5",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e9e8e4",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#72796e",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#9dd090",
+                    "on-secondary-fixed": "#2c160e",
+                    "primary": "#154212",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "tertiary-container": "#8d3220",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-surface-variant": "#42493e",
+                    "inverse-on-surface": "#f2f1ed",
+                    "surface-dim": "#dbdad6",
+                    "inverse-primary": "#a1d494"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "container-margin": "20px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
             }
-        }
+          },
+        },
+      }
     </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
         }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 <style>
     body {
@@ -114,160 +126,169 @@
 </head>
 <body class="bg-background text-on-background min-h-screen pb-32">
 <!-- TopAppBar -->
-<header class="w-full top-0 sticky bg-background dark:bg-background z-50">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
-<div class="flex items-center gap-4">
-<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95 transition-transform">
-<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="menu">menu</span>
-</button>
-<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Learn</h1>
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm dark:shadow-none flex items-center justify-between px-container-margin py-base w-full">
+<div class="flex items-center gap-base">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A high-quality professional headshot of a friendly individual with soft natural lighting against a minimalist background. The aesthetic is clean and modern, mirroring a premium digital gardening app interface. The image uses a warm, approachable color palette with subtle organic tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyojOZR4CBbD4BilGFyxhqrr0uWXmFglVDdvJyjQA3D4m61Js5V56RGP5EYTn-Ghqz7qhELNS0PilVFk9wxaIzdl4A-2WeG3UYlyAlHUzGRgFA-RkMN3oL0a_oQaE15BJOV7B9tdyHpovF_1zv-Ibmk59ptVscJN7DKtw-ZGKFDTU-eQFgt_5YCau_R5o7U6FtJd-Sh2gUwi_N5n5iPKHEkcsCmV-te0GjQ-VUoYTEQhD2o84w9aeQNG4F8AZdvipNru6eNU3Lgsw"/>
 </div>
-<div class="flex items-center">
-<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="A professional and clean headshot of a person smiling, set against a soft, out-of-focus natural garden background. The lighting is warm and natural, emphasizing a friendly and approachable persona for a lifestyle app. The overall aesthetic is bright and clear, matching a modern digital gardening theme with high-quality resolution and subtle green highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATTq8F8IFySqgozyxCUZbHroq_OFC2WF8mVQ3Zi0aWBJh2cj2TTENz5WMNdwIV1C97zKo3KDtklik4Y85iiriZsxf8uD-kj6KRKEg8K9939jl-kETjA5ffI3vLfl9-kXqsCgBHES0EOvTsw8DyN3nTfvfFTy2pIHbrMcaoFKCrYxZF5mvRQ2uX3Gx7VonyTO8RFudY3Irqx_DkBkeIRFXYF8Ub19vFtRgmLU10ureL17dYL-XTH6qBBVnpUcs6Q8vPrbABAql53zU"/>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">Greenthumb</h1>
 </div>
-</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim p-2 hover:bg-surface-container-low transition-colors active:scale-95 duration-200">
+            notifications
+        </button>
 </header>
-<main class="max-w-7xl mx-auto">
-<!-- Sub-navigation Filter Chips -->
-<nav class="px-container-margin py-md overflow-x-auto hide-scrollbar flex gap-3">
-<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg whitespace-nowrap active:scale-95 transition-all">All</button>
-<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label-lg border border-outline-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Guides</button>
-<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label-lg border border-outline-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Tips</button>
-<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label-lg border border-outline-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Beginner</button>
-<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label-lg border border-outline-variant whitespace-nowrap hover:bg-surface-container-high active:scale-95 transition-all">Advanced</button>
-</nav>
-<!-- Hero Section: Featured Guide -->
-<section class="px-container-margin mb-lg">
-<div class="relative w-full h-[400px] rounded-xl overflow-hidden shadow-sm group">
-<img alt="Composting Guide" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-angle, lush close-up of rich, dark organic compost being turned by a wooden garden tool. The scene is bathed in golden hour sunlight, highlighting the textures of decomposing leaves and fertile soil. The image evokes a sense of organic growth and natural sustainability, with vibrant green seedlings visible in the blurred background. The style is editorial and clean, following a modern botanical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9USKaUjcSTsRFsfDEoJM_WZgD5i1k0QW2GFt7zOzprx0BUtogIhBaFcN2zXTGMx5qv9sJSa6PfMLu7wI3HmFXTlrdbBUChpd89rGJiVxydDwAXhAoFKJRXRhG0K-TrOxBf_L-VC3ZWxxfZsxjGqSvp7SbC_xBqemXd8ioyzCtj49KLLPTOpJGYsQcURtRMiVKGMQGoAzATZARb56OEkT391pmk4s2d04qBv0nrPJLc18Q_jiy-KegWTvZqsS4Y1zvfVaQaaqCBsI"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-md md:p-xl">
-<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-label-sm w-fit mb-base uppercase tracking-wider">Featured Guide</span>
-<h2 class="font-headline-lg text-white text-display-lg mb-md max-w-2xl">The Art of Composting</h2>
-<button class="bg-primary-container text-on-primary-container px-xl py-md rounded-full font-label-lg w-fit flex items-center gap-base active:scale-95 transition-transform">
-                        Start Learning
-                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+<main class="mt-24 px-container-margin max-w-5xl mx-auto">
+<!-- Search & Filter Chips -->
+<div class="mb-lg">
+<div class="relative mb-md">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-body-md focus:ring-2 focus:ring-primary-container" placeholder="Search guides, tips, and basics..." type="text"/>
+</div>
+<div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+<button class="px-md py-sm rounded-full bg-primary text-on-primary font-label-lg whitespace-nowrap active:scale-95 transition-all">All Resources</button>
+<button class="px-md py-sm rounded-full bg-surface-container-high text-on-surface-variant font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-all">Guides</button>
+<button class="px-md py-sm rounded-full bg-surface-container-high text-on-surface-variant font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-all">Tips</button>
+<button class="px-md py-sm rounded-full bg-surface-container-high text-on-surface-variant font-label-lg whitespace-nowrap hover:bg-surface-container-highest transition-all">Beginners</button>
+</div>
+</div>
+<!-- Featured Section: The Art of Composting -->
+<section class="mb-xl">
+<div class="relative h-[400px] rounded-[32px] overflow-hidden group cursor-pointer shadow-lg">
+<img alt="Composting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A lush, detailed close-up of rich, dark organic compost being turned over with a wooden spade. Golden hour sunlight filters through nearby garden leaves, creating a warm and earthy atmosphere. The photography is high-end and editorial, emphasizing the tactile textures of the soil and the organic cycle of growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwvy1wKlApe37kzS3Yx74zWvWKWTkyPSp-nD3L-5J1mE0kd-rAOuUfD6YzaELipDGXRVlEaVH0dDdPRBpz_pWQOSZ5BPHffMMpkP0bTQO2mubilQcmBSFH6UdHWubHrGhiXPGIvvafi5EtfG-Ec0DRfmtIuk5IaQbS7YGfrtPBBUp078MDKWRIyC8ih36Gvwh2v7fzRQ6l6I9TaVJd8DH1mT1iYTsocGL0hLzw-H1opjb8l6fWbvbKK-vTQqMDbaW29R5X1U-SAGA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-md">
+<span class="bg-primary-fixed text-on-primary-fixed w-fit px-3 py-1 rounded-full text-label-sm mb-base uppercase tracking-wider">Featured Guide</span>
+<h2 class="font-display-lg text-white text-display-lg mb-sm">The Art of Composting</h2>
+<p class="text-white/90 text-body-lg max-w-2xl mb-md">Transform your kitchen waste into "black gold" for your garden with our masterclass on efficient, odorless composting.</p>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary px-xl py-base rounded-full font-label-lg flex items-center gap-xs">
+                            Read Now
+                            <span class="material-symbols-outlined">arrow_forward</span>
 </button>
+<span class="text-white/80 font-label-sm">12 min read • 4k views</span>
+</div>
 </div>
 </div>
 </section>
-<!-- Gardening Fundamentals -->
-<section class="px-container-margin mb-lg">
-<div class="flex justify-between items-end mb-md">
+<!-- Bento Grid Sections -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Soil Basics (Left/Large) -->
+<div class="md:col-span-7 bg-white rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-surface-container-low">
+<div class="h-64">
+<img alt="Soil health" class="w-full h-full object-cover" data-alt="A macro photograph of healthy, moist garden soil with small green sprouts beginning to emerge. The lighting is soft and natural, emphasizing the rich brown tones of the earth and the vibrant green of the new life. The composition is artistic and clean, evoking a sense of calm and biological potential." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC08DBbhtB_wPqHDBpBQS7-zIPMatkMr1Flrp2cpg7ILyiImxvHYJdDeXuXjtzd50BQJ4a1qRzgwKGaxTG3tMiVTZVaV9DWpHwuZKVoX3gmQK3ERUA2hRsdoxNNO8ABihtkxL39q9WMRHFEXpoCxqDCalfu7bnj7rGYqBZR0PfjxYPx41aj4SkMpawOGNVYWGWef8OncLg0xWQzUSrs5OisF3DOYRg7TDIMmjvZOczJiD-FbYwuwZcdGa9RaaReCwpGlFBlSMxnbEw"/>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Soil Basics</h3>
+<span class="material-symbols-outlined text-tertiary-container">landscape</span>
+</div>
+<p class="text-on-surface-variant text-body-md mb-md">Understand the foundation of every great garden. Learn about pH levels, drainage, and how to identify your soil type at home.</p>
+<div class="flex gap-sm">
+<span class="bg-surface-container-low px-3 py-1 rounded-full text-label-sm">Nutrients</span>
+<span class="bg-surface-container-low px-3 py-1 rounded-full text-label-sm">PH Balance</span>
+</div>
+</div>
+</div>
+<!-- Watering 101 (Right/Vertical) -->
+<div class="md:col-span-5 bg-secondary-container/30 rounded-[24px] p-md flex flex-col justify-between border border-secondary-container/50">
 <div>
-<h3 class="font-headline-md text-headline-md text-primary">Gardening Fundamentals</h3>
-<p class="font-body-md text-on-surface-variant">Essential knowledge for every green thumb.</p>
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl">water_drop</span>
 </div>
-<button class="text-secondary font-label-lg flex items-center gap-1 hover:underline">
-                    View All
-                    <span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
-</button>
+<h3 class="font-headline-md text-headline-md text-secondary mb-base">Watering 101</h3>
+<p class="text-on-secondary-fixed-variant text-body-md mb-md">Master the delicate balance of hydration. Overwatering is the #1 killer of houseplants—we show you how to avoid it.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-<!-- Card 1 -->
-<div class="bg-surface-container-lowest rounded-xl p-base shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-<img alt="Soil Basics" class="w-full h-48 object-cover rounded-lg mb-md" data-alt="A close-up shot of healthy, dark loam soil held in a gardener's cupped hands. The lighting is bright and clear, showcasing the intricate texture and moisture of the earth. Small green sprouts are beginning to emerge from the soil in the background. The aesthetic is tactile and grounding, emphasizing the foundational nature of gardening in a clean, high-contrast light mode environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGyw2PW9H2tOFXnoxU38BKr8oa1jiWuu8myFRmX_5rAT4mUkDFXMOZ1v36-0-J6ksLjAIoLrGHU6R86-KotVaCt7Lc5wRNAaTVLLvySXJk52eAoXu1aM33f6EbYxD8ZTCnPP44umC-EkvsO0ClJF70BGg7HJF62v5JmPy-eUhP0ghufgEEnjUXfjt7cw329syXqCoTiPKwyf_V-3xBKcxnl8jbiLOL9daH7kCfTpD_ITZ2IFECOSgloUqStOd0jteSvUWa5blZqbM"/>
-<div class="px-base pb-base">
-<h4 class="font-headline-md text-headline-md text-on-surface mb-xs">Soil Basics</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2">Learn how to identify and prepare the perfect soil for your plants.</p>
-<div class="mt-md flex items-center gap-base">
-<div class="bg-surface-container-high rounded-full p-2 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="timer">timer</span>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm text-on-secondary-fixed-variant font-label-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        The Finger Test Method
+                    </li>
+<li class="flex items-center gap-sm text-on-secondary-fixed-variant font-label-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Early Morning vs Evening
+                    </li>
+</ul>
 </div>
-<span class="font-label-sm text-on-surface-variant">12 min read</span>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-surface-container-lowest rounded-xl p-base shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-<img alt="Watering 101" class="w-full h-48 object-cover rounded-lg mb-md" data-alt="Crystal clear water droplets falling from a modern copper watering can onto the vibrant green leaves of an indoor plant. The morning sunlight filters through a nearby window, creating a shimmering, refreshing atmosphere. The photography focuses on the clarity of the water and the health of the foliage, embodying a calm and nurturing gardening task. The style is minimalist and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkDTqqwROH1ci5ObovDp73CBO8hTpXn9NGwOxHMfFYSVscrvoSKJE9SUbHW3K4iRD7FtkbYDeyihcmY-kpp63MeWVo07UUyLVNDspzrnSX14jSKGIJZ97v4SN2BWuAf--2q9PF8c0lodV-92Qj16dKElbWB0SwAgSnUeszyKYv9_IrYm7CNRiquDW5vQc09cyHmdIjah-L-dQSea6pdxw9L4VEb5EnAugA9YBAP4XnoVDIaJgcMmlJr0UU1DBRTFfR0IjTEzRITxk"/>
-<div class="px-base pb-base">
-<h4 class="font-headline-md text-headline-md text-on-surface mb-xs">Watering 101</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2">The science of hydration: when, how much, and how often to water.</p>
-<div class="mt-md flex items-center gap-base">
-<div class="bg-surface-container-high rounded-full p-2 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="timer">timer</span>
-</div>
-<span class="font-label-sm text-on-surface-variant">8 min read</span>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="bg-surface-container-lowest rounded-xl p-base shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-<img alt="Sunlight Guide" class="w-full h-48 object-cover rounded-lg mb-md" data-alt="Dappled sunlight streaming through a glass greenhouse roof, illuminating a variety of potted tropical plants. The light creates soft shadows and highlights the deep greens and textures of the leaves. The scene is airy and bright, representing the essential role of solar energy in plant growth. The visual style is serene and highly professional, utilizing a natural color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBp_tcLutwdxZHK3iSuirZfsLR1d_k3XwcZrd4hDiqtvhCBWq7WFtDLYFOGRW50vSbJg4XCRF_gLyb3n7iSVXdFF9hvZkbZE6PWAD_IxgMxZVMuWfP4Q54YXArrRiyuMI5TD9x8MpOLJA-v7SImMHmuh5rOkH-OXUbHdPPovbEn88a1zEoXJvVDEaqC5gGEq59t6pa-UunpxpNJKtFVg3AwvIynLjkVgAFyIVCALajLQlCF6SCkqR9-BPKvudl38kSuvL0l2orQAA"/>
-<div class="px-base pb-base">
-<h4 class="font-headline-md text-headline-md text-on-surface mb-xs">Sunlight Guide</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2">Master the balance of light and shade for a thriving garden.</p>
-<div class="mt-md flex items-center gap-base">
-<div class="bg-surface-container-high rounded-full p-2 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="timer">timer</span>
-</div>
-<span class="font-label-sm text-on-surface-variant">15 min read</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Seasonal Tips -->
-<section class="px-container-margin mb-lg">
-<h3 class="font-headline-md text-headline-md text-primary mb-md">Seasonal Tips</h3>
-<div class="flex flex-col gap-md">
-<!-- Tip Item 1 -->
-<div class="flex items-center gap-md bg-surface-container-low p-md rounded-xl hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-on-primary-container text-[32px]" data-icon="eco">eco</span>
+<!-- Sunlight Guide (Full Width Highlight) -->
+<div class="md:col-span-12 bg-white rounded-[24px] p-md flex flex-col md:flex-row items-center gap-lg border border-surface-container-low">
+<div class="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden">
+<img alt="Sunlight hitting leaves" class="w-full h-full object-cover" data-alt="Stunning visual of sunlight filtering through translucent green Monstera leaves. The backlighting creates a beautiful play of shadows and highlights the intricate vascular patterns of the plant. The scene is bright and airy, representing a perfect indoor lighting environment for tropical plants." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL26_-V8tJz30y4P8Ef8Xc_wsadqxqIgPBeXoQIdgoxd_6So1QlfmRK9aMRH3JjZas2NcTVM0ctRrl13EMLE_d3OblPk2vGsH8WJIr2rtrpd_GA5bZ443leS6573AL-KpIHUDbNRkNX-na6U0b63v-tYC_05hyeMRfP1w3FSyUcWpbIEV5Igz1Y4mFUV3rk7nPWVNLmj4M01Ntr25G5LY0L0RKgGpGShzNaUxa1MleCXWsQ5irlDXL6MM_VMEKLN-0KLV_lM-Cx28"/>
 </div>
 <div class="flex-1">
-<h5 class="font-headline-md text-[18px] text-on-surface">Spring Planting</h5>
-<p class="font-body-md text-on-surface-variant">Prepare your beds and start your seeds for the coming bloom.</p>
+<div class="inline-flex items-center gap-xs text-on-tertiary-fixed-variant bg-tertiary-fixed px-3 py-1 rounded-full text-label-sm mb-base">
+<span class="material-symbols-outlined text-sm">wb_sunny</span>
+                        Lighting Mastery
+                    </div>
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Sunlight Guide: From Direct to Deep Shade</h3>
+<p class="text-on-surface-variant text-body-md mb-lg">Not all sun is created equal. We break down what 'Bright Indirect Light' actually means in your living room versus your balcony.</p>
+<div class="grid grid-cols-3 gap-md">
+<div class="text-center">
+<div class="font-bold text-headline-md text-primary">6h+</div>
+<div class="text-label-sm text-outline">Full Sun</div>
 </div>
-<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+<div class="text-center border-x border-surface-variant">
+<div class="font-bold text-headline-md text-primary">3-6h</div>
+<div class="text-label-sm text-outline">Partial</div>
 </div>
-<!-- Tip Item 2 -->
-<div class="flex items-center gap-md bg-surface-container-low p-md rounded-xl hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-on-secondary-container text-[32px]" data-icon="content_cut">content_cut</span>
+<div class="text-center">
+<div class="font-bold text-headline-md text-primary">&lt;2h</div>
+<div class="text-label-sm text-outline">Low Light</div>
 </div>
-<div class="flex-1">
-<h5 class="font-headline-md text-[18px] text-on-surface">Summer Pruning</h5>
-<p class="font-body-md text-on-surface-variant">Manage growth and encourage better yields through selective cutting.</p>
 </div>
-<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
 </div>
-<!-- Tip Item 3 -->
-<div class="flex items-center gap-md bg-surface-container-low p-md rounded-xl hover:bg-surface-container-high transition-colors cursor-pointer group">
-<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-on-primary text-[32px]" data-icon="ac_unit">ac_unit</span>
 </div>
-<div class="flex-1">
-<h5 class="font-headline-md text-[18px] text-on-surface">Winter Protection</h5>
-<p class="font-body-md text-on-surface-variant">Shield your delicate perennials from the harsh winter frost.</p>
 </div>
-<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+<!-- Quick Tips List -->
+<section class="mt-xl mb-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-lg">Community Quick Tips</h3>
+<div class="space-y-sm">
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">tips_and_updates</span>
+</div>
+<div>
+<h4 class="font-label-lg text-on-surface">Banana Peels for Potash</h4>
+<p class="text-label-sm text-outline">A simple way to boost flowering in roses.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">egg_alt</span>
+</div>
+<div>
+<h4 class="font-label-lg text-on-surface">Crushed Eggshells for Calcium</h4>
+<p class="text-label-sm text-outline">Prevent blossom end rot in tomatoes easily.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">chevron_right</span>
 </div>
 </div>
 </section>
 </main>
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)] shadow-sm">
-<div class="flex justify-around items-center w-full px-base py-sm max-w-7xl mx-auto"><a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl" href="index.html">
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-container-lowest shadow-[0_-4px_12px_rgba(0,0,0,0.04)] shadow-lg flex justify-around items-center w-full py-sm pb-safe px-1">
+<button class="flex flex-col items-center justify-center gap-xs text-on-surface-variant dark:text-outline py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 px-2">
 <span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label-sm text-label-sm mt-1">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl" href="my-garden.html">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-on-surface-variant dark:text-outline py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 px-2">
 <span class="material-symbols-outlined" data-icon="potted_plant">potted_plant</span>
-<span class="font-label-sm text-label-sm mt-1">My Garden</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl" href="scanner.html">
+<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-on-surface-variant dark:text-outline py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 px-2">
 <span class="material-symbols-outlined" data-icon="filter_center_focus">filter_center_focus</span>
-<span class="font-label-sm text-label-sm mt-1">Identify</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-xl" href="community.html">
+<span class="font-label-sm text-label-sm whitespace-nowrap">Identify</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs text-on-surface-variant dark:text-outline py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full transition-all active:scale-90 duration-150 px-2">
 <span class="material-symbols-outlined" data-icon="groups">groups</span>
-<span class="font-label-sm text-label-sm mt-1">Community</span>
-</a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 active:scale-90 transition-all duration-200" href="learn.html">
-<span class="material-symbols-outlined" data-icon="school">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a></div>
+<span class="font-label-sm text-label-sm whitespace-nowrap">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full py-1 active:scale-90 duration-150 px-2">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">Learn</span>
+</button>
 </nav>
 </body></html>
