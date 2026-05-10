@@ -113,15 +113,16 @@
   </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen pb-32">
-<!-- TopAppBar -->
-<header class="w-full top-0 sticky z-40 bg-background flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
-<div class="flex items-center gap-md">
-<button class="material-symbols-outlined text-primary hover:bg-surface-container-high rounded-full transition-colors p-base active:scale-95 transition-transform" onclick="history.back()">arrow_back</button>
-<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+<!-- Top AppBar -->
+<header class="bg-background dark:bg-background w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
 </div>
-<div class="flex items-center gap-base">
-<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high rounded-full p-base active:scale-95 transition-transform" data-icon="search">search</button>
-<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover border-2 border-surface-container-highest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx4alabmTB_3tpWgCrTgHCHXd-SoaHHHawhINE2kJJ6jhayC_gwxCo_iGRZaGQgoPEeB3T24sG_QEddU7LNODyXyXTOA3twzD_ze0FRWDpXJVHyvJgbgwKv4kc5UBt0N8UdnW--AQWGT8bP5MtmJ2nV7B8gPNUfwoKrZ_TByrp-_j0jIMtGSHJNJAN87oSNpxVvw5YoalE6F0ggr3xVzfhuVkPjZw7S2CIZinkROUoGky_zs_iRD4M-vJVXNKOJiaPE-a6pftl3-c"/>
 </div>
 </header>
 <main class="max-w-2xl mx-auto">
