@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenthumb - Task Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary-container": "#fed3c7",
+                    "primary-fixed-dim": "#a1d494",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f2f1ed",
+                    "surface-container-high": "#e9e8e4",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "primary-fixed": "#bcf0ae",
+                    "background": "#faf9f5",
+                    "on-tertiary-container": "#ffaf9e",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "surface-variant": "#e3e2df",
+                    "outline-variant": "#c2c9bb",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
+                    "outline": "#72796e",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#42493e",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- Top AppBar -->
+<header class="bg-background dark:bg-background w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+</div>
+</div>
+</header>
+<main class="px-container-margin py-md">
+<!-- Task Calendar Heading -->
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Task Calendar</h2>
+<p class="font-body-md text-on-surface-variant">Stay on top of your plant care routine.</p>
+</div>
+<!-- Weekly Date Strip -->
+<section class="flex justify-between items-center bg-surface-container rounded-xl p-md mb-lg shadow-sm">
+<div class="flex flex-col items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Mon</span>
+<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">16</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Tue</span>
+<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">17</span>
+</div>
+<!-- Active Day -->
+<div class="flex flex-col items-center gap-2">
+<span class="font-label-sm text-primary font-bold">Wed</span>
+<span class="w-10 h-10 flex items-center justify-center font-label-lg bg-primary text-on-primary rounded-full shadow-md">18</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Thu</span>
+<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">19</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Fri</span>
+<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">20</span>
+</div>
+</section>
+<!-- Today's Tasks List -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-label-lg text-on-surface uppercase tracking-wider">Today's Tasks</h3>
+<span class="font-label-sm text-primary">3 Tasks</span>
+</div>
+<div class="space-y-4">
+<!-- High Priority Task -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_12px_rgba(21,66,18,0.04)] border-l-4 border-error flex items-start gap-gutter">
+<div class="mt-1">
+<input class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed" type="checkbox"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-lg text-on-surface">Water Snake Plant</h4>
+<span class="font-label-sm px-2 py-0.5 bg-error-container text-on-error-container rounded-full">High</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-1">Living Room</p>
+<div class="flex items-center gap-1 mt-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-sm">9:00 AM</span>
+</div>
+</div>
+</div>
+<!-- Medium Priority Task -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_12px_rgba(21,66,18,0.04)] border-l-4 border-tertiary-container flex items-start gap-gutter">
+<div class="mt-1">
+<input class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed" type="checkbox"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-lg text-on-surface">Check Soil for Fiddle Leaf Fig</h4>
+<span class="font-label-sm px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full">Medium</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-1">Dining Area</p>
+<div class="flex items-center gap-1 mt-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-sm">11:30 AM</span>
+</div>
+</div>
+</div>
+<!-- Completed Task -->
+<div class="bg-surface-container-low p-md rounded-xl opacity-60 flex items-start gap-gutter">
+<div class="mt-1">
+<input checked="" class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed bg-primary-container" type="checkbox"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-lg text-on-surface line-through">Mist Calathea</h4>
+<span class="font-label-sm px-2 py-0.5 bg-surface-variant text-on-surface-variant rounded-full">Done</span>
+</div>
+<p class="font-body-md text-on-surface-variant mt-1 line-through">Bedroom</p>
+<div class="flex items-center gap-1 mt-2 text-outline">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-sm">8:15 AM</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Productivity Card / Asymmetric Layout Element -->
+<section class="mt-xl">
+<div class="bg-primary-container text-on-primary-container p-lg rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-on-primary-container mb-2">Weekly Progress</h3>
+<p class="font-body-md opacity-90 mb-4">You've completed 85% of your garden tasks this week! Your plants are thriving.</p>
+<div class="w-full bg-primary h-2 rounded-full mb-2">
+<div class="bg-primary-fixed-dim h-full w-[85%] rounded-full"></div>
+</div>
+<span class="font-label-sm">12 of 14 tasks finished</span>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-20">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-container-margin w-14 h-14 bg-primary text-on-primary rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform duration-200 z-40">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full px-base py-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined active-icon">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- My Garden -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="my-garden.html">
+<span class="material-symbols-outlined">psychology_alt</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+</a>
+<!-- Identify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
+<span class="material-symbols-outlined">filter_center_focus</span>
+<span class="font-label-sm text-label-sm">Identify</span>
+</a>
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm">Community</span>
+</a>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Learn</span>
+</a>
+</div>
+</nav>
+</body></html>
