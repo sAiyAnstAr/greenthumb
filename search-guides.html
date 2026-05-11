@@ -210,40 +210,34 @@
 </div>
 </div>
 </div>
-<!-- Bottom Navigation Bar (Shared Component - Read Only) -->
-<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md flex gap-2 border-t border-[#ebf0ea] bg-[#f9fbf9] px-4 pb-3 pt-2 z-50">
-<a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#121811]" href="#">
-<div class="text-[#121811] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"></path>
-</svg>
-</div>
-<p class="text-[#121811] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full px-base py-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined active-icon">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
 </a>
-<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
-<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="BookOpen" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M224,48H160a40,40,0,0,0-32,16A40,40,0,0,0,96,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H96a24,24,0,0,1,24,24,8,8,0,0,0,16,0,24,24,0,0,1,24-24h64a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM96,192H32V64H96a24,24,0,0,1,24,24V200A39.81,39.81,0,0,0,96,192Zm128,0H160a39.81,39.81,0,0,0-24,8V88a24,24,0,0,1,24-24h64Z"></path>
-</svg>
-</div>
-<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Guides</p>
+<!-- My Garden -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="my-garden.html">
+<span class="material-symbols-outlined">psychology_alt</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
 </a>
-<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
-<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="Users" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
-</svg>
-</div>
-<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Community</p>
+<!-- Identify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
+<span class="material-symbols-outlined">filter_center_focus</span>
+<span class="font-label-sm text-label-sm">Identify</span>
 </a>
-<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
-<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="regular">
-<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
-<path d="M230.92,212-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
-</svg>
-</div>
-<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm">Community</span>
+</a>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Learn</span>
 </a>
 </div>
-</div>
+</nav>
 </body></html>
