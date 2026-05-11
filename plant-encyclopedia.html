@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Plant Encyclopedia - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#2c160e",
+                      "surface-container": "#efeeea",
+                      "surface-container-high": "#e9e8e4",
+                      "secondary-container": "#fed3c7",
+                      "surface": "#faf9f5",
+                      "on-primary-fixed-variant": "#23501e",
+                      "tertiary-container": "#8d3220",
+                      "surface-bright": "#faf9f5",
+                      "inverse-primary": "#a1d494",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#e3e2df",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb4a5",
+                      "tertiary-fixed": "#ffdad3",
+                      "primary-container": "#2d5a27",
+                      "on-primary-fixed": "#002201",
+                      "surface-tint": "#3b6934",
+                      "on-surface-variant": "#42493e",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#ffdbd0",
+                      "surface-container-highest": "#e3e2df",
+                      "secondary": "#77574d",
+                      "surface-dim": "#dbdad6",
+                      "on-surface": "#1b1c1a",
+                      "error": "#ba1a1a",
+                      "outline": "#72796e",
+                      "on-secondary-fixed-variant": "#5d4037",
+                      "on-tertiary-fixed": "#3e0500",
+                      "on-background": "#1b1c1a",
+                      "on-secondary-container": "#795950",
+                      "surface-container-low": "#f4f4f0",
+                      "outline-variant": "#c2c9bb",
+                      "primary-fixed-dim": "#a1d494",
+                      "on-tertiary-container": "#ffaf9e",
+                      "tertiary": "#6e1c0c",
+                      "on-tertiary-fixed-variant": "#802918",
+                      "background": "#faf9f5",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2f312e",
+                      "inverse-on-surface": "#f2f1ed",
+                      "primary-fixed": "#bcf0ae",
+                      "on-primary-container": "#9dd090",
+                      "primary": "#154212",
+                      "secondary-fixed-dim": "#e7bdb1",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "40px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "gutter": "16px",
+                      "xl": "64px",
+                      "md": "24px",
+                      "sm": "12px",
+                      "container-margin": "20px"
+              },
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f5;
+            color: #1b1c1a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex justify-center min-h-screen">
+<div class="relative flex min-h-screen w-full max-w-md flex-col bg-surface shadow-xl overflow-x-hidden">
+<!-- Top AppBar -->
+<div class="flex items-center bg-surface p-4 pb-2 justify-between sticky top-0 z-10 border-b border-surface-container-high">
+<div class="text-on-surface flex size-12 shrink-0 items-center" data-icon="List">
+<span class="material-symbols-outlined">list</span>
+</div>
+<h2 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] flex-1">Plant Encyclopedia</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-on-surface gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<div class="text-on-surface" data-icon="MagnifyingGlass">
+<span class="material-symbols-outlined">search</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Featured Section: Plant of the Day -->
+<div class="px-4 pt-6">
+<h3 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] mb-4">Plant of the Day</h3>
+<div class="@container">
+<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.06)] bg-surface-container-lowest border border-surface-container-high">
+<div class="w-full bg-center bg-no-repeat aspect-[16/9] bg-cover" data-alt="A lush Fiddle Leaf Fig plant with large, vibrant green waxy leaves standing in a minimalist ceramic pot. The setting is a sun-drenched modern living room with soft, high-key natural lighting and a warm, organic atmosphere. The image is captured in a high-end editorial style, emphasizing the plant's texture and height against a soft neutral wall." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrhUgiaoaJin8EfnbRzT4io2Kg7eHecH9zllk3ZdHXkBj-AK3iaByhUlNVFfqpuTpUnn9810wAjHJY_5YtZqhZVyvqboERBMOzC3rb3cvOhChqYE-F4YNapGIf3wCS5gabX7x_n05ZS9rWxnGI5ySYBQV6dB6fVGsei-3Qs-CEhl1dtQV-mhT0HmhP6mPgXhw9s-H2j8_jCIj02-qRx-y0vKzThhBka2JFAzPwnYvwCaZNFBqp3fX5FVRet2cNHqUq4yCcUz_jFaI");'>
+</div>
+<div class="flex w-full flex-col items-stretch justify-center gap-1 p-4">
+<p class="text-primary-container text-xs font-bold uppercase tracking-wider">Featured Species</p>
+<p class="text-on-surface text-xl font-bold leading-tight tracking-[-0.015em]">Fiddle Leaf Fig</p>
+<div class="flex items-center gap-3 justify-between mt-2">
+<p class="text-on-surface-variant text-sm font-normal italic">Ficus lyrata</p>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-9 px-4 bg-primary-container text-surface-container-lowest text-sm font-semibold transition-colors hover:bg-primary">
+<span class="truncate">Learn More</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Categories Section -->
+<div class="px-4 pt-8 pb-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em]">Plant Categories</h3>
+<span class="text-primary text-sm font-semibold cursor-pointer">View All</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Indoor Plants -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute bottom-3 left-3 z-20 text-white">
+<p class="text-xs font-medium opacity-90">124 Species</p>
+</div>
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="A diverse collection of indoor foliage plants including Monstera and Pothos arranged on a tiered wooden plant stand. The scene is bathed in soft, diffused morning light coming through a window, creating a serene and healthy green environment. The photography is professional and airy, reflecting a modern organic lifestyle with a focus on interior gardening and wellness." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJr17qkp0_MBL493Cjc7tCrK3lmx9VHo2VCwjOV4fWAHu5Jdb_LnIQpiuATUFDpkigtiise6z6hDBhh0GMN9Cnl_UeH2EukErjauEIptkrvadqn9Po0Pc_-8dAwKEffBtND4xwdYNccI_bf3pxaDhYHFC0rdRThseQ9sIJKo3qVyL2bgozYuG7GV60w0oFCTM_yADi6fPd05v7OsfdOIXWrhxom5uBXIjHmw3tFYH9k7sGHaYkaShpb0i8MRyjzFiyuV8jBDxrlic");'></div>
+</div>
+<p class="text-on-surface font-bold text-base">Indoor Plants</p>
+</div>
+<!-- Succulents -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute bottom-3 left-3 z-20 text-white">
+<p class="text-xs font-medium opacity-90">86 Species</p>
+</div>
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="A macro shot of various geometric succulents and cacti in terracotta pots, showcasing intricate patterns and dusty pastel green hues. The lighting is bright and warm, reminiscent of a Mediterranean garden at sunset. The aesthetic is clean and modern, focusing on the architectural beauty of desert plants in a professional editorial layout." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbhOOktPm4c7JVIu6zM7X7qle_h5tDADHW1FShsh68bl-qeeIJiY582db1Ky9wsc2sVvt-BxLNb_PaqM3zAXNLQJN2RXibDOfJLIC5Fylrw838kXbbJrju7_koCdQhiIBdrqB6mmjHNMyWGUv0KH_8Tq8AApi_9YhgY9a4jdU1cQjpoj6F2aKKqk-SwbeeIdke_HZsmx11vg1XSD6t68TmtlgJf9aNADNsW0ZCTCMevu7rQ56ryTS2OiZgOHrAQq-mN2hzKKyorsA");'></div>
+</div>
+<p class="text-on-surface font-bold text-base">Succulents</p>
+</div>
+<!-- Vegetables -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute bottom-3 left-3 z-20 text-white">
+<p class="text-xs font-medium opacity-90">52 Species</p>
+</div>
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="Rows of vibrant, edible vegetable plants like kale and lettuce growing in a raised wooden garden bed during peak harvest season. The lighting is golden hour, casting long, soft shadows and highlighting the deep greens and purples of the leaves. The image evokes a sense of productivity, sustainability, and the rewarding nature of organic home farming." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBivtVAUqfr01h_gB9x8SJpGuMTZmvhbb6UpCeiPeJ2gVEUQAGzzEPs6Eo4JafBsSptMjBxMMCV2XrnGCRNPP1tB06T_NOLg2vB8MTQwDWcifEz58hzRcG-LfWe3BylOeqcU2fVwZuFmrkCpvFctixAPKMgi6HEkdsEXzxRoA1o_evBEi0LszeVVXswvfO4H5v5IJ8_ew5APEigEcywUrm1FHCncbvvFawG79x0AM7w4I3hqhCwwFvzZoJwHp9M7lKMzW7_4nij-hU");'></div>
+</div>
+<p class="text-on-surface font-bold text-base">Vegetables</p>
+</div>
+<!-- Fruit Trees -->
+<div class="flex flex-col group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute bottom-3 left-3 z-20 text-white">
+<p class="text-xs font-medium opacity-90">31 Species</p>
+</div>
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-105" data-alt="A dwarf lemon tree in full bloom with small citrus fruits appearing, set against a backdrop of an urban rooftop garden. The lighting is high-key and optimistic, emphasizing the growth and vitality of fruit-bearing plants in limited spaces. The visual style is crisp and editorial, highlighting the marriage of urban living and nature." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDphUWfMJgwkS9wRkhcwgOvQ5nKp7pFrkP4EDeqsClx-MtrhbAx91gW-Y2a_YSu_vxA7G-cTuo4mktqL6p-v5BXC6AYpkqr70ejSwNLy4imQOZUounx7JOTxwLltVuzzLf-qwjHz7t5MfbaIfACXy2jq1ZLLVY39NqCkbF884xyHm13ftOdAwBRZ2xFjkgaXamn7f8a51umMkDmdq0IYGLUmjICcuxa6agH9n4mmYJHGhB20uSo2uiz9msqNhAfSacQrphlNnlRbFM");'></div>
+</div>
+<p class="text-on-surface font-bold text-base">Fruit Trees</p>
+</div>
+</div>
+</div>
+<!-- Extra padding for bottom nav -->
+<div class="h-24"></div>
+<!-- Bottom Navigation (Shared Component Logic) -->
+<div class="fixed bottom-0 left-0 right-0 z-50 flex flex-col max-w-md mx-auto">
+<div class="flex gap-2 border-t border-surface-container-high bg-surface px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant" href="#">
+<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="Leaf">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z"></path>
+</svg>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">My Garden</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface" href="#">
+<div class="text-on-surface flex h-8 items-center justify-center" data-icon="BookOpen">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M240,64V192a16,16,0,0,1-16,16H160a24,24,0,0,0-24,24,8,8,0,0,1-16,0,24,24,0,0,0-24-24H32a16,16,0,0,1-16-16V64A16,16,0,0,1,32,48H88a32,32,0,0,1,32,32v88a8,8,0,0,0,16,0V80a32,32,0,0,1,32-32h56A16,16,0,0,1,240,64Z"></path>
+</svg>
+</div>
+<p class="text-xs font-bold leading-normal tracking-[0.015em]">Learn</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant" href="#">
+<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="Users">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+</svg>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Community</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-on-surface-variant" href="#">
+<div class="text-on-surface-variant flex h-8 items-center justify-center" data-icon="Storefront">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96v16a40,40,0,0,0,16,32v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V144a40,40,0,0,0,16-32ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-48,0v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm-8-72a24,24,0,0,1-24-24v-8h48v8A24,24,0,0,1,192,136Z"></path>
+</svg>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Store</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>
