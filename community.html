@@ -1,3 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenthumb Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "on-background": "#1b1c1a",
+                    "surface-tint": "#3b6934",
+                    "on-secondary-fixed": "#2c160e",
+                    "surface-container-low": "#f4f4f0",
+                    "surface-bright": "#faf9f5",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-primary-container": "#9dd090",
+                    "primary": "#154212",
+                    "on-primary-fixed": "#002201",
+                    "inverse-surface": "#2f312e",
+                    "on-tertiary-container": "#ffaf9e",
+                    "on-secondary-container": "#795950",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#a1d494",
+                    "tertiary-fixed": "#ffdad3",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "surface": "#faf9f5",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2d5a27",
+                    "surface-variant": "#e3e2df",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container-high": "#e9e8e4",
+                    "outline-variant": "#c2c9bb",
+                    "on-primary-fixed-variant": "#23501e",
+                    "background": "#faf9f5",
+                    "tertiary-container": "#8d3220",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6e1c0c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeeea",
+                    "secondary-container": "#fed3c7",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "outline": "#72796e",
+                    "inverse-on-surface": "#f2f1ed",
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary": "#77574d",
+                    "primary-fixed": "#bcf0ae",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#42493e",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dbdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "20px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="bg-background dark:bg-background w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+</div>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-container-margin py-md space-y-lg">
+<!-- Search and Post Creation -->
+<section class="space-y-md">
+<div class="flex gap-base items-center">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search tips, plants, or helpers..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Post</span>
+</button>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+<button class="bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg">All Posts</button>
+<button class="bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors">Help Needed</button>
+<button class="bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors">Plant Tips</button>
+<button class="bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors">Showcase</button>
+<button class="bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-colors">Swap</button>
+</div>
+</section>
+<!-- Feed Content -->
+<div class="space-y-lg">
+<!-- Feed Item: Help Needed (Urgent) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container">
+<div class="p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container">MJ</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Maya Jensen</p>
+<p class="font-label-sm text-label-sm text-outline">2 hours ago • <span class="text-error font-semibold">Help Needed</span></p>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</button>
+</div>
+<div class="px-md pb-base">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Fiddle Leaf Fig leaves turning brown?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">I've noticed these spots appearing on the lower leaves. I water once a week and it gets indirect bright light. Is this root rot or something else?</p>
+</div>
+<div class="relative h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="A close-up high-quality photograph of a Fiddle Leaf Fig plant leaf showing distressed brown spots and yellowing edges. The lighting is soft and natural, emphasizing the texture of the organic leaf surface against a clean, minimalist interior background. The image carries a slightly somber but educational tone, perfect for a plant care advice forum." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3cv2UcYIHZsk77RRtUzb8SxJI5Kq2QScMeJiU1hldcMW4fDvBK6ZP_z3WC-s1idqBEq3BsXXed92BLJBge2hshsG44NVhL9S2mnOyUW2o_oem5g5DaJ4ZV0pJ1_3Z-UUarBbDwa9EUH53esT0U5phQSln335ywVxQbFb6gVPJ30W_f3PI8MsKOpr6wk0-5sEtTcHX4Ex4XioQlXOOm75dOSrF7WY7YSnAZjm1CscrDztxhlHPJHrH6q4x0lqB36d0-nqIf4yXN0"/>
+</div>
+<div class="p-md flex items-center gap-md border-t border-surface-container">
+<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span>24</span>
+</button>
+<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span>12</span>
+</button>
+<button class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</article>
+<!-- Feed Item: Tip Card (Asymmetric) -->
+<article class="grid md:grid-cols-2 gap-0 bg-primary-container rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-full min-h-[240px]">
+<img class="w-full h-full object-cover" data-alt="A beautiful, vibrant herb garden with lush green basil, rosemary, and mint growing in terra cotta pots. Warm golden hour sunlight streams through, creating a serene and productive gardening atmosphere. The colors are dominated by rich greens and earthy browns, following the modern organic aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLFDhHDc-lXyJlOvIs6Jbwq9o40vUx_8lbJJIx0lQksTujbUF1ZnEqN_G2IihknhJb4s2VdGa9iR2s6kHE4Faq1G1JDMGd7J5yETN_hgo1Lyzv0eg8zZRLaR7QiZwb5X97sWHuRG_B2MyzJ9FcWiXJPyH4zQvWJ5BO8-LaYS-wD3qB1K0xyy4uJYDclKnmQLE4K-eyKPOeL8cHbnhXXaZmq1nCidoDdjSGuAYKNbcU-xw3jFMXlQ5CYj3YIA5kZCvckq70WTr_2XY"/>
+</div>
+<div class="p-md flex flex-col justify-center text-on-primary-container">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider opacity-80">Gardening Tip</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-base">Revive Your Herbs</h3>
+<p class="font-body-md text-body-md opacity-90 mb-md">Pruning is the secret to bushy, healthy basil. Always cut just above a leaf node to encourage double-stem growth.</p>
+<button class="w-fit bg-on-primary-container text-primary-container px-md py-2 rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-opacity">Read Full Guide</button>
+</div>
+</article>
+<!-- Feed Item: Community Photo Feed -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container">
+<div class="p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img data-alt="A smiling woman with glasses and a sun hat in a bright garden setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtohLoOP0sBikU4oEM3sYlzJNjv-HjZmiGxRI6V40l_uPQFBkVy05qarzScQJM5LII-_Ub6hPWDPJe1cFKbsbnwG-b_BgULisONleJI_NYYiAPIEslXfKWpLFPmIGvLQfED4gjVGsmchhCfEOmc0kffw2X0hOc-ONHVe0nddvexe8XrMA0Ke0qpfGdJfiHRzXZIhXm7DfPsofAQYXk12EgyoMJ4SRoFWMMWsRnvGBjG6Boe9DskgM3Wj_eVEFMp0knFRHe1TcSNLg"/>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Sarah Bloom</p>
+<p class="font-label-sm text-label-sm text-outline">5 hours ago • <span class="text-primary font-semibold">Showcase</span></p>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</button>
+</div>
+<div class="px-md pb-md">
+<p class="font-body-md text-body-md text-on-surface">My balcony garden is finally in full bloom! Hard work pays off. 🌸✨</p>
+</div>
+<div class="grid grid-cols-2 gap-1 px-md pb-md">
+<div class="aspect-square rounded-l-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of bright pink flowers in a terracotta pot on a sunny balcony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ1FU7_ZeUy9OCbOlzzYzp-MpOtGvjvgrJmfvv45Wc3dhNY0rqiu3nHwtuiSgfW-EWhXFcfYfhwXirp18PDbJS1wU-5RFtL_wpmF7UMZX51uGj7YFymzGm7SHQg78oIgTbalmqfZd9KmB7UioCTNw5MppmmvJ-1AHRxVAVNpoUJlxlKsRqkypVCmJUi_deyieJpnvmXAa0o9BcpUSxrWE5BTaAvSVP6ploxrm6pDSEfB4myx3fgrzEH_RX6yE6buB2YkhD43asuns"/>
+</div>
+<div class="grid grid-rows-2 gap-1">
+<div class="rounded-tr-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A row of small green succulents in a bright window sill." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6O4QEDeiu8wZBcpmdA8l0u9waJvRu3dP3UalAevoVBMkO8g0QjzJu2O0y8-uhUKRzkM9VK16_-wzALg71120MsJvN7r7Bt6Rxos2zhzcTE4Npobti1sURV8NjMfE3voWf2NHiznlOQZRk7uB-3oqnntszqXkIV38-3OwIn7hgPlFkul4eff77T9m-YTaVQtup0WY--4u-rgUMQ42NO3b3WDAuALBpJtOt6lRff7Uf54uCgaOseB9tkAMfySfge7gaTNpVknbU3eE"/>
+</div>
+<div class="rounded-br-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Wide shot of a lush balcony garden with various plants in pots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSLBaUaLGDXiRonQkmZnHiOrB6toQ1uy77SP0TKylqs-d8mFC4FxnfW2-DREcdHurcFSHLOO55iQunzS7XqrcFJz0tLXrJAF2smY3gNCykb2eIxE2xFAoncndtHkGj_Xi09Yg4uJWN5OgsP6OTYC90zpUBGP3eKN1lvAFsnGBn0XXI2jM1SWJHS4JdMwc4vwd6TwnXqlvueeLZsM8aWgd-U028E0lshNNpqKy2-j_cCqz4EvdyJjJIsIotx7fp406kv71nBD9vXbk"/>
+</div>
+</div>
+</div>
+<div class="p-md flex items-center gap-md border-t border-surface-container">
+<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span>142</span>
+</button>
+<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span>8</span>
+</button>
+</div>
+</article>
+</div>
+</main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full px-base py-sm">
