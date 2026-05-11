@@ -122,14 +122,16 @@
 <body class="bg-background font-body-md text-on-surface">
 <!-- Root container matches the structural layout of index.html -->
 <div class="relative flex min-h-screen w-full flex-col bg-background overflow-x-hidden">
-<!-- Header: Identical to established core screens -->
-<header class="w-full sticky top-0 z-40 bg-background flex items-center justify-between px-container-margin py-base border-b border-outline-variant/30">
-<div class="flex items-center gap-md">
-<button class="material-symbols-outlined text-primary hover:bg-surface-container-high rounded-full transition-colors p-base active:scale-95">arrow_back</button>
-<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky z-40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
+<a class="hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</a>
+<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
 </div>
-<div class="flex items-center gap-base">
-<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high rounded-full p-base">more_vert</button>
 </div>
 </header>
 <main class="flex-1 flex flex-col">
@@ -224,28 +226,34 @@
 </div>
 </section>
 </main>
-<!-- Bottom Navigation: Identical to core screens with 5 items -->
-<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant/20 shadow-[0_-4px_10px_rgba(45,90,39,0.06)] flex justify-around items-center px-base py-sm">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="text-label-sm font-medium">Home</span>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full px-base py-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
+<span class="material-symbols-outlined active-icon">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
-<span class="material-symbols-outlined fill">school</span>
-<span class="text-label-sm font-bold">Learn</span>
+<!-- My Garden -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="my-garden.html">
+<span class="material-symbols-outlined">psychology_alt</span>
+<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
+<!-- Identify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
 <span class="material-symbols-outlined">filter_center_focus</span>
-<span class="text-label-sm font-medium">Identify</span>
+<span class="font-label-sm text-label-sm">Identify</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
+<!-- Community -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
 <span class="material-symbols-outlined">group</span>
-<span class="text-label-sm font-medium">Community</span>
+<span class="font-label-sm text-label-sm">Community</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined">person</span>
-<span class="text-label-sm font-medium">Profile</span>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-sm text-label-sm">Learn</span>
 </a>
-</nav>
 </div>
+</nav>
 </body></html>
