@@ -4,8 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -13,53 +12,53 @@
         theme: {
           extend: {
             "colors": {
-                    "on-secondary-fixed": "#2c160e",
-                    "surface-container": "#efeeea",
-                    "surface-container-high": "#e9e8e4",
-                    "secondary-container": "#fed3c7",
-                    "surface": "#faf9f5",
-                    "on-primary-fixed-variant": "#23501e",
-                    "tertiary-container": "#8d3220",
-                    "surface-bright": "#faf9f5",
-                    "inverse-primary": "#a1d494",
-                    "on-error": "#ffffff",
-                    "surface-variant": "#e3e2df",
-                    "on-tertiary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "tertiary-fixed": "#ffdad3",
-                    "primary-container": "#2d5a27",
-                    "on-primary-fixed": "#002201",
-                    "surface-tint": "#3b6934",
-                    "on-surface-variant": "#42493e",
-                    "on-secondary": "#ffffff",
-                    "secondary-fixed": "#ffdbd0",
-                    "surface-container-highest": "#e3e2df",
-                    "secondary": "#77574d",
-                    "surface-dim": "#dbdad6",
-                    "on-surface": "#1b1c1a",
-                    "error": "#ba1a1a",
-                    "outline": "#72796e",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-container": "#795950",
-                    "surface-container-low": "#f4f4f0",
-                    "outline-variant": "#c2c9bb",
-                    "primary-fixed-dim": "#a1d494",
-                    "on-tertiary-container": "#ffaf9e",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "background": "#faf9f5",
-                    "error-container": "#ffdad6",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-surface": "#2f312e",
-                    "inverse-on-surface": "#f2f1ed",
-                    "primary-fixed": "#bcf0ae",
-                    "on-primary-container": "#9dd090",
-                    "primary": "#154212",
                     "secondary-fixed-dim": "#e7bdb1",
+                    "on-surface": "#1b1c1a",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#23501e",
+                    "on-primary-container": "#9dd090",
+                    "outline-variant": "#c2c9bb",
+                    "on-tertiary-container": "#ffaf9e",
+                    "on-secondary-container": "#795950",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "background": "#faf9f5",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#6e1c0c",
+                    "surface": "#faf9f5",
                     "on-primary": "#ffffff",
-                    "on-error-container": "#93000a"
+                    "surface-variant": "#e3e2df",
+                    "on-background": "#1b1c1a",
+                    "on-primary-fixed": "#002201",
+                    "tertiary-container": "#8d3220",
+                    "inverse-on-surface": "#f2f1ed",
+                    "secondary-container": "#fed3c7",
+                    "surface-dim": "#dbdad6",
+                    "primary-container": "#2d5a27",
+                    "inverse-surface": "#2f312e",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-container": "#efeeea",
+                    "surface-container-low": "#f4f4f0",
+                    "surface-bright": "#faf9f5",
+                    "outline": "#72796e",
+                    "inverse-primary": "#a1d494",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary": "#77574d",
+                    "on-secondary-fixed": "#2c160e",
+                    "primary-fixed": "#bcf0ae",
+                    "primary": "#154212",
+                    "surface-container-high": "#e9e8e4",
+                    "surface-container-highest": "#e3e2df",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-surface-variant": "#42493e",
+                    "surface-tint": "#3b6934"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -68,26 +67,35 @@
                     "full": "9999px"
             },
             "spacing": {
-                    "lg": "40px",
-                    "base": "8px",
-                    "xs": "4px",
-                    "gutter": "16px",
                     "xl": "64px",
                     "md": "24px",
-                    "sm": "12px",
-                    "container-margin": "20px"
+                    "base": "8px",
+                    "gutter": "16px",
+                    "lg": "40px",
+                    "container-margin": "20px",
+                    "xs": "4px",
+                    "sm": "12px"
             },
             "fontFamily": {
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
                     "headline-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
                     "display-lg": ["Plus Jakarta Sans"],
                     "body-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
                     "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
             }
-          }
-        }
+          },
+        },
       }
     </script>
 <style>
@@ -95,151 +103,139 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             font-size: 24px;
         }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
         body {
             background-color: #faf9f5;
+            min-height: 100dvh;
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="bg-surface font-body-md text-on-surface">
-<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-surface overflow-x-hidden shadow-sm">
-<!-- TopAppBar -->
-<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky z-40">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
-<a class="hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
-<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
-</a>
-<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
-<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<div class="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-background overflow-x-hidden">
+<!-- Header: Styled like Screen 59 -->
+<header class="w-full sticky top-0 z-40 bg-background flex items-center justify-between px-container-margin py-base border-b border-outline-variant/30">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high rounded-full transition-colors p-base active:scale-95 transition-transform">arrow_back</button>
+<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
 </div>
+<div class="flex items-center gap-base">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high rounded-full p-base">more_vert</button>
 </div>
 </header>
-<!-- Search Bar with Filter -->
-<div class="px-container-margin py-3">
+<!-- Search Bar: Styled like plant detail inputs -->
+<div class="px-container-margin py-5">
 <div class="flex gap-3">
-<label class="flex flex-col flex-1 h-12">
-<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-sm bg-surface-container-low border border-outline-variant overflow-hidden">
-<div class="text-primary flex items-center justify-center pl-4">
-<span class="material-symbols-outlined" data-icon="search">search</span>
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" style="font-size: 20px;">search</span>
 </div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-on-surface focus:outline-0 focus:ring-0 border-none bg-transparent placeholder:text-outline px-4 pl-2 text-body-md" placeholder="Search plant guides..." value=""/>
+<input class="form-input w-full h-12 pl-11 pr-4 rounded-xl border border-stone-100 bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary transition-all text-body-md placeholder:text-outline shadow-sm" placeholder="Search plant guides..." type="text"/>
 </div>
-</label>
-<button class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container-low border border-outline-variant text-primary shadow-sm">
-<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<button class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container-low border border-stone-100 text-primary shadow-sm active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">tune</span>
 </button>
 </div>
 </div>
 <!-- Trending Searches -->
-<h3 class="text-on-surface text-label-lg px-container-margin pb-2 pt-4 uppercase tracking-wider opacity-70">Trending Searches</h3>
-<div class="flex gap-3 px-container-margin py-3 flex-wrap">
-<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
-<p class="text-on-surface-variant text-label-lg">Monstera Care</p>
+<section class="mb-gutter">
+<h3 class="text-outline text-label-sm px-container-margin pb-3 uppercase tracking-[0.1em] font-bold">Trending Searches</h3>
+<div class="flex gap-2 px-container-margin overflow-x-auto pb-2 no-scrollbar">
+<button class="flex-none h-9 items-center justify-center rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors border border-stone-100/50">
+<span class="text-on-surface-variant text-label-lg font-semibold">Monstera Care</span>
 </button>
-<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
-<p class="text-on-surface-variant text-label-lg">Starting Seeds</p>
+<button class="flex-none h-9 items-center justify-center rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors border border-stone-100/50">
+<span class="text-on-surface-variant text-label-lg font-semibold">Starting Seeds</span>
 </button>
-<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
-<p class="text-on-surface-variant text-label-lg">Best Indoor Plants</p>
-</button>
-<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
-<p class="text-on-surface-variant text-label-lg">Succulents</p>
+<button class="flex-none h-9 items-center justify-center rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors border border-stone-100/50">
+<span class="text-on-surface-variant text-label-lg font-semibold">Indoor Plants</span>
 </button>
 </div>
-<!-- Main Content: Top Care Guides Grid -->
-<div class="flex-1 px-container-margin pt-lg pb-xl">
-<div class="flex justify-between items-center mb-md">
-<h3 class="text-on-surface text-headline-md">Top Care Guides</h3>
-<span class="text-primary text-label-lg cursor-pointer">View all</span>
+</section>
+<!-- Top Care Guides Grid -->
+<div class="flex-1 px-container-margin pb-32">
+<div class="flex justify-between items-center mb-5">
+<h3 class="text-primary text-headline-md font-bold">Top Care Guides</h3>
+<button class="text-secondary text-label-lg font-bold">View All</button>
 </div>
-<div class="grid grid-cols-2 gap-md">
-<!-- Guide Card 1 -->
-<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
-<div class="h-40 w-full overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="A lush, vibrant Monstera Deliciosa plant with large fenestrated green leaves sitting in a modern ceramic pot. The lighting is soft morning sunlight creating an organic and peaceful atmosphere in a minimalist apartment. High-quality photography with a focus on leaf texture and deep green color palette consistent with the Greenthumb organic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM"/>
+<div class="grid grid-cols-2 gap-4">
+<!-- Guide Card 1: Styled like Growth Diary cards -->
+<div class="flex flex-col gap-2">
+<div class="aspect-square w-full rounded-2xl overflow-hidden bg-white shadow-sm border border-stone-100">
+<img alt="Monstera Deliciosa" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM"/>
 </div>
-<div class="p-sm flex flex-col gap-xs">
-<p class="text-on-surface font-bold text-body-md truncate">Monstera Deliciosa</p>
-<div class="flex items-center gap-1">
-<span class="size-2 rounded-full bg-primary"></span>
-<p class="text-on-surface-variant text-label-sm">Easy Care</p>
+<div class="px-1">
+<p class="text-on-surface font-bold text-label-lg truncate">Monstera Deliciosa</p>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="size-2 rounded-full bg-green-500"></span>
+<p class="text-outline text-label-sm font-medium">Easy Care</p>
 </div>
 </div>
 </div>
 <!-- Guide Card 2 -->
-<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
-<div class="h-40 w-full overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="Close-up of a Fiddle Leaf Fig tree in a bright airy room with white walls. The glossy large leaves catch the natural light, displaying intricate veins and a rich forest green tone. The composition is elegant and modern, emphasizing the plant as a natural sculpture within a clean living space. Digital gardening aesthetic with warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4"/>
+<div class="flex flex-col gap-2">
+<div class="aspect-square w-full rounded-2xl overflow-hidden bg-white shadow-sm border border-stone-100">
+<img alt="Fiddle Leaf Fig" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4"/>
 </div>
-<div class="p-sm flex flex-col gap-xs">
-<p class="text-on-surface font-bold text-body-md truncate">Fiddle Leaf Fig</p>
-<div class="flex items-center gap-1">
+<div class="px-1">
+<p class="text-on-surface font-bold text-label-lg truncate">Fiddle Leaf Fig</p>
+<div class="flex items-center gap-1.5 mt-0.5">
 <span class="size-2 rounded-full bg-tertiary"></span>
-<p class="text-on-surface-variant text-label-sm">Hard Care</p>
+<p class="text-outline text-label-sm font-medium">Hard Care</p>
 </div>
 </div>
 </div>
 <!-- Guide Card 3 -->
-<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
-<div class="h-40 w-full overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="A healthy Snake Plant (Sansevieria) with upright sword-like leaves showing yellow variegated edges and dark green patterns. The plant is set against a soft beige background with gentle shadows. The mood is calm and resilient, highlighting the architectural beauty of the plant in a high-end editorial style using an organic color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA"/>
+<div class="flex flex-col gap-2">
+<div class="aspect-square w-full rounded-2xl overflow-hidden bg-white shadow-sm border border-stone-100">
+<img alt="Snake Plant" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA"/>
 </div>
-<div class="p-sm flex flex-col gap-xs">
-<p class="text-on-surface font-bold text-body-md truncate">Snake Plant</p>
-<div class="flex items-center gap-1">
-<span class="size-2 rounded-full bg-primary"></span>
-<p class="text-on-surface-variant text-label-sm">Easy Care</p>
+<div class="px-1">
+<p class="text-on-surface font-bold text-label-lg truncate">Snake Plant</p>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="size-2 rounded-full bg-green-500"></span>
+<p class="text-outline text-label-sm font-medium">Easy Care</p>
 </div>
 </div>
 </div>
 <!-- Guide Card 4 -->
-<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
-<div class="h-40 w-full overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="A delicate Calathea Orbifolia with its distinctive large round leaves featuring silver and green stripes. The plant is bathed in soft, diffused lighting that enhances the watercolor-like patterns on the leaves. The setting feels like a quiet sanctuary, reflecting the Greenthumb brand's commitment to calm and botanical growth in an urban home." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8"/>
+<div class="flex flex-col gap-2">
+<div class="aspect-square w-full rounded-2xl overflow-hidden bg-white shadow-sm border border-stone-100">
+<img alt="Calathea Orbifolia" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8"/>
 </div>
-<div class="p-sm flex flex-col gap-xs">
-<p class="text-on-surface font-bold text-body-md truncate">Calathea Orbifolia</p>
-<div class="flex items-center gap-1">
+<div class="px-1">
+<p class="text-on-surface font-bold text-label-lg truncate">Calathea Orbifolia</p>
+<div class="flex items-center gap-1.5 mt-0.5">
 <span class="size-2 rounded-full bg-secondary"></span>
-<p class="text-on-surface-variant text-label-sm">Medium Care</p>
+<p class="text-outline text-label-sm font-medium">Medium Care</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
-<div class="flex justify-around items-center w-full px-base py-sm">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
-<span class="material-symbols-outlined active-icon">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
+<!-- Bottom Navigation Bar: Styled like Screen 59 but 5 items -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)] flex justify-around items-center px-base py-sm">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined fill">home</span>
+<span class="text-label-sm font-bold">Home</span>
 </a>
-<!-- My Garden -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<!-- Identify -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<!-- Community -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<!-- Learn -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
 <span class="material-symbols-outlined">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
+<span class="text-label-sm font-medium">Learn</span>
 </a>
-</div>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">filter_center_focus</span>
+<span class="text-label-sm font-medium">Identify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-sm font-medium">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all rounded-full px-4 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-medium">Profile</span>
+</a>
 </nav>
+</div>
 </body></html>
