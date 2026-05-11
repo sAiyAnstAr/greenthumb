@@ -112,20 +112,21 @@
 </head>
 <body class="bg-background text-on-background min-h-screen pb-32">
 <!-- TopAppBar -->
-<header class="w-full top-0 sticky bg-background/95 backdrop-blur-sm z-50">
+<header class="w-full bg-background pt-base">
 <div class="flex items-center justify-between px-container-margin py-base w-full">
-<div class="flex items-center gap-4">
 <button class="hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95">
-<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<span class="material-symbols-outlined text-on-surface" data-icon="menu">menu</span>
 </button>
-<h1 class="font-headline-lg text-headline-lg text-primary">Learn Hub</h1>
-</div>
+<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
 <div class="flex items-center">
-<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATTq8F8IFySqgozyxCUZbHroq_OFC2WF8mVQ3Zi0aWBJh2cj2TTENz5WMNdwIV1C97zKo3KDtklik4Y85iiriZsxf8uD-kj6KRKEg8K9939jl-kETjA5ffI3vLfl9-kXqsCgBHES0EOvTsw8DyN3nTfvfFTy2pIHbrMcaoFKCrYxZF5mvRQ2uX3Gx7VonyTO8RFudY3Irqx_DkBkeIRFXYF8Ub19vFtRgmLU10ureL17dYL-XTH6qBBVnpUcs6Q8vPrbABAql53zU"/>
+<img alt="User Profile" class="w-10 h-10 rounded-full border border-outline-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATTq8F8IFySqgozyxCUZbHroq_OFC2WF8mVQ3Zi0aWBJh2cj2TTENz5WMNdwIV1C97zKo3KDtklik4Y85iiriZsxf8uD-kj6KRKEg8K9939jl-kETjA5ffI3vLfl9-kXqsCgBHES0EOvTsw8DyN3nTfvfFTy2pIHbrMcaoFKCrYxZF5mvRQ2uX3Gx7VonyTO8RFudY3Irqx_DkBkeIRFXYF8Ub19vFtRgmLU10ureL17dYL-XTH6qBBVnpUcs6Q8vPrbABAql53zU"/>
 </div>
 </div>
 </header>
-<main class="w-full">
+<main class="w-full"><div class="px-container-margin py-md">
+<h2 class="font-display-lg text-display-lg text-primary mb-2">Learn</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl">Master the art of gardening with expert guides and journeys.</p>
+</div>
 <!-- Sub-navigation -->
 <nav class="px-container-margin py-md overflow-x-auto hide-scrollbar flex gap-3">
 <button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg whitespace-nowrap shadow-sm">All</button>
@@ -151,8 +152,8 @@
 </div>
 </section>
 <!-- Plant Encyclopedia Entry Point (Redesign Addition) -->
-<section class="mb-xl">
-<a class="block group relative overflow-hidden rounded-3xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md transition-all duration-300 mx-container-margin" href="plant-encyclopedia.html">
+<section class="px-container-margin mb-xl">
+<a class="block group relative overflow-hidden rounded-3xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md transition-all duration-300" href="plant-encyclopedia.html">
 <div class="flex flex-col md:flex-row md:items-center">
 <div class="relative h-48 md:h-auto md:w-1/3 overflow-hidden">
 <img alt="Plant Encyclopedia" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGyw2PW9H2tOFXnoxU38BKr8oa1jiWuu8myFRmX_5rAT4mUkDFXMOZ1v36-0-J6ksLjAIoLrGHU6R86-KotVaCt7Lc5wRNAaTVLLvySXJk52eAoXu1aM33f6EbYxD8ZTCnPP44umC-EkvsO0ClJF70BGg7HJF62v5JmPy-eUhP0ghufgEEnjUXfjt7cw329syXqCoTiPKwyf_V-3xBKcxnl8jbiLOL9daH7kCfTpD_ITZ2IFECOSgloUqStOd0jteSvUWa5blZqbM"/>
@@ -233,9 +234,9 @@
 </div>
 </section>
 <!-- Seasonal Tips -->
-<section class="mb-lg">
-<h3 class="font-headline-lg text-primary mb-md px-container-margin">Seasonal Tips</h3>
-<div class="grid grid-cols-1 gap-md px-container-margin">
+<section class="px-container-margin mb-lg">
+<h3 class="font-headline-lg text-primary mb-md">Seasonal Tips</h3>
+<div class="grid grid-cols-1 gap-md">
 <!-- Spring -->
 <div class="group relative overflow-hidden rounded-2xl bg-primary-container p-md flex items-center gap-md transition-all hover:translate-x-1 cursor-pointer">
 <div class="absolute right-0 top-0 opacity-10 -translate-y-1/4 translate-x-1/4">
@@ -281,10 +282,10 @@
 </div>
 </section>
 <!-- Magazine Feed Style: Recent Guides -->
-<section class="mb-lg">
-<h3 class="font-headline-md text-primary mb-md px-container-margin">Latest Deep Dives</h3>
+<section class="px-container-margin mb-lg">
+<h3 class="font-headline-md text-primary mb-md">Latest Deep Dives</h3>
 <div class="flex flex-col gap-lg">
-<div class="flex gap-md cursor-pointer group px-container-margin">
+<div class="flex gap-md cursor-pointer group">
 <div class="flex-1">
 <p class="text-label-sm text-secondary font-bold uppercase mb-1">Urban Living</p>
 <h4 class="font-headline-md text-on-surface mb-base group-hover:text-primary transition-colors">Vertical Gardening for Small Balconies</h4>
@@ -293,8 +294,8 @@
 </div>
 <img alt="Vertical Garden" class="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBp_tcLutwdxZHK3iSuirZfsLR1d_k3XwcZrd4hDiqtvhCBWq7WFtDLYFOGRW50vSbJg4XCRF_gLyb3n7iSVXdFF9hvZkbZE6PWAD_IxgMxZVMuWfP4Q54YXArrRiyuMI5TD9x8MpOLJA-v7SImMHmuh5rOkH-OXUbHdPPovbEn88a1zEoXJvVDEaqC5gGEq59t6pa-UunpxpNJKtFVg3AwvIynLjkVgAFyIVCALajLQlCF6SCkqR9-BPKvudl38kSuvL0l2orQAA"/>
 </div>
-<hr class="border-outline-variant/30 mx-container-margin"/>
-<div class="flex gap-md cursor-pointer group px-container-margin">
+<hr class="border-outline-variant/30"/>
+<div class="flex gap-md cursor-pointer group">
 <div class="flex-1">
 <p class="text-label-sm text-secondary font-bold uppercase mb-1">Sustainability</p>
 <h4 class="font-headline-md text-on-surface mb-base group-hover:text-primary transition-colors">Rainwater Harvesting Basics</h4>
