@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2c160e",
+                    "surface-container": "#efeeea",
+                    "surface-container-high": "#e9e8e4",
+                    "secondary-container": "#fed3c7",
+                    "surface": "#faf9f5",
+                    "on-primary-fixed-variant": "#23501e",
+                    "tertiary-container": "#8d3220",
+                    "surface-bright": "#faf9f5",
+                    "inverse-primary": "#a1d494",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e3e2df",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "tertiary-fixed": "#ffdad3",
+                    "primary-container": "#2d5a27",
+                    "on-primary-fixed": "#002201",
+                    "surface-tint": "#3b6934",
+                    "on-surface-variant": "#42493e",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffdbd0",
+                    "surface-container-highest": "#e3e2df",
+                    "secondary": "#77574d",
+                    "surface-dim": "#dbdad6",
+                    "on-surface": "#1b1c1a",
+                    "error": "#ba1a1a",
+                    "outline": "#72796e",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-container": "#795950",
+                    "surface-container-low": "#f4f4f0",
+                    "outline-variant": "#c2c9bb",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-tertiary-container": "#ffaf9e",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "background": "#faf9f5",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2f312e",
+                    "inverse-on-surface": "#f2f1ed",
+                    "primary-fixed": "#bcf0ae",
+                    "on-primary-container": "#9dd090",
+                    "primary": "#154212",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        body {
+            background-color: #faf9f5;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-surface overflow-x-hidden shadow-sm">
+<!-- Header Section (Shared Component Logic Inspired) -->
+<div class="flex items-center bg-surface p-4 pb-2 justify-between">
+<div class="text-on-surface flex size-12 shrink-0 items-center cursor-pointer" data-icon="arrow_back">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-on-surface text-headline-md flex-1">Search Guides</h2>
+<div class="text-on-surface flex size-12 shrink-0 items-center justify-end">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Search Bar with Filter -->
+<div class="px-container-margin py-3">
+<div class="flex gap-3">
+<label class="flex flex-col flex-1 h-12">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-sm bg-surface-container-low border border-outline-variant overflow-hidden">
+<div class="text-primary flex items-center justify-center pl-4">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-on-surface focus:outline-0 focus:ring-0 border-none bg-transparent placeholder:text-outline px-4 pl-2 text-body-md" placeholder="Search plant guides..." value=""/>
+</div>
+</label>
+<button class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container-low border border-outline-variant text-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+</div>
+<!-- Trending Searches -->
+<h3 class="text-on-surface text-label-lg px-container-margin pb-2 pt-4 uppercase tracking-wider opacity-70">Trending Searches</h3>
+<div class="flex gap-3 px-container-margin py-3 flex-wrap">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
+<p class="text-on-surface-variant text-label-lg">Monstera Care</p>
+</button>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
+<p class="text-on-surface-variant text-label-lg">Starting Seeds</p>
+</button>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
+<p class="text-on-surface-variant text-label-lg">Best Indoor Plants</p>
+</button>
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-full bg-surface-container-high px-4 hover:bg-surface-variant transition-colors">
+<p class="text-on-surface-variant text-label-lg">Succulents</p>
+</button>
+</div>
+<!-- Main Content: Top Care Guides Grid -->
+<div class="flex-1 px-container-margin pt-lg pb-xl">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-on-surface text-headline-md">Top Care Guides</h3>
+<span class="text-primary text-label-lg cursor-pointer">View all</span>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Guide Card 1 -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
+<div class="h-40 w-full overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A lush, vibrant Monstera Deliciosa plant with large fenestrated green leaves sitting in a modern ceramic pot. The lighting is soft morning sunlight creating an organic and peaceful atmosphere in a minimalist apartment. High-quality photography with a focus on leaf texture and deep green color palette consistent with the Greenthumb organic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM"/>
+</div>
+<div class="p-sm flex flex-col gap-xs">
+<p class="text-on-surface font-bold text-body-md truncate">Monstera Deliciosa</p>
+<div class="flex items-center gap-1">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-on-surface-variant text-label-sm">Easy Care</p>
+</div>
+</div>
+</div>
+<!-- Guide Card 2 -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
+<div class="h-40 w-full overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Close-up of a Fiddle Leaf Fig tree in a bright airy room with white walls. The glossy large leaves catch the natural light, displaying intricate veins and a rich forest green tone. The composition is elegant and modern, emphasizing the plant as a natural sculpture within a clean living space. Digital gardening aesthetic with warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4"/>
+</div>
+<div class="p-sm flex flex-col gap-xs">
+<p class="text-on-surface font-bold text-body-md truncate">Fiddle Leaf Fig</p>
+<div class="flex items-center gap-1">
+<span class="size-2 rounded-full bg-tertiary"></span>
+<p class="text-on-surface-variant text-label-sm">Hard Care</p>
+</div>
+</div>
+</div>
+<!-- Guide Card 3 -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
+<div class="h-40 w-full overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A healthy Snake Plant (Sansevieria) with upright sword-like leaves showing yellow variegated edges and dark green patterns. The plant is set against a soft beige background with gentle shadows. The mood is calm and resilient, highlighting the architectural beauty of the plant in a high-end editorial style using an organic color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA"/>
+</div>
+<div class="p-sm flex flex-col gap-xs">
+<p class="text-on-surface font-bold text-body-md truncate">Snake Plant</p>
+<div class="flex items-center gap-1">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-on-surface-variant text-label-sm">Easy Care</p>
+</div>
+</div>
+</div>
+<!-- Guide Card 4 -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container-high">
+<div class="h-40 w-full overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A delicate Calathea Orbifolia with its distinctive large round leaves featuring silver and green stripes. The plant is bathed in soft, diffused lighting that enhances the watercolor-like patterns on the leaves. The setting feels like a quiet sanctuary, reflecting the Greenthumb brand's commitment to calm and botanical growth in an urban home." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8"/>
+</div>
+<div class="p-sm flex flex-col gap-xs">
+<p class="text-on-surface font-bold text-body-md truncate">Calathea Orbifolia</p>
+<div class="flex items-center gap-1">
+<span class="size-2 rounded-full bg-secondary"></span>
+<p class="text-on-surface-variant text-label-sm">Medium Care</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Shared Component - Read Only) -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md flex gap-2 border-t border-[#ebf0ea] bg-[#f9fbf9] px-4 pb-3 pt-2 z-50">
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#121811]" href="#">
+<div class="text-[#121811] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"></path>
+</svg>
+</div>
+<p class="text-[#121811] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
+<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="BookOpen" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,48H160a40,40,0,0,0-32,16A40,40,0,0,0,96,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H96a24,24,0,0,1,24,24,8,8,0,0,0,16,0,24,24,0,0,1,24-24h64a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM96,192H32V64H96a24,24,0,0,1,24,24V200A39.81,39.81,0,0,0,96,192Zm128,0H160a39.81,39.81,0,0,0-24,8V88a24,24,0,0,1,24-24h64Z"></path>
+</svg>
+</div>
+<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Guides</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
+<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="Users" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+</svg>
+</div>
+<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Community</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#658560]" href="#">
+<div class="text-[#658560] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M230.92,212-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
+</svg>
+</div>
+<p class="text-[#658560] text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+</a>
+</div>
+</div>
+</body></html>
