@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Community - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -100,14 +100,15 @@
       }
     </script>
 <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px,100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     /* Nav Drawer */
     #nav-overlay { transition: opacity 0.25s ease; }
     #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer {
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: min(320px, 85vw);
-    }
+    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px, 85vw); }
     #nav-drawer.open { transform: translateX(0); }
     .nav-item { transition: background 0.15s ease, color 0.15s ease; }
     .nav-item.active { background: #bcf0ae; color: #002201; }
@@ -120,27 +121,26 @@
     .nav-chevron { transition: transform 0.2s ease; }
     .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
     .nav-sub-list.collapsed { max-height: 0 !important; }
-    /* Swipe from left edge */
     #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
+    /* Post panel */
+    #new-post-panel { transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+    #new-post-panel.open { transform: translateY(0); }
+    .post-cat-btn.selected { border-color: #154212; background: #bcf0ae; color: #002201; }
+    /* Post card */
+    .post-card { animation: fadeUp 0.3s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    /* Image preview */
+    .img-preview { position: relative; display: inline-block; }
+    .img-preview button { position: absolute; top: -8px; right: -8px; }
+    /* Chip active */
+    .comm-chip.active { background: #2d5a27; color: #9dd090; }
+    /* Skeleton */
+    .skeleton { background: linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%); background-size:200% 100%; animation: shimmer 1.4s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #faf9f5;
-        }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    </style>
-  </head>
-<body class="bg-background text-on-background min-h-screen pb-32">
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
 <div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
@@ -197,172 +197,436 @@
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45">
 
-<!-- Top AppBar -->
+<!-- Header -->
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" aria-label="Open menu">
-<span class="material-symbols-outlined text-primary">menu</span>
-</button>
+<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95"><span class="material-symbols-outlined text-primary">menu</span></button>
 <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform cursor-pointer" onclick="openNav()">
-<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
+
 <main class="max-w-screen-lg mx-auto px-container-margin pt-lg space-y-lg">
-<!-- Hero Section -->
-<section class="mb-lg">
-<h2 class="font-display-lg text-display-lg text-primary mb-xs">Community</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Connect with fellow gardeners, share your plants, and get expert advice.</p>
+<!-- Hero -->
+<section>
+    <h2 class="font-display-lg text-display-lg text-primary mb-xs">Community</h2>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">Connect with fellow gardeners, share your plants, and get expert advice.</p>
 </section>
-<!-- Search and Post Creation -->
+
+<!-- Search + Post button -->
 <section class="space-y-md">
-<div class="flex gap-base items-center">
-<div class="relative flex-grow">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search tips, plants, or helpers..." type="text"/>
-</div>
-<button onclick="openNewPost()" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-<span>Post</span>
-</button>
-</div>
-<!-- Category Chips -->
-<div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
-<button onclick="filterPosts('all')" id="chip-all" class="comm-chip bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">All Posts</button>
-<button onclick="filterPosts('help')" id="chip-help" class="comm-chip bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-all">Help Needed</button>
-<button onclick="filterPosts('tips')" id="chip-tips" class="comm-chip bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-all">Plant Tips</button>
-<button onclick="filterPosts('showcase')" id="chip-showcase" class="comm-chip bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-all">Showcase</button>
-<button onclick="filterPosts('swap')" id="chip-swap" class="comm-chip bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg hover:bg-surface-container-highest transition-all">Swap</button>
-</div>
+    <div class="flex gap-base items-center">
+        <div class="relative flex-grow">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+            <input id="search-input" oninput="filterBySearch(this.value)" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search posts..." type="text"/>
+        </div>
+        <button onclick="openNewPost()" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg flex-shrink-0">
+            <span class="material-symbols-outlined">add</span><span>Post</span>
+        </button>
+    </div>
+    <!-- Category chips -->
+    <div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+        <button onclick="setFilter('all')" id="chip-all" class="comm-chip active flex-shrink-0 bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">All Posts</button>
+        <button onclick="setFilter('help')" id="chip-help" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Help Needed</button>
+        <button onclick="setFilter('tips')" id="chip-tips" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Plant Tips</button>
+        <button onclick="setFilter('showcase')" id="chip-showcase" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Showcase</button>
+        <button onclick="setFilter('swap')" id="chip-swap" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Swap</button>
+    </div>
 </section>
-<!-- Feed Content -->
-<div class="space-y-lg">
-<!-- Feed Item: Help Needed (Urgent) -->
-<article data-category="help" class="comm-post bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container cursor-pointer" onclick="window.location.href='post-detail.html'">
-<div class="p-md flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container">MJ</div>
-<div>
-<p class="font-label-lg text-label-lg text-on-surface">Maya Jensen</p>
-<p class="font-label-sm text-label-sm text-outline">2 hours ago • <span class="text-error font-semibold">Help Needed</span></p>
+
+<!-- Feed -->
+<div id="feed" class="space-y-lg pb-8">
+    <!-- Loading skeletons -->
+    <div class="skeleton h-48 rounded-2xl"></div>
+    <div class="skeleton h-36 rounded-2xl"></div>
+    <div class="skeleton h-48 rounded-2xl"></div>
 </div>
+
+<!-- Empty state -->
+<div id="empty-state" class="hidden text-center py-xl">
+    <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1">forum</span>
+    <p class="font-headline-md text-on-surface-variant">No posts yet</p>
+    <p class="font-body-md text-outline mt-1">Be the first to share something!</p>
 </div>
-<button class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</button>
-</div>
-<div class="px-md pb-base">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Fiddle Leaf Fig leaves turning brown?</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">I've noticed these spots appearing on the lower leaves. I water once a week and it gets indirect bright light. Is this root rot or something else?</p>
-</div>
-<div class="relative h-64 w-full">
-<img class="w-full h-full object-cover" data-alt="A close-up high-quality photograph of a Fiddle Leaf Fig plant leaf showing distressed brown spots and yellowing edges. The lighting is soft and natural, emphasizing the texture of the organic leaf surface against a clean, minimalist interior background. The image carries a slightly somber but educational tone, perfect for a plant care advice forum." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3cv2UcYIHZsk77RRtUzb8SxJI5Kq2QScMeJiU1hldcMW4fDvBK6ZP_z3WC-s1idqBEq3BsXXed92BLJBge2hshsG44NVhL9S2mnOyUW2o_oem5g5DaJ4ZV0pJ1_3Z-UUarBbDwa9EUH53esT0U5phQSln335ywVxQbFb6gVPJ30W_f3PI8MsKOpr6wk0-5sEtTcHX4Ex4XioQlXOOm75dOSrF7WY7YSnAZjm1CscrDztxhlHPJHrH6q4x0lqB36d0-nqIf4yXN0"/>
-</div>
-<div class="p-md flex items-center gap-md border-t border-surface-container">
-<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
-<span>24</span>
-</button>
-<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span>12</span>
-</button>
-<button class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="share">share</span>
-</button>
-</div>
-</article>
-<!-- Feed Item: Tip Card (Asymmetric) -->
-<article data-category="tips" class="comm-post grid md:grid-cols-2 gap-0 bg-primary-container rounded-xl overflow-hidden shadow-sm">
-<div class="relative h-full min-h-[240px]">
-<img class="w-full h-full object-cover" data-alt="A beautiful, vibrant herb garden with lush green basil, rosemary, and mint growing in terra cotta pots. Warm golden hour sunlight streams through, creating a serene and productive gardening atmosphere. The colors are dominated by rich greens and earthy browns, following the modern organic aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLFDhHDc-lXyJlOvIs6Jbwq9o40vUx_8lbJJIx0lQksTujbUF1ZnEqN_G2IihknhJb4s2VdGa9iR2s6kHE4Faq1G1JDMGd7J5yETN_hgo1Lyzv0eg8zZRLaR7QiZwb5X97sWHuRG_B2MyzJ9FcWiXJPyH4zQvWJ5BO8-LaYS-wD3qB1K0xyy4uJYDclKnmQLE4K-eyKPOeL8cHbnhXXaZmq1nCidoDdjSGuAYKNbcU-xw3jFMXlQ5CYj3YIA5kZCvckq70WTr_2XY"/>
-</div>
-<div class="p-md flex flex-col justify-center text-on-primary-container">
-<div class="flex items-center gap-xs mb-sm">
-<span class="material-symbols-outlined text-primary-fixed" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
-<span class="font-label-sm text-label-sm uppercase tracking-wider opacity-80">Gardening Tip</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-base">Revive Your Herbs</h3>
-<p class="font-body-md text-body-md opacity-90 mb-md">Pruning is the secret to bushy, healthy basil. Always cut just above a leaf node to encourage double-stem growth.</p>
-<button class="w-fit bg-on-primary-container text-primary-container px-md py-2 rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-opacity">Read Full Guide</button>
-</div>
-</article>
-<!-- Feed Item: Community Photo Feed -->
-<article data-category="showcase" class="comm-post bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container cursor-pointer" onclick="window.location.href='post-detail.html'">
-<div class="p-md flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-10 h-10 rounded-full overflow-hidden">
-<img data-alt="A smiling woman with glasses and a sun hat in a bright garden setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtohLoOP0sBikU4oEM3sYlzJNjv-HjZmiGxRI6V40l_uPQFBkVy05qarzScQJM5LII-_Ub6hPWDPJe1cFKbsbnwG-b_BgULisONleJI_NYYiAPIEslXfKWpLFPmIGvLQfED4gjVGsmchhCfEOmc0kffw2X0hOc-ONHVe0nddvexe8XrMA0Ke0qpfGdJfiHRzXZIhXm7DfPsofAQYXk12EgyoMJ4SRoFWMMWsRnvGBjG6Boe9DskgM3Wj_eVEFMp0knFRHe1TcSNLg"/>
-</div>
-<div>
-<p class="font-label-lg text-label-lg text-on-surface">Sarah Bloom</p>
-<p class="font-label-sm text-label-sm text-outline">5 hours ago • <span class="text-primary font-semibold">Showcase</span></p>
-</div>
-</div>
-<button class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</button>
-</div>
-<div class="px-md pb-md">
-<p class="font-body-md text-body-md text-on-surface">My balcony garden is finally in full bloom! Hard work pays off. 🌸✨</p>
-</div>
-<div class="grid grid-cols-2 gap-1 px-md pb-md">
-<div class="aspect-square rounded-l-lg overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Close up of bright pink flowers in a terracotta pot on a sunny balcony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ1FU7_ZeUy9OCbOlzzYzp-MpOtGvjvgrJmfvv45Wc3dhNY0rqiu3nHwtuiSgfW-EWhXFcfYfhwXirp18PDbJS1wU-5RFtL_wpmF7UMZX51uGj7YFymzGm7SHQg78oIgTbalmqfZd9KmB7UioCTNw5MppmmvJ-1AHRxVAVNpoUJlxlKsRqkypVCmJUi_deyieJpnvmXAa0o9BcpUSxrWE5BTaAvSVP6ploxrm6pDSEfB4myx3fgrzEH_RX6yE6buB2YkhD43asuns"/>
-</div>
-<div class="grid grid-rows-2 gap-1">
-<div class="rounded-tr-lg overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A row of small green succulents in a bright window sill." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6O4QEDeiu8wZBcpmdA8l0u9waJvRu3dP3UalAevoVBMkO8g0QjzJu2O0y8-uhUKRzkM9VK16_-wzALg71120MsJvN7r7Bt6Rxos2zhzcTE4Npobti1sURV8NjMfE3voWf2NHiznlOQZRk7uB-3oqnntszqXkIV38-3OwIn7hgPlFkul4eff77T9m-YTaVQtup0WY--4u-rgUMQ42NO3b3WDAuALBpJtOt6lRff7Uf54uCgaOseB9tkAMfySfge7gaTNpVknbU3eE"/>
-</div>
-<div class="rounded-br-lg overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Wide shot of a lush balcony garden with various plants in pots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSLBaUaLGDXiRonQkmZnHiOrB6toQ1uy77SP0TKylqs-d8mFC4FxnfW2-DREcdHurcFSHLOO55iQunzS7XqrcFJz0tLXrJAF2smY3gNCykb2eIxE2xFAoncndtHkGj_Xi09Yg4uJWN5OgsP6OTYC90zpUBGP3eKN1lvAFsnGBn0XXI2jM1SWJHS4JdMwc4vwd6TwnXqlvueeLZsM8aWgd-U028E0lshNNpqKy2-j_cCqz4EvdyJjJIsIotx7fp406kv71nBD9vXbk"/>
-</div>
-</div>
-</div>
-<div class="p-md flex items-center gap-md border-t border-surface-container">
-<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
-<span>142</span>
-</button>
-<button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span>8</span>
-</button>
-</div>
-</article>
-</div>
+
 </main>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+
+<!-- New Post Panel -->
+<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm" onclick="closeNewPost()"></div>
+<div id="new-post-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-h-[90vh] overflow-y-auto">
+    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
+    <div class="flex items-center justify-between mb-lg">
+        <h3 class="font-headline-md text-headline-md text-on-surface">New Post</h3>
+        <button onclick="closeNewPost()" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant">close</span></button>
+    </div>
+    <div class="space-y-md">
+        <!-- Category -->
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Category</label>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="selectPostCat('help')" id="pcat-help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🆘 Help Needed</button>
+                <button onclick="selectPostCat('tips')" id="pcat-tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌿 Plant Tips</button>
+                <button onclick="selectPostCat('showcase')" id="pcat-showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌸 Showcase</button>
+                <button onclick="selectPostCat('swap')" id="pcat-swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🔄 Swap</button>
+            </div>
+        </div>
+        <!-- Title -->
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Title <span class="text-error">*</span></label>
+            <input id="post-title" type="text" maxlength="120" placeholder="What's on your mind?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+        </div>
+        <!-- Body -->
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Details</label>
+            <textarea id="post-body" rows="4" maxlength="1000" placeholder="Share more details, ask your question, or describe your plant..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
+        </div>
+        <!-- Image upload -->
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Photo <span class="text-outline">(optional)</span></label>
+            <div id="image-preview-area" class="hidden mb-2">
+                <div class="relative inline-block">
+                    <img id="image-preview" src="" alt="" class="h-32 rounded-xl object-cover border border-outline-variant/30"/>
+                    <button onclick="removeImage()" class="absolute -top-2 -right-2 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-[12px] shadow">✕</button>
+                </div>
+            </div>
+            <button onclick="document.getElementById('image-input').click()" class="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-outline-variant/40 text-on-surface-variant hover:border-primary hover:text-primary transition-all font-label-lg text-label-lg">
+                <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                Add Photo
+            </button>
+            <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)"/>
+        </div>
+        <!-- Submit -->
+        <button onclick="submitPost()" id="submit-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
+            Share with Community
+        </button>
+        <p id="post-error" class="hidden text-error font-label-sm text-center"></p>
+    </div>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<!-- My Garden -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<!-- Identify -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<!-- Community (active) -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="community.html">
-<span class="material-symbols-outlined active-icon">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<!-- Learn -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
-<span class="material-symbols-outlined">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="community.html"><span class="material-symbols-outlined active-icon">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html"><span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
 </div>
 </nav>
 
 <script>
+// ── Supabase ──────────────────────────────────────────────────────────────
+const { createClient } = supabase;
+const sb = createClient('https://vgvldoegptvzijlpsrtu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
+
+// ── State ─────────────────────────────────────────────────────────────────
+let allPosts = [];
+let currentFilter = 'all';
+let currentSearch = '';
+let selectedCat = null;
+let selectedImageFile = null;
+let isSubmitting = false;
+
+// ── Category meta ─────────────────────────────────────────────────────────
+const CAT = {
+    help:     { label: 'Help Needed',  colour: 'bg-error-container text-on-error-container' },
+    tips:     { label: 'Plant Tips',   colour: 'bg-primary-fixed text-on-primary-fixed-variant' },
+    showcase: { label: 'Showcase',     colour: 'bg-secondary-container text-on-secondary-container' },
+    swap:     { label: 'Swap',         colour: 'bg-tertiary-fixed text-on-tertiary-fixed-variant' },
+};
+
+function catMeta(cat) {
+    return CAT[cat] || { label: cat, colour: 'bg-surface-container text-on-surface-variant' };
+}
+
+function timeAgo(iso) {
+    const diff = (Date.now() - new Date(iso)) / 1000;
+    if (diff < 60)    return 'just now';
+    if (diff < 3600)  return Math.floor(diff/60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+    return Math.floor(diff/86400) + 'd ago';
+}
+
+function initials(name) {
+    return (name || 'G').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
+
+// ── Load posts ────────────────────────────────────────────────────────────
+async function loadPosts() {
+    try {
+        const { data, error } = await sb
+            .from('posts')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        allPosts = data || [];
+        renderFeed();
+    } catch(e) {
+        console.error('Load posts error:', e);
+        document.getElementById('feed').innerHTML = `
+            <div class="text-center py-lg">
+                <span class="material-symbols-outlined text-[40px] text-outline">cloud_off</span>
+                <p class="font-body-md text-on-surface-variant mt-2">Could not load posts</p>
+                <button onclick="loadPosts()" class="mt-md font-label-lg text-primary hover:underline">Retry</button>
+            </div>`;
+    }
+}
+
+// ── Render feed ───────────────────────────────────────────────────────────
+function renderFeed() {
+    const feed = document.getElementById('feed');
+    const empty = document.getElementById('empty-state');
+
+    let posts = allPosts;
+
+    // Filter by category
+    if (currentFilter !== 'all') {
+        posts = posts.filter(p => p.category === currentFilter);
+    }
+
+    // Filter by search
+    if (currentSearch.trim()) {
+        const q = currentSearch.toLowerCase();
+        posts = posts.filter(p =>
+            p.title.toLowerCase().includes(q) ||
+            (p.body || '').toLowerCase().includes(q)
+        );
+    }
+
+    if (posts.length === 0) {
+        feed.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+
+    feed.innerHTML = posts.map(post => {
+        const meta = catMeta(post.category);
+        const inits = initials(post.author);
+        const colours = ['bg-primary-container text-on-primary-container',
+                         'bg-secondary-container text-on-secondary-container',
+                         'bg-tertiary-fixed text-on-tertiary-fixed-variant'];
+        const avatarCol = colours[inits.charCodeAt(0) % colours.length];
+
+        return `
+        <article class="post-card bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant/20">
+            <!-- Post header -->
+            <div class="flex items-center justify-between px-md pt-md pb-sm">
+                <div class="flex items-center gap-sm">
+                    <div class="w-10 h-10 rounded-full ${avatarCol} flex items-center justify-center font-bold text-[13px] flex-shrink-0">${inits}</div>
+                    <div>
+                        <p class="font-label-lg text-on-surface">${post.author}</p>
+                        <p class="font-label-sm text-outline">${timeAgo(post.created_at)}</p>
+                    </div>
+                </div>
+                <span class="font-label-sm px-3 py-1 rounded-full ${meta.colour}">${meta.label}</span>
+            </div>
+            <!-- Post body -->
+            <div class="px-md pb-sm">
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">${post.title}</h3>
+                ${post.body ? `<p class="font-body-md text-on-surface-variant">${post.body}</p>` : ''}
+            </div>
+            <!-- Image -->
+            ${post.image_url ? `
+            <div class="w-full overflow-hidden max-h-72">
+                <img src="${post.image_url}" alt="Post image" class="w-full object-cover"/>
+            </div>` : ''}
+            <!-- Actions -->
+            <div class="flex items-center gap-lg px-md py-sm border-t border-outline-variant/20">
+                <button onclick="likePost('${post.id}', this)" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
+                    <span class="material-symbols-outlined">favorite_border</span>
+                    <span class="like-count">${post.likes || 0}</span>
+                </button>
+                <a href="post-detail.html?id=${post.id}" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                    <span>Reply</span>
+                </a>
+                <button onclick="sharePost('${post.title}')" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">share</span>
+                </button>
+            </div>
+        </article>`;
+    }).join('');
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────
+function setFilter(cat) {
+    currentFilter = cat;
+    document.querySelectorAll('.comm-chip').forEach(c => {
+        c.classList.remove('active', 'bg-primary-container', 'text-on-primary-container');
+        c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+    });
+    const btn = document.getElementById('chip-' + cat);
+    if (btn) {
+        btn.classList.add('active', 'bg-primary-container', 'text-on-primary-container');
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+    }
+    renderFeed();
+}
+
+function filterBySearch(val) {
+    currentSearch = val;
+    renderFeed();
+}
+
+// ── Like ──────────────────────────────────────────────────────────────────
+async function likePost(id, btn) {
+    const post = allPosts.find(p => p.id === id);
+    if (!post) return;
+    post.likes = (post.likes || 0) + 1;
+    btn.querySelector('.like-count').textContent = post.likes;
+    btn.querySelector('.material-symbols-outlined').textContent = 'favorite';
+    btn.querySelector('.material-symbols-outlined').style.color = '#ba1a1a';
+    btn.disabled = true;
+    await sb.from('posts').update({ likes: post.likes }).eq('id', id);
+}
+
+// ── Share ─────────────────────────────────────────────────────────────────
+function sharePost(title) {
+    if (navigator.share) {
+        navigator.share({ title: title + ' - Greenthumb Community', url: window.location.href });
+    } else {
+        navigator.clipboard?.writeText(window.location.href);
+    }
+}
+
+// ── New Post Panel ────────────────────────────────────────────────────────
+function openNewPost() {
+    document.getElementById('new-post-panel').classList.add('open');
+    document.getElementById('post-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    selectedCat = null;
+    selectedImageFile = null;
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-body').value = '';
+    document.getElementById('post-error').classList.add('hidden');
+    document.getElementById('image-preview-area').classList.add('hidden');
+    document.getElementById('image-input').value = '';
+    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
+}
+
+function closeNewPost() {
+    document.getElementById('new-post-panel').classList.remove('open');
+    document.getElementById('post-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function selectPostCat(cat) {
+    selectedCat = cat;
+    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
+    const btn = document.getElementById('pcat-' + cat);
+    if (btn) btn.classList.add('selected');
+}
+
+// ── Image handling ────────────────────────────────────────────────────────
+function handleImageSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+        showPostError('Image must be under 5MB');
+        return;
+    }
+    selectedImageFile = file;
+    const reader = new FileReader();
+    reader.onload = ev => {
+        document.getElementById('image-preview').src = ev.target.result;
+        document.getElementById('image-preview-area').classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeImage() {
+    selectedImageFile = null;
+    document.getElementById('image-preview-area').classList.add('hidden');
+    document.getElementById('image-input').value = '';
+}
+
+function showPostError(msg) {
+    const el = document.getElementById('post-error');
+    el.textContent = msg;
+    el.classList.remove('hidden');
+}
+
+// ── Submit post ───────────────────────────────────────────────────────────
+async function submitPost() {
+    if (isSubmitting) return;
+    const title = document.getElementById('post-title').value.trim();
+    const body  = document.getElementById('post-body').value.trim();
+
+    document.getElementById('post-error').classList.add('hidden');
+
+    if (!title) { showPostError('Please add a title'); document.getElementById('post-title').focus(); return; }
+    if (!selectedCat) { showPostError('Please select a category'); return; }
+
+    isSubmitting = true;
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sharing…';
+    btn.disabled = true;
+
+    try {
+        let imageUrl = null;
+
+        // Upload image if selected
+        if (selectedImageFile) {
+            const ext = selectedImageFile.name.split('.').pop();
+            const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+            const { error: uploadErr } = await sb.storage
+                .from('post-images')
+                .upload(path, selectedImageFile, { cacheControl: '3600', upsert: false });
+
+            if (uploadErr) throw uploadErr;
+
+            const { data: urlData } = sb.storage.from('post-images').getPublicUrl(path);
+            imageUrl = urlData.publicUrl;
+        }
+
+        // Insert post
+        const { data, error } = await sb.from('posts').insert({
+            author: 'Gardener',
+            category: selectedCat,
+            title,
+            body: body || null,
+            image_url: imageUrl,
+            likes: 0
+        }).select().single();
+
+        if (error) throw error;
+
+        // Add to local array and re-render
+        allPosts.unshift(data);
+        closeNewPost();
+        setFilter('all');
+        renderFeed();
+
+        // Scroll to top of feed
+        document.getElementById('feed').scrollIntoView({ behavior: 'smooth' });
+
+    } catch(e) {
+        console.error('Submit error:', e);
+        showPostError('Could not post — please try again');
+    } finally {
+        isSubmitting = false;
+        btn.textContent = 'Share with Community';
+        btn.disabled = false;
+    }
+}
+
+// ── Real-time subscription ────────────────────────────────────────────────
+sb.channel('posts-channel')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, payload => {
+        // Only add if not already in list (avoid duplicating own posts)
+        if (!allPosts.find(p => p.id === payload.new.id)) {
+            allPosts.unshift(payload.new);
+            renderFeed();
+        }
+    })
+    .subscribe();
+
+// ── Nav Drawer ────────────────────────────────────────────────────────────
+
 // ── Nav Drawer ────────────────────────────────────────────────────────────
 function openNav() {
     document.getElementById('nav-drawer').classList.add('open');
@@ -476,132 +740,16 @@ document.querySelectorAll('.nav-sub-list').forEach(list => {
 } catch(navErr) {
     console.warn('Nav init error:', navErr);
 }
+
+
+try {
+    setActiveNav('community');
+    document.querySelectorAll('.nav-sub-list').forEach(list => {
+        list.style.maxHeight = list.classList.contains('collapsed') ? '0px' : '500px';
+    });
+} catch(e) { console.warn('Nav init:', e); }
+
+// ── Init ──────────────────────────────────────────────────────────────────
+loadPosts();
 </script>
-
-<script>
-function filterPosts(category) {
-    // Update chips
-    document.querySelectorAll('.comm-chip').forEach(c => {
-        c.classList.remove('bg-primary-container','text-on-primary-container');
-        c.classList.add('bg-surface-container-high','text-on-surface-variant');
-    });
-    const active = document.getElementById('chip-' + category) || document.getElementById('chip-all');
-    active.classList.add('bg-primary-container','text-on-primary-container');
-    active.classList.remove('bg-surface-container-high','text-on-surface-variant');
-    
-    // Show/hide posts
-    document.querySelectorAll('.comm-post').forEach(post => {
-        const cat = post.dataset.category;
-        const show = category === 'all' || cat === category;
-        post.style.display = show ? '' : 'none';
-    });
-}
-</script>
-
-<!-- New Post Panel -->
-<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm" onclick="closeNewPost()"></div>
-<div id="new-post-panel" style="position:fixed;bottom:0;left:0;right:0;z-index:50;background:#faf9f5;border-radius:24px 24px 0 0;padding:16px 20px 48px;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 -4px 24px rgba(0,0,0,0.15)">
-    <div style="width:40px;height:4px;background:#c2c9bb;border-radius:2px;margin:0 auto 16px"></div>
-    <h3 class="font-headline-md text-headline-md text-on-surface mb-md">New Post</h3>
-    <div class="space-y-md">
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Category</label>
-            <div class="flex flex-wrap gap-2" id="post-category-chips">
-                <button onclick="selectPostCategory('help')" id="pcat-help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Help Needed</button>
-                <button onclick="selectPostCategory('tips')" id="pcat-tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Plant Tips</button>
-                <button onclick="selectPostCategory('showcase')" id="pcat-showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Showcase</button>
-                <button onclick="selectPostCategory('swap')" id="pcat-swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Swap</button>
-            </div>
-        </div>
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Title</label>
-            <input id="post-title" type="text" placeholder="What's your question or update?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
-        </div>
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Details</label>
-            <textarea id="post-body" rows="4" placeholder="Share more details, photos, or observations..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
-        </div>
-        <button onclick="submitPost()" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
-            Share with Community
-        </button>
-    </div>
-</div>
-
-<script>
-let selectedPostCategory = null;
-
-function openNewPost() {
-    document.getElementById('new-post-panel').style.transform = 'translateY(0)';
-    document.getElementById('post-overlay').classList.remove('hidden');
-    selectedPostCategory = null;
-    document.querySelectorAll('.post-cat-btn').forEach(b => {
-        b.style.borderColor = '';
-        b.style.background = '';
-        b.style.color = '';
-    });
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-body').value = '';
-}
-
-function closeNewPost() {
-    document.getElementById('new-post-panel').style.transform = 'translateY(100%)';
-    document.getElementById('post-overlay').classList.add('hidden');
-}
-
-function selectPostCategory(cat) {
-    selectedPostCategory = cat;
-    document.querySelectorAll('.post-cat-btn').forEach(b => {
-        b.style.borderColor = '';
-        b.style.background = '#efeeea';
-        b.style.color = '#42493e';
-    });
-    const btn = document.getElementById('pcat-' + cat);
-    if (btn) {
-        btn.style.borderColor = '#154212';
-        btn.style.background = '#bcf0ae';
-        btn.style.color = '#002201';
-    }
-}
-
-function submitPost() {
-    const title = document.getElementById('post-title').value.trim();
-    const body  = document.getElementById('post-body').value.trim();
-    if (!title) { document.getElementById('post-title').focus(); return; }
-
-    const catLabels = { help:'Help Needed', tips:'Plant Tips', showcase:'Showcase', swap:'Swap' };
-    const catLabel  = catLabels[selectedPostCategory] || 'Plant Tips';
-    const catColour = selectedPostCategory === 'help' ? 'text-error font-semibold' : 'text-primary font-semibold';
-
-    const feed = document.querySelector('.space-y-lg');
-    const article = document.createElement('article');
-    article.dataset.category = selectedPostCategory || 'tips';
-    article.className = 'comm-post bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container';
-    article.innerHTML = `
-        <div class="p-md flex items-center justify-between">
-            <div class="flex items-center gap-sm">
-                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center font-bold text-on-primary-container">You</div>
-                <div>
-                    <p class="font-label-lg text-label-lg text-on-surface">You</p>
-                    <p class="font-label-sm text-label-sm text-outline">Just now • <span class="${catColour}">${catLabel}</span></p>
-                </div>
-            </div>
-        </div>
-        <div class="px-md pb-md">
-            <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">${title}</h3>
-            ${body ? `<p class="font-body-md text-body-md text-on-surface-variant">${body}</p>` : ''}
-        </div>
-        <div class="p-md flex items-center gap-md border-t border-surface-container">
-            <button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">favorite_border</span><span>0</span>
-            </button>
-            <button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                <span class="material-symbols-outlined">chat_bubble</span><span>0</span>
-            </button>
-        </div>`;
-
-    feed.prepend(article);
-    closeNewPost();
-}
-</script>
-
 </body></html>
