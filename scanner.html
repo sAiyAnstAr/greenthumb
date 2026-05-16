@@ -488,6 +488,8 @@ async function requestCamera() {
         showState('live');
     } catch(e) {
         console.warn('Camera error:', e.name, e.message);
+        const msg = document.getElementById('no-camera-msg');
+        if (msg) msg.textContent = `Camera error: ${e.name} — ${e.message}. You can still use the gallery below.`;
         showState('denied');
     }
 }
