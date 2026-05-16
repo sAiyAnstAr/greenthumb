@@ -475,12 +475,20 @@ function showState(state) {
 
 // ── Camera ────────────────────────────────────────────────────────────────
 async function requestCamera() {
+    const msg = document.getElementById('no-camera-msg');
+
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        if (msg) msg.textContent = '❌ Camera requires HTTPS — make sure you are on saiyanstar.github.io (https)';
+        showState('denied'); return;
+    }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        if (msg) msg.textContent = '❌ Camera API not available in this browser. Please use the gallery below.';
+        showState('denied'); return;
+    }
+
     showState('requesting');
     try {
-        stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
-            audio: false
-        });
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
         const video = document.getElementById('video-feed');
         video.srcObject = stream;
         await video.play();
@@ -488,24 +496,19 @@ async function requestCamera() {
         showState('live');
     } catch(e) {
         console.warn('Camera error:', e.name, e.message);
-        const msg = document.getElementById('no-camera-msg');
-        if (msg) msg.textContent = `Camera error: ${e.name} — ${e.message}. You can still use the gallery below.`;
+        if (msg) msg.textContent = '❌ ' + e.name + ': ' + e.message;
         showState('denied');
     }
 }
 
-function capturePhoto() {
-    const video  = document.getElementById('video-feed');
-    const canvas = document.getElementById('capture-canvas');
-    canvas.width  = video.videoWidth  || 640;
-    canvas.height = video.videoHeight || 480;
-    canvas.getContext('2d').drawImage(video, 0, 0);
-    canvas.toBlob(blob => processImage(blob, URL.createObjectURL(blob)), 'image/jpeg', 0.9);
-}
-
-// ── Gallery ───────────────────────────────────────────────────────────────
 function openGallery() {
-    document.getElementById('gallery-input').click();
+    const input = document.getElementById('gallery-input');
+    if (!input) {
+        const msg = document.getElementById('no-camera-msg');
+        if (msg) msg.textContent = '❌ Gallery not found — try refreshing the page';
+        return;
+    }
+    input.click();
 }
 
 function handleGalleryImage(e) {
