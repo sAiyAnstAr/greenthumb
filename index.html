@@ -137,67 +137,76 @@
 <p class="font-body-lg text-body-lg text-on-surface-variant">Your urban sanctuary is waiting for you today.</p>
 </section>
 <!-- Weather Widget -->
-<section class="flex justify-start">
-<div id="weather-card" class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-variant/30 overflow-hidden w-full max-w-lg">
+<section>
+<div id="weather-card" class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-variant/30 overflow-hidden w-full">
     <!-- Loading state -->
-    <div id="weather-loading" class="flex items-center gap-md p-md">
-        <div class="bg-surface-container w-10 h-10 rounded-full animate-pulse"></div>
-        <div class="space-y-2 flex-1">
-            <div class="h-3 bg-surface-container rounded animate-pulse w-24"></div>
-            <div class="h-5 bg-surface-container rounded animate-pulse w-36"></div>
+    <div id="weather-loading" class="flex items-center gap-md px-md py-sm">
+        <div class="bg-surface-container w-8 h-8 rounded-full animate-pulse flex-shrink-0"></div>
+        <div class="space-y-1.5 flex-1">
+            <div class="h-3 bg-surface-container rounded animate-pulse w-20"></div>
+            <div class="h-4 bg-surface-container rounded animate-pulse w-28"></div>
         </div>
-        <div class="h-3 bg-surface-container rounded animate-pulse w-16"></div>
+        <div class="flex gap-3">
+            <div class="h-10 w-14 bg-surface-container rounded-xl animate-pulse"></div>
+            <div class="h-10 w-14 bg-surface-container rounded-xl animate-pulse"></div>
+            <div class="h-10 w-14 bg-surface-container rounded-xl animate-pulse"></div>
+        </div>
     </div>
     <!-- Weather content (hidden until loaded) -->
     <div id="weather-content" class="hidden">
-        <!-- Main row -->
-        <div class="flex items-center gap-md p-md pb-sm">
-            <div id="weather-icon-wrap" class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-2 rounded-full flex-shrink-0">
-                <span id="weather-icon" class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">wb_sunny</span>
-            </div>
-            <div class="flex-1 min-w-0">
-                <div class="flex items-baseline gap-2">
-                    <p id="weather-temp" class="font-headline-lg text-headline-lg text-on-surface"></p>
-                    <p id="weather-desc" class="font-label-lg text-label-lg text-on-surface-variant truncate"></p>
+        <!-- Single compact row: current | divider | forecast -->
+        <div class="flex items-center px-md py-sm gap-md">
+            <!-- Current weather (left) -->
+            <div class="flex items-center gap-sm flex-shrink-0">
+                <div id="weather-icon-wrap" class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-1.5 rounded-full flex-shrink-0">
+                    <span id="weather-icon" class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">wb_sunny</span>
                 </div>
-                <div class="flex items-center gap-1 mt-0.5">
-                    <span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
-                    <p id="weather-location" class="font-label-sm text-outline truncate"></p>
+                <div class="min-w-0">
+                    <div class="flex items-baseline gap-1.5 flex-wrap">
+                        <p id="weather-temp" class="font-headline-md text-headline-md text-on-surface leading-none"></p>
+                        <p id="weather-desc" class="font-label-sm text-on-surface-variant"></p>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5">
+                        <span class="material-symbols-outlined text-[12px] text-outline">location_on</span>
+                        <p id="weather-location" class="font-label-sm text-outline truncate max-w-[120px]"></p>
+                        <button onclick="openLocationPicker()" class="ml-1 hover:text-primary transition-colors flex-shrink-0" title="Change location">
+                            <span class="material-symbols-outlined text-outline hover:text-primary text-[14px]">edit_location_alt</span>
+                        </button>
+                    </div>
+                    <!-- Detail stats compact inline -->
+                    <div class="flex items-center gap-sm mt-1 flex-wrap">
+                        <span class="flex items-center gap-0.5 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[13px]">water_drop</span>
+                            <span id="weather-humidity" class="font-label-sm"></span>
+                        </span>
+                        <span class="flex items-center gap-0.5 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[13px]">air</span>
+                            <span id="weather-wind" class="font-label-sm"></span>
+                        </span>
+                        <span class="flex items-center gap-0.5 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[13px]">wb_sunny</span>
+                            <span id="weather-uv" class="font-label-sm"></span>
+                        </span>
+                        <span class="flex items-center gap-0.5 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[13px]">thermostat</span>
+                            <span id="weather-feels" class="font-label-sm"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <button onclick="openLocationPicker()" class="p-2 rounded-full hover:bg-surface-container transition-colors flex-shrink-0" title="Change location">
-                <span class="material-symbols-outlined text-outline text-[18px]">edit_location_alt</span>
-            </button>
+            <!-- Divider -->
+            <div class="w-px self-stretch bg-outline-variant/40 flex-shrink-0 mx-1"></div>
+            <!-- 3-day forecast (right, fills remaining space) -->
+            <div id="forecast-strip" class="flex flex-1 justify-around items-center gap-0 divide-x divide-outline-variant/30"></div>
         </div>
-        <!-- Detail row -->
-        <div class="flex items-center gap-lg px-md pb-md text-on-surface-variant">
-            <div class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-[16px]">water_drop</span>
-                <span id="weather-humidity" class="font-label-sm"></span>
-            </div>
-            <div class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-[16px]">air</span>
-                <span id="weather-wind" class="font-label-sm"></span>
-            </div>
-            <div class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-[16px]">wb_sunny</span>
-                <span id="weather-uv" class="font-label-sm"></span>
-            </div>
-            <div class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-[16px]">thermostat</span>
-                <span id="weather-feels" class="font-label-sm"></span>
-            </div>
-        </div>
-        <!-- 3-day forecast strip -->
-        <div id="forecast-strip" class="flex gap-0 border-t border-outline-variant/30 divide-x divide-outline-variant/30"></div>
-        <!-- Plant care tip based on weather -->
-        <div id="weather-tip" class="hidden border-t border-outline-variant/30 px-md py-sm flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings:'FILL' 1">eco</span>
+        <!-- Plant care tip — slim full-width strip -->
+        <div id="weather-tip" class="hidden border-t border-outline-variant/30 px-md py-xs flex items-center gap-2 bg-primary-fixed/10">
+            <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings:'FILL' 1">eco</span>
             <p id="weather-tip-text" class="font-label-sm text-on-surface-variant"></p>
         </div>
     </div>
     <!-- Error state -->
-    <div id="weather-error" class="hidden flex items-center justify-between p-md gap-md">
+    <div id="weather-error" class="hidden flex items-center justify-between px-md py-sm gap-md">
         <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-outline">cloud_off</span>
             <p class="font-label-lg text-on-surface-variant">Weather unavailable</p>
@@ -240,17 +249,15 @@
 <!-- Status Overviews -->
 <section class="grid grid-cols-1 md:grid-cols-2 gap-md">
 <!-- Today's Schedule Card -->
-<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<a href="calendar.html" class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow active:scale-[0.98] duration-200 group">
 <div>
-<div class="flex justify-between items-start mb-md">
+<div class="flex justify-between items-center mb-md">
 <span class="bg-primary-fixed text-on-primary-fixed-variant px-sm py-1 rounded-full font-label-lg text-label-lg">Today's Schedule</span>
-<a class="text-secondary font-label-lg hover:underline flex items-center" href="calendar.html">
-                            Task Calendar <span class="material-symbols-outlined text-[18px] ml-1">arrow_forward</span>
-</a>
+<span class="material-symbols-outlined text-primary group-hover:text-primary/70 transition-colors">event_note</span>
 </div>
 <div class="flex items-center gap-md">
 <div class="text-primary">
-<span class="material-symbols-outlined text-[48px]">event_upcoming</span>
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings:'FILL' 1">event_upcoming</span>
 </div>
 <div>
 <h3 class="font-headline-md text-headline-md text-on-surface">3 tasks remaining</h3>
@@ -258,13 +265,17 @@
 </div>
 </div>
 </div>
-<!-- Mini Progress Track -->
+<!-- Mini Progress Track + link -->
 <div class="mt-lg">
-<div class="w-full bg-surface-container rounded-full h-2">
+<div class="w-full bg-surface-container rounded-full h-2 mb-sm">
 <div class="bg-primary h-2 rounded-full" style="width: 66%;"></div>
 </div>
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-primary group-hover:underline">View Task Calendar</span>
+<span class="material-symbols-outlined text-primary text-[14px]">arrow_forward</span>
 </div>
 </div>
+</a>
 <!-- Garden Health Card -->
 <a href="garden-health.html" class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow active:scale-[0.98] duration-200 group">
 <div>
@@ -490,17 +501,17 @@ function renderWeather(data, locationName) {
     const isCloudy = [2,3,45,48].includes(code);
     iconWrap.className = `p-2 rounded-full flex-shrink-0 ${isRainy ? 'bg-primary-fixed text-on-primary-fixed-variant' : isCloudy ? 'bg-surface-container text-on-surface-variant' : 'bg-tertiary-fixed text-on-tertiary-fixed-variant'}`;
 
-    // 3-day forecast (skip today = index 0)
+    // 3-day forecast (skip today = index 0) — compact inline columns
     const strip = document.getElementById('forecast-strip');
     strip.innerHTML = '';
     for (let i = 1; i <= 3; i++) {
         const date = new Date(d.time[i]);
         const div = document.createElement('div');
-        div.className = 'flex-1 flex flex-col items-center py-sm gap-1';
+        div.className = 'flex-1 flex flex-col items-center py-xs gap-0.5 px-1';
         div.innerHTML = `
-            <span class="font-label-sm text-outline">${DAY_NAMES[date.getDay()]}</span>
-            <span class="material-symbols-outlined text-[20px] text-on-surface-variant" style="font-variation-settings:'FILL' 1">${WMO_ICONS[d.weather_code[i]] || 'wb_sunny'}</span>
-            <span class="font-label-sm text-on-surface">${Math.round(d.temperature_2m_max[i])}° <span class="text-outline">${Math.round(d.temperature_2m_min[i])}°</span></span>
+            <span class="font-label-sm text-outline text-[10px] uppercase">${DAY_NAMES[date.getDay()]}</span>
+            <span class="material-symbols-outlined text-[18px] text-on-surface-variant" style="font-variation-settings:'FILL' 1">${WMO_ICONS[d.weather_code[i]] || 'wb_sunny'}</span>
+            <span class="font-label-sm text-[11px] text-on-surface whitespace-nowrap">${Math.round(d.temperature_2m_max[i])}° <span class="text-outline">${Math.round(d.temperature_2m_min[i])}°</span></span>
         `;
         strip.appendChild(div);
     }
