@@ -1,93 +1,37 @@
 <!DOCTYPE html>
-
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Greenthumb - Task Calendar</title>
+<title>Task Calendar - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
+    tailwind.config = {
         darkMode: "class",
         theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary-container": "#fed3c7",
-                    "primary-fixed-dim": "#a1d494",
-                    "surface-container-low": "#f4f4f0",
-                    "on-error-container": "#93000a",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-high": "#e9e8e4",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "primary-fixed": "#bcf0ae",
-                    "background": "#faf9f5",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "error-container": "#ffdad6",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-bright": "#faf9f5",
-                    "primary-container": "#2d5a27",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-fixed": "#2c160e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "surface-variant": "#e3e2df",
-                    "outline-variant": "#c2c9bb",
-                    "surface-container-lowest": "#ffffff",
-                    "primary": "#154212",
-                    "on-tertiary": "#ffffff",
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface": "#faf9f5",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
-                    "surface-container": "#efeeea",
-                    "on-secondary-container": "#795950",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed": "#3e0500",
-                    "inverse-surface": "#2f312e",
-                    "surface-tint": "#3b6934",
-                    "tertiary-container": "#8d3220",
-                    "outline": "#72796e",
-                    "on-primary-container": "#9dd090",
-                    "on-error": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "on-surface-variant": "#42493e",
-                    "surface-dim": "#dbdad6",
-                    "secondary": "#77574d",
-                    "inverse-primary": "#a1d494",
-                    "on-primary-fixed": "#002201"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "lg": "40px",
-                    "base": "8px",
-                    "gutter": "16px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "sm": "12px",
-                    "container-margin": "20px"
-            },
-            "fontFamily": {
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
+            extend: {
+                "colors": {
+                    "secondary-fixed": "#ffdbd0","secondary-container": "#fed3c7","primary-fixed-dim": "#a1d494",
+                    "surface-container-low": "#f4f4f0","on-error-container": "#93000a","inverse-on-surface": "#f2f1ed",
+                    "surface-container-high": "#e9e8e4","secondary-fixed-dim": "#e7bdb1","primary-fixed": "#bcf0ae",
+                    "background": "#faf9f5","on-tertiary-container": "#ffaf9e","on-secondary-fixed-variant": "#5d4037",
+                    "error-container": "#ffdad6","tertiary-fixed": "#ffdad3","surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27","on-background": "#1b1c1a","on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e","surface-variant": "#e3e2df","outline-variant": "#c2c9bb",
+                    "surface-container-lowest": "#ffffff","primary": "#154212","on-tertiary": "#ffffff","error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918","surface": "#faf9f5","on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5","on-surface": "#1b1c1a","surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea","on-secondary-container": "#795950","tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500","inverse-surface": "#2f312e","surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220","outline": "#72796e","on-primary-container": "#9dd090",
+                    "on-error": "#ffffff","on-primary": "#ffffff","on-surface-variant": "#42493e",
+                    "surface-dim": "#dbdad6","secondary": "#77574d","inverse-primary": "#a1d494","on-primary-fixed": "#002201"
+                },
+                "borderRadius": {"DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px"},
+                "spacing": {"xl": "64px","lg": "40px","base": "8px","gutter": "16px","xs": "4px","md": "24px","sm": "12px","container-margin": "20px"},
+                "fontFamily": {"label-sm": ["Plus Jakarta Sans"],"headline-lg": ["Plus Jakarta Sans"],"headline-md": ["Plus Jakarta Sans"],"body-md": ["Plus Jakarta Sans"],"label-lg": ["Plus Jakarta Sans"],"display-lg": ["Plus Jakarta Sans"],"body-lg": ["Plus Jakarta Sans"]},
+                "fontSize": {
                     "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
                     "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
                     "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
@@ -95,178 +39,709 @@
                     "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
                     "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                     "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                }
             }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #faf9f5;
-        }
-    </style>
+    }
+</script>
 <style>
     body {
-      min-height: max(884px, 100dvh);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #faf9f5;
+        min-height: max(884px, 100dvh);
     }
-  </style>
-  </head>
-<body class="bg-background text-on-surface min-h-screen pb-24">
-<!-- TopAppBar -->
-<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky z-40">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
-<a class="hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
-<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
-</a>
-<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
-<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Calendar modal */
+    #cal-modal { transition: opacity 0.2s ease, transform 0.2s ease; }
+    #cal-modal.hidden { opacity: 0; pointer-events: none; }
+
+    /* Progress bar animation */
+    .progress-fill { transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Task checkbox custom */
+    .task-check:checked + label .check-box {
+        background-color: #154212;
+        border-color: #154212;
+    }
+    .task-check:checked + label .check-box::after {
+        content: '';
+        display: block;
+        width: 5px; height: 9px;
+        border: 2px solid white;
+        border-top: none; border-left: none;
+        transform: rotate(45deg) translate(-1px, -1px);
+        margin: 2px auto 0;
+    }
+
+    /* Day dot indicators */
+    .has-task::after {
+        content: '';
+        display: block;
+        width: 4px; height: 4px;
+        background: #3b6934;
+        border-radius: 50%;
+        margin: 2px auto 0;
+    }
+    .has-task-high::after { background: #ba1a1a; }
+
+    /* Slide-up add task panel */
+    #add-panel {
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #add-panel.open { transform: translateY(0); }
+
+    /* View toggle */
+    .view-btn.active {
+        background: #154212;
+        color: #ffffff;
+    }
+
+    /* Week strip scroll */
+    .week-strip { scroll-snap-type: x mandatory; }
+    .week-day { scroll-snap-align: center; }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
+<!-- Top AppBar -->
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
 </div>
 </header>
-<main class="px-container-margin py-md">
-<!-- Task Calendar Heading -->
-<div class="mb-lg">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Task Calendar</h2>
-<p class="font-body-md text-on-surface-variant">Stay on top of your plant care routine.</p>
-</div>
-<!-- Weekly Date Strip -->
-<section class="flex justify-between items-center bg-surface-container rounded-xl p-md mb-lg shadow-sm">
-<div class="flex flex-col items-center gap-2">
-<span class="font-label-sm text-on-surface-variant">Mon</span>
-<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">16</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<span class="font-label-sm text-on-surface-variant">Tue</span>
-<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">17</span>
-</div>
-<!-- Active Day -->
-<div class="flex flex-col items-center gap-2">
-<span class="font-label-sm text-primary font-bold">Wed</span>
-<span class="w-10 h-10 flex items-center justify-center font-label-lg bg-primary text-on-primary rounded-full shadow-md">18</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<span class="font-label-sm text-on-surface-variant">Thu</span>
-<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">19</span>
-</div>
-<div class="flex flex-col items-center gap-2">
-<span class="font-label-sm text-on-surface-variant">Fri</span>
-<span class="w-10 h-10 flex items-center justify-center font-label-lg text-on-surface">20</span>
-</div>
-</section>
-<!-- Today's Tasks List -->
-<section>
-<div class="flex justify-between items-center mb-md">
-<h3 class="font-label-lg text-on-surface uppercase tracking-wider">Today's Tasks</h3>
-<span class="font-label-sm text-primary">3 Tasks</span>
-</div>
-<div class="space-y-4">
-<!-- High Priority Task -->
-<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_12px_rgba(21,66,18,0.04)] border-l-4 border-error flex items-start gap-gutter">
-<div class="mt-1">
-<input class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed" type="checkbox"/>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start">
-<h4 class="font-label-lg text-on-surface">Water Snake Plant</h4>
-<span class="font-label-sm px-2 py-0.5 bg-error-container text-on-error-container rounded-full">High</span>
-</div>
-<p class="font-body-md text-on-surface-variant mt-1">Living Room</p>
-<div class="flex items-center gap-1 mt-2 text-primary">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-<span class="font-label-sm">9:00 AM</span>
-</div>
-</div>
-</div>
-<!-- Medium Priority Task -->
-<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_12px_rgba(21,66,18,0.04)] border-l-4 border-tertiary-container flex items-start gap-gutter">
-<div class="mt-1">
-<input class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed" type="checkbox"/>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start">
-<h4 class="font-label-lg text-on-surface">Check Soil for Fiddle Leaf Fig</h4>
-<span class="font-label-sm px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full">Medium</span>
-</div>
-<p class="font-body-md text-on-surface-variant mt-1">Dining Area</p>
-<div class="flex items-center gap-1 mt-2 text-primary">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-<span class="font-label-sm">11:30 AM</span>
-</div>
-</div>
-</div>
-<!-- Completed Task -->
-<div class="bg-surface-container-low p-md rounded-xl opacity-60 flex items-start gap-gutter">
-<div class="mt-1">
-<input checked="" class="w-6 h-6 rounded-lg border-outline text-primary focus:ring-primary-fixed bg-primary-container" type="checkbox"/>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start">
-<h4 class="font-label-lg text-on-surface line-through">Mist Calathea</h4>
-<span class="font-label-sm px-2 py-0.5 bg-surface-variant text-on-surface-variant rounded-full">Done</span>
-</div>
-<p class="font-body-md text-on-surface-variant mt-1 line-through">Bedroom</p>
-<div class="flex items-center gap-1 mt-2 text-outline">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-<span class="font-label-sm">8:15 AM</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Productivity Card / Asymmetric Layout Element -->
-<section class="mt-xl">
-<div class="bg-primary-container text-on-primary-container p-lg rounded-2xl relative overflow-hidden">
-<div class="relative z-10">
-<h3 class="font-headline-md text-on-primary-container mb-2">Weekly Progress</h3>
-<p class="font-body-md opacity-90 mb-4">You've completed 85% of your garden tasks this week! Your plants are thriving.</p>
-<div class="w-full bg-primary h-2 rounded-full mb-2">
-<div class="bg-primary-fixed-dim h-full w-[85%] rounded-full"></div>
-</div>
-<span class="font-label-sm">12 of 14 tasks finished</span>
-</div>
-<div class="absolute -right-8 -bottom-8 opacity-20">
-<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-</div>
-</section>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
+
+    <!-- Hero -->
+    <section class="mb-lg">
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Task Calendar</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Stay on top of your plant care routine.</p>
+    </section>
+
+    <!-- View Toggle + Open Full Calendar -->
+    <div class="flex items-center justify-between mb-md">
+        <div class="flex items-center bg-surface-container rounded-full p-1 gap-1">
+            <button id="btn-week" onclick="setView('week')" class="view-btn active font-label-lg text-label-lg px-4 py-1.5 rounded-full transition-all duration-200">Week</button>
+            <button id="btn-month" onclick="setView('month')" class="view-btn font-label-lg text-label-lg px-4 py-1.5 rounded-full transition-all duration-200 text-on-surface-variant">Month</button>
+        </div>
+        <button onclick="openCalModal()" class="flex items-center gap-1 font-label-lg text-label-lg text-primary hover:bg-surface-container px-3 py-1.5 rounded-full transition-colors">
+            <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+            Full View
+        </button>
+    </div>
+
+    <!-- Week Strip View -->
+    <div id="week-view">
+        <div class="flex items-center justify-between mb-sm">
+            <button onclick="shiftWeek(-1)" class="p-1 rounded-full hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+            </button>
+            <span id="week-label" class="font-label-lg text-on-surface-variant text-label-lg"></span>
+            <button onclick="shiftWeek(1)" class="p-1 rounded-full hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+            </button>
+        </div>
+        <section class="flex justify-between items-center bg-surface-container-lowest rounded-2xl px-md py-sm mb-lg shadow-sm border border-outline-variant/30" id="week-strip">
+            <!-- Days rendered by JS -->
+        </section>
+    </div>
+
+    <!-- Month Mini View -->
+    <div id="month-view" class="hidden mb-lg">
+        <div class="flex items-center justify-between mb-md">
+            <button onclick="shiftMonth(-1)" class="p-1 rounded-full hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+            </button>
+            <span id="month-label" class="font-headline-md text-headline-md text-on-surface"></span>
+            <button onclick="shiftMonth(1)" class="p-1 rounded-full hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+            </button>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-md shadow-sm border border-outline-variant/30">
+            <!-- Day of week headers -->
+            <div class="grid grid-cols-7 mb-2">
+                <div class="text-center font-label-sm text-outline py-1">Su</div>
+                <div class="text-center font-label-sm text-outline py-1">Mo</div>
+                <div class="text-center font-label-sm text-outline py-1">Tu</div>
+                <div class="text-center font-label-sm text-outline py-1">We</div>
+                <div class="text-center font-label-sm text-outline py-1">Th</div>
+                <div class="text-center font-label-sm text-outline py-1">Fr</div>
+                <div class="text-center font-label-sm text-outline py-1">Sa</div>
+            </div>
+            <div id="month-grid" class="grid grid-cols-7 gap-y-1"></div>
+        </div>
+    </div>
+
+    <!-- Selected Date Heading -->
+    <div class="flex items-center justify-between mb-md">
+        <div>
+            <h3 id="selected-date-label" class="font-headline-md text-headline-md text-on-surface"></h3>
+            <span id="task-count-label" class="font-label-sm text-on-surface-variant"></span>
+        </div>
+        <button onclick="openAddPanel()" class="flex items-center gap-1 bg-primary text-on-primary font-label-lg text-label-lg px-4 py-2 rounded-full active:scale-95 transition-transform shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add Task
+        </button>
+    </div>
+
+    <!-- Task List -->
+    <section id="task-list" class="space-y-3 mb-lg"></section>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden flex flex-col items-center justify-center py-xl text-center">
+        <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1;">sentiment_satisfied</span>
+        <p class="font-headline-md text-on-surface-variant">No tasks for this day</p>
+        <p class="font-body-md text-outline mt-1">Tap Add Task to schedule plant care</p>
+    </div>
+
+    <!-- Weekly Progress -->
+    <section class="mb-xl pb-4">
+        <div class="bg-primary-container rounded-2xl p-lg relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="font-headline-md text-on-primary-container mb-1">Weekly Progress</h3>
+                        <p id="progress-desc" class="font-body-md text-on-primary-container/80"></p>
+                    </div>
+                    <span id="progress-pct" class="font-display-lg text-display-lg text-on-primary-container/30 leading-none"></span>
+                </div>
+                <div class="w-full bg-primary/30 h-3 rounded-full mb-3 overflow-hidden">
+                    <div id="progress-bar" class="progress-fill bg-primary-fixed-dim h-full rounded-full" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span id="progress-label" class="font-label-lg text-on-primary-container/80"></span>
+                    <div class="flex gap-3">
+                        <div class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim inline-block"></span>
+                            <span class="font-label-sm text-on-primary-container/70">Done</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-primary/30 inline-block"></span>
+                            <span class="font-label-sm text-on-primary-container/70">Remaining</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-10">
+                <span class="material-symbols-outlined text-[140px] text-on-primary-container" style="font-variation-settings:'FILL' 1;">eco</span>
+            </div>
+        </div>
+    </section>
+
 </main>
-<!-- Floating Action Button -->
-<button class="fixed bottom-24 right-container-margin w-14 h-14 bg-primary text-on-primary rounded-xl shadow-lg flex items-center justify-center active:scale-90 transition-transform duration-200 z-40">
-<span class="material-symbols-outlined text-[32px]">add</span>
-</button>
+
+<!-- Full Calendar Modal -->
+<div id="cal-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center hidden">
+    <div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="closeCalModal()"></div>
+    <div class="relative bg-background rounded-t-3xl sm:rounded-3xl w-full max-w-screen-lg max-h-[90vh] overflow-y-auto shadow-2xl p-lg pb-xl">
+        <div class="flex items-center justify-between mb-lg">
+            <div class="flex items-center gap-md">
+                <button onclick="shiftModalMonth(-1)" class="p-2 rounded-full hover:bg-surface-container transition-colors">
+                    <span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+                </button>
+                <span id="modal-month-label" class="font-headline-md text-headline-md text-on-surface min-w-[160px] text-center"></span>
+                <button onclick="shiftModalMonth(1)" class="p-2 rounded-full hover:bg-surface-container transition-colors">
+                    <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+                </button>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="goToToday()" class="font-label-lg text-label-lg text-primary hover:bg-surface-container px-3 py-1.5 rounded-full transition-colors">Today</button>
+                <button onclick="closeCalModal()" class="p-2 rounded-full hover:bg-surface-container transition-colors">
+                    <span class="material-symbols-outlined text-on-surface-variant">close</span>
+                </button>
+            </div>
+        </div>
+        <!-- Year row for fast navigation -->
+        <div class="flex gap-2 overflow-x-auto hide-scrollbar mb-md pb-1" id="year-strip"></div>
+        <!-- Modal calendar grid -->
+        <div class="grid grid-cols-7 mb-2">
+            <div class="text-center font-label-sm text-outline py-2">Su</div>
+            <div class="text-center font-label-sm text-outline py-2">Mo</div>
+            <div class="text-center font-label-sm text-outline py-2">Tu</div>
+            <div class="text-center font-label-sm text-outline py-2">We</div>
+            <div class="text-center font-label-sm text-outline py-2">Th</div>
+            <div class="text-center font-label-sm text-outline py-2">Fr</div>
+            <div class="text-center font-label-sm text-outline py-2">Sa</div>
+        </div>
+        <div id="modal-cal-grid" class="grid grid-cols-7 gap-y-1 mb-lg"></div>
+        <!-- Events for selected day in modal -->
+        <div id="modal-day-tasks" class="border-t border-outline-variant/40 pt-md"></div>
+    </div>
+</div>
+
+<!-- Add Task Slide-up Panel -->
+<div id="add-panel-overlay" class="fixed inset-0 z-50 hidden" onclick="closeAddPanel()"></div>
+<div id="add-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-w-screen-lg mx-auto">
+    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
+    <h3 class="font-headline-md text-headline-md text-on-surface mb-md">New Task</h3>
+    <div class="space-y-md">
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Task Name</label>
+            <input id="new-task-name" type="text" placeholder="e.g. Water Monstera" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+        </div>
+        <div class="grid grid-cols-2 gap-md">
+            <div>
+                <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Location</label>
+                <input id="new-task-loc" type="text" placeholder="e.g. Living Room" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            </div>
+            <div>
+                <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Time</label>
+                <input id="new-task-time" type="time" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md"/>
+            </div>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Priority</label>
+            <div class="flex gap-2">
+                <button onclick="setPriority('high')" id="pri-high" class="priority-btn flex-1 py-2 rounded-xl border-2 border-error/40 bg-error-container/30 text-on-error-container font-label-lg text-label-lg transition-all">High</button>
+                <button onclick="setPriority('medium')" id="pri-medium" class="priority-btn flex-1 py-2 rounded-xl border-2 border-tertiary-container/40 bg-tertiary-fixed/30 text-on-tertiary-fixed-variant font-label-lg text-label-lg transition-all">Medium</button>
+                <button onclick="setPriority('low')" id="pri-low" class="priority-btn flex-1 py-2 rounded-xl border-2 border-primary-container/40 bg-primary-fixed/20 text-primary font-label-lg text-label-lg transition-all">Low</button>
+            </div>
+        </div>
+        <button onclick="saveTask()" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
+            Save Task
+        </button>
+    </div>
+</div>
+
 <!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
-<div class="flex justify-around items-center w-full px-base py-sm">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
-<span class="material-symbols-outlined active-icon">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<!-- My Garden -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<!-- Identify -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<!-- Community -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<!-- Learn -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
-<span class="material-symbols-outlined">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a>
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="index.html">
+        <span class="material-symbols-outlined active-icon">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
+        <span class="material-symbols-outlined">psychology_alt</span>
+        <span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
+        <span class="material-symbols-outlined">filter_center_focus</span>
+        <span class="font-label-sm text-label-sm">Identify</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-sm text-label-sm">Community</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
+        <span class="material-symbols-outlined">school</span>
+        <span class="font-label-sm text-label-sm">Learn</span>
+    </a>
 </div>
 </nav>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+const today = new Date();
+today.setHours(0,0,0,0);
+
+let selectedDate = new Date(today);
+let weekOffset = 0;       // weeks from current week
+let monthOffset = 0;      // months from current month
+let modalMonthOffset = 0; // for modal
+let currentView = 'week';
+let selectedPriority = 'medium';
+
+// All tasks stored as { id, date (YYYY-MM-DD), name, location, time, priority, done }
+let tasks = [
+    { id: 1, date: dateKey(today), name: 'Water Snake Plant', location: 'Living Room', time: '09:00', priority: 'high', done: false },
+    { id: 2, date: dateKey(today), name: 'Check Soil for Fiddle Leaf Fig', location: 'Dining Area', time: '11:30', priority: 'medium', done: false },
+    { id: 3, date: dateKey(today), name: 'Mist Calathea', location: 'Bedroom', time: '08:15', priority: 'low', done: true },
+];
+
+// seed a few tasks across other days this week for realism
+(function seedWeek() {
+    const d = new Date(today);
+    d.setDate(d.getDate() + 1);
+    tasks.push({ id: 4, date: dateKey(d), name: 'Fertilise Monstera', location: 'Study', time: '10:00', priority: 'medium', done: false });
+    d.setDate(d.getDate() + 1);
+    tasks.push({ id: 5, date: dateKey(d), name: 'Repot Peace Lily', location: 'Balcony', time: '14:00', priority: 'high', done: false });
+    const p = new Date(today);
+    p.setDate(p.getDate() - 1);
+    tasks.push({ id: 6, date: dateKey(p), name: 'Rotate Pothos', location: 'Kitchen', time: '09:30', priority: 'low', done: true });
+    tasks.push({ id: 7, date: dateKey(p), name: 'Prune Basil', location: 'Windowsill', time: '17:00', priority: 'medium', done: true });
+})();
+
+let nextId = 10;
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function dateKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function parseKey(k) { const [y,m,d] = k.split('-').map(Number); return new Date(y,m-1,d); }
+function isSame(a,b) { return dateKey(a)===dateKey(b); }
+function isToday(d) { return isSame(d, today); }
+function formatFull(d) {
+    return d.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function formatMonth(d) { return d.toLocaleDateString('en-AU',{month:'long',year:'numeric'}); }
+function dayName(d) { return d.toLocaleDateString('en-AU',{weekday:'short'}); }
+
+function tasksForDate(d) { return tasks.filter(t => t.date === dateKey(d)); }
+function tasksForWeek(anchorMonday) {
+    const days = [];
+    for (let i=0; i<7; i++) { const d = new Date(anchorMonday); d.setDate(d.getDate()+i); days.push(d); }
+    return tasks.filter(t => days.some(d => dateKey(d)===t.date));
+}
+
+function getWeekMonday(offset=0) {
+    const d = new Date(today);
+    const dow = d.getDay(); // 0=Sun
+    const diff = dow === 0 ? -6 : 1 - dow; // back to Monday
+    d.setDate(d.getDate() + diff + offset * 7);
+    return d;
+}
+
+// ─── Progress ─────────────────────────────────────────────────────────────────
+function updateProgress() {
+    // weekly progress: Mon–Sun of current real week
+    const monday = getWeekMonday(0);
+    const weekTasks = tasksForWeek(monday);
+    const total = weekTasks.length;
+    const done = weekTasks.filter(t => t.done).length;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-label').textContent = `${done} of ${total} tasks completed`;
+
+    let msg = '';
+    if (pct === 100) msg = "Perfect week — your plants are thriving! 🌿";
+    else if (pct >= 75) msg = "Almost there, great work this week!";
+    else if (pct >= 50) msg = "Halfway through — keep it going!";
+    else if (pct > 0)  msg = "Good start — your garden needs you!";
+    else               msg = "No tasks completed yet this week.";
+    document.getElementById('progress-desc').textContent = msg;
+}
+
+// ─── Week Strip ───────────────────────────────────────────────────────────────
+function renderWeekStrip() {
+    const monday = getWeekMonday(weekOffset);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+    document.getElementById('week-label').textContent =
+        `${monday.toLocaleDateString('en-AU',{day:'numeric',month:'short'})} – ${sunday.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}`;
+
+    const strip = document.getElementById('week-strip');
+    strip.innerHTML = '';
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(monday); d.setDate(monday.getDate() + i);
+        const isSelected = isSame(d, selectedDate);
+        const isT = isToday(d);
+        const dayTasks = tasksForDate(d);
+        const hasHigh = dayTasks.some(t => t.priority === 'high' && !t.done);
+        const hasAny = dayTasks.length > 0;
+
+        const btn = document.createElement('button');
+        btn.className = 'week-day flex flex-col items-center gap-1 py-2 px-2 rounded-xl transition-all duration-200 flex-1 ' +
+            (isSelected ? 'bg-primary text-on-primary shadow-md' : isT ? 'bg-primary-fixed/40 text-primary' : 'text-on-surface hover:bg-surface-container');
+        btn.innerHTML = `
+            <span class="font-label-sm text-[10px] uppercase">${dayName(d)}</span>
+            <span class="w-8 h-8 flex items-center justify-center font-label-lg rounded-full ${isSelected ? 'font-bold' : ''}">${d.getDate()}</span>
+            <span class="h-1 w-1 rounded-full ${hasAny ? (hasHigh ? 'bg-error' : (isSelected ? 'bg-on-primary/60' : 'bg-primary')) : 'bg-transparent'}"></span>
+        `;
+        btn.onclick = () => { selectedDate = new Date(d); weekOffset = Math.floor((d - today) / (7*86400000)) + (d < today ? -1 : 0); renderAll(); };
+        strip.appendChild(btn);
+    }
+}
+
+function shiftWeek(dir) {
+    weekOffset += dir;
+    // keep selectedDate in view
+    const monday = getWeekMonday(weekOffset);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+    if (selectedDate < monday || selectedDate > sunday) {
+        selectedDate = dir > 0 ? new Date(monday) : new Date(sunday);
+    }
+    renderAll();
+}
+
+// ─── Month Mini ───────────────────────────────────────────────────────────────
+function renderMonthMini() {
+    const ref = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1);
+    document.getElementById('month-label').textContent = formatMonth(ref);
+
+    const grid = document.getElementById('month-grid');
+    grid.innerHTML = '';
+
+    const firstDow = ref.getDay();
+    const daysInMonth = new Date(ref.getFullYear(), ref.getMonth()+1, 0).getDate();
+
+    // leading blanks
+    for (let i = 0; i < firstDow; i++) {
+        const blank = document.createElement('div'); blank.className = 'py-1';
+        grid.appendChild(blank);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(ref.getFullYear(), ref.getMonth(), d);
+        const isSelected = isSame(date, selectedDate);
+        const isT = isToday(date);
+        const dayTasks = tasksForDate(date);
+        const hasHigh = dayTasks.some(t => t.priority === 'high' && !t.done);
+        const hasAny = dayTasks.length > 0;
+
+        const btn = document.createElement('button');
+        btn.className = 'flex flex-col items-center py-1 rounded-lg transition-all ' +
+            (isSelected ? 'bg-primary text-on-primary' : isT ? 'bg-primary-fixed/40 text-primary font-bold' : 'hover:bg-surface-container text-on-surface');
+        btn.innerHTML = `<span class="font-label-lg text-[13px]">${d}</span>` +
+            `<span class="h-1 w-1 rounded-full mt-0.5 ${hasAny ? (hasHigh ? 'bg-error' : (isSelected ? 'bg-on-primary/60':'bg-primary')) : 'bg-transparent'}"></span>`;
+        btn.onclick = () => { selectedDate = new Date(date); renderAll(); };
+        grid.appendChild(btn);
+    }
+}
+
+function shiftMonth(dir) {
+    monthOffset += dir;
+    const ref = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1);
+    if (!isSame(new Date(ref.getFullYear(), ref.getMonth(), selectedDate.getDate()), selectedDate)) {
+        selectedDate = new Date(ref.getFullYear(), ref.getMonth(), 1);
+    }
+    renderAll();
+}
+
+// ─── Task List ────────────────────────────────────────────────────────────────
+function renderTaskList() {
+    const list = document.getElementById('task-list');
+    const empty = document.getElementById('empty-state');
+    const dayTasks = tasksForDate(selectedDate).sort((a,b) => a.time.localeCompare(b.time));
+
+    document.getElementById('selected-date-label').textContent =
+        isToday(selectedDate) ? "Today's Tasks" : formatFull(selectedDate).split(',').slice(0,2).join(',');
+    document.getElementById('task-count-label').textContent =
+        dayTasks.length === 0 ? 'No tasks' : `${dayTasks.filter(t=>!t.done).length} remaining · ${dayTasks.filter(t=>t.done).length} done`;
+
+    list.innerHTML = '';
+
+    if (dayTasks.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+
+    dayTasks.forEach(task => {
+        const borderColor = task.priority === 'high' ? 'border-error' : task.priority === 'medium' ? 'border-tertiary-container' : 'border-primary-container';
+        const badgeBg = task.priority === 'high' ? 'bg-error-container text-on-error-container' :
+                        task.priority === 'medium' ? 'bg-tertiary-fixed text-on-tertiary-fixed-variant' :
+                        'bg-primary-fixed text-on-primary-fixed-variant';
+        const badgeLabel = task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
+
+        const card = document.createElement('div');
+        card.className = `bg-surface-container-lowest rounded-xl shadow-sm border-l-4 ${borderColor} flex items-start gap-gutter p-md transition-opacity ${task.done ? 'opacity-55' : ''}`;
+        card.dataset.id = task.id;
+        card.innerHTML = `
+            <div class="mt-0.5 flex-shrink-0">
+                <button onclick="toggleTask(${task.id})" class="w-6 h-6 rounded-md border-2 ${task.done ? 'bg-primary border-primary' : 'border-outline'} flex items-center justify-center transition-all">
+                    ${task.done ? '<span class="material-symbols-outlined text-on-primary" style="font-size:14px">check</span>' : ''}
+                </button>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start gap-2">
+                    <h4 class="font-label-lg text-on-surface ${task.done ? 'line-through text-on-surface-variant' : ''} truncate">${task.name}</h4>
+                    <span class="font-label-sm px-2 py-0.5 rounded-full flex-shrink-0 ${badgeBg}">${badgeLabel}</span>
+                </div>
+                <p class="font-body-md text-on-surface-variant mt-0.5 ${task.done ? 'line-through' : ''}">${task.location}</p>
+                <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1 ${task.done ? 'text-outline' : 'text-primary'}">
+                        <span class="material-symbols-outlined text-[16px]">schedule</span>
+                        <span class="font-label-sm">${formatTime(task.time)}</span>
+                    </div>
+                    <button onclick="deleteTask(${task.id})" class="p-1 rounded-full hover:bg-error-container/40 text-outline hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">delete</span>
+                    </button>
+                </div>
+            </div>
+        `;
+        list.appendChild(card);
+    });
+}
+
+function formatTime(t) {
+    if (!t) return '';
+    const [h,m] = t.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    return `${h%12||12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function toggleTask(id) {
+    const t = tasks.find(t => t.id === id);
+    if (t) { t.done = !t.done; renderAll(); }
+}
+
+function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    renderAll();
+}
+
+// ─── Add Task ─────────────────────────────────────────────────────────────────
+function openAddPanel() {
+    document.getElementById('add-panel').classList.add('open');
+    document.getElementById('add-panel-overlay').classList.remove('hidden');
+    document.getElementById('new-task-name').focus();
+}
+function closeAddPanel() {
+    document.getElementById('add-panel').classList.remove('open');
+    document.getElementById('add-panel-overlay').classList.add('hidden');
+}
+function setPriority(p) {
+    selectedPriority = p;
+    ['high','medium','low'].forEach(x => {
+        document.getElementById('pri-'+x).style.opacity = x === p ? '1' : '0.45';
+        document.getElementById('pri-'+x).style.transform = x === p ? 'scale(1.04)' : 'scale(1)';
+    });
+}
+function saveTask() {
+    const name = document.getElementById('new-task-name').value.trim();
+    if (!name) { document.getElementById('new-task-name').focus(); return; }
+    tasks.push({
+        id: nextId++,
+        date: dateKey(selectedDate),
+        name,
+        location: document.getElementById('new-task-loc').value.trim() || '—',
+        time: document.getElementById('new-task-time').value || '08:00',
+        priority: selectedPriority,
+        done: false
+    });
+    document.getElementById('new-task-name').value = '';
+    document.getElementById('new-task-loc').value = '';
+    document.getElementById('new-task-time').value = '';
+    closeAddPanel();
+    renderAll();
+}
+
+// ─── Full Calendar Modal ───────────────────────────────────────────────────────
+function openCalModal() {
+    modalMonthOffset = monthOffset || Math.round((selectedDate - today) / (30*86400000));
+    renderModal();
+    renderYearStrip();
+    document.getElementById('cal-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+function closeCalModal() {
+    document.getElementById('cal-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+function shiftModalMonth(dir) { modalMonthOffset += dir; renderModal(); renderYearStrip(); }
+function goToToday() { selectedDate = new Date(today); modalMonthOffset = 0; renderModal(); renderYearStrip(); }
+
+function renderYearStrip() {
+    const strip = document.getElementById('year-strip');
+    strip.innerHTML = '';
+    const refYear = new Date(today.getFullYear(), today.getMonth() + modalMonthOffset).getFullYear();
+    for (let y = refYear - 3; y <= refYear + 5; y++) {
+        const btn = document.createElement('button');
+        btn.className = `flex-shrink-0 px-4 py-1.5 rounded-full font-label-lg text-label-lg transition-colors ${y === refYear ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'}`;
+        btn.textContent = y;
+        btn.onclick = () => { modalMonthOffset = (y - today.getFullYear()) * 12 + (today.getMonth()); renderModal(); renderYearStrip(); };
+        strip.appendChild(btn);
+    }
+}
+
+function renderModal() {
+    const ref = new Date(today.getFullYear(), today.getMonth() + modalMonthOffset, 1);
+    document.getElementById('modal-month-label').textContent = formatMonth(ref);
+
+    const grid = document.getElementById('modal-cal-grid');
+    grid.innerHTML = '';
+
+    const firstDow = ref.getDay();
+    const daysInMonth = new Date(ref.getFullYear(), ref.getMonth()+1, 0).getDate();
+
+    for (let i = 0; i < firstDow; i++) {
+        const blank = document.createElement('div'); blank.className = 'py-1';
+        grid.appendChild(blank);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(ref.getFullYear(), ref.getMonth(), d);
+        const isSelected = isSame(date, selectedDate);
+        const isT = isToday(date);
+        const dayTasks = tasksForDate(date);
+        const hasHigh = dayTasks.some(t => t.priority === 'high' && !t.done);
+        const hasAny = dayTasks.length > 0;
+
+        const btn = document.createElement('button');
+        btn.className = `flex flex-col items-center py-2 rounded-xl transition-all w-full ${
+            isSelected ? 'bg-primary text-on-primary shadow-md' :
+            isT ? 'bg-primary-fixed/40 text-primary font-bold' :
+            'hover:bg-surface-container text-on-surface'
+        }`;
+        btn.innerHTML = `<span class="font-label-lg">${d}</span>` +
+            `<span class="h-1 w-1 rounded-full mt-1 ${hasAny ? (hasHigh ? 'bg-error' : (isSelected ? 'bg-on-primary/60':'bg-primary-container')) : 'bg-transparent'}"></span>`;
+        btn.onclick = () => {
+            selectedDate = new Date(date);
+            renderModal();
+            renderModalDayTasks();
+        };
+        grid.appendChild(btn);
+    }
+    renderModalDayTasks();
+}
+
+function renderModalDayTasks() {
+    const container = document.getElementById('modal-day-tasks');
+    const dayTasks = tasksForDate(selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
+    container.innerHTML = `<h4 class="font-headline-md text-headline-md text-on-surface mb-md">${isToday(selectedDate) ? "Today" : formatFull(selectedDate).split(',').slice(0,2).join(',')}</h4>`;
+    if (dayTasks.length === 0) {
+        container.innerHTML += `<p class="font-body-md text-on-surface-variant">No tasks — enjoy the day!</p>`;
+        return;
+    }
+    dayTasks.forEach(t => {
+        const row = document.createElement('div');
+        const borderColor = t.priority === 'high' ? 'border-error' : t.priority === 'medium' ? 'border-tertiary-container' : 'border-primary-container';
+        row.className = `flex items-center gap-md p-md rounded-xl border-l-4 ${borderColor} bg-surface-container-lowest mb-3 ${t.done ? 'opacity-55' : ''}`;
+        row.innerHTML = `
+            <button onclick="toggleTask(${t.id}); renderModal(); renderModalDayTasks(); renderAll();" class="w-6 h-6 rounded-md border-2 ${t.done ? 'bg-primary border-primary' : 'border-outline'} flex items-center justify-center flex-shrink-0">
+                ${t.done ? '<span class="material-symbols-outlined text-on-primary" style="font-size:14px">check</span>' : ''}
+            </button>
+            <div class="flex-1 min-w-0">
+                <p class="font-label-lg text-on-surface ${t.done ? 'line-through text-on-surface-variant' : ''} truncate">${t.name}</p>
+                <p class="font-label-sm text-outline">${t.location} · ${formatTime(t.time)}</p>
+            </div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+// ─── View Switch ──────────────────────────────────────────────────────────────
+function setView(v) {
+    currentView = v;
+    document.getElementById('week-view').classList.toggle('hidden', v !== 'week');
+    document.getElementById('month-view').classList.toggle('hidden', v !== 'month');
+    document.getElementById('btn-week').classList.toggle('active', v === 'week');
+    document.getElementById('btn-month').classList.toggle('active', v === 'month');
+    document.getElementById('btn-week').classList.toggle('text-on-surface-variant', v !== 'week');
+    document.getElementById('btn-month').classList.toggle('text-on-surface-variant', v !== 'month');
+    renderAll();
+}
+
+// ─── Main Render ──────────────────────────────────────────────────────────────
+function renderAll() {
+    renderWeekStrip();
+    renderMonthMini();
+    renderTaskList();
+    updateProgress();
+}
+
+// Keyboard shortcut: Escape closes modal/panel
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeCalModal(); closeAddPanel(); }
+});
+
+// Init
+renderAll();
+// Animate progress bar after a tick
+setTimeout(updateProgress, 100);
+</script>
 </body></html>
