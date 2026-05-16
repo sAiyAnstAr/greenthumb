@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Community - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "on-background": "#1b1c1a",
-                    "surface-tint": "#3b6934",
-                    "on-secondary-fixed": "#2c160e",
-                    "surface-container-low": "#f4f4f0",
-                    "surface-bright": "#faf9f5",
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary-container": "#fed3c7",
                     "primary-fixed-dim": "#a1d494",
-                    "on-primary-container": "#9dd090",
-                    "primary": "#154212",
-                    "on-primary-fixed": "#002201",
-                    "inverse-surface": "#2f312e",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-container": "#795950",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-tertiary": "#ffffff",
-                    "inverse-primary": "#a1d494",
-                    "tertiary-fixed": "#ffdad3",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "surface": "#faf9f5",
-                    "on-error": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface-variant": "#e3e2df",
-                    "on-secondary": "#ffffff",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f2f1ed",
                     "surface-container-high": "#e9e8e4",
-                    "outline-variant": "#c2c9bb",
-                    "on-primary-fixed-variant": "#23501e",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "primary-fixed": "#bcf0ae",
                     "background": "#faf9f5",
-                    "tertiary-container": "#8d3220",
+                    "on-tertiary-container": "#ffaf9e",
                     "on-secondary-fixed-variant": "#5d4037",
                     "error-container": "#ffdad6",
-                    "tertiary": "#6e1c0c",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "surface-variant": "#e3e2df",
+                    "outline-variant": "#c2c9bb",
                     "surface-container-lowest": "#ffffff",
-                    "surface-container": "#efeeea",
-                    "secondary-container": "#fed3c7",
+                    "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
                     "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
                     "outline": "#72796e",
-                    "inverse-on-surface": "#f2f1ed",
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary": "#77574d",
-                    "primary-fixed": "#bcf0ae",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
                     "on-primary": "#ffffff",
                     "on-surface-variant": "#42493e",
-                    "on-error-container": "#93000a",
-                    "surface-dim": "#dbdad6"
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -68,74 +68,66 @@
                     "full": "9999px"
             },
             "spacing": {
-                    "gutter": "16px",
-                    "container-margin": "20px",
-                    "sm": "12px",
-                    "base": "8px",
-                    "md": "24px",
                     "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
                     "xs": "4px",
-                    "lg": "40px"
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
             },
             "fontFamily": {
                     "label-sm": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
                     "headline-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
                     "headline-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"]
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
             },
             "fontSize": {
                     "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
                     "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                     "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
             }
           },
         },
       }
     </script>
 <style>
+
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px,100dvh); }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    /* Nav Drawer */
     #nav-overlay { transition: opacity 0.25s ease; }
     #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px, 85vw); }
+    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px,85vw); }
     #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
+    .nav-item { transition: background 0.15s ease; }
     .nav-item.active { background: #bcf0ae; color: #002201; }
     .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item { transition: background 0.15s ease; }
-    .nav-sub-item.active { color: #154212; font-weight: 700; }
     .nav-sub-item:hover { background: #efeeea; }
     .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
     .nav-chevron { transition: transform 0.2s ease; }
+    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
     .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
     .nav-sub-list.collapsed { max-height: 0 !important; }
-    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
-    /* Post panel */
-    #new-post-panel { transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
-    #new-post-panel.open { transform: translateY(0); }
-    .post-cat-btn.selected { border-color: #154212; background: #bcf0ae; color: #002201; }
-    /* Post card */
-    .post-card { animation: fadeUp 0.3s ease; }
+    #swipe-zone { position:fixed; left:0; top:0; bottom:0; width:20px; z-index:45; }
+
+    #new-post-panel { transform:translateY(100%); transition:transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+    #new-post-panel.open { transform:translateY(0); }
+    .post-card { animation:fadeUp 0.3s ease; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-    /* Image preview */
-    .img-preview { position: relative; display: inline-block; }
-    .img-preview button { position: absolute; top: -8px; right: -8px; }
-    /* Chip active */
-    .comm-chip.active { background: #2d5a27; color: #9dd090; }
-    /* Skeleton */
-    .skeleton { background: linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%); background-size:200% 100%; animation: shimmer 1.4s infinite; }
+    .comm-chip.active { background:#2d5a27; color:#9dd090; }
+    .post-cat-btn.selected { border-color:#154212 !important; background:#bcf0ae !important; color:#002201 !important; }
+    .skeleton { background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 </style>
 </head>
@@ -197,110 +189,88 @@
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div></div>
 
-<!-- Header -->
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95"><span class="material-symbols-outlined text-primary">menu</span></button>
-<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
+    <button id="menu-btn" class="p-2 rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">menu</span></button>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div id="avatar-btn" class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
 
 <main class="max-w-screen-lg mx-auto px-container-margin pt-lg space-y-lg">
-<!-- Hero -->
-<section>
-    <h2 class="font-display-lg text-display-lg text-primary mb-xs">Community</h2>
-    <p class="font-body-lg text-body-lg text-on-surface-variant">Connect with fellow gardeners, share your plants, and get expert advice.</p>
-</section>
-
-<!-- Search + Post button -->
-<section class="space-y-md">
-    <div class="flex gap-base items-center">
-        <div class="relative flex-grow">
-            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
-            <input id="search-input" oninput="filterBySearch(this.value)" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search posts..." type="text"/>
+    <section>
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Community</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Connect with fellow gardeners, share your plants, and get expert advice.</p>
+    </section>
+    <section class="space-y-md">
+        <div class="flex gap-base items-center">
+            <div class="relative flex-grow">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+                <input id="search-input" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search posts..." type="text"/>
+            </div>
+            <button id="new-post-btn" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg flex-shrink-0">
+                <span class="material-symbols-outlined">add</span><span>Post</span>
+            </button>
         </div>
-        <button onclick="openNewPost()" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg flex-shrink-0">
-            <span class="material-symbols-outlined">add</span><span>Post</span>
-        </button>
+        <div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+            <button data-filter="all" class="comm-chip active flex-shrink-0 bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg transition-all">All Posts</button>
+            <button data-filter="help" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg transition-all">Help Needed</button>
+            <button data-filter="tips" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg transition-all">Plant Tips</button>
+            <button data-filter="showcase" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg transition-all">Showcase</button>
+            <button data-filter="swap" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg transition-all">Swap</button>
+        </div>
+    </section>
+    <div id="feed" class="space-y-lg pb-8">
+        <div class="skeleton h-48 rounded-2xl"></div>
+        <div class="skeleton h-36 rounded-2xl"></div>
+        <div class="skeleton h-48 rounded-2xl"></div>
     </div>
-    <!-- Category chips -->
-    <div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
-        <button onclick="setFilter('all')" id="chip-all" class="comm-chip active flex-shrink-0 bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">All Posts</button>
-        <button onclick="setFilter('help')" id="chip-help" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Help Needed</button>
-        <button onclick="setFilter('tips')" id="chip-tips" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Plant Tips</button>
-        <button onclick="setFilter('showcase')" id="chip-showcase" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Showcase</button>
-        <button onclick="setFilter('swap')" id="chip-swap" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Swap</button>
+    <div id="empty-state" class="hidden text-center py-xl">
+        <span class="material-symbols-outlined text-[56px] text-outline" style="font-variation-settings:'FILL' 1">forum</span>
+        <p class="font-headline-md text-on-surface-variant mt-md">No posts yet — be the first!</p>
     </div>
-</section>
-
-<!-- Feed -->
-<div id="feed" class="space-y-lg pb-8">
-    <!-- Loading skeletons -->
-    <div class="skeleton h-48 rounded-2xl"></div>
-    <div class="skeleton h-36 rounded-2xl"></div>
-    <div class="skeleton h-48 rounded-2xl"></div>
-</div>
-
-<!-- Empty state -->
-<div id="empty-state" class="hidden text-center py-xl">
-    <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1">forum</span>
-    <p class="font-headline-md text-on-surface-variant">No posts yet</p>
-    <p class="font-body-md text-outline mt-1">Be the first to share something!</p>
-</div>
-
 </main>
 
 <!-- New Post Panel -->
-<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm" onclick="closeNewPost()"></div>
+<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm"></div>
 <div id="new-post-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-h-[90vh] overflow-y-auto">
     <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
     <div class="flex items-center justify-between mb-lg">
         <h3 class="font-headline-md text-headline-md text-on-surface">New Post</h3>
-        <button onclick="closeNewPost()" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant">close</span></button>
+        <button id="close-post-btn" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant">close</span></button>
     </div>
     <div class="space-y-md">
-        <!-- Category -->
         <div>
             <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Category</label>
             <div class="flex flex-wrap gap-2">
-                <button onclick="selectPostCat('help')" id="pcat-help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🆘 Help Needed</button>
-                <button onclick="selectPostCat('tips')" id="pcat-tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌿 Plant Tips</button>
-                <button onclick="selectPostCat('showcase')" id="pcat-showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌸 Showcase</button>
-                <button onclick="selectPostCat('swap')" id="pcat-swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🔄 Swap</button>
+                <button data-cat="help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-on-surface-variant transition-all">Help Needed</button>
+                <button data-cat="tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-on-surface-variant transition-all">Plant Tips</button>
+                <button data-cat="showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-on-surface-variant transition-all">Showcase</button>
+                <button data-cat="swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-on-surface-variant transition-all">Swap</button>
             </div>
         </div>
-        <!-- Title -->
         <div>
             <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Title <span class="text-error">*</span></label>
-            <input id="post-title" type="text" maxlength="120" placeholder="What's on your mind?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            <input id="post-title" type="text" maxlength="120" placeholder="What's on your mind?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary text-body-md placeholder:text-outline"/>
         </div>
-        <!-- Body -->
         <div>
             <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Details</label>
-            <textarea id="post-body" rows="4" maxlength="1000" placeholder="Share more details, ask your question, or describe your plant..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
+            <textarea id="post-body" rows="4" maxlength="1000" placeholder="Share more details..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary text-body-md placeholder:text-outline resize-none"></textarea>
         </div>
-        <!-- Image upload -->
         <div>
             <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Photo <span class="text-outline">(optional)</span></label>
-            <div id="image-preview-area" class="hidden mb-2">
-                <div class="relative inline-block">
-                    <img id="image-preview" src="" alt="" class="h-32 rounded-xl object-cover border border-outline-variant/30"/>
-                    <button onclick="removeImage()" class="absolute -top-2 -right-2 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-[12px] shadow">✕</button>
-                </div>
+            <div id="img-preview-wrap" class="hidden mb-2 relative inline-block">
+                <img id="img-preview" src="" class="h-28 rounded-xl object-cover border border-outline-variant/30"/>
+                <button id="remove-img-btn" class="absolute -top-2 -right-2 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-xs shadow">✕</button>
             </div>
-            <button onclick="document.getElementById('image-input').click()" class="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-outline-variant/40 text-on-surface-variant hover:border-primary hover:text-primary transition-all font-label-lg text-label-lg">
-                <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
-                Add Photo
+            <button id="add-photo-btn" class="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-outline-variant/40 text-on-surface-variant hover:border-primary hover:text-primary transition-all font-label-lg">
+                <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span> Add Photo
             </button>
-            <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)"/>
+            <input type="file" id="post-img-input" accept="image/*" class="hidden"/>
         </div>
-        <!-- Submit -->
-        <button onclick="submitPost()" id="submit-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
-            Share with Community
-        </button>
+        <button id="submit-post-btn" class="w-full bg-primary text-on-primary font-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">Share with Community</button>
         <p id="post-error" class="hidden text-error font-label-sm text-center"></p>
     </div>
 </div>
@@ -316,459 +286,378 @@
 </div>
 </nav>
 
+<!-- NAV SCRIPT -->
 <script>
 
-// ── Supabase ──────────────────────────────────────────────────────────────
-// Safe Supabase init
-if (typeof supabase === 'undefined') {
-    console.error('Supabase library not loaded');
-}
-const { createClient } = supabase;
-const sb = createClient('https://vgvldoegptvzijlpsrtu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
-
-// ── State ─────────────────────────────────────────────────────────────────
-let allPosts = [];
-let currentFilter = 'all';
-let currentSearch = '';
-let selectedCat = null;
-let selectedImageFile = null;
-let isSubmitting = false;
-
-// ── Category meta ─────────────────────────────────────────────────────────
-const CAT = {
-    help:     { label: 'Help Needed',  colour: 'bg-error-container text-on-error-container' },
-    tips:     { label: 'Plant Tips',   colour: 'bg-primary-fixed text-on-primary-fixed-variant' },
-    showcase: { label: 'Showcase',     colour: 'bg-secondary-container text-on-secondary-container' },
-    swap:     { label: 'Swap',         colour: 'bg-tertiary-fixed text-on-tertiary-fixed-variant' },
-};
-
-function catMeta(cat) {
-    return CAT[cat] || { label: cat, colour: 'bg-surface-container text-on-surface-variant' };
-}
-
-function timeAgo(iso) {
-    const diff = (Date.now() - new Date(iso)) / 1000;
-    if (diff < 60)    return 'just now';
-    if (diff < 3600)  return Math.floor(diff/60) + 'm ago';
-    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-    return Math.floor(diff/86400) + 'd ago';
-}
-
-function initials(name) {
-    return (name || 'G').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-}
-
-// ── Load posts ────────────────────────────────────────────────────────────
-async function loadPosts() {
-    try {
-        const { data, error } = await sb
-            .from('posts')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        allPosts = data || [];
-        renderFeed();
-    } catch(e) {
-        console.error('Load posts error:', e);
-        document.getElementById('feed').innerHTML = `
-            <div class="bg-error-container rounded-2xl p-md text-center">
-                <p class="font-label-lg text-on-error-container mb-1">Could not load posts</p>
-                <p class="font-label-sm text-on-error-container/70">${e.message || 'Check console for details'}</p>
-                <button onclick="loadPosts()" class="mt-md font-label-lg text-primary hover:underline bg-white px-4 py-2 rounded-full">Retry</button>
-            </div>`;
-    }
-}
-
-// ── Render feed ───────────────────────────────────────────────────────────
-function renderFeed() {
-    const feed = document.getElementById('feed');
-    const empty = document.getElementById('empty-state');
-
-    let posts = allPosts;
-
-    // Filter by category
-    if (currentFilter !== 'all') {
-        posts = posts.filter(p => p.category === currentFilter);
-    }
-
-    // Filter by search
-    if (currentSearch.trim()) {
-        const q = currentSearch.toLowerCase();
-        posts = posts.filter(p =>
-            p.title.toLowerCase().includes(q) ||
-            (p.body || '').toLowerCase().includes(q)
-        );
-    }
-
-    if (posts.length === 0) {
-        feed.innerHTML = '';
-        empty.classList.remove('hidden');
-        return;
-    }
-    empty.classList.add('hidden');
-
-    feed.innerHTML = posts.map(post => {
-        const meta = catMeta(post.category);
-        const inits = initials(post.author);
-        const colours = ['bg-primary-container text-on-primary-container',
-                         'bg-secondary-container text-on-secondary-container',
-                         'bg-tertiary-fixed text-on-tertiary-fixed-variant'];
-        const avatarCol = colours[inits.charCodeAt(0) % colours.length];
-
-        return `
-        <article class="post-card bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant/20">
-            <!-- Post header -->
-            <div class="flex items-center justify-between px-md pt-md pb-sm">
-                <div class="flex items-center gap-sm">
-                    <div class="w-10 h-10 rounded-full ${avatarCol} flex items-center justify-center font-bold text-[13px] flex-shrink-0">${inits}</div>
-                    <div>
-                        <p class="font-label-lg text-on-surface">${post.author}</p>
-                        <p class="font-label-sm text-outline">${timeAgo(post.created_at)}</p>
-                    </div>
-                </div>
-                <span class="font-label-sm px-3 py-1 rounded-full ${meta.colour}">${meta.label}</span>
-            </div>
-            <!-- Post body -->
-            <div class="px-md pb-sm">
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">${post.title}</h3>
-                ${post.body ? `<p class="font-body-md text-on-surface-variant">${post.body}</p>` : ''}
-            </div>
-            <!-- Image -->
-            ${post.image_url ? `
-            <div class="w-full overflow-hidden max-h-72">
-                <img src="${post.image_url}" alt="Post image" class="w-full object-cover"/>
-            </div>` : ''}
-            <!-- Actions -->
-            <div class="flex items-center gap-lg px-md py-sm border-t border-outline-variant/20">
-                <button onclick="likePost('${post.id}', this)" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined">favorite_border</span>
-                    <span class="like-count">${post.likes || 0}</span>
-                </button>
-                <a href="post-detail.html?id=${post.id}" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">chat_bubble</span>
-                    <span>Reply</span>
-                </a>
-                <button onclick="sharePost('${post.title}')" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">share</span>
-                </button>
-                ${post.author === 'Gardener' ? `
-                <button onclick="deletePost('${post.id}', this)" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">delete</span>
-                </button>` : '<span class="ml-auto"></span>'}
-            </div>
-        </article>`;
-    }).join('');
-}
-
-// ── Filters ───────────────────────────────────────────────────────────────
-function setFilter(cat) {
-    currentFilter = cat;
-    document.querySelectorAll('.comm-chip').forEach(c => {
-        c.classList.remove('active', 'bg-primary-container', 'text-on-primary-container');
-        c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
-    });
-    const btn = document.getElementById('chip-' + cat);
-    if (btn) {
-        btn.classList.add('active', 'bg-primary-container', 'text-on-primary-container');
-        btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
-    }
-    renderFeed();
-}
-
-function filterBySearch(val) {
-    currentSearch = val;
-    renderFeed();
-}
-
-// ── Like ──────────────────────────────────────────────────────────────────
-async function likePost(id, btn) {
-    const post = allPosts.find(p => p.id === id);
-    if (!post) return;
-    post.likes = (post.likes || 0) + 1;
-    btn.querySelector('.like-count').textContent = post.likes;
-    btn.querySelector('.material-symbols-outlined').textContent = 'favorite';
-    btn.querySelector('.material-symbols-outlined').style.color = '#ba1a1a';
-    btn.disabled = true;
-    await sb.from('posts').update({ likes: post.likes }).eq('id', id);
-}
-
-// ── Delete post ───────────────────────────────────────────────────────────
-async function deletePost(id, btn) {
-    if (!confirm('Delete this post?')) return;
-    btn.disabled = true;
-    try {
-        const { error } = await sb.from('posts').delete().eq('id', id);
-        if (error) throw error;
-        allPosts = allPosts.filter(p => p.id !== id);
-        renderFeed();
-    } catch(e) {
-        console.error('Delete error:', e);
-        btn.disabled = false;
-        alert('Could not delete post. Please try again.');
-    }
-}
-
-// ── Share ─────────────────────────────────────────────────────────────────
-function sharePost(title) {
-    if (navigator.share) {
-        navigator.share({ title: title + ' - Greenthumb Community', url: window.location.href });
-    } else {
-        navigator.clipboard?.writeText(window.location.href);
-    }
-}
-
-// ── New Post Panel ────────────────────────────────────────────────────────
-function openNewPost() {
-    document.getElementById('new-post-panel').classList.add('open');
-    document.getElementById('post-overlay').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    selectedCat = null;
-    selectedImageFile = null;
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-body').value = '';
-    document.getElementById('post-error').classList.add('hidden');
-    document.getElementById('image-preview-area').classList.add('hidden');
-    document.getElementById('image-input').value = '';
-    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
-}
-
-function closeNewPost() {
-    document.getElementById('new-post-panel').classList.remove('open');
-    document.getElementById('post-overlay').classList.add('hidden');
-    document.body.style.overflow = '';
-}
-
-function selectPostCat(cat) {
-    selectedCat = cat;
-    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
-    const btn = document.getElementById('pcat-' + cat);
-    if (btn) btn.classList.add('selected');
-}
-
-// ── Image handling ────────────────────────────────────────────────────────
-function handleImageSelect(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-        showPostError('Image must be under 5MB');
-        return;
-    }
-    selectedImageFile = file;
-    const reader = new FileReader();
-    reader.onload = ev => {
-        document.getElementById('image-preview').src = ev.target.result;
-        document.getElementById('image-preview-area').classList.remove('hidden');
-    };
-    reader.readAsDataURL(file);
-}
-
-function removeImage() {
-    selectedImageFile = null;
-    document.getElementById('image-preview-area').classList.add('hidden');
-    document.getElementById('image-input').value = '';
-}
-
-function showPostError(msg) {
-    const el = document.getElementById('post-error');
-    el.textContent = msg;
-    el.classList.remove('hidden');
-}
-
-// ── Submit post ───────────────────────────────────────────────────────────
-async function submitPost() {
-    if (isSubmitting) return;
-    const title = document.getElementById('post-title').value.trim();
-    const body  = document.getElementById('post-body').value.trim();
-
-    document.getElementById('post-error').classList.add('hidden');
-
-    if (!title) { showPostError('Please add a title'); document.getElementById('post-title').focus(); return; }
-    if (!selectedCat) { showPostError('Please select a category'); return; }
-
-    isSubmitting = true;
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sharing…';
-    btn.disabled = true;
-
-    try {
-        let imageUrl = null;
-
-        // Upload image if selected
-        if (selectedImageFile) {
-            try {
-                const ext = selectedImageFile.name.split('.').pop();
-                const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-                const { error: uploadErr } = await sb.storage
-                    .from('post-images')
-                    .upload(path, selectedImageFile, { cacheControl: '3600', upsert: false });
-
-                if (!uploadErr) {
-                    const { data: urlData } = sb.storage.from('post-images').getPublicUrl(path);
-                    imageUrl = urlData.publicUrl;
-                } else {
-                    console.warn('Image upload failed, posting without image:', uploadErr.message);
-                }
-            } catch(imgErr) {
-                console.warn('Image upload error, posting without image:', imgErr);
-            }
-        }
-
-        // Insert post
-        const { data, error } = await sb.from('posts').insert({
-            author: 'Gardener',
-            category: selectedCat,
-            title,
-            body: body || null,
-            image_url: imageUrl,
-            likes: 0
-        }).select().single();
-
-        if (error) throw error;
-
-        // Add to local array and re-render
-        allPosts.unshift(data);
-        closeNewPost();
-        setFilter('all');
-        renderFeed();
-
-        // Scroll to top of feed
-        document.getElementById('feed').scrollIntoView({ behavior: 'smooth' });
-
-    } catch(e) {
-        console.error('Submit error:', e);
-        showPostError('Could not post — please try again');
-    } finally {
-        isSubmitting = false;
-        btn.textContent = 'Share with Community';
-        btn.disabled = false;
-    }
-}
-
-// ── Real-time subscription ────────────────────────────────────────────────
-sb.channel('posts-channel')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, payload => {
-        // Only add if not already in list (avoid duplicating own posts)
-        if (!allPosts.find(p => p.id === payload.new.id)) {
-            allPosts.unshift(payload.new);
-            renderFeed();
-        }
-    })
-    .subscribe();
-
-
-try {
-// ── Nav Drawer ────────────────────────────────────────────────────────────
 function openNav() {
-    document.getElementById('nav-drawer').classList.add('open');
-    document.getElementById('nav-overlay').classList.remove('hidden');
+    var d = document.getElementById('nav-drawer');
+    var o = document.getElementById('nav-overlay');
+    if(d) d.classList.add('open');
+    if(o) o.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
 function closeNav() {
-    document.getElementById('nav-drawer').classList.remove('open');
-    document.getElementById('nav-overlay').classList.add('hidden');
+    var d = document.getElementById('nav-drawer');
+    var o = document.getElementById('nav-overlay');
+    if(d) d.classList.remove('open');
+    if(o) o.classList.add('hidden');
     document.body.style.overflow = '';
 }
 function toggleGroup(id) {
-    const list = document.getElementById(id);
+    var list = document.getElementById(id);
     if (!list) return;
-    const btn = list.previousElementSibling;
-    const isCollapsed = list.classList.contains('collapsed');
-    list.classList.toggle('collapsed', !isCollapsed);
-    if (btn) btn.classList.toggle('open', isCollapsed);
-    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
+    var btn = list.previousElementSibling;
+    var collapsed = list.classList.contains('collapsed');
+    list.classList.toggle('collapsed', !collapsed);
+    if (btn) btn.classList.toggle('open', collapsed);
+    list.style.maxHeight = collapsed ? list.scrollHeight + 'px' : null;
 }
-
-// Set active nav item
 function setActiveNav(pageId) {
-    // Map of pageId to nav element id and which group to open
-    const map = {
-        'home':           { item: 'nav-home', group: null },
-        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
-        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
-        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
-        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
-        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
-        'scanner':        { item: 'nav-scanner', group: null },
-        'community':      { item: 'nav-community', group: null },
-        'learn':          { item: 'nav-learn', group: 'learn-group' },
-        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
-        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
-        'articles':       { item: 'nav-articles', group: 'learn-group' },
-        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
-        'recommendations':{ item: 'nav-recommendations', group: null },
-        'calendar':       { item: 'nav-calendar', group: null },
-        'profile':        { item: 'nav-profile', group: null },
-        'settings':       { item: 'nav-settings', group: null },
+    var map = {
+        'home':'nav-home','my-garden':'nav-my-garden','garden-health':'nav-garden-health',
+        'garden-planner':'nav-garden-planner','garden-diary':'nav-garden-diary',
+        'add-plant':'nav-add-plant','scanner':'nav-scanner','community':'nav-community',
+        'learn':'nav-learn','encyclopedia':'nav-encyclopedia','search-guides':'nav-search-guides',
+        'articles':'nav-articles','journeys':'nav-journeys','recommendations':'nav-recommendations',
+        'calendar':'nav-calendar','profile':'nav-profile','settings':'nav-settings'
     };
-    const entry = map[pageId];
-    if (!entry) return;
-    // Highlight active item
-    const el = document.getElementById(entry.item);
-    if (el) el.classList.add('active');
-    // Open parent group if needed
-    if (entry.group) {
-        const group = document.getElementById(entry.group);
-        const btn = group?.previousElementSibling;
-        if (group) {
-            group.classList.remove('collapsed');
-            group.style.maxHeight = '500px';
-            if (btn) btn.classList.add('open');
-        }
+    var groups = {
+        'garden-health':'garden-group','garden-planner':'garden-group',
+        'garden-diary':'garden-group','add-plant':'garden-group','my-garden':'garden-group',
+        'learn':'learn-group','encyclopedia':'learn-group','search-guides':'learn-group',
+        'articles':'learn-group','journeys':'learn-group'
+    };
+    var itemId = map[pageId];
+    if (itemId) {
+        var el = document.getElementById(itemId);
+        if (el) el.classList.add('active');
+    }
+    var groupId = groups[pageId];
+    if (groupId) {
+        var g = document.getElementById(groupId);
+        var b = g && g.previousElementSibling;
+        if (g) { g.classList.remove('collapsed'); g.style.maxHeight = '500px'; }
+        if (b) b.classList.add('open');
     }
 }
-
-// Swipe from left edge to open
-(function() {
-    const zone = document.getElementById('swipe-zone');
-    let startX = 0, startY = 0;
-    document.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    document.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = Math.abs(e.changedTouches[0].clientY - startY);
-        if (startX < 30 && dx > 60 && dy < 60) openNav();
-    }, { passive: true });
-    // Swipe left to close
-    const navDrawerEl = document.getElementById('nav-drawer');
-    if (navDrawerEl) {
-        navDrawerEl.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-        navDrawerEl.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - startX;
-            if (dx < -60) closeNav();
-        }, { passive: true });
-    }
-})();
-
-// Keyboard
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-
-// Set location in drawer from saved location
 (function() {
     try {
-        const loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
-        if (loc && loc.name) document.getElementById('nav-location').textContent = loc.name;
+        var loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
+        if (loc && loc.name) {
+            var el = document.getElementById('nav-location');
+            if (el) el.textContent = loc.name;
+        }
     } catch(e) {}
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches[0].clientX < 30) window._swipeStartX = e.touches[0].clientX;
+    }, {passive:true});
+    document.addEventListener('touchend', function(e) {
+        if (window._swipeStartX && e.changedTouches[0].clientX - window._swipeStartX > 60) openNav();
+        window._swipeStartX = null;
+    }, {passive:true});
+    var drawer = document.getElementById('nav-drawer');
+    if (drawer) {
+        drawer.addEventListener('touchend', function(e) {
+            if (window._swipeStartX !== undefined) {
+                var dx = e.changedTouches[0].clientX - (window._swipeStartX || 0);
+                if (dx < -60) closeNav();
+            }
+        }, {passive:true});
+    }
 })();
 
-// Init — wrapped in try/catch so page JS always runs
-try {
-    setActiveNav('community');
-    document.querySelectorAll('.nav-sub-list').forEach(list => {
-        list.style.maxHeight = list.classList.contains('collapsed') ? '0px' : '500px';
+try { setActiveNav('community'); } catch(e) {}
+try { document.querySelectorAll('.nav-sub-list').forEach(function(l) { l.style.maxHeight = l.classList.contains('collapsed') ? '0px' : '500px'; }); } catch(e) {}
+document.getElementById('menu-btn').addEventListener('click', openNav);
+document.getElementById('avatar-btn').addEventListener('click', openNav);
+</script>
+
+<!-- COMMUNITY SCRIPT -->
+<script>
+(function() {
+    'use strict';
+
+    // ── Supabase init ─────────────────────────────────────────────────────
+    var sb;
+    try {
+        var _c = supabase.createClient;
+        sb = _c( + SUPABASE_URL + ,  + SUPABASE_KEY + );
+    } catch(e) {
+        console.error('Supabase init failed:', e);
+        document.getElementById('feed').innerHTML = '<div class="text-center py-lg"><p class="font-body-md text-on-surface-variant">Could not connect to database: ' + e.message + '</p></div>';
+        return;
+    }
+
+    // ── State ─────────────────────────────────────────────────────────────
+    var allPosts = [];
+    var currentFilter = 'all';
+    var currentSearch = '';
+    var selectedCat = null;
+    var selectedImgFile = null;
+    var isSubmitting = false;
+
+    // ── Category meta ─────────────────────────────────────────────────────
+    var CAT_META = {
+        help:     { label:'Help Needed',  cls:'bg-error-container text-on-error-container' },
+        tips:     { label:'Plant Tips',   cls:'bg-primary-fixed text-on-primary-fixed-variant' },
+        showcase: { label:'Showcase',     cls:'bg-secondary-container text-on-secondary-container' },
+        swap:     { label:'Swap',         cls:'bg-tertiary-fixed text-on-tertiary-fixed-variant' }
+    };
+    function catMeta(cat) { return CAT_META[cat] || { label:cat, cls:'bg-surface-container text-on-surface-variant' }; }
+
+    function timeAgo(iso) {
+        var diff = (Date.now() - new Date(iso)) / 1000;
+        if (diff < 60) return 'just now';
+        if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+        return Math.floor(diff/86400) + 'd ago';
+    }
+    function initials(name) { return ((name||'G').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)||'G').toUpperCase(); }
+
+    // ── Load posts ────────────────────────────────────────────────────────
+    function loadPosts() {
+        sb.from('posts').select('*').order('created_at', { ascending: false })
+            .then(function(res) {
+                if (res.error) throw res.error;
+                allPosts = res.data || [];
+                renderFeed();
+            })
+            .catch(function(e) {
+                console.error('Load error:', e);
+                document.getElementById('feed').innerHTML =
+                    '<div class="bg-error-container rounded-2xl p-md text-center">' +
+                    '<p class="font-label-lg text-on-error-container">' + (e.message||'Could not load posts') + '</p>' +
+                    '<button id="retry-load-btn" class="mt-md font-label-lg text-primary bg-white px-4 py-2 rounded-full">Retry</button>' +
+                    '</div>';
+                var rb = document.getElementById('retry-load-btn');
+                if (rb) rb.addEventListener('click', loadPosts);
+            });
+    }
+
+    // ── Render ────────────────────────────────────────────────────────────
+    function renderFeed() {
+        var feed  = document.getElementById('feed');
+        var empty = document.getElementById('empty-state');
+        var posts = allPosts.slice();
+
+        if (currentFilter !== 'all') posts = posts.filter(function(p){ return p.category === currentFilter; });
+        if (currentSearch.trim()) {
+            var q = currentSearch.toLowerCase();
+            posts = posts.filter(function(p){ return p.title.toLowerCase().indexOf(q) > -1 || ((p.body||'').toLowerCase().indexOf(q) > -1); });
+        }
+
+        if (!posts.length) { feed.innerHTML = ''; empty.classList.remove('hidden'); return; }
+        empty.classList.add('hidden');
+
+        var COLOURS = ['bg-primary-container text-on-primary-container','bg-secondary-container text-on-secondary-container','bg-tertiary-fixed text-on-tertiary-fixed-variant'];
+        feed.innerHTML = posts.map(function(post) {
+            var meta = catMeta(post.category);
+            var ini  = initials(post.author);
+            var acol = COLOURS[ini.charCodeAt(0) % COLOURS.length];
+            var isOwn = post.author === 'Gardener';
+            return '<article class="post-card bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant/20" data-id="' + post.id + '">' +
+                '<div class="flex items-center justify-between px-md pt-md pb-sm">' +
+                '<div class="flex items-center gap-sm"><div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-[13px] flex-shrink-0 ' + acol + '">' + ini + '</div>' +
+                '<div><p class="font-label-lg text-on-surface">' + post.author + '</p><p class="font-label-sm text-outline">' + timeAgo(post.created_at) + '</p></div></div>' +
+                '<span class="font-label-sm px-3 py-1 rounded-full ' + meta.cls + '">' + meta.label + '</span></div>' +
+                '<div class="px-md pb-sm"><h3 class="font-headline-md text-headline-md text-on-surface mb-xs">' + post.title + '</h3>' +
+                (post.body ? '<p class="font-body-md text-on-surface-variant">' + post.body + '</p>' : '') + '</div>' +
+                (post.image_url ? '<div class="w-full overflow-hidden max-h-72"><img src="' + post.image_url + '" class="w-full object-cover"/></div>' : '') +
+                '<div class="flex items-center gap-lg px-md py-sm border-t border-outline-variant/20">' +
+                '<button class="like-btn flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-error transition-colors" data-id="' + post.id + '" data-likes="' + (post.likes||0) + '"><span class="material-symbols-outlined">favorite_border</span><span>' + (post.likes||0) + '</span></button>' +
+                '<a href="post-detail.html?id=' + post.id + '" class="flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">chat_bubble</span><span>Reply</span></a>' +
+                '<button class="share-btn flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-primary" data-title="' + post.title.replace(/"/g,'&quot;') + '"><span class="material-symbols-outlined">share</span></button>' +
+                (isOwn ? '<button class="delete-btn ml-auto flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-error transition-colors" data-id="' + post.id + '"><span class="material-symbols-outlined text-[18px]">delete</span></button>' : '<span class="ml-auto"></span>') +
+                '</div></article>';
+        }).join('');
+
+        // Wire action buttons via delegation
+        feed.querySelectorAll('.like-btn').forEach(function(btn) { btn.addEventListener('click', handleLike); });
+        feed.querySelectorAll('.delete-btn').forEach(function(btn) { btn.addEventListener('click', handleDelete); });
+        feed.querySelectorAll('.share-btn').forEach(function(btn) { btn.addEventListener('click', handleShare); });
+    }
+
+    // ── Actions ───────────────────────────────────────────────────────────
+    function handleLike(e) {
+        var btn = e.currentTarget;
+        if (btn.disabled) return;
+        btn.disabled = true;
+        var id = btn.dataset.id;
+        var post = allPosts.find(function(p){ return p.id === id; });
+        if (!post) return;
+        post.likes = (post.likes||0) + 1;
+        btn.querySelector('span:last-child').textContent = post.likes;
+        btn.querySelector('.material-symbols-outlined').textContent = 'favorite';
+        btn.querySelector('.material-symbols-outlined').style.color = '#ba1a1a';
+        sb.from('posts').update({ likes: post.likes }).eq('id', id).then(function(){});
+    }
+
+    function handleDelete(e) {
+        var btn = e.currentTarget;
+        var id = btn.dataset.id;
+        if (!confirm('Delete this post?')) return;
+        btn.disabled = true;
+        sb.from('posts').delete().eq('id', id)
+            .then(function(res) {
+                if (res.error) throw res.error;
+                allPosts = allPosts.filter(function(p){ return p.id !== id; });
+                renderFeed();
+            })
+            .catch(function(e) {
+                btn.disabled = false;
+                alert('Could not delete: ' + e.message);
+            });
+    }
+
+    function handleShare(e) {
+        var title = e.currentTarget.dataset.title;
+        if (navigator.share) navigator.share({ title: title + ' — Greenthumb', url: window.location.href });
+        else if (navigator.clipboard) navigator.clipboard.writeText(window.location.href);
+    }
+
+    // ── Filter & Search ───────────────────────────────────────────────────
+    document.querySelectorAll('.comm-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+            currentFilter = chip.dataset.filter;
+            document.querySelectorAll('.comm-chip').forEach(function(c) {
+                c.classList.remove('active','bg-primary-container','text-on-primary-container');
+                c.classList.add('bg-surface-container-high','text-on-surface-variant');
+            });
+            chip.classList.add('active','bg-primary-container','text-on-primary-container');
+            chip.classList.remove('bg-surface-container-high','text-on-surface-variant');
+            renderFeed();
+        });
     });
-} catch(navErr) {
-    console.warn('Nav init error:', navErr);
-}
 
+    document.getElementById('search-input').addEventListener('input', function() {
+        currentSearch = this.value;
+        renderFeed();
+    });
 
-} catch(navErr) { console.warn('Nav JS error:', navErr); }
-// ── Init ──────────────────────────────────────────────────────────────────
-loadPosts();
+    // ── New Post Panel ────────────────────────────────────────────────────
+    function openPanel() {
+        document.getElementById('new-post-panel').classList.add('open');
+        document.getElementById('post-overlay').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        selectedCat = null;
+        selectedImgFile = null;
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-body').value = '';
+        document.getElementById('post-error').classList.add('hidden');
+        document.getElementById('img-preview-wrap').classList.add('hidden');
+        document.getElementById('post-img-input').value = '';
+        document.querySelectorAll('.post-cat-btn').forEach(function(b){ b.classList.remove('selected'); });
+    }
+    function closePanel() {
+        document.getElementById('new-post-panel').classList.remove('open');
+        document.getElementById('post-overlay').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
 
+    document.getElementById('new-post-btn').addEventListener('click', openPanel);
+    document.getElementById('close-post-btn').addEventListener('click', closePanel);
+    document.getElementById('post-overlay').addEventListener('click', closePanel);
+
+    document.querySelectorAll('.post-cat-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            selectedCat = btn.dataset.cat;
+            document.querySelectorAll('.post-cat-btn').forEach(function(b){ b.classList.remove('selected'); });
+            btn.classList.add('selected');
+        });
+    });
+
+    // Image
+    document.getElementById('add-photo-btn').addEventListener('click', function() { document.getElementById('post-img-input').click(); });
+    document.getElementById('remove-img-btn').addEventListener('click', function() {
+        selectedImgFile = null;
+        document.getElementById('img-preview-wrap').classList.add('hidden');
+        document.getElementById('post-img-input').value = '';
+    });
+    document.getElementById('post-img-input').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        if (file.size > 5*1024*1024) { document.getElementById('post-error').textContent = 'Image must be under 5MB'; document.getElementById('post-error').classList.remove('hidden'); return; }
+        selectedImgFile = file;
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('img-preview').src = ev.target.result;
+            document.getElementById('img-preview-wrap').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Submit
+    document.getElementById('submit-post-btn').addEventListener('click', function() {
+        if (isSubmitting) return;
+        var title = document.getElementById('post-title').value.trim();
+        var body  = document.getElementById('post-body').value.trim();
+        var errEl = document.getElementById('post-error');
+        var submitBtn = document.getElementById('submit-post-btn');
+
+        errEl.classList.add('hidden');
+        if (!title) { errEl.textContent = 'Please add a title'; errEl.classList.remove('hidden'); document.getElementById('post-title').focus(); return; }
+        if (!selectedCat) { errEl.textContent = 'Please select a category'; errEl.classList.remove('hidden'); return; }
+
+        isSubmitting = true;
+        submitBtn.textContent = 'Sharing…';
+        submitBtn.disabled = true;
+
+        function doInsert(imageUrl) {
+            sb.from('posts').insert({
+                author: 'Gardener', category: selectedCat,
+                title: title, body: body || null,
+                image_url: imageUrl || null, likes: 0
+            }).select().single()
+            .then(function(res) {
+                if (res.error) throw res.error;
+                allPosts.unshift(res.data);
+                closePanel();
+                currentFilter = 'all';
+                document.querySelectorAll('.comm-chip').forEach(function(c) {
+                    c.classList.remove('active','bg-primary-container','text-on-primary-container');
+                    c.classList.add('bg-surface-container-high','text-on-surface-variant');
+                });
+                document.querySelector('[data-filter="all"]').classList.add('active','bg-primary-container','text-on-primary-container');
+                renderFeed();
+                document.getElementById('feed').scrollIntoView({ behavior:'smooth' });
+            })
+            .catch(function(e) {
+                errEl.textContent = 'Could not post: ' + e.message;
+                errEl.classList.remove('hidden');
+            })
+            .finally(function() {
+                isSubmitting = false;
+                submitBtn.textContent = 'Share with Community';
+                submitBtn.disabled = false;
+            });
+        }
+
+        if (selectedImgFile) {
+            var ext = selectedImgFile.name.split('.').pop();
+            var path = Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+            sb.storage.from('post-images').upload(path, selectedImgFile, { cacheControl:'3600', upsert:false })
+                .then(function(res) {
+                    if (res.error) { console.warn('Image upload failed, posting without:', res.error.message); doInsert(null); return; }
+                    var url = sb.storage.from('post-images').getPublicUrl(path).data.publicUrl;
+                    doInsert(url);
+                })
+                .catch(function() { doInsert(null); });
+        } else {
+            doInsert(null);
+        }
+    });
+
+    // ── Real-time ─────────────────────────────────────────────────────────
+    sb.channel('posts').on('postgres_changes', { event:'INSERT', schema:'public', table:'posts' }, function(payload) {
+        if (!allPosts.find(function(p){ return p.id === payload.new.id; })) {
+            allPosts.unshift(payload.new);
+            renderFeed();
+        }
+    }).subscribe();
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    loadPosts();
+
+})();
 </script>
 </body></html>
