@@ -347,7 +347,8 @@
 </nav>
 
 <script>
-
+// ── Nav Drawer (isolated) ─────────────────────────────────────────────────
+try {
 // ── Nav Drawer ────────────────────────────────────────────────────────────
 function openNav() {
     document.getElementById('nav-drawer').classList.add('open');
@@ -433,8 +434,11 @@ drawer.addEventListener('touchend', e => {
 }, { passive: true });
 }
 })();
+} catch(e) { console.warn('Nav error:', e); }
+</script>
 
-
+<script>
+// ── Scanner Camera (isolated) ─────────────────────────────────────────────
 // ── PlantNet Camera ────────────────────────────────────────────────────────
 const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
 const PLANTNET_URL = 'https://my-api.plantnet.org/v2/identify/all';
@@ -499,6 +503,15 @@ async function requestCamera() {
         if (msg) msg.textContent = '❌ ' + e.name + ': ' + e.message;
         showState('denied');
     }
+}
+
+function capturePhoto() {
+    const video  = document.getElementById('video-feed');
+    const canvas = document.getElementById('capture-canvas');
+    canvas.width  = video.videoWidth  || 640;
+    canvas.height = video.videoHeight || 480;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    canvas.toBlob(blob => processImage(blob, URL.createObjectURL(blob)), 'image/jpeg', 0.9);
 }
 
 function openGallery() {
@@ -637,6 +650,5 @@ try {
         list.style.maxHeight = list.classList.contains('collapsed') ? '0px' : '500px';
     });
 } catch(e) { console.warn('Nav init:', e); }
-
 </script>
 </body></html>
