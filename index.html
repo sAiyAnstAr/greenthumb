@@ -133,21 +133,110 @@
 <main class="max-w-screen-lg mx-auto px-container-margin pt-lg space-y-lg">
 <!-- Hero Section -->
 <section class="mb-xs">
-<h2 class="font-display-lg text-display-lg text-primary mb-xs">Good morning, Gardener!</h2>
+<h2 id="greeting" class="font-display-lg text-display-lg text-primary mb-xs">Good morning, Gardener!</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant">Your urban sanctuary is waiting for you today.</p>
 </section>
 <!-- Weather Widget -->
 <section class="flex justify-start">
-<div class="bg-surface-container-lowest p-md rounded-xl flex items-center gap-md shadow-sm border border-surface-variant/30">
-<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-2 rounded-full">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Local Weather</p>
-<p class="font-headline-md text-headline-md text-on-surface">Sunny, 24°C</p>
-</div>
+<div id="weather-card" class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-variant/30 overflow-hidden w-full max-w-lg">
+    <!-- Loading state -->
+    <div id="weather-loading" class="flex items-center gap-md p-md">
+        <div class="bg-surface-container w-10 h-10 rounded-full animate-pulse"></div>
+        <div class="space-y-2 flex-1">
+            <div class="h-3 bg-surface-container rounded animate-pulse w-24"></div>
+            <div class="h-5 bg-surface-container rounded animate-pulse w-36"></div>
+        </div>
+        <div class="h-3 bg-surface-container rounded animate-pulse w-16"></div>
+    </div>
+    <!-- Weather content (hidden until loaded) -->
+    <div id="weather-content" class="hidden">
+        <!-- Main row -->
+        <div class="flex items-center gap-md p-md pb-sm">
+            <div id="weather-icon-wrap" class="bg-tertiary-fixed text-on-tertiary-fixed-variant p-2 rounded-full flex-shrink-0">
+                <span id="weather-icon" class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">wb_sunny</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                    <p id="weather-temp" class="font-headline-lg text-headline-lg text-on-surface"></p>
+                    <p id="weather-desc" class="font-label-lg text-label-lg text-on-surface-variant truncate"></p>
+                </div>
+                <div class="flex items-center gap-1 mt-0.5">
+                    <span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+                    <p id="weather-location" class="font-label-sm text-outline truncate"></p>
+                </div>
+            </div>
+            <button onclick="openLocationPicker()" class="p-2 rounded-full hover:bg-surface-container transition-colors flex-shrink-0" title="Change location">
+                <span class="material-symbols-outlined text-outline text-[18px]">edit_location_alt</span>
+            </button>
+        </div>
+        <!-- Detail row -->
+        <div class="flex items-center gap-lg px-md pb-md text-on-surface-variant">
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">water_drop</span>
+                <span id="weather-humidity" class="font-label-sm"></span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">air</span>
+                <span id="weather-wind" class="font-label-sm"></span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+                <span id="weather-uv" class="font-label-sm"></span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">thermostat</span>
+                <span id="weather-feels" class="font-label-sm"></span>
+            </div>
+        </div>
+        <!-- 3-day forecast strip -->
+        <div id="forecast-strip" class="flex gap-0 border-t border-outline-variant/30 divide-x divide-outline-variant/30"></div>
+        <!-- Plant care tip based on weather -->
+        <div id="weather-tip" class="hidden border-t border-outline-variant/30 px-md py-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings:'FILL' 1">eco</span>
+            <p id="weather-tip-text" class="font-label-sm text-on-surface-variant"></p>
+        </div>
+    </div>
+    <!-- Error state -->
+    <div id="weather-error" class="hidden flex items-center justify-between p-md gap-md">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-outline">cloud_off</span>
+            <p class="font-label-lg text-on-surface-variant">Weather unavailable</p>
+        </div>
+        <button onclick="openLocationPicker()" class="font-label-lg text-label-lg text-primary hover:underline">Set location</button>
+    </div>
 </div>
 </section>
+<!-- Location Picker Modal -->
+<div id="location-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="closeLocationPicker()"></div>
+    <div class="relative bg-background rounded-t-3xl sm:rounded-3xl w-full max-w-md shadow-2xl p-lg pb-xl mx-auto">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Set Weather Location</h3>
+        <div class="space-y-md">
+            <button onclick="useGPS()" id="gps-btn" class="w-full flex items-center gap-md p-md rounded-xl border-2 border-primary/30 bg-primary-fixed/20 hover:bg-primary-fixed/30 transition-colors active:scale-[0.98]">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">my_location</span>
+                <div class="text-left">
+                    <p class="font-label-lg text-on-surface">Use my current location</p>
+                    <p class="font-label-sm text-on-surface-variant">Auto-detect via GPS</p>
+                </div>
+            </button>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-outline" style="font-size:20px">search</span>
+                </div>
+                <input id="location-search" type="text" placeholder="Search city or suburb…" class="form-input w-full h-12 pl-11 pr-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            </div>
+            <!-- Quick picks -->
+            <div>
+                <p class="font-label-sm text-outline uppercase tracking-wider mb-2">Quick picks</p>
+                <div class="flex flex-wrap gap-2" id="quick-locations"></div>
+            </div>
+            <div id="location-search-results" class="space-y-2 hidden"></div>
+        </div>
+        <button onclick="closeLocationPicker()" class="absolute top-4 right-4 p-2 rounded-full hover:bg-surface-container transition-colors">
+            <span class="material-symbols-outlined text-on-surface-variant">close</span>
+        </button>
+    </div>
+</div>
 <!-- Status Overviews -->
 <section class="grid grid-cols-1 md:grid-cols-2 gap-md">
 <!-- Today's Schedule Card -->
@@ -177,11 +266,11 @@
 </div>
 </div>
 <!-- Garden Health Card -->
-<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<a href="garden-health.html" class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant/30 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow active:scale-[0.98] duration-200 group">
 <div>
-<div class="flex justify-between items-start mb-md">
+<div class="flex justify-between items-center mb-md">
 <span class="bg-secondary-fixed text-on-secondary-fixed-variant px-sm py-1 rounded-full font-label-lg text-label-lg">Garden Health</span>
-<span class="material-symbols-outlined text-secondary">analytics</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">analytics</span>
 </div>
 <div class="flex items-center gap-md">
 <div class="relative flex items-center justify-center">
@@ -199,17 +288,21 @@
 </div>
 <div class="mt-lg flex -space-x-2">
 <div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Close-up of a vibrant green succulent in a minimalist white ceramic pot, representing garden health and growth in a modern bright setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiQnYihP7C7BotZ9ZYiBPjAe1_7whMTlGjCM_M7rNlh6lvcRagTfmO5-wc0Z7O9t0g_EO8QNvHI9KOLE0CpRhCHZMcvsZh68WZhlGE_ZaHDGPDn-uEAlNCSIctMHXoIWK_umbrBfqJk6W_QKMohOJ7TpFT5SJfL1ycFy4e7hF_34zigteg3lkCXTPvs0Jze__85384EuTzg8nEtqoj2jwGkCkLAqjttvZKsb698uBDiK_BnfjzkRP_adOvgKgwiwDKG9TVcq4Tegs"/>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiQnYihP7C7BotZ9ZYiBPjAe1_7whMTlGjCM_M7rNlh6lvcRagTfmO5-wc0Z7O9t0g_EO8QNvHI9KOLE0CpRhCHZMcvsZh68WZhlGE_ZaHDGPDn-uEAlNCSIctMHXoIWK_umbrBfqJk6W_QKMohOJ7TpFT5SJfL1ycFy4e7hF_34zigteg3lkCXTPvs0Jze__85384EuTzg8nEtqoj2jwGkCkLAqjttvZKsb698uBDiK_BnfjzkRP_adOvgKgwiwDKG9TVcq4Tegs" alt="Plant"/>
 </div>
 <div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A lush peace lily with broad green leaves, photographed with soft cinematic lighting to emphasize its organic texture and healthy glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOfWrs7Kfl-2QPHIqf5HtTeHT-0sOwsweBOva9W_ha8JVBG6VRj0S93pS2GlpiOcGY7HUTvp5XC0DN3qI5Sm5oePmQILDv0JF4Nl4Ej2ezw6J75OrxHTVuQE0LPPeXWj7tuLMUl3cZu4uacaI_ThykrWgZ6-aXG99XZI9hOH14ogYzY8_fGx1iSJTtfXx_pXTaJHs2AiAVREODj1oKAo7eN7TQndTQl_25J1P4O0eUDysJYv9vUcSmYLF-c31yB13uiJLWMF5wSMY"/>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOfWrs7Kfl-2QPHIqf5HtTeHT-0sOwsweBOva9W_ha8JVBG6VRj0S93pS2GlpiOcGY7HUTvp5XC0DN3qI5Sm5oePmQILDv0JF4Nl4Ej2ezw6J75OrxHTVuQE0LPPeXWj7tuLMUl3cZu4uacaI_ThykrWgZ6-aXG99XZI9hOH14ogYzY8_fGx1iSJTtfXx_pXTaJHs2AiAVREODj1oKAo7eN7TQndTQl_25J1P4O0eUDysJYv9vUcSmYLF-c31yB13uiJLWMF5wSMY" alt="Plant"/>
 </div>
 <div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Macro detail of a Monstera leaf showing beautiful vein patterns and deep green color, set against a clean minimalist light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7nhBYRkczKVoycWC5j1cw-9V1_Atzc11jZRn1JHQBJC6NDs8ziVjGOxn1Gzlj1Y5rIJ3ZYQ8jIB_BtwgVxgPFih3b4w0Sajf-ujxSmExwCq0gisdaYOConT_eMzQohbUrpSlYAlPMbCcbJHba3j0RjnMaqf4iJKpXDuroirDp3FMdO15ffcxr44jZg8gc82HkwUCgP0rSTMGSgR48C4pnz5p6rLPrfLvKudNpACSui0hvL5yaYx35MRfEec0j4CbfUGdmQO_SCA"/>
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7nhBYRkczKVoycWC5j1cw-9V1_Atzc11jZRn1JHQBJC6NDs8ziVjGOxn1Gzlj1Y5rIJ3ZYQ8jIB_BtwgVxgPFih3b4w0Sajf-ujxSmExwCq0gisdaYOConT_eMzQohbUrpSlYAlPMbCcbJHba3j0RjnMaqf4iJKpXDuroirDp3FMdO15ffcxr44jZg8gc82HkwUCgP0rSTMGSgR48C4pnz5p6rLPrfLvKudNpACSui0hvL5yaYx35MRfEec0j4CbfUGdmQO_SCA" alt="Plant"/>
 </div>
 <div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center font-label-sm">+9</div>
 </div>
+<div class="flex items-center gap-1 mt-sm">
+<span class="font-label-sm text-primary group-hover:underline">View Garden Health</span>
+<span class="material-symbols-outlined text-primary text-[14px]">arrow_forward</span>
 </div>
+</a>
 </section>
 <!-- Quick Action Bento Grid -->
 <section>
@@ -268,20 +361,20 @@
 <a class="text-on-surface-variant font-label-lg hover:text-primary" href="learn.html">View All</a>
 </div>
 <div class="flex gap-md overflow-x-auto pb-4 scrollbar-hide -mx-container-margin px-container-margin">
-<div class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0">
-<img class="w-full h-40 object-cover" data-alt="A beautifully composed flat lay of gardening tools—a vintage copper watering can, wooden-handled trowel, and organic fertilizer—on a clean stone surface with soft morning light, evoking a sense of calm and organized preparation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBud8GpHBL6lCVNxDiqtXTezuKHpeKLmBcSz-s1AX_KIuxTiAnUPMC53iNkFD_tzdn7zfjtXg8WKmqz4MUK0NgjecIAKWDn9-sqM4ZqYrZGLNc76JmjK6e3KhmkJQOCKCm078DqF2MaOB_MQ9mWhIKjZtzFjJNnT4t6aBfWMxQgMRRVWilnsD-di_c2aYOmYBJvfqRVzA2TRBT-nBI6cFxaNRrLHdvY0qDNKLkog4TEPS-20Yt8PBPDY1sPXuzMjYQBAgz4sn9U4lc"/>
+<a href="recommendations.html" class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0 hover:shadow-md transition-shadow active:scale-[0.98] duration-200">
+<img class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBud8GpHBL6lCVNxDiqtXTezuKHpeKLmBcSz-s1AX_KIuxTiAnUPMC53iNkFD_tzdn7zfjtXg8WKmqz4MUK0NgjecIAKWDn9-sqM4ZqYrZGLNc76JmjK6e3KhmkJQOCKCm078DqF2MaOB_MQ9mWhIKjZtzFjJNnT4t6aBfWMxQgMRRVWilnsD-di_c2aYOmYBJvfqRVzA2TRBT-nBI6cFxaNRrLHdvY0qDNKLkog4TEPS-20Yt8PBPDY1sPXuzMjYQBAgz4sn9U4lc" alt="Soil guide"/>
 <div class="p-md">
 <span class="font-label-sm text-label-sm text-secondary uppercase">Essential Care</span>
 <h4 class="font-label-lg text-label-lg text-on-surface mt-1">Mastering Soil pH for Beginners</h4>
 </div>
-</div>
-<div class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0">
-<img class="w-full h-40 object-cover" data-alt="A modern, high-end living room featuring a spectacular indoor plant wall, with indirect warm lighting highlighting the variety of textures and leaf shapes, creating a lush and serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbkjP8W-gcsyUv_AGAigsSTOa393s-cFOvX7QsMC3vISQqTbaHifuGnTbbfp0E13T2xZ7H9dfruIqWhbIk6fOFWKq2Ep1_zIGSxm7MZ6YjmjMLF-ni1t9VSR5mS0nSMj6tCXjn9JKbZWoHoo7Il32RDWb2eAGMs3T9rITQNwwmWTkuGZusq4kgIh-iuKtFW2Xivdxk2H2fGyD992o_-P6svJhQxAQRefxRG1LnCRbhmT3pfnKi7x-frWLYjyNtQwXdSzPgMKOMRzg"/>
+</a>
+<a href="recommendations.html" class="min-w-[280px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-variant/30 flex-shrink-0 hover:shadow-md transition-shadow active:scale-[0.98] duration-200">
+<img class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbkjP8W-gcsyUv_AGAigsSTOa393s-cFOvX7QsMC3vISQqTbaHifuGnTbbfp0E13T2xZ7H9dfruIqWhbIk6fOFWKq2Ep1_zIGSxm7MZ6YjmjMLF-ni1t9VSR5mS0nSMj6tCXjn9JKbZWoHoo7Il32RDWb2eAGMs3T9rITQNwwmWTkuGZusq4kgIh-iuKtFW2Xivdxk2H2fGyD992o_-P6svJhQxAQRefxRG1LnCRbhmT3pfnKi7x-frWLYjyNtQwXdSzPgMKOMRzg" alt="Indoor plants"/>
 <div class="p-md">
 <span class="font-label-sm text-label-sm text-secondary uppercase">Indoor Jungle</span>
 <h4 class="font-label-lg text-label-lg text-on-surface mt-1">Top 10 Low-Light Bedroom Plants</h4>
 </div>
-</div>
+</a>
 </div>
 </section>
 </main>
@@ -315,4 +408,199 @@
 </a>
 </div>
 </nav>
+<script>
+// ─── Greeting ────────────────────────────────────────────────────────────────
+(function() {
+    const h = new Date().getHours();
+    const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+    document.getElementById('greeting').textContent = greet + ', Gardener!';
+})();
+
+// ─── Weather ──────────────────────────────────────────────────────────────────
+const WMO_CODES = {
+    0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',
+    45:'Foggy',48:'Icy fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',
+    61:'Light rain',63:'Rain',65:'Heavy rain',71:'Light snow',73:'Snow',75:'Heavy snow',
+    80:'Rain showers',81:'Rain showers',82:'Heavy showers',
+    95:'Thunderstorm',96:'Thunderstorm w/ hail',99:'Thunderstorm w/ hail',
+};
+const WMO_ICONS = {
+    0:'wb_sunny',1:'wb_sunny',2:'partly_cloudy_day',3:'cloud',
+    45:'foggy',48:'foggy',51:'rainy',53:'rainy',55:'rainy',
+    61:'rainy',63:'rainy',65:'rainy',71:'weather_snowy',73:'weather_snowy',75:'weather_snowy',
+    80:'rainy',81:'rainy',82:'rainy',95:'thunderstorm',96:'thunderstorm',99:'thunderstorm',
+};
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+const QUICK_LOCATIONS = [
+    { name:'Gold Coast', lat:-28.0167, lon:153.4000 },
+    { name:'Brisbane',   lat:-27.4698, lon:153.0251 },
+    { name:'Sydney',     lat:-33.8688, lon:151.2093 },
+    { name:'Melbourne',  lat:-37.8136, lon:144.9631 },
+    { name:'London',     lat:51.5074,  lon:-0.1278  },
+    { name:'New York',   lat:40.7128,  lon:-74.0060 },
+];
+
+// Saved location
+let savedLocation = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null')
+    || { name:'Gold Coast', lat:-28.0167, lon:153.4000 };
+
+function saveLocation(loc) {
+    savedLocation = loc;
+    localStorage.setItem('gt_weather_loc', JSON.stringify(loc));
+}
+
+async function fetchWeather(lat, lon, locationName) {
+    try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
+            + `&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,uv_index`
+            + `&daily=weather_code,temperature_2m_max,temperature_2m_min`
+            + `&timezone=auto&forecast_days=4`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
+        renderWeather(data, locationName);
+    } catch(e) {
+        document.getElementById('weather-loading').classList.add('hidden');
+        document.getElementById('weather-error').classList.remove('hidden');
+    }
+}
+
+function renderWeather(data, locationName) {
+    const c = data.current;
+    const d = data.daily;
+
+    document.getElementById('weather-loading').classList.add('hidden');
+    document.getElementById('weather-content').classList.remove('hidden');
+
+    const code = c.weather_code;
+    document.getElementById('weather-temp').textContent = Math.round(c.temperature_2m) + '°C';
+    document.getElementById('weather-desc').textContent = WMO_CODES[code] || 'Clear';
+    document.getElementById('weather-location').textContent = locationName;
+    document.getElementById('weather-humidity').textContent = c.relative_humidity_2m + '% humidity';
+    document.getElementById('weather-wind').textContent = Math.round(c.wind_speed_10m) + ' km/h wind';
+    document.getElementById('weather-uv').textContent = 'UV ' + (c.uv_index ?? '—');
+    document.getElementById('weather-feels').textContent = 'Feels ' + Math.round(c.apparent_temperature) + '°C';
+
+    const icon = document.getElementById('weather-icon');
+    icon.textContent = WMO_ICONS[code] || 'wb_sunny';
+    const iconWrap = document.getElementById('weather-icon-wrap');
+    // colour the icon bg based on conditions
+    const isRainy = [51,53,55,61,63,65,80,81,82,95,96,99].includes(code);
+    const isCloudy = [2,3,45,48].includes(code);
+    iconWrap.className = `p-2 rounded-full flex-shrink-0 ${isRainy ? 'bg-primary-fixed text-on-primary-fixed-variant' : isCloudy ? 'bg-surface-container text-on-surface-variant' : 'bg-tertiary-fixed text-on-tertiary-fixed-variant'}`;
+
+    // 3-day forecast (skip today = index 0)
+    const strip = document.getElementById('forecast-strip');
+    strip.innerHTML = '';
+    for (let i = 1; i <= 3; i++) {
+        const date = new Date(d.time[i]);
+        const div = document.createElement('div');
+        div.className = 'flex-1 flex flex-col items-center py-sm gap-1';
+        div.innerHTML = `
+            <span class="font-label-sm text-outline">${DAY_NAMES[date.getDay()]}</span>
+            <span class="material-symbols-outlined text-[20px] text-on-surface-variant" style="font-variation-settings:'FILL' 1">${WMO_ICONS[d.weather_code[i]] || 'wb_sunny'}</span>
+            <span class="font-label-sm text-on-surface">${Math.round(d.temperature_2m_max[i])}° <span class="text-outline">${Math.round(d.temperature_2m_min[i])}°</span></span>
+        `;
+        strip.appendChild(div);
+    }
+
+    // Plant care tip
+    const temp = c.temperature_2m;
+    const humidity = c.relative_humidity_2m;
+    let tip = null;
+    if (isRainy) tip = 'Rain today — skip watering outdoor plants and check for waterlogged pots.';
+    else if (temp > 32) tip = `It's ${Math.round(temp)}°C — water plants early morning or evening to avoid heat stress.`;
+    else if (humidity < 40) tip = 'Low humidity today — mist your tropical plants or run a humidifier.';
+    else if (c.uv_index >= 8) tip = 'High UV today — move sensitive plants away from direct windows.';
+    else if (temp < 10) tip = 'Cold snap — bring tender plants inside and reduce watering.';
+
+    if (tip) {
+        document.getElementById('weather-tip-text').textContent = tip;
+        document.getElementById('weather-tip').classList.remove('hidden');
+    }
+}
+
+// ─── Location Picker ──────────────────────────────────────────────────────────
+function openLocationPicker() {
+    document.getElementById('location-modal').classList.remove('hidden');
+    // Render quick picks
+    const wrap = document.getElementById('quick-locations');
+    wrap.innerHTML = QUICK_LOCATIONS.map(loc => `
+        <button onclick="selectQuickLocation('${loc.name}',${loc.lat},${loc.lon})"
+            class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg hover:bg-primary-fixed hover:text-on-primary-fixed-variant transition-colors">
+            ${loc.name}
+        </button>`).join('');
+
+    // Search listener
+    const input = document.getElementById('location-search');
+    input.value = '';
+    input.oninput = debounce(searchLocations, 400);
+}
+
+function closeLocationPicker() {
+    document.getElementById('location-modal').classList.add('hidden');
+    document.getElementById('location-search-results').classList.add('hidden');
+}
+
+function selectQuickLocation(name, lat, lon) {
+    saveLocation({ name, lat, lon });
+    closeLocationPicker();
+    reloadWeather();
+}
+
+async function useGPS() {
+    const btn = document.getElementById('gps-btn');
+    btn.innerHTML = `<span class="material-symbols-outlined text-primary animate-spin">sync</span><div class="text-left"><p class="font-label-lg text-on-surface">Locating…</p></div>`;
+    navigator.geolocation.getCurrentPosition(async pos => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+        // Reverse geocode via Open-Meteo doesn't support it, use a free geocoder
+        try {
+            const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+            const geo = await r.json();
+            const name = geo.address?.suburb || geo.address?.city || geo.address?.town || 'My Location';
+            saveLocation({ name, lat, lon });
+        } catch {
+            saveLocation({ name: 'My Location', lat, lon });
+        }
+        closeLocationPicker();
+        reloadWeather();
+    }, () => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-error">location_off</span><div class="text-left"><p class="font-label-lg text-error">Location denied</p><p class="font-label-sm text-on-surface-variant">Please search manually</p></div>`;
+    });
+}
+
+async function searchLocations(e) {
+    const q = e.target.value.trim();
+    const resultsEl = document.getElementById('location-search-results');
+    if (q.length < 2) { resultsEl.classList.add('hidden'); return; }
+    try {
+        const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5`);
+        const results = await r.json();
+        resultsEl.classList.remove('hidden');
+        resultsEl.innerHTML = results.length === 0
+            ? `<p class="font-label-sm text-outline p-2">No results found</p>`
+            : results.map(p => `
+                <button onclick="selectQuickLocation('${(p.display_name.split(',').slice(0,2).join(',')).replace(/'/g,"\\'")}',${p.lat},${p.lon})"
+                    class="w-full text-left px-md py-sm rounded-xl hover:bg-surface-container transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-outline text-[16px]">location_on</span>
+                    <span class="font-label-lg text-on-surface truncate">${p.display_name.split(',').slice(0,3).join(', ')}</span>
+                </button>`).join('');
+    } catch { resultsEl.classList.add('hidden'); }
+}
+
+function debounce(fn, ms) {
+    let t; return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+}
+
+function reloadWeather() {
+    document.getElementById('weather-loading').classList.remove('hidden');
+    document.getElementById('weather-content').classList.add('hidden');
+    document.getElementById('weather-error').classList.add('hidden');
+    fetchWeather(savedLocation.lat, savedLocation.lon, savedLocation.name);
+}
+
+// Init weather
+reloadWeather();
+</script>
 </body></html>
