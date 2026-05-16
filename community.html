@@ -2,64 +2,63 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Community - Greenthumb</title>
+<title>Article - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "on-background": "#1b1c1a",
-                    "surface-tint": "#3b6934",
-                    "on-secondary-fixed": "#2c160e",
-                    "surface-container-low": "#f4f4f0",
-                    "surface-bright": "#faf9f5",
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary-container": "#fed3c7",
                     "primary-fixed-dim": "#a1d494",
-                    "on-primary-container": "#9dd090",
-                    "primary": "#154212",
-                    "on-primary-fixed": "#002201",
-                    "inverse-surface": "#2f312e",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-container": "#795950",
-                    "on-tertiary-fixed": "#3e0500",
-                    "on-tertiary": "#ffffff",
-                    "inverse-primary": "#a1d494",
-                    "tertiary-fixed": "#ffdad3",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "surface": "#faf9f5",
-                    "on-error": "#ffffff",
-                    "primary-container": "#2d5a27",
-                    "surface-variant": "#e3e2df",
-                    "on-secondary": "#ffffff",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f2f1ed",
                     "surface-container-high": "#e9e8e4",
-                    "outline-variant": "#c2c9bb",
-                    "on-primary-fixed-variant": "#23501e",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "primary-fixed": "#bcf0ae",
                     "background": "#faf9f5",
-                    "tertiary-container": "#8d3220",
+                    "on-tertiary-container": "#ffaf9e",
                     "on-secondary-fixed-variant": "#5d4037",
                     "error-container": "#ffdad6",
-                    "tertiary": "#6e1c0c",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "surface-variant": "#e3e2df",
+                    "outline-variant": "#c2c9bb",
                     "surface-container-lowest": "#ffffff",
-                    "surface-container": "#efeeea",
-                    "secondary-container": "#fed3c7",
+                    "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
                     "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
                     "outline": "#72796e",
-                    "inverse-on-surface": "#f2f1ed",
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary": "#77574d",
-                    "primary-fixed": "#bcf0ae",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
                     "on-primary": "#ffffff",
                     "on-surface-variant": "#42493e",
-                    "on-error-container": "#93000a",
-                    "surface-dim": "#dbdad6"
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -68,47 +67,47 @@
                     "full": "9999px"
             },
             "spacing": {
-                    "gutter": "16px",
-                    "container-margin": "20px",
-                    "sm": "12px",
-                    "base": "8px",
-                    "md": "24px",
                     "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
                     "xs": "4px",
-                    "lg": "40px"
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
             },
             "fontFamily": {
                     "label-sm": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"],
                     "headline-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
                     "headline-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"]
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
             },
             "fontSize": {
                     "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
                     "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
                     "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
             }
           },
         },
       }
     </script>
 <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px,100dvh); }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
     /* Nav Drawer */
     #nav-overlay { transition: opacity 0.25s ease; }
     #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px, 85vw); }
+    #nav-drawer {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: min(320px, 85vw);
+    }
     #nav-drawer.open { transform: translateX(0); }
     .nav-item { transition: background 0.15s ease, color 0.15s ease; }
     .nav-item.active { background: #bcf0ae; color: #002201; }
@@ -121,26 +120,43 @@
     .nav-chevron { transition: transform 0.2s ease; }
     .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
     .nav-sub-list.collapsed { max-height: 0 !important; }
+    /* Swipe from left edge */
     #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
-    /* Post panel */
-    #new-post-panel { transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
-    #new-post-panel.open { transform: translateY(0); }
-    .post-cat-btn.selected { border-color: #154212; background: #bcf0ae; color: #002201; }
-    /* Post card */
-    .post-card { animation: fadeUp 0.3s ease; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-    /* Image preview */
-    .img-preview { position: relative; display: inline-block; }
-    .img-preview button { position: absolute; top: -8px; right: -8px; }
-    /* Chip active */
-    .comm-chip.active { background: #2d5a27; color: #9dd090; }
-    /* Skeleton */
-    .skeleton { background: linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%); background-size:200% 100%; animation: shimmer 1.4s infinite; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .progress-bar { position:fixed; top:0; left:0; height:3px; background:#154212; z-index:100; transition:width 0.1s ease; }
+    .article-body h2 { font-size:24px; font-weight:700; color:#154212; margin:1.5rem 0 0.75rem; }
+    .article-body h3 { font-size:18px; font-weight:600; color:#1b1c1a; margin:1.25rem 0 0.5rem; }
+    .article-body p { font-size:16px; line-height:1.75; color:#42493e; margin-bottom:1rem; }
+    .article-body ul { list-style:disc; padding-left:1.5rem; margin-bottom:1rem; }
+    .article-body ul li { font-size:16px; line-height:1.75; color:#42493e; margin-bottom:0.25rem; }
+    .article-body a { color:#154212; text-decoration:underline; }
+    .skeleton { background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
+
 </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen pb-32">
-
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
 <div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
@@ -197,436 +213,84 @@
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45">
-
-<!-- Header -->
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95"><span class="material-symbols-outlined text-primary">menu</span></button>
+<a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="learn.html"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
 <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
 <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
-
-<main class="max-w-screen-lg mx-auto px-container-margin pt-lg space-y-lg">
-<!-- Hero -->
-<section>
-    <h2 class="font-display-lg text-display-lg text-primary mb-xs">Community</h2>
-    <p class="font-body-lg text-body-lg text-on-surface-variant">Connect with fellow gardeners, share your plants, and get expert advice.</p>
-</section>
-
-<!-- Search + Post button -->
-<section class="space-y-md">
-    <div class="flex gap-base items-center">
-        <div class="relative flex-grow">
-            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
-            <input id="search-input" oninput="filterBySearch(this.value)" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search posts..." type="text"/>
+<div class="progress-bar" id="reading-progress"></div>
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg pb-xl" id="article-main">
+    <!-- Loading skeleton -->
+    <div id="article-loading">
+        <div class="h-4 skeleton rounded mb-sm w-24"></div>
+        <div class="h-8 skeleton rounded mb-md w-4/5"></div>
+        <div class="h-4 skeleton rounded mb-xs w-full"></div>
+        <div class="h-4 skeleton rounded mb-xs w-full"></div>
+        <div class="h-4 skeleton rounded mb-lg w-3/4"></div>
+        <div class="aspect-video skeleton rounded-2xl mb-lg"></div>
+        <div class="space-y-2">
+            <div class="h-4 skeleton rounded w-full"></div>
+            <div class="h-4 skeleton rounded w-full"></div>
+            <div class="h-4 skeleton rounded w-5/6"></div>
         </div>
-        <button onclick="openNewPost()" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg flex-shrink-0">
-            <span class="material-symbols-outlined">add</span><span>Post</span>
-        </button>
     </div>
-    <!-- Category chips -->
-    <div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
-        <button onclick="setFilter('all')" id="chip-all" class="comm-chip active flex-shrink-0 bg-primary-container text-on-primary-container px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">All Posts</button>
-        <button onclick="setFilter('help')" id="chip-help" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Help Needed</button>
-        <button onclick="setFilter('tips')" id="chip-tips" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Plant Tips</button>
-        <button onclick="setFilter('showcase')" id="chip-showcase" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Showcase</button>
-        <button onclick="setFilter('swap')" id="chip-swap" class="comm-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full whitespace-nowrap font-label-lg text-label-lg transition-all">Swap</button>
-    </div>
-</section>
-
-<!-- Feed -->
-<div id="feed" class="space-y-lg pb-8">
-    <!-- Loading skeletons -->
-    <div class="skeleton h-48 rounded-2xl"></div>
-    <div class="skeleton h-36 rounded-2xl"></div>
-    <div class="skeleton h-48 rounded-2xl"></div>
-</div>
-
-<!-- Empty state -->
-<div id="empty-state" class="hidden text-center py-xl">
-    <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1">forum</span>
-    <p class="font-headline-md text-on-surface-variant">No posts yet</p>
-    <p class="font-body-md text-outline mt-1">Be the first to share something!</p>
-</div>
-
-</main>
-
-<!-- New Post Panel -->
-<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm" onclick="closeNewPost()"></div>
-<div id="new-post-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-h-[90vh] overflow-y-auto">
-    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
-    <div class="flex items-center justify-between mb-lg">
-        <h3 class="font-headline-md text-headline-md text-on-surface">New Post</h3>
-        <button onclick="closeNewPost()" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant">close</span></button>
-    </div>
-    <div class="space-y-md">
-        <!-- Category -->
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Category</label>
-            <div class="flex flex-wrap gap-2">
-                <button onclick="selectPostCat('help')" id="pcat-help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🆘 Help Needed</button>
-                <button onclick="selectPostCat('tips')" id="pcat-tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌿 Plant Tips</button>
-                <button onclick="selectPostCat('showcase')" id="pcat-showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🌸 Showcase</button>
-                <button onclick="selectPostCat('swap')" id="pcat-swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">🔄 Swap</button>
+    <!-- Article content -->
+    <div id="article-content" class="hidden">
+        <div class="flex items-center gap-2 mb-sm flex-wrap">
+            <span id="article-category" class="font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant"></span>
+            <span id="article-read-time" class="font-label-sm text-outline"></span>
+        </div>
+        <h1 id="article-title" class="font-display-lg text-display-lg text-primary mb-md leading-tight"></h1>
+        <div class="flex items-center gap-md mb-lg pb-lg border-b border-outline-variant/30">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-outline text-[16px]">auto_stories</span>
+                <span class="font-label-sm text-outline">Sourced from Wikipedia</span>
             </div>
-        </div>
-        <!-- Title -->
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Title <span class="text-error">*</span></label>
-            <input id="post-title" type="text" maxlength="120" placeholder="What's on your mind?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
-        </div>
-        <!-- Body -->
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Details</label>
-            <textarea id="post-body" rows="4" maxlength="1000" placeholder="Share more details, ask your question, or describe your plant..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
-        </div>
-        <!-- Image upload -->
-        <div>
-            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Photo <span class="text-outline">(optional)</span></label>
-            <div id="image-preview-area" class="hidden mb-2">
-                <div class="relative inline-block">
-                    <img id="image-preview" src="" alt="" class="h-32 rounded-xl object-cover border border-outline-variant/30"/>
-                    <button onclick="removeImage()" class="absolute -top-2 -right-2 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-[12px] shadow">✕</button>
-                </div>
-            </div>
-            <button onclick="document.getElementById('image-input').click()" class="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-dashed border-outline-variant/40 text-on-surface-variant hover:border-primary hover:text-primary transition-all font-label-lg text-label-lg">
-                <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
-                Add Photo
+            <button onclick="shareArticle()" class="ml-auto flex items-center gap-1 font-label-sm text-primary hover:underline">
+                <span class="material-symbols-outlined text-[16px]">share</span> Share
             </button>
-            <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)"/>
         </div>
-        <!-- Submit -->
-        <button onclick="submitPost()" id="submit-btn" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
-            Share with Community
-        </button>
-        <p id="post-error" class="hidden text-error font-label-sm text-center"></p>
+        <!-- OpenFarm data card if available -->
+        <div id="openfarm-card" class="hidden bg-primary-fixed/20 rounded-2xl p-md mb-lg border border-primary-container/30">
+            <div class="flex items-center gap-2 mb-sm">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">eco</span>
+                <h3 class="font-label-lg text-on-surface">Growing Guide</h3>
+            </div>
+            <div id="openfarm-content" class="grid grid-cols-2 gap-md"></div>
+        </div>
+        <!-- Article body from Wikipedia -->
+        <div id="article-body" class="article-body mb-xl"></div>
+        <!-- YouTube videos -->
+        <div id="youtube-section" class="hidden mb-xl">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-md">📺 Related Videos</h3>
+            <div id="youtube-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-md"></div>
+            <p class="font-label-sm text-outline mt-2">Videos from YouTube · Content by respective creators</p>
+        </div>
+        <!-- Related articles -->
+        <div class="border-t border-outline-variant/30 pt-lg">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-md">More to Explore</h3>
+            <div class="space-y-3" id="related-list"></div>
+        </div>
     </div>
-</div>
-
-<!-- Bottom Nav -->
+    <div id="article-error" class="hidden text-center py-xl">
+        <span class="material-symbols-outlined text-[48px] text-outline mb-md">wifi_off</span>
+        <p class="font-headline-md text-on-surface-variant">Could not load article</p>
+        <button onclick="loadArticle()" class="mt-md font-label-lg text-primary hover:underline">Try again</button>
+    </div>
+</main>
 <nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
 <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
 <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
 <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="community.html"><span class="material-symbols-outlined active-icon">group</span><span class="font-label-sm text-label-sm">Community</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html"><span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="learn.html"><span class="material-symbols-outlined active-icon">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
 </div>
 </nav>
-
 <script>
-// ── Supabase ──────────────────────────────────────────────────────────────
-const { createClient } = supabase;
-const sb = createClient('https://vgvldoegptvzijlpsrtu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
-
-// ── State ─────────────────────────────────────────────────────────────────
-let allPosts = [];
-let currentFilter = 'all';
-let currentSearch = '';
-let selectedCat = null;
-let selectedImageFile = null;
-let isSubmitting = false;
-
-// ── Category meta ─────────────────────────────────────────────────────────
-const CAT = {
-    help:     { label: 'Help Needed',  colour: 'bg-error-container text-on-error-container' },
-    tips:     { label: 'Plant Tips',   colour: 'bg-primary-fixed text-on-primary-fixed-variant' },
-    showcase: { label: 'Showcase',     colour: 'bg-secondary-container text-on-secondary-container' },
-    swap:     { label: 'Swap',         colour: 'bg-tertiary-fixed text-on-tertiary-fixed-variant' },
-};
-
-function catMeta(cat) {
-    return CAT[cat] || { label: cat, colour: 'bg-surface-container text-on-surface-variant' };
-}
-
-function timeAgo(iso) {
-    const diff = (Date.now() - new Date(iso)) / 1000;
-    if (diff < 60)    return 'just now';
-    if (diff < 3600)  return Math.floor(diff/60) + 'm ago';
-    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
-    return Math.floor(diff/86400) + 'd ago';
-}
-
-function initials(name) {
-    return (name || 'G').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-}
-
-// ── Load posts ────────────────────────────────────────────────────────────
-async function loadPosts() {
-    try {
-        const { data, error } = await sb
-            .from('posts')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        allPosts = data || [];
-        renderFeed();
-    } catch(e) {
-        console.error('Load posts error:', e);
-        document.getElementById('feed').innerHTML = `
-            <div class="text-center py-lg">
-                <span class="material-symbols-outlined text-[40px] text-outline">cloud_off</span>
-                <p class="font-body-md text-on-surface-variant mt-2">Could not load posts</p>
-                <button onclick="loadPosts()" class="mt-md font-label-lg text-primary hover:underline">Retry</button>
-            </div>`;
-    }
-}
-
-// ── Render feed ───────────────────────────────────────────────────────────
-function renderFeed() {
-    const feed = document.getElementById('feed');
-    const empty = document.getElementById('empty-state');
-
-    let posts = allPosts;
-
-    // Filter by category
-    if (currentFilter !== 'all') {
-        posts = posts.filter(p => p.category === currentFilter);
-    }
-
-    // Filter by search
-    if (currentSearch.trim()) {
-        const q = currentSearch.toLowerCase();
-        posts = posts.filter(p =>
-            p.title.toLowerCase().includes(q) ||
-            (p.body || '').toLowerCase().includes(q)
-        );
-    }
-
-    if (posts.length === 0) {
-        feed.innerHTML = '';
-        empty.classList.remove('hidden');
-        return;
-    }
-    empty.classList.add('hidden');
-
-    feed.innerHTML = posts.map(post => {
-        const meta = catMeta(post.category);
-        const inits = initials(post.author);
-        const colours = ['bg-primary-container text-on-primary-container',
-                         'bg-secondary-container text-on-secondary-container',
-                         'bg-tertiary-fixed text-on-tertiary-fixed-variant'];
-        const avatarCol = colours[inits.charCodeAt(0) % colours.length];
-
-        return `
-        <article class="post-card bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant/20">
-            <!-- Post header -->
-            <div class="flex items-center justify-between px-md pt-md pb-sm">
-                <div class="flex items-center gap-sm">
-                    <div class="w-10 h-10 rounded-full ${avatarCol} flex items-center justify-center font-bold text-[13px] flex-shrink-0">${inits}</div>
-                    <div>
-                        <p class="font-label-lg text-on-surface">${post.author}</p>
-                        <p class="font-label-sm text-outline">${timeAgo(post.created_at)}</p>
-                    </div>
-                </div>
-                <span class="font-label-sm px-3 py-1 rounded-full ${meta.colour}">${meta.label}</span>
-            </div>
-            <!-- Post body -->
-            <div class="px-md pb-sm">
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">${post.title}</h3>
-                ${post.body ? `<p class="font-body-md text-on-surface-variant">${post.body}</p>` : ''}
-            </div>
-            <!-- Image -->
-            ${post.image_url ? `
-            <div class="w-full overflow-hidden max-h-72">
-                <img src="${post.image_url}" alt="Post image" class="w-full object-cover"/>
-            </div>` : ''}
-            <!-- Actions -->
-            <div class="flex items-center gap-lg px-md py-sm border-t border-outline-variant/20">
-                <button onclick="likePost('${post.id}', this)" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined">favorite_border</span>
-                    <span class="like-count">${post.likes || 0}</span>
-                </button>
-                <a href="post-detail.html?id=${post.id}" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">chat_bubble</span>
-                    <span>Reply</span>
-                </a>
-                <button onclick="sharePost('${post.title}')" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">share</span>
-                </button>
-            </div>
-        </article>`;
-    }).join('');
-}
-
-// ── Filters ───────────────────────────────────────────────────────────────
-function setFilter(cat) {
-    currentFilter = cat;
-    document.querySelectorAll('.comm-chip').forEach(c => {
-        c.classList.remove('active', 'bg-primary-container', 'text-on-primary-container');
-        c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
-    });
-    const btn = document.getElementById('chip-' + cat);
-    if (btn) {
-        btn.classList.add('active', 'bg-primary-container', 'text-on-primary-container');
-        btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
-    }
-    renderFeed();
-}
-
-function filterBySearch(val) {
-    currentSearch = val;
-    renderFeed();
-}
-
-// ── Like ──────────────────────────────────────────────────────────────────
-async function likePost(id, btn) {
-    const post = allPosts.find(p => p.id === id);
-    if (!post) return;
-    post.likes = (post.likes || 0) + 1;
-    btn.querySelector('.like-count').textContent = post.likes;
-    btn.querySelector('.material-symbols-outlined').textContent = 'favorite';
-    btn.querySelector('.material-symbols-outlined').style.color = '#ba1a1a';
-    btn.disabled = true;
-    await sb.from('posts').update({ likes: post.likes }).eq('id', id);
-}
-
-// ── Share ─────────────────────────────────────────────────────────────────
-function sharePost(title) {
-    if (navigator.share) {
-        navigator.share({ title: title + ' - Greenthumb Community', url: window.location.href });
-    } else {
-        navigator.clipboard?.writeText(window.location.href);
-    }
-}
-
-// ── New Post Panel ────────────────────────────────────────────────────────
-function openNewPost() {
-    document.getElementById('new-post-panel').classList.add('open');
-    document.getElementById('post-overlay').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    selectedCat = null;
-    selectedImageFile = null;
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-body').value = '';
-    document.getElementById('post-error').classList.add('hidden');
-    document.getElementById('image-preview-area').classList.add('hidden');
-    document.getElementById('image-input').value = '';
-    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
-}
-
-function closeNewPost() {
-    document.getElementById('new-post-panel').classList.remove('open');
-    document.getElementById('post-overlay').classList.add('hidden');
-    document.body.style.overflow = '';
-}
-
-function selectPostCat(cat) {
-    selectedCat = cat;
-    document.querySelectorAll('.post-cat-btn').forEach(b => b.classList.remove('selected'));
-    const btn = document.getElementById('pcat-' + cat);
-    if (btn) btn.classList.add('selected');
-}
-
-// ── Image handling ────────────────────────────────────────────────────────
-function handleImageSelect(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-        showPostError('Image must be under 5MB');
-        return;
-    }
-    selectedImageFile = file;
-    const reader = new FileReader();
-    reader.onload = ev => {
-        document.getElementById('image-preview').src = ev.target.result;
-        document.getElementById('image-preview-area').classList.remove('hidden');
-    };
-    reader.readAsDataURL(file);
-}
-
-function removeImage() {
-    selectedImageFile = null;
-    document.getElementById('image-preview-area').classList.add('hidden');
-    document.getElementById('image-input').value = '';
-}
-
-function showPostError(msg) {
-    const el = document.getElementById('post-error');
-    el.textContent = msg;
-    el.classList.remove('hidden');
-}
-
-// ── Submit post ───────────────────────────────────────────────────────────
-async function submitPost() {
-    if (isSubmitting) return;
-    const title = document.getElementById('post-title').value.trim();
-    const body  = document.getElementById('post-body').value.trim();
-
-    document.getElementById('post-error').classList.add('hidden');
-
-    if (!title) { showPostError('Please add a title'); document.getElementById('post-title').focus(); return; }
-    if (!selectedCat) { showPostError('Please select a category'); return; }
-
-    isSubmitting = true;
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sharing…';
-    btn.disabled = true;
-
-    try {
-        let imageUrl = null;
-
-        // Upload image if selected
-        if (selectedImageFile) {
-            const ext = selectedImageFile.name.split('.').pop();
-            const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-            const { error: uploadErr } = await sb.storage
-                .from('post-images')
-                .upload(path, selectedImageFile, { cacheControl: '3600', upsert: false });
-
-            if (uploadErr) throw uploadErr;
-
-            const { data: urlData } = sb.storage.from('post-images').getPublicUrl(path);
-            imageUrl = urlData.publicUrl;
-        }
-
-        // Insert post
-        const { data, error } = await sb.from('posts').insert({
-            author: 'Gardener',
-            category: selectedCat,
-            title,
-            body: body || null,
-            image_url: imageUrl,
-            likes: 0
-        }).select().single();
-
-        if (error) throw error;
-
-        // Add to local array and re-render
-        allPosts.unshift(data);
-        closeNewPost();
-        setFilter('all');
-        renderFeed();
-
-        // Scroll to top of feed
-        document.getElementById('feed').scrollIntoView({ behavior: 'smooth' });
-
-    } catch(e) {
-        console.error('Submit error:', e);
-        showPostError('Could not post — please try again');
-    } finally {
-        isSubmitting = false;
-        btn.textContent = 'Share with Community';
-        btn.disabled = false;
-    }
-}
-
-// ── Real-time subscription ────────────────────────────────────────────────
-sb.channel('posts-channel')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, payload => {
-        // Only add if not already in list (avoid duplicating own posts)
-        if (!allPosts.find(p => p.id === payload.new.id)) {
-            allPosts.unshift(payload.new);
-            renderFeed();
-        }
-    })
-    .subscribe();
-
-// ── Nav Drawer ────────────────────────────────────────────────────────────
-
 // ── Nav Drawer ────────────────────────────────────────────────────────────
 function openNav() {
     document.getElementById('nav-drawer').classList.add('open');
@@ -713,43 +377,161 @@ function setActiveNav(pageId) {
     }
 })();
 
-// Keyboard
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+const YOUTUBE_KEY = 'AIzaSyAN9eJwek4cxcAcTzqkKMqn5KNmaC3u960';
+const PERENUAL_KEY = 'sk-H63g6a085fb86f4c417329';
 
-// Set location in drawer from saved location
-(function() {
-    try {
-        const loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
-        if (loc && loc.name) document.getElementById('nav-location').textContent = loc.name;
-    } catch(e) {}
-})();
+// Get topic from URL param e.g. article-detail.html?topic=Composting&category=Soil+Care
+const params = new URLSearchParams(window.location.search);
+const TOPIC = params.get('topic') || 'Monstera deliciosa';
+const CATEGORY = params.get('category') || 'Plant Care';
 
-// Init — wrapped in try/catch so page JS always runs
-try {
-// Init active state
-setActiveNav('community');
+document.title = TOPIC + ' - Greenthumb';
 
-// Init all sub-lists collapsed except active group
-document.querySelectorAll('.nav-sub-list').forEach(list => {
-    if (!list.classList.contains('collapsed')) {
-        list.style.maxHeight = '500px';
-    } else {
-        list.style.maxHeight = '0px';
-    }
+// Reading progress bar
+window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    document.getElementById('reading-progress').style.width = Math.min(pct, 100) + '%';
 });
-} catch(navErr) {
-    console.warn('Nav init error:', navErr);
+
+async function loadArticle() {
+    document.getElementById('article-loading').classList.remove('hidden');
+    document.getElementById('article-content').classList.add('hidden');
+    document.getElementById('article-error').classList.add('hidden');
+    
+    try {
+        // 1. Wikipedia summary
+        const wikiSlug = TOPIC.replace(/ /g, '_');
+        const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiSlug)}`);
+        const wikiData = await wikiRes.json();
+
+        // 2. Wikipedia full sections
+        const sectRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/mobile-sections/${encodeURIComponent(wikiSlug)}`);
+        const sectData = await sectRes.json();
+
+        // 3. OpenFarm data
+        fetchOpenFarm(TOPIC);
+
+        // 4. YouTube videos (if key available)
+        if (YOUTUBE_KEY) fetchYouTube(TOPIC + ' plant care');
+
+        // Render article
+        document.getElementById('article-loading').classList.add('hidden');
+        document.getElementById('article-content').classList.remove('hidden');
+        
+        document.getElementById('article-category').textContent = CATEGORY;
+        document.getElementById('article-title').textContent = wikiData.title || TOPIC;
+        
+        // Estimate read time
+        const wordCount = (wikiData.extract || '').split(' ').length;
+        document.getElementById('article-read-time').textContent = Math.max(2, Math.ceil(wordCount/200)) + ' min read';
+        
+        // Build article body from sections
+        let bodyHtml = '';
+        if (wikiData.extract) {
+            bodyHtml += `<p>${wikiData.extract}</p>`;
+        }
+        if (sectData.sections) {
+            sectData.sections.slice(1, 6).forEach(s => {
+                if (s.line && s.text) {
+                    bodyHtml += `<h2>${s.line}</h2>`;
+                    // Strip wiki markup tags
+                    const clean = s.text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                    if (clean.length > 50) bodyHtml += `<p>${clean.slice(0, 1200)}${clean.length > 1200 ? '…' : ''}</p>`;
+                }
+            });
+        }
+        document.getElementById('article-body').innerHTML = bodyHtml || `<p>Detailed information about ${TOPIC}.</p>`;
+        
+        // Related articles
+        renderRelated();
+        
+    } catch(e) {
+        document.getElementById('article-loading').classList.add('hidden');
+        document.getElementById('article-error').classList.remove('hidden');
+    }
 }
 
+async function fetchOpenFarm(topic) {
+    try {
+        const res = await fetch(`https://openfarm.cc/api/v1/crops?filter=${encodeURIComponent(topic)}`);
+        const data = await res.json();
+        const crop = data.data?.[0]?.attributes;
+        if (!crop) return;
+        const card = document.getElementById('openfarm-card');
+        const content = document.getElementById('openfarm-content');
+        const fields = [
+            { label: 'Sun', value: crop.sun_requirements, icon: 'wb_sunny' },
+            { label: 'Water', value: crop.water_requirements, icon: 'water_drop' },
+            { label: 'Sow', value: crop.sowing_method, icon: 'grass' },
+            { label: 'Spacing', value: crop.row_spacing ? crop.row_spacing + ' cm' : null, icon: 'straighten' },
+        ].filter(f => f.value);
+        if (fields.length > 0) {
+            content.innerHTML = fields.map(f => `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">${f.icon}</span>
+                    <div><p class="font-label-sm text-outline">${f.label}</p><p class="font-label-lg text-on-surface">${f.value}</p></div>
+                </div>`).join('');
+            card.classList.remove('hidden');
+        }
+    } catch(e) {}
+}
 
-try {
-    setActiveNav('community');
-    document.querySelectorAll('.nav-sub-list').forEach(list => {
-        list.style.maxHeight = list.classList.contains('collapsed') ? '0px' : '500px';
-    });
-} catch(e) { console.warn('Nav init:', e); }
+async function fetchYouTube(query) {
+    try {
+        const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=4&key=${YOUTUBE_KEY}`);
+        const data = await res.json();
+        if (!data.items?.length) return;
+        document.getElementById('youtube-section').classList.remove('hidden');
+        document.getElementById('youtube-grid').innerHTML = data.items.map(v => `
+            <a href="https://youtube.com/watch?v=${v.id.videoId}" target="_blank" rel="noopener" class="group flex flex-col rounded-2xl overflow-hidden border border-outline-variant/20 bg-surface-container-lowest hover:shadow-md transition-shadow">
+                <div class="aspect-video overflow-hidden relative">
+                    <img src="${v.snippet.thumbnails.medium.url}" alt="${v.snippet.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1">play_arrow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-sm">
+                    <p class="font-label-lg text-on-surface line-clamp-2">${v.snippet.title}</p>
+                    <p class="font-label-sm text-outline mt-0.5">${v.snippet.channelTitle}</p>
+                </div>
+            </a>`).join('');
+    } catch(e) {}
+}
 
-// ── Init ──────────────────────────────────────────────────────────────────
-loadPosts();
+const RELATED = [
+    { title:'Soil Basics for Beginners', topic:'Soil', category:'Fundamentals' },
+    { title:'Watering Techniques', topic:'Plant watering', category:'Care' },
+    { title:'Propagation Guide', topic:'Plant propagation', category:'Advanced' },
+    { title:'Pest & Disease Management', topic:'Plant disease', category:'Health' },
+];
+
+function renderRelated() {
+    document.getElementById('related-list').innerHTML = RELATED
+        .filter(r => r.topic !== TOPIC)
+        .slice(0, 3)
+        .map(r => `
+            <a href="article-detail.html?topic=${encodeURIComponent(r.topic)}&category=${encodeURIComponent(r.category)}" 
+               class="flex items-center gap-md bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined text-primary flex-shrink-0" style="font-variation-settings:'FILL' 1">article</span>
+                <div class="flex-1 min-w-0">
+                    <p class="font-label-lg text-on-surface truncate">${r.title}</p>
+                    <p class="font-label-sm text-outline">${r.category}</p>
+                </div>
+                <span class="material-symbols-outlined text-outline">chevron_right</span>
+            </a>`).join('');
+}
+
+function shareArticle() {
+    if (navigator.share) navigator.share({ title: TOPIC + ' - Greenthumb', url: window.location.href });
+    else navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'));
+}
+
+loadArticle();
+
+
+setActiveNav('articles');
 </script>
 </body></html>
