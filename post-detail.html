@@ -314,10 +314,11 @@ function closeNav() {
 }
 function toggleGroup(id) {
     const list = document.getElementById(id);
+    if (!list) return;
     const btn = list.previousElementSibling;
     const isCollapsed = list.classList.contains('collapsed');
     list.classList.toggle('collapsed', !isCollapsed);
-    btn.classList.toggle('open', isCollapsed);
+    if (btn) btn.classList.toggle('open', isCollapsed);
     list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
 }
 
@@ -374,13 +375,16 @@ function setActiveNav(pageId) {
         if (startX < 30 && dx > 60 && dy < 60) openNav();
     }, { passive: true });
     // Swipe left to close
-    document.getElementById('nav-drawer').addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-    }, { passive: true });
-    document.getElementById('nav-drawer').addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        if (dx < -60) closeNav();
-    }, { passive: true });
+    const navDrawerEl = document.getElementById('nav-drawer');
+    if (navDrawerEl) {
+        navDrawerEl.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        navDrawerEl.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - startX;
+            if (dx < -60) closeNav();
+        }, { passive: true });
+    }
 })();
 
 const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
