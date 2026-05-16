@@ -444,9 +444,13 @@ function renderFeed() {
                     <span class="material-symbols-outlined">chat_bubble</span>
                     <span>Reply</span>
                 </a>
-                <button onclick="sharePost('${post.title}')" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+                <button onclick="sharePost('${post.title}')" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
                     <span class="material-symbols-outlined">share</span>
                 </button>
+                ${post.author === 'Gardener' ? `
+                <button onclick="deletePost('${post.id}', this)" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                </button>` : '<span class="ml-auto"></span>'}
             </div>
         </article>`;
     }).join('');
@@ -482,6 +486,22 @@ async function likePost(id, btn) {
     btn.querySelector('.material-symbols-outlined').style.color = '#ba1a1a';
     btn.disabled = true;
     await sb.from('posts').update({ likes: post.likes }).eq('id', id);
+}
+
+// ── Delete post ───────────────────────────────────────────────────────────
+async function deletePost(id, btn) {
+    if (!confirm('Delete this post?')) return;
+    btn.disabled = true;
+    try {
+        const { error } = await sb.from('posts').delete().eq('id', id);
+        if (error) throw error;
+        allPosts = allPosts.filter(p => p.id !== id);
+        renderFeed();
+    } catch(e) {
+        console.error('Delete error:', e);
+        btn.disabled = false;
+        alert('Could not delete post. Please try again.');
+    }
 }
 
 // ── Share ─────────────────────────────────────────────────────────────────
@@ -571,16 +591,22 @@ async function submitPost() {
 
         // Upload image if selected
         if (selectedImageFile) {
-            const ext = selectedImageFile.name.split('.').pop();
-            const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-            const { error: uploadErr } = await sb.storage
-                .from('post-images')
-                .upload(path, selectedImageFile, { cacheControl: '3600', upsert: false });
+            try {
+                const ext = selectedImageFile.name.split('.').pop();
+                const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+                const { error: uploadErr } = await sb.storage
+                    .from('post-images')
+                    .upload(path, selectedImageFile, { cacheControl: '3600', upsert: false });
 
-            if (uploadErr) throw uploadErr;
-
-            const { data: urlData } = sb.storage.from('post-images').getPublicUrl(path);
-            imageUrl = urlData.publicUrl;
+                if (!uploadErr) {
+                    const { data: urlData } = sb.storage.from('post-images').getPublicUrl(path);
+                    imageUrl = urlData.publicUrl;
+                } else {
+                    console.warn('Image upload failed, posting without image:', uploadErr.message);
+                }
+            } catch(imgErr) {
+                console.warn('Image upload error, posting without image:', imgErr);
+            }
         }
 
         // Insert post
