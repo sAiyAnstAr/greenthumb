@@ -317,7 +317,12 @@
 </nav>
 
 <script>
+
 // ── Supabase ──────────────────────────────────────────────────────────────
+// Safe Supabase init
+if (typeof supabase === 'undefined') {
+    console.error('Supabase library not loaded');
+}
 const { createClient } = supabase;
 const sb = createClient('https://vgvldoegptvzijlpsrtu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
 
@@ -651,6 +656,8 @@ sb.channel('posts-channel')
     })
     .subscribe();
 
+
+try {
 // ── Nav Drawer ────────────────────────────────────────────────────────────
 function openNav() {
     document.getElementById('nav-drawer').classList.add('open');
@@ -758,7 +765,10 @@ try {
     console.warn('Nav init error:', navErr);
 }
 
+
+} catch(navErr) { console.warn('Nav JS error:', navErr); }
 // ── Init ──────────────────────────────────────────────────────────────────
 loadPosts();
+
 </script>
 </body></html>
