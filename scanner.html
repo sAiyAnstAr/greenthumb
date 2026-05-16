@@ -219,10 +219,10 @@
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45">
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
 
-<!-- Header overlaid on camera -->
-<header class="absolute top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/60 to-transparent">
+<!-- Header - sticky, dark for camera feel -->
+<header class="bg-on-background/90 w-full top-0 sticky z-40 border-b border-white/10">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
 <button onclick="openNav()" class="hover:bg-white/20 transition-colors p-2 rounded-full active:scale-95" aria-label="Open menu">
 <span class="material-symbols-outlined text-white">menu</span>
@@ -257,20 +257,19 @@
     </div>
 
     <!-- Status pill -->
-    <div class="absolute top-24 left-0 right-0 flex justify-center pointer-events-none">
-        <div id="status-pill" class="bg-black/30 backdrop-blur-md rounded-full px-md py-sm border border-white/20">
+    <div class="absolute top-4 left-0 right-0 flex justify-center pointer-events-none z-10">
+        <div id="status-pill" class="bg-black/40 backdrop-blur-md rounded-full px-md py-sm border border-white/20">
             <p id="status-text" class="text-white font-label-lg text-label-lg tracking-wide">Align plant in frame</p>
         </div>
     </div>
 
-    <!-- Camera controls -->
-    <div id="camera-controls" class="mt-auto relative z-10 px-container-margin pb-32 flex flex-col items-center gap-lg">
+    <!-- Camera controls - only visible when camera is active -->
+    <div id="camera-controls" class="hidden mt-auto relative z-10 px-container-margin pb-32 flex flex-col items-center gap-lg">
         <div class="flex items-center justify-between w-full max-w-sm">
             <!-- Gallery picker -->
             <button onclick="openGallery()" class="p-md rounded-full bg-black/40 text-white active:scale-90 transition-transform border border-white/20" title="Choose from gallery">
                 <span class="material-symbols-outlined">image</span>
             </button>
-            <input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="handleGalleryImage(event)"/>
             <!-- Capture button -->
             <button onclick="capturePhoto()" id="capture-btn" class="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center bg-white/20 active:scale-90 transition-transform shadow-lg">
                 <div class="w-14 h-14 rounded-full bg-white"></div>
@@ -282,14 +281,22 @@
         </div>
     </div>
 
-    <!-- No camera fallback -->
-    <div id="no-camera" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-on-background/90 z-10">
-        <span class="material-symbols-outlined text-[64px] text-outline mb-md">no_photography</span>
-        <p class="font-headline-md text-white mb-sm">Camera not available</p>
-        <p class="font-body-md text-white/60 mb-lg text-center px-lg">Use the gallery button to identify a plant from a photo</p>
-        <button onclick="openGallery()" class="bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full active:scale-95 transition-transform">
-            Choose from Gallery
-        </button>
+    <!-- No camera fallback - shown by default, hidden once camera starts -->
+    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10">
+        <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-lg">
+            <span class="material-symbols-outlined text-[48px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
+        </div>
+        <p class="font-headline-md text-headline-md text-white mb-sm">Identify a Plant</p>
+        <p class="font-body-md text-white/70 mb-lg text-center px-lg">Point your camera at any plant to identify it instantly, or choose a photo from your gallery.</p>
+        <div class="flex flex-col gap-3 w-full max-w-xs px-container-margin">
+            <button onclick="requestCamera()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
+                Enable Camera
+            </button>
+            <button onclick="openGallery()" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform border border-white/30 text-center">
+                Choose from Gallery
+            </button>
+        </div>
+        <input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="handleGalleryImage(event)"/>
     </div>
 </main>
 
@@ -431,6 +438,12 @@ let flashOn = false;
 let capturedBlob = null;
 let track = null;
 
+async function requestCamera() {
+    const noCamera = document.getElementById('no-camera');
+    noCamera.innerHTML = `<div class="text-center"><div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-md animate-pulse"><span class="material-symbols-outlined text-[32px] text-white">photo_camera</span></div><p class="font-body-md text-white/80">Requesting camera access…</p></div>`;
+    await startCamera();
+}
+
 async function startCamera() {
     try {
         stream = await navigator.mediaDevices.getUserMedia({
@@ -440,10 +453,25 @@ async function startCamera() {
         const video = document.getElementById('video-feed');
         video.srcObject = stream;
         track = stream.getVideoTracks()[0];
+        // Camera working — hide fallback, show controls
+        document.getElementById('no-camera').classList.add('hidden');
+        document.getElementById('camera-controls').classList.remove('hidden');
         document.getElementById('scan-line').style.display = 'block';
     } catch(e) {
+        // Camera denied — restore fallback
+        document.getElementById('no-camera').innerHTML = `
+        <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-lg">
+            <span class="material-symbols-outlined text-[48px] text-white" style="font-variation-settings:'FILL' 1">no_photography</span>
+        </div>
+        <p class="font-headline-md text-headline-md text-white mb-sm">Camera not available</p>
+        <p class="font-body-md text-white/70 mb-lg text-center px-lg">Camera access was denied or unavailable. You can still identify plants from your photo gallery.</p>
+        <div class="flex flex-col gap-3 w-full max-w-xs px-container-margin">
+            <button onclick="openGallery()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
+                Choose from Gallery
+            </button>
+        </div>
+        <input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="handleGalleryImage(event)"/>`;
         document.getElementById('no-camera').classList.remove('hidden');
-        document.getElementById('scan-line').style.display = 'none';
     }
 }
 
@@ -585,8 +613,9 @@ function setStatus(text) {
     document.getElementById('status-text').textContent = text;
 }
 
-// Start camera on load
-startCamera();
+// Don't auto-start camera — show the friendly fallback first
+// Camera starts when user taps "Enable Camera"
+// This prevents the black screen in contexts without camera access
 
 setActiveNav('scanner');
 </script>
