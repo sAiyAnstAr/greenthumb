@@ -224,7 +224,7 @@
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
 <input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary-container font-body-md text-body-md text-on-surface" placeholder="Search tips, plants, or helpers..." type="text"/>
 </div>
-<button class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg">
+<button onclick="openNewPost()" class="bg-primary text-on-primary px-md py-3 rounded-full flex items-center gap-base active:scale-95 transition-transform shadow-md font-label-lg text-label-lg">
 <span class="material-symbols-outlined" data-icon="add">add</span>
 <span>Post</span>
 </button>
@@ -376,10 +376,11 @@ function closeNav() {
 }
 function toggleGroup(id) {
     const list = document.getElementById(id);
+    if (!list) return;
     const btn = list.previousElementSibling;
     const isCollapsed = list.classList.contains('collapsed');
     list.classList.toggle('collapsed', !isCollapsed);
-    btn.classList.toggle('open', isCollapsed);
+    if (btn) btn.classList.toggle('open', isCollapsed);
     list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
 }
 
@@ -436,13 +437,16 @@ function setActiveNav(pageId) {
         if (startX < 30 && dx > 60 && dy < 60) openNav();
     }, { passive: true });
     // Swipe left to close
-    document.getElementById('nav-drawer').addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-    }, { passive: true });
-    document.getElementById('nav-drawer').addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        if (dx < -60) closeNav();
-    }, { passive: true });
+    const navDrawerEl = document.getElementById('nav-drawer');
+    if (navDrawerEl) {
+        navDrawerEl.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        navDrawerEl.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - startX;
+            if (dx < -60) closeNav();
+        }, { passive: true });
+    }
 })();
 
 // Keyboard
@@ -456,6 +460,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); 
     } catch(e) {}
 })();
 
+// Init — wrapped in try/catch so page JS always runs
+try {
 // Init active state
 setActiveNav('community');
 
@@ -467,6 +473,9 @@ document.querySelectorAll('.nav-sub-list').forEach(list => {
         list.style.maxHeight = '0px';
     }
 });
+} catch(navErr) {
+    console.warn('Nav init error:', navErr);
+}
 </script>
 
 <script>
@@ -488,4 +497,111 @@ function filterPosts(category) {
     });
 }
 </script>
+
+<!-- New Post Panel -->
+<div id="post-overlay" class="fixed inset-0 z-50 hidden bg-on-background/40 backdrop-blur-sm" onclick="closeNewPost()"></div>
+<div id="new-post-panel" style="position:fixed;bottom:0;left:0;right:0;z-index:50;background:#faf9f5;border-radius:24px 24px 0 0;padding:16px 20px 48px;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 -4px 24px rgba(0,0,0,0.15)">
+    <div style="width:40px;height:4px;background:#c2c9bb;border-radius:2px;margin:0 auto 16px"></div>
+    <h3 class="font-headline-md text-headline-md text-on-surface mb-md">New Post</h3>
+    <div class="space-y-md">
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Category</label>
+            <div class="flex flex-wrap gap-2" id="post-category-chips">
+                <button onclick="selectPostCategory('help')" id="pcat-help" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Help Needed</button>
+                <button onclick="selectPostCategory('tips')" id="pcat-tips" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Plant Tips</button>
+                <button onclick="selectPostCategory('showcase')" id="pcat-showcase" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Showcase</button>
+                <button onclick="selectPostCategory('swap')" id="pcat-swap" class="post-cat-btn px-4 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">Swap</button>
+            </div>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Title</label>
+            <input id="post-title" type="text" placeholder="What's your question or update?" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Details</label>
+            <textarea id="post-body" rows="4" placeholder="Share more details, photos, or observations..." class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
+        </div>
+        <button onclick="submitPost()" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
+            Share with Community
+        </button>
+    </div>
+</div>
+
+<script>
+let selectedPostCategory = null;
+
+function openNewPost() {
+    document.getElementById('new-post-panel').style.transform = 'translateY(0)';
+    document.getElementById('post-overlay').classList.remove('hidden');
+    selectedPostCategory = null;
+    document.querySelectorAll('.post-cat-btn').forEach(b => {
+        b.style.borderColor = '';
+        b.style.background = '';
+        b.style.color = '';
+    });
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-body').value = '';
+}
+
+function closeNewPost() {
+    document.getElementById('new-post-panel').style.transform = 'translateY(100%)';
+    document.getElementById('post-overlay').classList.add('hidden');
+}
+
+function selectPostCategory(cat) {
+    selectedPostCategory = cat;
+    document.querySelectorAll('.post-cat-btn').forEach(b => {
+        b.style.borderColor = '';
+        b.style.background = '#efeeea';
+        b.style.color = '#42493e';
+    });
+    const btn = document.getElementById('pcat-' + cat);
+    if (btn) {
+        btn.style.borderColor = '#154212';
+        btn.style.background = '#bcf0ae';
+        btn.style.color = '#002201';
+    }
+}
+
+function submitPost() {
+    const title = document.getElementById('post-title').value.trim();
+    const body  = document.getElementById('post-body').value.trim();
+    if (!title) { document.getElementById('post-title').focus(); return; }
+
+    const catLabels = { help:'Help Needed', tips:'Plant Tips', showcase:'Showcase', swap:'Swap' };
+    const catLabel  = catLabels[selectedPostCategory] || 'Plant Tips';
+    const catColour = selectedPostCategory === 'help' ? 'text-error font-semibold' : 'text-primary font-semibold';
+
+    const feed = document.querySelector('.space-y-lg');
+    const article = document.createElement('article');
+    article.dataset.category = selectedPostCategory || 'tips';
+    article.className = 'comm-post bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container';
+    article.innerHTML = `
+        <div class="p-md flex items-center justify-between">
+            <div class="flex items-center gap-sm">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center font-bold text-on-primary-container">You</div>
+                <div>
+                    <p class="font-label-lg text-label-lg text-on-surface">You</p>
+                    <p class="font-label-sm text-label-sm text-outline">Just now • <span class="${catColour}">${catLabel}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="px-md pb-md">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">${title}</h3>
+            ${body ? `<p class="font-body-md text-body-md text-on-surface-variant">${body}</p>` : ''}
+        </div>
+        <div class="p-md flex items-center gap-md border-t border-surface-container">
+            <button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">favorite_border</span><span>0</span>
+            </button>
+            <button class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+                <span class="material-symbols-outlined">chat_bubble</span><span>0</span>
+            </button>
+        </div>`;
+
+    feed.prepend(article);
+    closeNewPost();
+}
+</script>
+
 </body></html>
