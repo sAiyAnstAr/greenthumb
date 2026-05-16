@@ -626,14 +626,8 @@ function setStatus(text) {
     if (el) el.textContent = text;
 }
 
-// Init — show idle state (green fallback screen)
-showState('idle');
-
-setActiveNav('scanner');
-
 // ── Init ─────────────────────────────────────────────────────────────────
 showState('idle');
-
 try {
     setActiveNav('scanner');
     document.querySelectorAll('.nav-sub-list').forEach(list => {
