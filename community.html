@@ -367,10 +367,10 @@ async function loadPosts() {
     } catch(e) {
         console.error('Load posts error:', e);
         document.getElementById('feed').innerHTML = `
-            <div class="text-center py-lg">
-                <span class="material-symbols-outlined text-[40px] text-outline">cloud_off</span>
-                <p class="font-body-md text-on-surface-variant mt-2">Could not load posts</p>
-                <button onclick="loadPosts()" class="mt-md font-label-lg text-primary hover:underline">Retry</button>
+            <div class="bg-error-container rounded-2xl p-md text-center">
+                <p class="font-label-lg text-on-error-container mb-1">Could not load posts</p>
+                <p class="font-label-sm text-on-error-container/70">${e.message || 'Check console for details'}</p>
+                <button onclick="loadPosts()" class="mt-md font-label-lg text-primary hover:underline bg-white px-4 py-2 rounded-full">Retry</button>
             </div>`;
     }
 }
@@ -556,7 +556,9 @@ async function submitPost() {
     const title = document.getElementById('post-title').value.trim();
     const body  = document.getElementById('post-body').value.trim();
 
-    document.getElementById('post-error').classList.add('hidden'); showPostError('Please add a title'); document.getElementById('post-title').focus(); return; }
+    document.getElementById('post-error').classList.add('hidden');
+
+    if (!title) { showPostError('Please add a title'); document.getElementById('post-title').focus(); return; }
     if (!selectedCat) { showPostError('Please select a category'); return; }
 
     isSubmitting = true;
