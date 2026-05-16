@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Plant - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode:"class",
+        theme:{ extend:{
+            "colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},
+            "borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+            "spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},
+            "fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},
+            "fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}
+        }}
+    }
+</script>
+<style>
+    body { font-family:'Plus Jakarta Sans',sans-serif; background-color:#faf9f5; min-height:max(884px,100dvh); }
+    .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .active-icon { font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar{display:none;} .hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+    .step { display:none; } .step.active { display:block; }
+    .step-fade { animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .search-result:hover { background:#efeeea; }
+    .care-chip.selected { background:#bcf0ae; color:#002201; border-color:#3b6934; }
+    .light-opt.selected { background:#bcf0ae; color:#002201; border-color:#3b6934; }
+    .water-opt.selected { background:#bcf0ae; color:#002201; border-color:#3b6934; }
+    input[type=range]::-webkit-slider-thumb { background:#154212; }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a id="back-btn" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="my-garden.html">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
+</div>
+</header>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
+
+    <!-- Hero -->
+    <section class="mb-lg">
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Add New Plant</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Search, identify, and set up your plant's care profile.</p>
+    </section>
+
+    <!-- Step progress bar -->
+    <div class="flex items-center gap-2 mb-lg">
+        <div id="prog-1" class="h-1.5 flex-1 rounded-full bg-primary transition-all duration-300"></div>
+        <div id="prog-2" class="h-1.5 flex-1 rounded-full bg-surface-container transition-all duration-300"></div>
+        <div id="prog-3" class="h-1.5 flex-1 rounded-full bg-surface-container transition-all duration-300"></div>
+        <div id="prog-4" class="h-1.5 flex-1 rounded-full bg-surface-container transition-all duration-300"></div>
+    </div>
+
+    <!-- ── STEP 1: Find your plant ─────────────────────────────── -->
+    <div id="step-1" class="step active step-fade">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Find your plant</h3>
+        <p class="font-body-md text-on-surface-variant mb-md">Search by common name, scientific name, or use the scanner to identify it from a photo.</p>
+
+        <div class="flex gap-3 mb-md">
+            <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-outline" style="font-size:20px">search</span>
+                </div>
+                <input id="plant-search" type="text" placeholder="e.g. Monstera, Peace Lily…"
+                    class="form-input w-full h-12 pl-11 pr-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            </div>
+            <a href="scanner.html" class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-on-primary shadow-sm active:scale-95 transition-transform" title="Scan to identify">
+                <span class="material-symbols-outlined">filter_center_focus</span>
+            </a>
+        </div>
+
+        <!-- Search results -->
+        <div id="search-results" class="hidden space-y-2 mb-lg"></div>
+
+        <!-- Popular / suggested plants when empty -->
+        <div id="popular-plants">
+            <p class="font-label-sm text-outline uppercase tracking-wider mb-md">Popular Plants</p>
+            <div class="grid grid-cols-2 gap-3" id="popular-grid"></div>
+        </div>
+    </div>
+
+    <!-- ── STEP 2: Confirm plant ───────────────────────────────── -->
+    <div id="step-2" class="step step-fade">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Confirm plant</h3>
+        <div id="confirm-card" class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm mb-lg">
+            <div id="confirm-img-wrap" class="h-48 bg-surface-container overflow-hidden">
+                <img id="confirm-img" class="w-full h-full object-cover" src="" alt=""/>
+            </div>
+            <div class="p-md">
+                <h4 id="confirm-name" class="font-headline-md text-headline-md text-on-surface"></h4>
+                <p id="confirm-species" class="font-label-lg text-label-lg text-outline italic mb-md"></p>
+                <div class="grid grid-cols-3 gap-3 mb-md">
+                    <div class="bg-primary-fixed/30 rounded-xl p-sm text-center">
+                        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">water_drop</span>
+                        <p id="confirm-water" class="font-label-sm text-on-surface mt-1"></p>
+                    </div>
+                    <div class="bg-tertiary-fixed/30 rounded-xl p-sm text-center">
+                        <span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings:'FILL' 1">wb_sunny</span>
+                        <p id="confirm-light" class="font-label-sm text-on-surface mt-1"></p>
+                    </div>
+                    <div class="bg-secondary-container/30 rounded-xl p-sm text-center">
+                        <span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings:'FILL' 1">thermostat</span>
+                        <p id="confirm-diff" class="font-label-sm text-on-surface mt-1"></p>
+                    </div>
+                </div>
+                <p id="confirm-desc" class="font-body-md text-on-surface-variant"></p>
+            </div>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="goStep(1)" class="flex-1 py-3 rounded-xl border-2 border-outline-variant font-label-lg text-on-surface-variant hover:bg-surface-container transition-colors">Search again</button>
+            <button onclick="goStep(3)" class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label-lg shadow-sm active:scale-95 transition-transform">This is my plant</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 3: Name & location ─────────────────────────────── -->
+    <div id="step-3" class="step step-fade">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Name & location</h3>
+        <p class="font-body-md text-on-surface-variant mb-lg">Give your plant a nickname and tell us where it lives.</p>
+        <div class="space-y-md">
+            <div>
+                <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Nickname <span class="text-outline">(optional)</span></label>
+                <input id="plant-nickname" type="text" placeholder="e.g. My favourite leafy friend"
+                    class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            </div>
+            <div>
+                <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Room / Location</label>
+                <div class="grid grid-cols-3 gap-2 mb-2" id="room-chips"></div>
+                <input id="plant-location-custom" type="text" placeholder="Or type a custom location…"
+                    class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+            </div>
+            <div>
+                <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Date acquired</label>
+                <input id="plant-date" type="date" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md"/>
+            </div>
+        </div>
+        <div class="flex gap-3 mt-lg">
+            <button onclick="goStep(2)" class="flex-1 py-3 rounded-xl border-2 border-outline-variant font-label-lg text-on-surface-variant">Back</button>
+            <button onclick="goStep(4)" class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label-lg shadow-sm active:scale-95 transition-transform">Continue</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 4: Care schedule ───────────────────────────────── -->
+    <div id="step-4" class="step step-fade">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Care schedule</h3>
+        <p class="font-body-md text-on-surface-variant mb-lg">We've pre-filled this from the plant profile — adjust as needed.</p>
+        <div class="space-y-lg">
+            <!-- Watering frequency -->
+            <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/30">
+                <div class="flex items-center gap-2 mb-md">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">water_drop</span>
+                    <h4 class="font-label-lg text-on-surface">Watering frequency</h4>
+                </div>
+                <div class="flex flex-wrap gap-2" id="water-chips"></div>
+            </div>
+            <!-- Light preference -->
+            <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/30">
+                <div class="flex items-center gap-2 mb-md">
+                    <span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1">wb_sunny</span>
+                    <h4 class="font-label-lg text-on-surface">Light preference</h4>
+                </div>
+                <div class="flex flex-wrap gap-2" id="light-chips"></div>
+            </div>
+            <!-- Reminders toggle -->
+            <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/30 flex items-center justify-between">
+                <div>
+                    <h4 class="font-label-lg text-on-surface">Watering reminders</h4>
+                    <p class="font-label-sm text-on-surface-variant">Get notified when it's time to water</p>
+                </div>
+                <button id="reminder-toggle" onclick="toggleReminder()" class="w-12 h-6 rounded-full bg-primary relative transition-colors">
+                    <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-all"></span>
+                </button>
+            </div>
+        </div>
+        <div class="flex gap-3 mt-lg">
+            <button onclick="goStep(3)" class="flex-1 py-3 rounded-xl border-2 border-outline-variant font-label-lg text-on-surface-variant">Back</button>
+            <button onclick="savePlant()" class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label-lg shadow-sm active:scale-95 transition-transform">Add to My Garden 🌿</button>
+        </div>
+    </div>
+
+    <!-- ── Success state ───────────────────────────────────────── -->
+    <div id="step-success" class="step step-fade text-center py-xl">
+        <div class="w-24 h-24 rounded-full bg-primary-fixed flex items-center justify-center mx-auto mb-lg">
+            <span class="material-symbols-outlined text-[48px] text-on-primary-fixed-variant" style="font-variation-settings:'FILL' 1">check_circle</span>
+        </div>
+        <h3 class="font-headline-lg text-headline-lg text-on-surface mb-xs" id="success-title"></h3>
+        <p class="font-body-lg text-on-surface-variant mb-xl">It's been added to your garden. Time to give it some love! 🌱</p>
+        <div class="flex flex-col gap-3">
+            <a href="my-garden.html" class="block py-3 rounded-xl bg-primary text-on-primary font-label-lg shadow-sm text-center">Go to My Garden</a>
+            <a href="garden-health.html" class="block py-3 rounded-xl border-2 border-primary text-primary font-label-lg text-center">View Garden Health</a>
+            <button onclick="resetForm()" class="py-3 rounded-xl border-2 border-outline-variant text-on-surface-variant font-label-lg">Add another plant</button>
+        </div>
+    </div>
+
+</main>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html">
+        <span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="my-garden.html">
+        <span class="material-symbols-outlined active-icon">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
+        <span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
+        <span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
+        <span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span>
+    </a>
+</div>
+</nav>
+
+<script>
+// ─── Plant database (Open Plant API + curated) ────────────────────────────────
+const POPULAR = [
+    { id:'monstera', name:'Monstera Deliciosa', species:'Monstera deliciosa', water:'Weekly', light:'Bright indirect', difficulty:'Easy', desc:'The iconic split-leaf plant. Thrives in bright indirect light and is very forgiving of irregular watering.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM' },
+    { id:'snakeplant', name:'Snake Plant', species:'Sansevieria trifasciata', water:'Every 2–3 weeks', light:'Low to bright', difficulty:'Very easy', desc:'Almost indestructible. Tolerates low light and infrequent watering — perfect for beginners.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA' },
+    { id:'peacelily', name:'Peace Lily', species:'Spathiphyllum wallisii', water:'Weekly', light:'Low to medium', difficulty:'Easy', desc:'Elegant white blooms and lush leaves. One of the best low-light performers.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y' },
+    { id:'pothos', name:'Pothos', species:'Epipremnum aureum', water:'Every 1–2 weeks', light:'Low to bright indirect', difficulty:'Very easy', desc:'The ultimate trailing plant. Nearly impossible to kill and grows quickly in almost any light.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE' },
+    { id:'fiddle', name:'Fiddle Leaf Fig', species:'Ficus lyrata', water:'Weekly', light:'Bright indirect', difficulty:'Challenging', desc:'Dramatic, large leaves and a striking silhouette. Needs consistency — hates being moved.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4' },
+    { id:'calathea', name:'Calathea Orbifolia', species:'Calathea orbifolia', water:'Every 5–7 days', light:'Medium indirect', difficulty:'Moderate', desc:'Stunning striped foliage that moves with light. Loves humidity and filtered light.', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8' },
+];
+
+const ROOMS = ['Living Room','Bedroom','Kitchen','Study','Bathroom','Balcony','Dining Area','Hallway','Windowsill'];
+const WATER_OPTS = ['Daily','Twice a week','Weekly','Every 2 weeks','Monthly'];
+const LIGHT_OPTS = ['Full sun','Bright indirect','Medium indirect','Low light','Shade'];
+
+let selectedPlant = null;
+let selectedRoom = null;
+let selectedWater = null;
+let selectedLight = null;
+let reminderOn = true;
+let currentStep = 1;
+
+// ─── Step navigation ──────────────────────────────────────────────────────────
+function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(n === 'success' ? 'step-success' : `step-${n}`).classList.add('active');
+    if (typeof n === 'number') currentStep = n;
+    // Update progress bar
+    for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`prog-${i}`);
+        if (el) el.className = `h-1.5 flex-1 rounded-full transition-all duration-300 ${i <= n ? 'bg-primary' : 'bg-surface-container'}`;
+    }
+    // Back button: step 1 goes to index, others go back a step
+    const backBtn = document.getElementById('back-btn');
+    if (n === 1 || n === 'success') { backBtn.href = 'my-garden.html'; backBtn.onclick = null; }
+    else { backBtn.href = '#'; backBtn.onclick = () => goStep(n - 1); }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Plant search (using Open Trefle-style search via Perenual free API) ──────
+// Using a public plant search that doesn't require keys for basic results
+let searchTimeout;
+document.getElementById('plant-search').addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const q = this.value.trim().toLowerCase();
+    if (q.length < 2) { document.getElementById('search-results').classList.add('hidden'); document.getElementById('popular-plants').classList.remove('hidden'); return; }
+    searchTimeout = setTimeout(() => searchPlants(q), 350);
+});
+
+function searchPlants(q) {
+    // Filter from popular + simulate API search results
+    const local = POPULAR.filter(p => p.name.toLowerCase().includes(q) || p.species.toLowerCase().includes(q));
+    // Additional hardcoded results for common searches
+    const extra = [
+        { id:'zz', name:'ZZ Plant', species:'Zamioculcas zamiifolia', water:'Every 2–3 weeks', light:'Low to bright indirect', difficulty:'Very easy', desc:'Waxy, architectural leaves. One of the most drought-tolerant houseplants available.', img:'https://images.unsplash.com/photo-1598880940342-d56579403e61?w=400' },
+        { id:'rubber', name:'Rubber Plant', species:'Ficus elastica', water:'Weekly', light:'Bright indirect', difficulty:'Easy', desc:'Bold, glossy leaves in dark green or burgundy. A classic statement plant.', img:'https://images.unsplash.com/photo-1597055181449-53a7d1c00fe3?w=400' },
+        { id:'spidey', name:'Spider Plant', species:'Chlorophytum comosum', water:'Weekly', light:'Bright indirect', difficulty:'Very easy', desc:'Fast-growing with arching leaves and dangling offshoots. Great air purifier.', img:'https://images.unsplash.com/photo-1615218370895-0b35b0a54c43?w=400' },
+        { id:'aloe', name:'Aloe Vera', species:'Aloe barbadensis miller', water:'Every 3 weeks', light:'Full sun', difficulty:'Easy', desc:'Succulent with medicinal gel. Loves sun and minimal watering.', img:'https://images.unsplash.com/photo-1567748157439-651aca2ff064?w=400' },
+    ].filter(p => p.name.toLowerCase().includes(q) || p.species.toLowerCase().includes(q));
+
+    const results = [...new Map([...local,...extra].map(p=>[p.id,p])).values()];
+    renderSearchResults(results, q);
+}
+
+function renderSearchResults(results, q) {
+    const el = document.getElementById('search-results');
+    document.getElementById('popular-plants').classList.add('hidden');
+    el.classList.remove('hidden');
+    if (results.length === 0) {
+        el.innerHTML = `<div class="text-center py-lg"><span class="material-symbols-outlined text-[40px] text-outline">search_off</span><p class="font-body-md text-on-surface-variant mt-2">No plants found for "${q}"</p><p class="font-label-sm text-outline mt-1">Try a different name, or use the camera to identify it</p></div>`;
+        return;
+    }
+    el.innerHTML = results.map(p => `
+        <button onclick="selectPlant('${p.id}')" class="search-result w-full flex items-center gap-md p-sm rounded-xl transition-colors text-left">
+            <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container">
+                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/56x56/efeeea/72796e?text=🌿'"/>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="font-label-lg text-on-surface truncate">${p.name}</p>
+                <p class="font-label-sm text-outline italic truncate">${p.species}</p>
+                <div class="flex items-center gap-2 mt-0.5">
+                    <span class="font-label-sm text-primary">${p.difficulty}</span>
+                    <span class="text-outline">·</span>
+                    <span class="font-label-sm text-on-surface-variant">${p.water}</span>
+                </div>
+            </div>
+            <span class="material-symbols-outlined text-outline flex-shrink-0">chevron_right</span>
+        </button>
+    `).join('');
+}
+
+function selectPlant(id) {
+    selectedPlant = [...POPULAR, {id:'zz',name:'ZZ Plant',species:'Zamioculcas zamiifolia',water:'Every 2–3 weeks',light:'Low to bright indirect',difficulty:'Very easy',desc:'Waxy, architectural leaves.',img:'https://images.unsplash.com/photo-1598880940342-d56579403e61?w=400'},{id:'rubber',name:'Rubber Plant',species:'Ficus elastica',water:'Weekly',light:'Bright indirect',difficulty:'Easy',desc:'Bold, glossy leaves.',img:'https://images.unsplash.com/photo-1597055181449-53a7d1c00fe3?w=400'},{id:'spidey',name:'Spider Plant',species:'Chlorophytum comosum',water:'Weekly',light:'Bright indirect',difficulty:'Very easy',desc:'Fast-growing.',img:'https://images.unsplash.com/photo-1615218370895-0b35b0a54c43?w=400'},{id:'aloe',name:'Aloe Vera',species:'Aloe barbadensis miller',water:'Every 3 weeks',light:'Full sun',difficulty:'Easy',desc:'Succulent with medicinal gel.',img:'https://images.unsplash.com/photo-1567748157439-651aca2ff064?w=400'}].find(p=>p.id===id);
+    if (!selectedPlant) return;
+    document.getElementById('confirm-img').src = selectedPlant.img;
+    document.getElementById('confirm-name').textContent = selectedPlant.name;
+    document.getElementById('confirm-species').textContent = selectedPlant.species;
+    document.getElementById('confirm-water').textContent = selectedPlant.water;
+    document.getElementById('confirm-light').textContent = selectedPlant.light;
+    document.getElementById('confirm-diff').textContent = selectedPlant.difficulty;
+    document.getElementById('confirm-desc').textContent = selectedPlant.desc;
+    selectedWater = selectedPlant.water;
+    selectedLight = selectedPlant.light;
+    goStep(2);
+}
+
+// ─── Popular grid ─────────────────────────────────────────────────────────────
+document.getElementById('popular-grid').innerHTML = POPULAR.map(p => `
+    <button onclick="selectPlant('${p.id}')" class="flex flex-col gap-2 text-left group">
+        <div class="aspect-square w-full rounded-2xl overflow-hidden bg-surface-container border border-outline-variant/20 active:scale-[0.97] transition-transform">
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+        </div>
+        <div>
+            <p class="font-label-lg text-on-surface truncate">${p.name}</p>
+            <p class="font-label-sm text-outline">${p.difficulty}</p>
+        </div>
+    </button>`).join('');
+
+// ─── Room chips ───────────────────────────────────────────────────────────────
+document.getElementById('room-chips').innerHTML = ROOMS.map(r => `
+    <button onclick="selectRoom('${r}')" id="room-${r.replace(/ /g,'-')}"
+        class="care-chip px-3 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">
+        ${r}
+    </button>`).join('');
+function selectRoom(r) {
+    selectedRoom = r;
+    document.querySelectorAll('.care-chip').forEach(b => b.classList.remove('selected'));
+    document.getElementById('room-'+r.replace(/ /g,'-')).classList.add('selected');
+    document.getElementById('plant-location-custom').value = '';
+}
+
+// ─── Water & light chips ──────────────────────────────────────────────────────
+document.getElementById('water-chips').innerHTML = WATER_OPTS.map(w => `
+    <button onclick="selectWater('${w}')" id="water-${w.replace(/ /g,'-')}"
+        class="water-opt px-4 py-2 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">
+        ${w}
+    </button>`).join('');
+function selectWater(w) {
+    selectedWater = w;
+    document.querySelectorAll('.water-opt').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('water-'+w.replace(/ /g,'-')).classList.add('selected');
+}
+
+document.getElementById('light-chips').innerHTML = LIGHT_OPTS.map(l => `
+    <button onclick="selectLight('${l}')" id="light-${l.replace(/ /g,'-')}"
+        class="light-opt px-4 py-2 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-lg text-label-lg text-on-surface-variant transition-all">
+        ${l}
+    </button>`).join('');
+function selectLight(l) {
+    selectedLight = l;
+    document.querySelectorAll('.light-opt').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('light-'+l.replace(/ /g,'-')).classList.add('selected');
+}
+
+// Pre-select from plant data when entering step 4
+const origGoStep = goStep;
+function goStep(n) {
+    if (n === 4 && selectedPlant) {
+        const wMatch = WATER_OPTS.find(w=>selectedPlant.water.toLowerCase().includes(w.toLowerCase()));
+        const lMatch = LIGHT_OPTS.find(l=>selectedPlant.light.toLowerCase().includes(l.toLowerCase()));
+        if (wMatch) setTimeout(()=>selectWater(wMatch), 50);
+        if (lMatch) setTimeout(()=>selectLight(lMatch), 50);
+    }
+    // call the original logic
+    document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+    const id = n==='success'?'step-success':`step-${n}`;
+    document.getElementById(id).classList.add('active');
+    if (typeof n==='number') currentStep=n;
+    for(let i=1;i<=4;i++){const el=document.getElementById(`prog-${i}`);if(el)el.className=`h-1.5 flex-1 rounded-full transition-all duration-300 ${i<=n?'bg-primary':'bg-surface-container'}`;}
+    const bb=document.getElementById('back-btn');
+    if(n===1||n==='success'){bb.href='my-garden.html';bb.onclick=null;}
+    else{bb.href='#';bb.onclick=()=>goStep(n-1);}
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── Reminder toggle ──────────────────────────────────────────────────────────
+function toggleReminder() {
+    reminderOn = !reminderOn;
+    const btn = document.getElementById('reminder-toggle');
+    btn.className = `w-12 h-6 rounded-full relative transition-colors ${reminderOn ? 'bg-primary' : 'bg-outline-variant'}`;
+    btn.querySelector('span').className = `absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all ${reminderOn ? 'right-1' : 'left-1'}`;
+}
+
+// ─── Save plant ───────────────────────────────────────────────────────────────
+function savePlant() {
+    const nickname = document.getElementById('plant-nickname').value.trim();
+    const customLoc = document.getElementById('plant-location-custom').value.trim();
+    const location = customLoc || selectedRoom || 'Unspecified';
+    const displayName = nickname || selectedPlant?.name || 'New Plant';
+
+    // Save to localStorage so My Garden can pick it up
+    const plants = JSON.parse(localStorage.getItem('gt_plants') || '[]');
+    plants.push({
+        id: Date.now(),
+        name: selectedPlant?.name || displayName,
+        nickname,
+        species: selectedPlant?.species || '',
+        location,
+        water: selectedWater || 'Weekly',
+        light: selectedLight || 'Bright indirect',
+        img: selectedPlant?.img || '',
+        added: new Date().toISOString(),
+        reminders: reminderOn,
+    });
+    localStorage.setItem('gt_plants', JSON.stringify(plants));
+
+    document.getElementById('success-title').textContent = `${displayName} is in your garden!`;
+    goStep('success');
+}
+
+// ─── Reset ────────────────────────────────────────────────────────────────────
+function resetForm() {
+    selectedPlant = null; selectedRoom = null; selectedWater = null; selectedLight = null;
+    document.getElementById('plant-search').value = '';
+    document.getElementById('plant-nickname').value = '';
+    document.getElementById('plant-location-custom').value = '';
+    document.getElementById('search-results').classList.add('hidden');
+    document.getElementById('popular-plants').classList.remove('hidden');
+    goStep(1);
+}
+
+// Set default date to today
+document.getElementById('plant-date').value = new Date().toISOString().split('T')[0];
+</script>
+</body></html>
