@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recommendations - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
+<style>
+    body{font-family:'Plus Jakarta Sans',sans-serif;background-color:#faf9f5;min-height:max(884px,100dvh);}
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+    .active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+    .hide-scrollbar::-webkit-scrollbar{display:none;}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+    .card-fade{animation:fadeUp 0.35s ease both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .tab-btn.active{background:#154212;color:#fff;}
+    .weather-badge{backdrop-filter:blur(8px);}
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
+</div>
+</header>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
+
+    <!-- Hero -->
+    <section class="mb-lg">
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Recommended for You</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Personalised picks based on your garden, your climate, and what's in season.</p>
+    </section>
+
+    <!-- Weather context banner -->
+    <div id="weather-banner" class="mb-lg rounded-2xl overflow-hidden bg-primary-container relative hidden">
+        <div class="p-md relative z-10">
+            <div class="flex items-center gap-2 mb-1">
+                <span id="wb-icon" class="material-symbols-outlined text-on-primary-container" style="font-variation-settings:'FILL' 1">wb_sunny</span>
+                <p class="font-label-lg text-on-primary-container">Recommendations for your climate</p>
+            </div>
+            <p id="wb-text" class="font-body-md text-on-primary-container/80"></p>
+        </div>
+        <div class="absolute right-0 top-0 bottom-0 flex items-center pr-md opacity-20">
+            <span class="material-symbols-outlined text-on-primary-container text-[80px]" style="font-variation-settings:'FILL' 1">eco</span>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex items-center bg-surface-container rounded-full p-1 gap-1 mb-lg">
+        <button onclick="setTab('plants')" id="tab-plants" class="tab-btn active flex-1 font-label-lg text-label-lg py-2 rounded-full transition-all duration-200">🌿 Plants</button>
+        <button onclick="setTab('guides')" id="tab-guides" class="tab-btn flex-1 font-label-lg text-label-lg py-2 rounded-full transition-all duration-200 text-on-surface-variant">📖 Guides</button>
+        <button onclick="setTab('tips')" id="tab-tips" class="tab-btn flex-1 font-label-lg text-label-lg py-2 rounded-full transition-all duration-200 text-on-surface-variant">💡 Tips</button>
+    </div>
+
+    <!-- Plants tab -->
+    <div id="tab-content-plants">
+        <!-- Featured pick -->
+        <div id="featured-plant" class="mb-lg hidden">
+            <p class="font-label-sm text-outline uppercase tracking-wider mb-sm">⭐ Top Pick for Your Climate</p>
+            <div id="featured-card" class="relative rounded-2xl overflow-hidden h-56 shadow-md cursor-pointer group">
+                <img id="featured-img" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="" alt=""/>
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex flex-col justify-end p-md">
+                    <span id="featured-badge" class="self-start font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant mb-2"></span>
+                    <h3 id="featured-name" class="font-headline-lg text-headline-lg text-white"></h3>
+                    <p id="featured-reason" class="font-label-lg text-white/80"></p>
+                </div>
+            </div>
+        </div>
+        <!-- Plant grid skeleton -->
+        <div id="plants-skeleton" class="grid grid-cols-2 md:grid-cols-3 gap-md mb-lg">
+            <div class="rounded-2xl overflow-hidden"><div class="aspect-square skeleton rounded-2xl mb-2"></div><div class="h-4 skeleton rounded mb-1 w-3/4"></div><div class="h-3 skeleton rounded w-1/2"></div></div>
+            <div class="rounded-2xl overflow-hidden"><div class="aspect-square skeleton rounded-2xl mb-2"></div><div class="h-4 skeleton rounded mb-1 w-3/4"></div><div class="h-3 skeleton rounded w-1/2"></div></div>
+            <div class="rounded-2xl overflow-hidden hidden md:block"><div class="aspect-square skeleton rounded-2xl mb-2"></div><div class="h-4 skeleton rounded mb-1 w-3/4"></div><div class="h-3 skeleton rounded w-1/2"></div></div>
+        </div>
+        <div id="plants-grid" class="grid grid-cols-2 md:grid-cols-3 gap-md mb-lg hidden"></div>
+    </div>
+
+    <!-- Guides tab -->
+    <div id="tab-content-guides" class="hidden">
+        <div id="guides-list" class="space-y-3 mb-lg"></div>
+    </div>
+
+    <!-- Tips tab -->
+    <div id="tab-content-tips" class="hidden">
+        <div id="tips-list" class="space-y-3 mb-lg"></div>
+    </div>
+
+    <!-- Wikipedia attribution -->
+    <p class="font-label-sm text-outline text-center pb-4">Plant data sourced from Wikipedia & Open-Meteo. Climate recommendations update with live weather.</p>
+
+</main>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="index.html">
+        <span class="material-symbols-outlined active-icon">home</span><span class="font-label-sm text-label-sm">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
+        <span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
+        <span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
+        <span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
+        <span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span>
+    </a>
+</div>
+</nav>
+
+<script>
+// ─── Plant catalogue ──────────────────────────────────────────────────────────
+// Each entry has a Wikipedia slug so we can fetch live descriptions
+const PLANT_CATALOGUE = [
+    { id:'monstera', name:'Monstera Deliciosa', wiki:'Monstera_deliciosa', light:'bright-indirect', temp:'warm', humidity:'medium', tags:['tropical','statement','easy'], difficulty:'Easy', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM' },
+    { id:'snake', name:'Snake Plant', wiki:'Sansevieria_trifasciata', light:'low', temp:'any', humidity:'low', tags:['low-light','beginner','air-purifier'], difficulty:'Very Easy', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA' },
+    { id:'pothos', name:'Pothos', wiki:'Epipremnum_aureum', light:'low', temp:'any', humidity:'low', tags:['trailing','beginner','fast-growing'], difficulty:'Very Easy', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE' },
+    { id:'zz', name:'ZZ Plant', wiki:'Zamioculcas', light:'low', temp:'warm', humidity:'low', tags:['drought-tolerant','low-light','statement'], difficulty:'Very Easy', img:'https://images.unsplash.com/photo-1598880940342-d56579403e61?w=600&q=80' },
+    { id:'aloe', name:'Aloe Vera', wiki:'Aloe_vera', light:'full-sun', temp:'warm', humidity:'low', tags:['succulent','medicinal','sunny'], difficulty:'Easy', img:'https://images.unsplash.com/photo-1567748157439-651aca2ff064?w=600&q=80' },
+    { id:'rubber', name:'Rubber Plant', wiki:'Ficus_elastica', light:'bright-indirect', temp:'warm', humidity:'medium', tags:['statement','tall','easy'], difficulty:'Easy', img:'https://images.unsplash.com/photo-1597055181449-53a7d1c00fe3?w=600&q=80' },
+    { id:'spider', name:'Spider Plant', wiki:'Chlorophytum_comosum', light:'bright-indirect', temp:'any', humidity:'medium', tags:['air-purifier','easy','hanging'], difficulty:'Very Easy', img:'https://images.unsplash.com/photo-1615218370895-0b35b0a54c43?w=600&q=80' },
+    { id:'fern', name:'Boston Fern', wiki:'Nephrolepis_exaltata', light:'medium', temp:'cool', humidity:'high', tags:['humidity-lover','classic','lush'], difficulty:'Moderate', img:'https://images.unsplash.com/photo-1604762487519-5db6d4db7bca?w=600&q=80' },
+    { id:'orchid', name:'Phalaenopsis Orchid', wiki:'Phalaenopsis', light:'bright-indirect', temp:'warm', humidity:'medium', tags:['flowering','elegant','exotic'], difficulty:'Moderate', img:'https://images.unsplash.com/photo-1566402441742-1b9c5f3df5e7?w=600&q=80' },
+    { id:'bird-paradise', name:"Bird of Paradise", wiki:'Strelitzia_reginae', light:'full-sun', temp:'warm', humidity:'medium', tags:['statement','tropical','sunny'], difficulty:'Moderate', img:'https://images.unsplash.com/photo-1598880940342-d56579403e61?w=600&q=80' },
+    { id:'peace', name:'Peace Lily', wiki:'Spathiphyllum', light:'low', temp:'warm', humidity:'high', tags:['flowering','low-light','air-purifier'], difficulty:'Easy', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y' },
+    { id:'lavender', name:'Lavender', wiki:'Lavandula', light:'full-sun', temp:'cool', humidity:'low', tags:['fragrant','outdoor','mediterranean'], difficulty:'Easy', img:'https://images.unsplash.com/photo-1499578124509-1611b77778c4?w=600&q=80' },
+];
+
+const GUIDES = [
+    { title:'Mastering Soil pH for Beginners', category:'Essential Care', time:'8 min read', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBud8GpHBL6lCVNxDiqtXTezuKHpeKLmBcSz-s1AX_KIuxTiAnUPMC53iNkFD_tzdn7zfjtXg8WKmqz4MUK0NgjecIAKWDn9-sqM4ZqYrZGLNc76JmjK6e3KhmkJQOCKCm078DqF2MaOB_MQ9mWhIKjZtzFjJNnT4t6aBfWMxQgMRRVWilnsD-di_c2aYOmYBJvfqRVzA2TRBT-nBI6cFxaNRrLHdvY0qDNKLkog4TEPS-20Yt8PBPDY1sPXuzMjYQBAgz4sn9U4lc', link:'plant-encyclopedia.html' },
+    { title:'Top 10 Low-Light Bedroom Plants', category:'Indoor Jungle', time:'5 min read', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuCbkjP8W-gcsyUv_AGAigsSTOa393s-cFOvX7QsMC3vISQqTbaHifuGnTbbfp0E13T2xZ7H9dfruIqWhbIk6fOFWKq2Ep1_zIGSxm7MZ6YjmjMLF-ni1t9VSR5mS0nSMj6tCXjn9JKbZWoHoo7Il32RDWb2eAGMs3T9rITQNwwmWTkuGZusq4kgIh-iuKtFW2Xivdxk2H2fGyD992o_-P6svJhQxAQRefxRG1LnCRbhmT3pfnKi7x-frWLYjyNtQwXdSzPgMKOMRzg', link:'search-guides.html' },
+    { title:'How to Propagate Your Favourite Plants', category:'Propagation', time:'12 min read', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE', link:'learn.html' },
+    { title:'Autumn & Winter Plant Care Guide', category:'Seasonal', time:'10 min read', img:'https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y', link:'learn.html' },
+];
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let currentTab = 'plants';
+let weatherData = null;
+let wikiDescriptions = {};
+let savedLoc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null') || { name:'Gold Coast', lat:-28.0167, lon:153.4000 };
+
+// ─── Tab switching ────────────────────────────────────────────────────────────
+function setTab(t) {
+    currentTab = t;
+    ['plants','guides','tips'].forEach(tab => {
+        document.getElementById('tab-content-'+tab).classList.toggle('hidden', tab!==t);
+        const btn = document.getElementById('tab-'+tab);
+        btn.classList.toggle('active', tab===t);
+        btn.classList.toggle('text-on-surface-variant', tab!==t);
+    });
+}
+
+// ─── Weather fetch ────────────────────────────────────────────────────────────
+async function fetchWeather() {
+    try {
+        const { lat, lon, name } = savedLoc;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto`;
+        const res = await fetch(url);
+        weatherData = (await res.json()).current;
+        renderWeatherBanner(name);
+        renderPlants();
+    } catch {
+        renderPlants(); // fallback without weather
+    }
+}
+
+const WMO = {0:'clear sky',1:'mainly clear',2:'partly cloudy',3:'overcast',61:'rainy',63:'rainy',65:'heavy rain',80:'showery',95:'stormy'};
+function renderWeatherBanner(locName) {
+    if (!weatherData) return;
+    const temp = Math.round(weatherData.temperature_2m);
+    const hum = weatherData.relative_humidity_2m;
+    const code = weatherData.weather_code;
+    const isHot = temp > 28;
+    const isCold = temp < 15;
+    const isHumid = hum > 70;
+    const isDry = hum < 40;
+    const isRainy = [61,63,65,80,81,82,95,96,99].includes(code);
+
+    let text = `It's ${temp}°C in ${locName}`;
+    let icon = 'wb_sunny';
+    if (isRainy) { text += ` with rain — perfect for humidity-lovers like ferns and calatheas`; icon='rainy'; }
+    else if (isHot && isDry) { text += ` and dry — we've picked plants that handle the heat`; icon='device_thermostat'; }
+    else if (isCold) { text += ` — cool season picks and indoor tropical performers are your best bet`; icon='ac_unit'; }
+    else if (isHumid) { text += ` and humid — great conditions for tropical varieties`; icon='water_drop'; }
+    else { text += ` — ideal conditions for most indoor plants right now`; }
+
+    document.getElementById('wb-icon').textContent = icon;
+    document.getElementById('wb-text').textContent = text;
+    document.getElementById('weather-banner').classList.remove('hidden');
+}
+
+// ─── Plant recommendations (weather-weighted) ─────────────────────────────────
+function scorePlant(plant) {
+    if (!weatherData) return 50;
+    const temp = weatherData.temperature_2m;
+    const hum = weatherData.relative_humidity_2m;
+    const code = weatherData.weather_code;
+    let score = 50;
+    const isRainy = [61,63,65,80,81,82,95].includes(code);
+    const isHot = temp > 28;
+    const isCool = temp < 18;
+    const isHumid = hum > 65;
+    const isDry = hum < 40;
+
+    if (isRainy && plant.humidity === 'high') score += 20;
+    if (isDry && plant.humidity === 'low') score += 15;
+    if (isHot && plant.temp === 'warm') score += 15;
+    if (isCool && plant.temp === 'cool') score += 15;
+    if (isHot && plant.light === 'full-sun') score += 10;
+    if (plant.difficulty === 'Very Easy') score += 8;
+    if (plant.difficulty === 'Easy') score += 5;
+    // slight randomness for variety
+    score += Math.random() * 10;
+    return score;
+}
+
+function reasonForPlant(plant) {
+    if (!weatherData) return 'A great addition to any indoor garden.';
+    const temp = Math.round(weatherData.temperature_2m);
+    const hum = weatherData.relative_humidity_2m;
+    const code = weatherData.weather_code;
+    const isRainy = [61,63,65,80,81,82,95].includes(code);
+    const isHot = temp > 28;
+
+    if (isRainy && plant.humidity === 'high') return `Thrives in today's humid conditions.`;
+    if (isHot && plant.temp === 'warm') return `Loves the ${temp}°C warmth outside.`;
+    if (plant.difficulty === 'Very Easy') return 'Nearly impossible to kill — great for busy gardeners.';
+    if (plant.tags.includes('air-purifier')) return 'Excellent air purifier for your home.';
+    if (plant.tags.includes('low-light')) return 'Perfect if you don\'t get much natural light.';
+    return 'A proven favourite for indoor gardeners.';
+}
+
+async function renderPlants() {
+    const scored = PLANT_CATALOGUE.map(p => ({ ...p, score: scorePlant(p), reason: reasonForPlant(p) }))
+        .sort((a,b) => b.score - a.score);
+
+    const featured = scored[0];
+    const rest = scored.slice(1, 7);
+
+    // Featured
+    document.getElementById('featured-img').src = featured.img;
+    document.getElementById('featured-name').textContent = featured.name;
+    document.getElementById('featured-reason').textContent = featured.reason;
+    document.getElementById('featured-badge').textContent = featured.difficulty;
+    document.getElementById('featured-plant').classList.remove('hidden');
+    document.getElementById('featured-card').onclick = () => window.location.href = 'plant-encyclopedia.html';
+
+    // Fetch Wikipedia excerpts for top 3
+    await Promise.all(rest.slice(0,3).map(async p => {
+        if (wikiDescriptions[p.id]) return;
+        try {
+            const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${p.wiki}`);
+            const d = await r.json();
+            wikiDescriptions[p.id] = d.extract ? d.extract.split('.')[0] + '.' : '';
+        } catch { wikiDescriptions[p.id] = ''; }
+    }));
+
+    // Render grid
+    const grid = document.getElementById('plants-grid');
+    document.getElementById('plants-skeleton').classList.add('hidden');
+    grid.classList.remove('hidden');
+    grid.innerHTML = rest.map((p, i) => `
+        <a href="plant-encyclopedia.html" class="card-fade flex flex-col gap-2 group cursor-pointer" style="animation-delay:${i*0.06}s">
+            <div class="aspect-square rounded-2xl overflow-hidden border border-outline-variant/20 shadow-sm">
+                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400" onerror="this.parentElement.style.background='#efeeea'"/>
+            </div>
+            <div>
+                <p class="font-label-lg text-on-surface truncate">${p.name}</p>
+                <p class="font-label-sm text-outline">${p.difficulty}</p>
+                ${wikiDescriptions[p.id] ? `<p class="font-label-sm text-on-surface-variant mt-1 line-clamp-2">${wikiDescriptions[p.id]}</p>` : ''}
+                <p class="font-label-sm text-primary mt-1">${p.reason}</p>
+            </div>
+        </a>`).join('');
+
+    renderGuides();
+    renderTips();
+}
+
+// ─── Guides ───────────────────────────────────────────────────────────────────
+function renderGuides() {
+    document.getElementById('guides-list').innerHTML = GUIDES.map(g => `
+        <a href="${g.link}" class="card-fade flex gap-md bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow active:scale-[0.98] duration-150">
+            <div class="w-28 h-24 flex-shrink-0 overflow-hidden">
+                <img src="${g.img}" alt="${g.title}" class="w-full h-full object-cover"/>
+            </div>
+            <div class="flex-1 min-w-0 py-md pr-md flex flex-col justify-center">
+                <span class="font-label-sm text-secondary uppercase tracking-wider">${g.category}</span>
+                <h4 class="font-label-lg text-on-surface mt-0.5">${g.title}</h4>
+                <span class="font-label-sm text-outline mt-1">${g.time}</span>
+            </div>
+        </a>`).join('');
+}
+
+// ─── Tips (weather-informed) ──────────────────────────────────────────────────
+function renderTips() {
+    const temp = weatherData ? Math.round(weatherData.temperature_2m) : null;
+    const hum = weatherData?.relative_humidity_2m;
+    const code = weatherData?.weather_code;
+    const isRainy = code && [61,63,65,80,81,82,95].includes(code);
+
+    const tips = [
+        { icon:'water_drop', colour:'bg-primary-fixed/40 text-on-primary-fixed-variant', title: isRainy ? 'Skip the watering can today' : temp > 30 ? 'Water more in the heat' : 'Stick to a watering schedule', body: isRainy ? 'Rain today means your outdoor and balcony plants are sorted. Check indoor pots aren\'t getting splashed.' : temp > 30 ? `At ${temp}°C, plants lose water fast. Check soil moisture daily and water in the early morning.` : 'Consistent watering builds strong roots. Try the finger test — if the top 2cm of soil is dry, it\'s time.' },
+        { icon:'wb_sunny', colour:'bg-tertiary-fixed/50 text-on-tertiary-fixed-variant', title: hum < 40 ? 'Low humidity alert' : hum > 70 ? 'High humidity today' : 'Light positioning matters', body: hum < 40 ? 'Humidity is low — mist tropical plants, group plants together, or place a pebble tray with water nearby.' : hum > 70 ? 'Great humidity for tropicals today! Open windows to prevent fungal issues on plants with dense foliage.' : 'Rotate plants 90° every few weeks so all sides get even light exposure and grow symmetrically.' },
+        { icon:'compost', colour:'bg-secondary-container/40 text-on-secondary-container', title:'Stop fertilising soon', body:'As we move into cooler months, most houseplants slow their growth and need less feeding. Stop fertilising by late autumn to avoid salt build-up in the soil.' },
+        { icon:'content_cut', colour:'bg-surface-container-highest text-on-surface-variant', title:'Prune for better growth', body:'Remove dead or yellowing leaves promptly — the plant wastes energy trying to recover them. Clean cuts with sterilised scissors.' },
+        { icon:'thermostat', colour:'bg-primary-fixed/30 text-on-primary-fixed-variant', title: temp && temp < 15 ? 'Cold nights ahead' : 'Watch for temperature stress', body: temp && temp < 15 ? `Nights are dropping to around ${temp}°C. Move tropical plants away from cold windows and draughty spots.` : 'Most houseplants prefer 18–27°C. Avoid placing them near air conditioning vents, heaters, or draughty windows.' },
+    ];
+
+    document.getElementById('tips-list').innerHTML = tips.map((t,i) => `
+        <div class="card-fade tip-card rounded-2xl p-md flex items-start gap-md border border-outline-variant/20 bg-surface-container-low" style="animation-delay:${i*0.07}s">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${t.colour}">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">${t.icon}</span>
+            </div>
+            <div>
+                <h4 class="font-label-lg text-on-surface mb-0.5">${t.title}</h4>
+                <p class="font-body-md text-on-surface-variant">${t.body}</p>
+            </div>
+        </div>`).join('');
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+fetchWeather();
+</script>
+</body></html>
