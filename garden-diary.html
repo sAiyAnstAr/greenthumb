@@ -1,249 +1,348 @@
 <!DOCTYPE html>
-
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Garden Diary - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary-container": "#fed3c7",
-                    "primary-fixed-dim": "#a1d494",
-                    "surface-container-low": "#f4f4f0",
-                    "on-error-container": "#93000a",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-high": "#e9e8e4",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "primary-fixed": "#bcf0ae",
-                    "background": "#faf9f5",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "error-container": "#ffdad6",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-bright": "#faf9f5",
-                    "primary-container": "#2d5a27",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-fixed": "#2c160e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "surface-variant": "#e3e2df",
-                    "outline-variant": "#c2c9bb",
-                    "surface-container-lowest": "#ffffff",
-                    "primary": "#154212",
-                    "on-tertiary": "#ffffff",
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface": "#faf9f5",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
-                    "surface-container": "#efeeea",
-                    "on-secondary-container": "#795950",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed": "#3e0500",
-                    "inverse-surface": "#2f312e",
-                    "surface-tint": "#3b6934",
-                    "tertiary-container": "#8d3220",
-                    "outline": "#72796e",
-                    "on-primary-container": "#9dd090",
-                    "on-error": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "on-surface-variant": "#42493e",
-                    "surface-dim": "#dbdad6",
-                    "secondary": "#77574d",
-                    "inverse-primary": "#a1d494",
-                    "on-primary-fixed": "#002201"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "lg": "40px",
-                    "base": "8px",
-                    "gutter": "16px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "sm": "12px",
-                    "container-margin": "20px"
-            },
-            "fontFamily": {
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
+    tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .timeline-line::before {
-            content: '';
-            position: absolute;
-            left: 11px;
-            top: 24px;
-            bottom: -24px;
-            width: 2px;
-            background-color: #c2c9bb; /* outline-variant */
-        }
-        .timeline-item:last-child .timeline-line::before {
-            display: none;
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
-<!-- TopAppBar -->
-<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky z-40">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-7xl mx-auto">
-<a class="hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
-<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
-</a>
-<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
-<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+    body{font-family:'Plus Jakarta Sans',sans-serif;background-color:#faf9f5;min-height:max(884px,100dvh);}
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+    .active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+    .hide-scrollbar::-webkit-scrollbar{display:none;}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+    /* Timeline line */
+    .timeline-line{position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#bcf0ae,#c2c9bb);border-radius:1px;}
+    .entry-fade{animation:entryIn 0.3s ease;}
+    @keyframes entryIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    #add-entry-panel{transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);}
+    #add-entry-panel.open{transform:translateY(0);}
+    .filter-chip.active{background:#154212;color:#ffffff;}
+    .action-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:12px;font-weight:500;}
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="index.html">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
 </div>
 </header>
-<main class="px-container-margin pt-lg">
-<!-- Heading -->
-<section class="mb-lg">
-<h1 class="font-display-lg text-display-lg text-primary mb-xs">Garden Diary</h1>
-<p class="text-on-surface-variant font-body-md">Your personal history of growth and care.</p>
-</section>
-<!-- Timeline -->
-<div class="space-y-xl">
-<!-- Entry 1 -->
-<div class="relative flex gap-gutter timeline-item">
-<div class="timeline-line relative">
-<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 relative">
-<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">water_drop</span>
-</div>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface">Watered Monstera Deliciosa</h3>
-<span class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago</span>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container">
-<img alt="Watered Monstera" class="w-full aspect-[4/3] object-cover" data-alt="A close-up high-resolution photograph of a vibrant Monstera Deliciosa leaf with fresh water droplets resting on its deep green surface. The lighting is soft and directional, highlighting the organic texture and architectural holes of the leaf. The background is a minimalist, warm stone-colored wall, creating a serene and healthy atmosphere typical of a modern digital garden diary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvsl_9_8DPOiCDcbbue53x8Co1CpF8ty5TKLwBMQvk9r68SANecruqKtC6Mj1eeBPZO_r2CgNzJYK98E_z1Mx73Wl5YDZALi_EgYqQnnHW9vN8izHlEXiRS1Uy1PIE7Y0XWzy4HVVvgkC6iBEcYca9Xwn8Prn9vCjLSF9EH1i-dO2qTpx1AyG5_pCRhAqjM8I9i9NB56h-LqAPByyypMc7iGzAWVYHkfmRIiRk-LxgpxQh1aaSG-wOczr9ZsTnyr-OTsxJcIFtNvY"/>
-<div class="p-md">
-<p class="text-on-surface-variant italic font-body-md">Standard weekly hydration. Added a drop of organic liquid fertilizer to the mix.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Entry 2 -->
-<div class="relative flex gap-gutter timeline-item">
-<div class="timeline-line relative">
-<div class="w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center z-10 relative">
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">content_cut</span>
-</div>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface">Pruned Fiddle Leaf Fig</h3>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</span>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-surface-container">
-<p class="text-on-surface font-body-md mb-base">Notes: Removed three lower leaves that were starting to yellow. Checked for spider mites; none found. The top growth seems healthy and firm.</p>
-<div class="flex gap-base">
-<div class="bg-secondary-fixed text-on-secondary-fixed px-sm py-xs rounded-full font-label-sm text-label-sm">Maintenance</div>
-<div class="bg-surface-container-high text-on-surface-variant px-sm py-xs rounded-full font-label-sm text-label-sm">Indoor</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Entry 3 -->
-<div class="relative flex gap-gutter timeline-item">
-<div class="timeline-line relative">
-<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center z-10 relative">
-<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-</div>
-<div class="flex-1">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface">New Growth Spotted!</h3>
-<span class="font-label-sm text-label-sm text-on-surface-variant">3 days ago</span>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container">
-<img alt="Pothos Propagation" class="w-full aspect-[4/3] object-cover" data-alt="An extreme macro shot of a delicate, pale green Pothos shoot emerging from a propagation jar. Clear water in the glass vessel reflects soft ambient light, showing tiny roots developing. The background is a creamy, out-of-focus wooden surface. The mood is hopeful and calm, emphasizing the 'Bloom States' and progress of a successful gardening journey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI4X7BNketmnMOFyQhUNu2VOLhxUd35lPwlelA9iN1OxgJHGhCB1xVCyUOVgLEwLiFgcfYgskbKnwoqfz-UjquKSYdsrTQWHy5uHbUyLqVoiS7J811nteLrW60AoL6X0KrTvnonw2NI960LtzhsOpjr7rWZ6q5jIQC3TaGgojI7GfEJ57iq8FHZCgTQbHtmxS8uKsnE2JEoKglXKJrSpdp-uuJqbndsoaUu0nEPqghx1VenDalDK2IhnD4ny9yreKhKNY0ihE8LJM"/>
-<div class="p-md">
-<p class="text-on-surface-variant italic font-body-md">The Pothos cutting in the kitchen window finally has its first node sprout! Moving it to soil in about 10 days.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
+
+    <!-- Hero -->
+    <section class="mb-lg">
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Garden Diary</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Your personal journal of every care moment, milestone, and observation.</p>
+    </section>
+
+    <!-- Stats row -->
+    <div class="grid grid-cols-3 gap-md mb-lg">
+        <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm text-center">
+            <p id="stat-entries" class="font-headline-lg text-headline-lg text-primary"></p>
+            <p class="font-label-sm text-on-surface-variant">Entries</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm text-center">
+            <p id="stat-streak" class="font-headline-lg text-headline-lg text-primary"></p>
+            <p class="font-label-sm text-on-surface-variant">Day streak</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm text-center">
+            <p id="stat-plants" class="font-headline-lg text-headline-lg text-primary"></p>
+            <p class="font-label-sm text-on-surface-variant">Plants logged</p>
+        </div>
+    </div>
+
+    <!-- Filter row -->
+    <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar mb-lg pb-1">
+        <button onclick="setFilter('all')" id="fchip-all" class="filter-chip active flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">All</button>
+        <button onclick="setFilter('water')" id="fchip-water" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">💧 Watered</button>
+        <button onclick="setFilter('fertilise')" id="fchip-fertilise" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">🌿 Fertilised</button>
+        <button onclick="setFilter('prune')" id="fchip-prune" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">✂️ Pruned</button>
+        <button onclick="setFilter('observation')" id="fchip-observation" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">👁️ Observations</button>
+        <button onclick="setFilter('milestone')" id="fchip-milestone" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all">🌸 Milestones</button>
+    </div>
+
+    <!-- New Entry button -->
+    <div class="flex justify-between items-center mb-md">
+        <h3 id="timeline-heading" class="font-headline-md text-headline-md text-on-surface"></h3>
+        <button onclick="openAddEntry()" class="flex items-center gap-1 bg-primary text-on-primary font-label-lg text-label-lg px-4 py-2 rounded-full active:scale-95 transition-transform shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">edit_note</span>
+            New Entry
+        </button>
+    </div>
+
+    <!-- Timeline -->
+    <div id="timeline" class="relative pl-12 pb-4">
+        <div class="timeline-line"></div>
+        <!-- entries rendered by JS -->
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-xl flex flex-col items-center">
+        <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1">book_2</span>
+        <p class="font-headline-md text-on-surface-variant">No entries yet</p>
+        <p class="font-body-md text-outline mt-1">Start logging your garden's story</p>
+        <button onclick="openAddEntry()" class="mt-lg font-label-lg text-label-lg text-primary hover:underline">Add your first entry</button>
+    </div>
+
 </main>
-<!-- FAB -->
-<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
-<span class="material-symbols-outlined text-[28px]">add</span>
-</button>
+
+<!-- Add Entry Panel -->
+<div id="add-overlay" class="fixed inset-0 z-50 hidden bg-on-background/30 backdrop-blur-sm" onclick="closeAddEntry()"></div>
+<div id="add-entry-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-w-screen-lg mx-auto">
+    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
+    <h3 class="font-headline-md text-headline-md text-on-surface mb-lg">New Diary Entry</h3>
+    <div class="space-y-md">
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-2 block">Type</label>
+            <div class="flex flex-wrap gap-2" id="entry-type-chips"></div>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Plant</label>
+            <select id="entry-plant" class="form-select w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md">
+                <option value="Monstera Deliciosa">Monstera Deliciosa</option>
+                <option value="Snake Plant">Snake Plant</option>
+                <option value="Fiddle Leaf Fig">Fiddle Leaf Fig</option>
+                <option value="Calathea Orbifolia">Calathea Orbifolia</option>
+                <option value="Peace Lily">Peace Lily</option>
+                <option value="Pothos">Pothos</option>
+                <option value="All plants">All plants</option>
+            </select>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Note</label>
+            <textarea id="entry-note" rows="3" placeholder="What did you notice? How does it look? Any concerns?" class="form-textarea w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline resize-none"></textarea>
+        </div>
+        <div>
+            <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Mood</label>
+            <div class="flex gap-3">
+                <button onclick="selectMood('😊')" id="mood-😊" class="mood-btn flex-1 py-2 text-xl rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">😊</button>
+                <button onclick="selectMood('😐')" id="mood-😐" class="mood-btn flex-1 py-2 text-xl rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">😐</button>
+                <button onclick="selectMood('😟')" id="mood-😟" class="mood-btn flex-1 py-2 text-xl rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">😟</button>
+                <button onclick="selectMood('🌸')" id="mood-🌸" class="mood-btn flex-1 py-2 text-xl rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">🌸</button>
+                <button onclick="selectMood('🚨')" id="mood-🚨" class="mood-btn flex-1 py-2 text-xl rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">🚨</button>
+            </div>
+        </div>
+        <button onclick="saveEntry()" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">Save Entry</button>
+    </div>
+</div>
+
 <!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
-<div class="flex justify-around items-center w-full px-base py-sm">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="index.html">
-<span class="material-symbols-outlined active-icon">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<!-- My Garden -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<!-- Identify -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<!-- Community -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="community.html">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<!-- Learn -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full active:scale-90 duration-200" href="learn.html">
-<span class="material-symbols-outlined">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a>
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="index.html">
+        <span class="material-symbols-outlined active-icon">home</span><span class="font-label-sm text-label-sm">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
+        <span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
+        <span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
+        <span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
+        <span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span>
+    </a>
 </div>
 </nav>
+
+<script>
+// ─── Entry types ──────────────────────────────────────────────────────────────
+const ENTRY_TYPES = [
+    { id:'water',       label:'Watered',     icon:'water_drop',   colour:'bg-primary-fixed/40 text-on-primary-fixed-variant border-primary-container/40' },
+    { id:'fertilise',   label:'Fertilised',  icon:'compost',      colour:'bg-secondary-container/30 text-on-secondary-container border-secondary-container/40' },
+    { id:'prune',       label:'Pruned',      icon:'content_cut',  colour:'bg-surface-container text-on-surface-variant border-outline-variant/40' },
+    { id:'repot',       label:'Repotted',    icon:'yard',         colour:'bg-tertiary-fixed/30 text-on-tertiary-fixed-variant border-tertiary-container/30' },
+    { id:'mist',        label:'Misted',      icon:'air',          colour:'bg-primary-fixed/40 text-on-primary-fixed-variant border-primary-container/40' },
+    { id:'observation', label:'Observation', icon:'visibility',   colour:'bg-surface-container-high text-on-surface-variant border-outline-variant/40' },
+    { id:'milestone',   label:'Milestone',   icon:'star',         colour:'bg-tertiary-fixed/50 text-on-tertiary-fixed-variant border-tertiary-container/30' },
+    { id:'treatment',   label:'Treatment',   icon:'healing',      colour:'bg-error-container/30 text-on-error-container border-error/20' },
+];
+
+// ─── Seed entries ─────────────────────────────────────────────────────────────
+function daysAgo(n) { const d = new Date(); d.setDate(d.getDate()-n); return d.toISOString(); }
+
+let entries = JSON.parse(localStorage.getItem('gt_diary') || 'null') || [
+    { id:1, type:'milestone', plant:'Monstera Deliciosa', note:'Spotted the first new leaf unfurling — two tiny fenestrations already forming. So exciting!', mood:'🌸', date:daysAgo(0) },
+    { id:2, type:'water',     plant:'Fiddle Leaf Fig',   note:'Finally watered after 4 days overdue. Leaves were drooping slightly. Soil was bone dry.', mood:'😟', date:daysAgo(0) },
+    { id:3, type:'observation', plant:'Calathea Orbifolia', note:'Leaves curling inward — humidity must be too low. Placed a pebble tray underneath.', mood:'😐', date:daysAgo(1) },
+    { id:4, type:'fertilise', plant:'Monstera Deliciosa', note:'Applied liquid fertiliser diluted 50%. Growing season is nearly over so this will be the last feed.', mood:'😊', date:daysAgo(2) },
+    { id:5, type:'water',     plant:'Snake Plant',        note:'Watered thoroughly. This one barely needs anything — still looking sharp.', mood:'😊', date:daysAgo(3) },
+    { id:6, type:'prune',     plant:'Pothos',             note:'Trimmed a few yellowing vines and cut back the longest runner. Propagated 3 cuttings in water.', mood:'😊', date:daysAgo(5) },
+    { id:7, type:'repot',     plant:'Peace Lily',         note:'Moved up to a 20cm pot with fresh premium potting mix. Roots were completely filling the old pot.', mood:'🌸', date:daysAgo(7) },
+    { id:8, type:'treatment', plant:'Fiddle Leaf Fig',    note:'Found minor scale insects on underside of two leaves. Wiped with neem oil solution.', mood:'🚨', date:daysAgo(10) },
+    { id:9, type:'milestone', plant:'Snake Plant',        note:"1 year anniversary in this apartment. It was a tiny 15cm plant when I got it — now it's over 80cm!", mood:'🌸', date:daysAgo(14) },
+    { id:10, type:'water',    plant:'Calathea Orbifolia', note:'Used room-temperature filtered water. Avoiding the tap chlorine since it causes brown tips.', mood:'😊', date:daysAgo(14) },
+];
+let nextId = 20;
+let selectedFilter = 'all';
+let selectedType = 'water';
+let selectedMood = '😊';
+
+// ─── Entry type chips in form ─────────────────────────────────────────────────
+document.getElementById('entry-type-chips').innerHTML = ENTRY_TYPES.map(t => `
+    <button onclick="selectEntryType('${t.id}')" id="etype-${t.id}"
+        class="entry-type-btn flex items-center gap-1 px-3 py-1.5 rounded-full border-2 border-outline-variant/40 bg-surface-container font-label-sm text-on-surface-variant transition-all">
+        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1">${t.icon}</span>
+        ${t.label}
+    </button>`).join('');
+selectEntryType('water');
+
+function selectEntryType(id) {
+    selectedType = id;
+    document.querySelectorAll('.entry-type-btn').forEach(b => {
+        b.classList.remove('border-primary','bg-primary-fixed/30','text-on-primary-fixed-variant');
+        b.classList.add('border-outline-variant/40','bg-surface-container','text-on-surface-variant');
+    });
+    const btn = document.getElementById('etype-'+id);
+    btn.classList.add('border-primary','bg-primary-fixed/30','text-on-primary-fixed-variant');
+    btn.classList.remove('border-outline-variant/40','bg-surface-container','text-on-surface-variant');
+}
+
+function selectMood(m) {
+    selectedMood = m;
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('border-primary','bg-primary-fixed/30','scale-110'));
+    const btn = document.getElementById('mood-'+m);
+    btn.classList.add('border-primary','bg-primary-fixed/30','scale-110');
+}
+
+// ─── Filter ───────────────────────────────────────────────────────────────────
+function setFilter(f) {
+    selectedFilter = f;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    document.getElementById('fchip-'+f).classList.add('active');
+    renderTimeline();
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function relativeDate(iso) {
+    const d = new Date(iso); const now = new Date();
+    const diff = Math.floor((now - d) / 86400000);
+    if (diff === 0) return 'Today';
+    if (diff === 1) return 'Yesterday';
+    if (diff < 7) return `${diff} days ago`;
+    return d.toLocaleDateString('en-AU', {day:'numeric', month:'short', year:'numeric'});
+}
+function fullDate(iso) { return new Date(iso).toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
+function dayKey(iso) { return iso.split('T')[0]; }
+
+function typeForId(id) { return ENTRY_TYPES.find(t=>t.id===id) || ENTRY_TYPES[0]; }
+
+// ─── Timeline render ──────────────────────────────────────────────────────────
+function renderTimeline() {
+    const filtered = selectedFilter === 'all' ? entries : entries.filter(e=>e.type===selectedFilter);
+    filtered.sort((a,b) => new Date(b.date)-new Date(a.date));
+
+    const timeline = document.getElementById('timeline');
+    const empty = document.getElementById('empty-state');
+    timeline.innerHTML = '<div class="timeline-line"></div>';
+
+    if (filtered.length === 0) { empty.classList.remove('hidden'); document.getElementById('timeline-heading').textContent=''; return; }
+    empty.classList.add('hidden');
+    document.getElementById('timeline-heading').textContent = `${filtered.length} entr${filtered.length===1?'y':'ies'}`;
+
+    // Group by day
+    const groups = {};
+    filtered.forEach(e => { const k=dayKey(e.date); if(!groups[k]) groups[k]=[]; groups[k].push(e); });
+
+    Object.keys(groups).sort((a,b)=>b.localeCompare(a)).forEach(day => {
+        const dayEntries = groups[day];
+        const dateLabel = relativeDate(day+'T00:00:00');
+
+        // Day header
+        const header = document.createElement('div');
+        header.className = 'flex items-center mb-sm mt-md first:mt-0';
+        header.innerHTML = `
+            <div class="absolute left-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-md z-10">
+                <span class="material-symbols-outlined text-on-primary text-[18px]" style="font-variation-settings:'FILL' 1">calendar_today</span>
+            </div>
+            <div class="ml-0">
+                <p class="font-label-lg text-primary font-bold">${dateLabel}</p>
+                <p class="font-label-sm text-outline">${new Date(day).toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'})}</p>
+            </div>`;
+        timeline.appendChild(header);
+
+        dayEntries.forEach((entry, idx) => {
+            const t = typeForId(entry.type);
+            const card = document.createElement('div');
+            card.className = 'entry-fade bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm p-md mb-3 ml-0';
+            card.innerHTML = `
+                <div class="flex items-start justify-between gap-2 mb-2">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="action-tag ${t.colour}">
+                            <span class="material-symbols-outlined text-[12px]" style="font-variation-settings:'FILL' 1">${t.icon}</span>
+                            ${t.label}
+                        </span>
+                        <span class="font-label-sm text-on-surface-variant">${entry.plant}</span>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <span class="text-lg">${entry.mood}</span>
+                        <button onclick="deleteEntry(${entry.id})" class="p-1 rounded-full hover:bg-error-container/40 text-outline hover:text-error transition-colors">
+                            <span class="material-symbols-outlined text-[16px]">delete</span>
+                        </button>
+                    </div>
+                </div>
+                ${entry.note ? `<p class="font-body-md text-on-surface">${entry.note}</p>` : ''}
+                <p class="font-label-sm text-outline mt-2">${new Date(entry.date).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'})}</p>
+            `;
+            timeline.appendChild(card);
+        });
+    });
+
+    updateStats();
+}
+
+// ─── Stats ────────────────────────────────────────────────────────────────────
+function updateStats() {
+    document.getElementById('stat-entries').textContent = entries.length;
+    const plants = new Set(entries.map(e=>e.plant)).size;
+    document.getElementById('stat-plants').textContent = plants;
+    // Streak: consecutive days with at least one entry
+    const days = new Set(entries.map(e=>dayKey(e.date)));
+    let streak = 0;
+    let d = new Date();
+    while (days.has(dayKey(d.toISOString()))) { streak++; d.setDate(d.getDate()-1); }
+    document.getElementById('stat-streak').textContent = streak;
+}
+
+// ─── Add/delete ───────────────────────────────────────────────────────────────
+function openAddEntry() {
+    document.getElementById('add-entry-panel').classList.add('open');
+    document.getElementById('add-overlay').classList.remove('hidden');
+    selectEntryType('water'); selectMood('😊');
+    document.getElementById('entry-note').value = '';
+}
+function closeAddEntry() {
+    document.getElementById('add-entry-panel').classList.remove('open');
+    document.getElementById('add-overlay').classList.add('hidden');
+}
+function saveEntry() {
+    const note = document.getElementById('entry-note').value.trim();
+    const plant = document.getElementById('entry-plant').value;
+    entries.unshift({ id: nextId++, type: selectedType, plant, note, mood: selectedMood, date: new Date().toISOString() });
+    localStorage.setItem('gt_diary', JSON.stringify(entries));
+    closeAddEntry();
+    renderTimeline();
+}
+function deleteEntry(id) {
+    entries = entries.filter(e=>e.id!==id);
+    localStorage.setItem('gt_diary', JSON.stringify(entries));
+    renderTimeline();
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeAddEntry(); });
+renderTimeline();
+</script>
 </body></html>
