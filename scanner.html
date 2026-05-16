@@ -282,14 +282,14 @@
     </div>
 
     <!-- No camera fallback - shown by default, hidden once camera starts -->
-    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10">
+    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10 px-container-margin">
         <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-lg">
             <span class="material-symbols-outlined text-[48px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
         </div>
-        <p class="font-headline-md text-headline-md text-white mb-sm">Identify a Plant</p>
-        <p class="font-body-md text-white/70 mb-lg text-center px-lg">Point your camera at any plant to identify it instantly, or choose a photo from your gallery.</p>
-        <div class="flex flex-col gap-3 w-full max-w-xs px-container-margin">
-            <button onclick="requestCamera()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
+        <p class="font-headline-md text-headline-md text-white mb-sm text-center">Identify a Plant</p>
+        <p id="no-camera-msg" class="font-body-md text-white/70 mb-lg text-center max-w-xs">Tap Enable Camera to start, or pick a photo from your gallery.</p>
+        <div class="flex flex-col gap-3 w-full max-w-xs">
+            <button id="enable-camera-btn" onclick="requestCamera()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
                 Enable Camera
             </button>
             <button onclick="openGallery()" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform border border-white/30 text-center">
@@ -429,22 +429,48 @@ function setActiveNav(pageId) {
     }, { passive: true });
 })();
 
+
 // ── PlantNet Camera ────────────────────────────────────────────────────────
 const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
 const PLANTNET_URL = 'https://my-api.plantnet.org/v2/identify/all';
 
-let stream = null;
-let flashOn = false;
-let capturedBlob = null;
-let track = null;
+let stream = null, flashOn = false, capturedBlob = null, track = null;
 
-async function requestCamera() {
+// ── State management ──────────────────────────────────────────────────────
+function showState(state) {
     const noCamera = document.getElementById('no-camera');
-    noCamera.innerHTML = `<div class="text-center"><div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-md animate-pulse"><span class="material-symbols-outlined text-[32px] text-white">photo_camera</span></div><p class="font-body-md text-white/80">Requesting camera access…</p></div>`;
-    await startCamera();
+    const msg      = document.getElementById('no-camera-msg');
+    const enableBtn= document.getElementById('enable-camera-btn');
+    const controls = document.getElementById('camera-controls');
+    const scanLine = document.getElementById('scan-line');
+
+    const states = {
+        idle:       { msg: 'Tap Enable Camera to start, or pick a photo from your gallery.', btn: 'Enable Camera',   cameraOn: false },
+        requesting: { msg: 'Requesting camera access…',                                       btn: null,              cameraOn: false },
+        live:       { msg: null,                                                               btn: null,              cameraOn: true  },
+        denied:     { msg: 'Camera access was denied. You can still use the gallery.',         btn: 'Try Again',       cameraOn: false },
+    };
+    const s = states[state] || states.idle;
+
+    if (s.cameraOn) {
+        noCamera.classList.add('hidden');
+        controls.classList.remove('hidden');
+        if (scanLine) scanLine.style.display = 'block';
+    } else {
+        noCamera.classList.remove('hidden');
+        controls.classList.add('hidden');
+        if (scanLine) scanLine.style.display = 'none';
+        if (msg) msg.textContent = s.msg || '';
+        if (enableBtn) {
+            if (s.btn) { enableBtn.textContent = s.btn; enableBtn.classList.remove('hidden'); }
+            else        { enableBtn.classList.add('hidden'); }
+        }
+    }
 }
 
-async function startCamera() {
+// ── Camera ────────────────────────────────────────────────────────────────
+async function requestCamera() {
+    showState('requesting');
     try {
         stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
@@ -452,47 +478,25 @@ async function startCamera() {
         });
         const video = document.getElementById('video-feed');
         video.srcObject = stream;
+        await video.play();
         track = stream.getVideoTracks()[0];
-        // Camera working — hide fallback, show controls
-        document.getElementById('no-camera').classList.add('hidden');
-        document.getElementById('camera-controls').classList.remove('hidden');
-        document.getElementById('scan-line').style.display = 'block';
+        showState('live');
     } catch(e) {
-        // Camera denied — restore fallback
-        document.getElementById('no-camera').innerHTML = `
-        <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-lg">
-            <span class="material-symbols-outlined text-[48px] text-white" style="font-variation-settings:'FILL' 1">no_photography</span>
-        </div>
-        <p class="font-headline-md text-headline-md text-white mb-sm">Camera not available</p>
-        <p class="font-body-md text-white/70 mb-lg text-center px-lg">Camera access was denied or unavailable. You can still identify plants from your photo gallery.</p>
-        <div class="flex flex-col gap-3 w-full max-w-xs px-container-margin">
-            <button onclick="openGallery()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
-                Choose from Gallery
-            </button>
-        </div>
-        <input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="handleGalleryImage(event)"/>`;
-        document.getElementById('no-camera').classList.remove('hidden');
+        console.warn('Camera error:', e.name, e.message);
+        showState('denied');
     }
 }
 
 function capturePhoto() {
-    const video = document.getElementById('video-feed');
+    const video  = document.getElementById('video-feed');
     const canvas = document.getElementById('capture-canvas');
-    canvas.width = video.videoWidth || 640;
+    canvas.width  = video.videoWidth  || 640;
     canvas.height = video.videoHeight || 480;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
-    canvas.toBlob(blob => {
-        capturedBlob = blob;
-        const url = URL.createObjectURL(blob);
-        document.getElementById('captured-preview').src = url;
-        document.getElementById('captured-preview').classList.remove('hidden');
-        document.getElementById('result-thumb').src = url;
-        showResultsLoading();
-        identifyPlant(blob);
-    }, 'image/jpeg', 0.9);
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    canvas.toBlob(blob => processImage(blob, URL.createObjectURL(blob)), 'image/jpeg', 0.9);
 }
 
+// ── Gallery ───────────────────────────────────────────────────────────────
 function openGallery() {
     document.getElementById('gallery-input').click();
 }
@@ -500,13 +504,19 @@ function openGallery() {
 function handleGalleryImage(e) {
     const file = e.target.files[0];
     if (!file) return;
-    capturedBlob = file;
-    const url = URL.createObjectURL(file);
-    document.getElementById('captured-preview').src = url;
-    document.getElementById('captured-preview').classList.remove('hidden');
-    document.getElementById('result-thumb').src = url;
+    e.target.value = ''; // allow re-selecting same file
+    processImage(file, URL.createObjectURL(file));
+}
+
+// ── Image processing ──────────────────────────────────────────────────────
+function processImage(blob, previewUrl) {
+    capturedBlob = blob;
+    const preview = document.getElementById('captured-preview');
+    preview.src = previewUrl;
+    preview.classList.remove('hidden');
+    document.getElementById('result-thumb').src = previewUrl;
     showResultsLoading();
-    identifyPlant(file);
+    identifyPlant(blob);
 }
 
 async function toggleFlash() {
@@ -515,79 +525,75 @@ async function toggleFlash() {
     try {
         await track.applyConstraints({ advanced: [{ torch: flashOn }] });
         document.getElementById('flash-btn').querySelector('span').textContent = flashOn ? 'flash_on' : 'flash_off';
-    } catch(e) {
-        flashOn = false;
-    }
+    } catch(e) { flashOn = false; }
 }
 
+// ── Results ───────────────────────────────────────────────────────────────
 function showResultsLoading() {
-    const sheet = document.getElementById('results-sheet');
-    sheet.classList.remove('hidden');
+    document.getElementById('results-sheet').classList.remove('hidden');
     document.getElementById('results-loading').classList.remove('hidden');
     document.getElementById('results-list').classList.add('hidden');
     document.getElementById('results-error').classList.add('hidden');
-    setStatus('Identifying plant…', false);
+    setStatus('Identifying plant…');
 }
 
 async function identifyPlant(imageBlob) {
     try {
-        const formData = new FormData();
-        formData.append('images', imageBlob, 'plant.jpg');
-        formData.append('organs', 'leaf');
-        
+        const form = new FormData();
+        form.append('images', imageBlob, 'plant.jpg');
+        form.append('organs', 'leaf');
+
         const res = await fetch(`${PLANTNET_URL}?api-key=${PLANTNET_KEY}&nb-results=3&lang=en`, {
-            method: 'POST',
-            body: formData
+            method: 'POST', body: form
         });
-        
-        if (!res.ok) throw new Error('API error: ' + res.status);
+        if (!res.ok) throw new Error('API ' + res.status);
         const data = await res.json();
-        
         if (!data.results?.length) throw new Error('No results');
         renderResults(data.results);
-        
     } catch(e) {
+        console.warn('PlantNet:', e);
         document.getElementById('results-loading').classList.add('hidden');
         document.getElementById('results-error').classList.remove('hidden');
-        setStatus('Could not identify — try again', false);
+        setStatus('Could not identify — try again');
     }
 }
 
 function renderResults(results) {
     document.getElementById('results-loading').classList.add('hidden');
     document.getElementById('results-list').classList.remove('hidden');
-    
-    const topScore = results[0].score;
-    setStatus(`Best match: ${results[0].species.commonNames?.[0] || results[0].species.scientificNameWithoutAuthor}`, false);
-    
-    document.getElementById('results-list').innerHTML = results.map((r, i) => {
-        const commonName = r.species.commonNames?.[0] || 'Unknown common name';
-        const sciName = r.species.scientificNameWithoutAuthor;
-        const confidence = Math.round(r.score * 100);
-        const imgUrl = r.images?.[0]?.url?.m || '';
-        const confColour = confidence > 70 ? 'bg-primary' : confidence > 40 ? 'bg-tertiary' : 'bg-outline';
-        
+    setStatus('Best match: ' + (results[0].species.commonNames?.[0] || results[0].species.scientificNameWithoutAuthor));
+
+    document.getElementById('results-list').innerHTML = results.map(r => {
+        const name  = r.species.commonNames?.[0] || 'Unknown';
+        const sci   = r.species.scientificNameWithoutAuthor;
+        const pct   = Math.round(r.score * 100);
+        const img   = r.images?.[0]?.url?.m || '';
+        const barCl = pct > 70 ? 'bg-primary' : pct > 40 ? 'bg-tertiary' : 'bg-outline';
+        const bdgCl = pct > 70 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-surface-container text-on-surface-variant';
+        const safeName = name.replace(/'/g, "\'");
+        const safeSci  = sci.replace(/'/g, "\'");
+
         return `<div class="result-fade flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">
-            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container border border-outline-variant/20">
-                ${imgUrl ? `<img src="${imgUrl}" alt="${commonName}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\'material-symbols-outlined text-outline text-[32px] flex items-center justify-center h-full w-full\'\' style=\'font-variation-settings:\'FILL\' 1\'\'>eco</span>'"  />` : '<span class="material-symbols-outlined text-outline text-[32px] flex items-center justify-center h-full" style="font-variation-settings:'FILL' 1">eco</span>'}
+            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container border border-outline-variant/20 flex items-center justify-center">
+                ${img ? `<img src="${img}" alt="${name}" class="w-full h-full object-cover"/>` : '<span class="material-symbols-outlined text-outline text-[28px]" style="font-variation-settings:'FILL' 1">eco</span>'}
             </div>
             <div class="flex-1 min-w-0">
                 <div class="flex items-start justify-between gap-2 mb-1">
                     <div class="min-w-0">
-                        <p class="font-label-lg text-on-surface truncate">${commonName}</p>
-                        <p class="font-label-sm text-outline italic truncate">${sciName}</p>
+                        <p class="font-label-lg text-on-surface truncate">${name}</p>
+                        <p class="font-label-sm text-outline italic truncate">${sci}</p>
                     </div>
-                    <span class="font-label-sm px-2 py-0.5 rounded-full ${confidence > 70 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-surface-container text-on-surface-variant'} flex-shrink-0">${confidence}%</span>
+                    <span class="font-label-sm px-2 py-0.5 rounded-full ${bdgCl} flex-shrink-0">${pct}%</span>
                 </div>
                 <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-2">
-                    <div class="confidence-bar h-full rounded-full ${confColour}" style="width:${confidence}%"></div>
+                    <div class="confidence-bar h-full rounded-full ${barCl}" style="width:${pct}%"></div>
                 </div>
-                <div class="flex gap-2 flex-wrap">
-                    <a href="article-detail.html?topic=${encodeURIComponent(sciName)}&category=Plant+ID" 
+                <div class="flex gap-3 flex-wrap">
+                    <a href="article-detail.html?topic=${encodeURIComponent(sci)}&category=Plant+ID"
                        class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
                         <span class="material-symbols-outlined text-[14px]">info</span> Learn more
                     </a>
-                    <button onclick="addToGarden('${commonName.replace(/'/g, "\\'")}','${sciName.replace(/'/g, "\\'")}','${imgUrl}')" 
+                    <button onclick="addToGarden('${safeName}','${safeSci}','${img}')"
                             class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
                         <span class="material-symbols-outlined text-[14px]">add_circle</span> Add to My Garden
                     </button>
@@ -598,7 +604,6 @@ function renderResults(results) {
 }
 
 function addToGarden(name, species, img) {
-    // Pre-fill add-plant flow via localStorage
     localStorage.setItem('gt_prefill_plant', JSON.stringify({ name, species, img }));
     window.location.href = 'add-plant.html';
 }
@@ -606,16 +611,16 @@ function addToGarden(name, species, img) {
 function dismissResults() {
     document.getElementById('results-sheet').classList.add('hidden');
     document.getElementById('captured-preview').classList.add('hidden');
-    setStatus('Align plant in frame', false);
+    setStatus('Align plant in frame');
 }
 
 function setStatus(text) {
-    document.getElementById('status-text').textContent = text;
+    const el = document.getElementById('status-text');
+    if (el) el.textContent = text;
 }
 
-// Don't auto-start camera — show the friendly fallback first
-// Camera starts when user taps "Enable Camera"
-// This prevents the black screen in contexts without camera access
+// Init — show idle state (green fallback screen)
+showState('idle');
 
 setActiveNav('scanner');
 </script>
