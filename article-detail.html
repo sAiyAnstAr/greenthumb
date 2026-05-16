@@ -373,7 +373,7 @@ function setActiveNav(pageId) {
     }, { passive: true });
 })();
 
-const YOUTUBE_KEY = 'AIzaSyDSjVijkbvCa7d8XnoSA4_hoJy_6ivziZQ';
+const YOUTUBE_KEY = 'AIzaSyAN9eJwek4cxcAcTzqkKMqn5KNmaC3u960';
 const PERENUAL_KEY = 'sk-H63g6a085fb86f4c417329';
 
 // Get topic from URL param e.g. article-detail.html?topic=Composting&category=Soil+Care
@@ -409,7 +409,7 @@ async function loadArticle() {
         fetchOpenFarm(TOPIC);
 
         // 4. YouTube videos (if key available)
-        if (YOUTUBE_KEY !== 'YOUR_YOUTUBE_KEY') fetchYouTube(TOPIC + ' plant care');
+        if (YOUTUBE_KEY) fetchYouTube(TOPIC + ' plant care');
 
         // Render article
         document.getElementById('article-loading').classList.add('hidden');
