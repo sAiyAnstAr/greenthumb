@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Garden Health - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "secondary-fixed": "#ffdbd0","secondary-container": "#fed3c7","primary-fixed-dim": "#a1d494",
+                    "surface-container-low": "#f4f4f0","on-error-container": "#93000a","inverse-on-surface": "#f2f1ed",
+                    "surface-container-high": "#e9e8e4","secondary-fixed-dim": "#e7bdb1","primary-fixed": "#bcf0ae",
+                    "background": "#faf9f5","on-tertiary-container": "#ffaf9e","on-secondary-fixed-variant": "#5d4037",
+                    "error-container": "#ffdad6","tertiary-fixed": "#ffdad3","surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27","on-background": "#1b1c1a","on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e","surface-variant": "#e3e2df","outline-variant": "#c2c9bb",
+                    "surface-container-lowest": "#ffffff","primary": "#154212","on-tertiary": "#ffffff","error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918","surface": "#faf9f5","on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5","on-surface": "#1b1c1a","surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea","on-secondary-container": "#795950","tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500","inverse-surface": "#2f312e","surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220","outline": "#72796e","on-primary-container": "#9dd090",
+                    "on-error": "#ffffff","on-primary": "#ffffff","on-surface-variant": "#42493e",
+                    "surface-dim": "#dbdad6","secondary": "#77574d","inverse-primary": "#a1d494","on-primary-fixed": "#002201"
+                },
+                "borderRadius": {"DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px"},
+                "spacing": {"xl": "64px","lg": "40px","base": "8px","gutter": "16px","xs": "4px","md": "24px","sm": "12px","container-margin": "20px"},
+                "fontFamily": {"label-sm": ["Plus Jakarta Sans"],"headline-lg": ["Plus Jakarta Sans"],"headline-md": ["Plus Jakarta Sans"],"body-md": ["Plus Jakarta Sans"],"label-lg": ["Plus Jakarta Sans"],"display-lg": ["Plus Jakarta Sans"],"body-lg": ["Plus Jakarta Sans"]},
+                "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #faf9f5;
+        min-height: max(884px, 100dvh);
+    }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Animated score ring */
+    .ring-track { fill: none; stroke: rgba(45,90,39,0.15); stroke-width: 10; }
+    .ring-fill {
+        fill: none; stroke: #154212; stroke-width: 10;
+        stroke-linecap: round;
+        stroke-dasharray: 314;
+        stroke-dashoffset: 314;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+        transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ring-fill.critical { stroke: #ba1a1a; }
+    .ring-fill.warning  { stroke: #802918; }
+    .ring-fill.good     { stroke: #3b6934; }
+    .ring-fill.great    { stroke: #154212; }
+
+    /* Health bar mini */
+    .health-bar-fill { transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+    /* Status pill colours */
+    .pill-thriving  { background: #bcf0ae; color: #002201; }
+    .pill-good      { background: #e9e8e4; color: #42493e; }
+    .pill-attention { background: #ffdad3; color: #802918; }
+    .pill-critical  { background: #ffdad6; color: #93000a; }
+
+    /* Card left border */
+    .border-thriving  { border-left-color: #3b6934; }
+    .border-good      { border-left-color: #c2c9bb; }
+    .border-attention { border-left-color: #802918; }
+    .border-critical  { border-left-color: #ba1a1a; }
+
+    /* Icon status colours */
+    .icon-ok      { color: #3b6934; }
+    .icon-warn    { color: #802918; }
+    .icon-bad     { color: #ba1a1a; }
+    .icon-neutral { color: #72796e; }
+
+    /* Slide-up log panel */
+    #log-panel {
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #log-panel.open { transform: translateY(0); }
+
+    /* Filter chip active */
+    .filter-chip.active { background: #154212; color: #ffffff; }
+
+    /* Card hover */
+    .plant-card { transition: box-shadow 0.2s ease, transform 0.15s ease; }
+    .plant-card:hover { box-shadow: 0 6px 20px rgba(21,66,18,0.10); transform: translateY(-1px); }
+
+    /* Tip card gradient */
+    .tip-card { background: linear-gradient(135deg, #f4f4f0 0%, #e9e8e4 100%); }
+
+    /* Alert banner */
+    .alert-banner { animation: slideDown 0.3s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-8px); } to { opacity:1; transform: translateY(0); } }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
+<!-- Top AppBar -->
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="my-garden.html">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
+        <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
+</div>
+</header>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
+
+    <!-- Hero -->
+    <section class="mb-lg">
+        <h2 class="font-display-lg text-display-lg text-primary mb-xs">Garden Health</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">A live overview of every plant's wellbeing.</p>
+    </section>
+
+    <!-- Alert Banner (urgent plants) -->
+    <div id="alert-banner" class="hidden alert-banner mb-md rounded-2xl bg-error-container border border-error/20 px-md py-sm flex items-center gap-md">
+        <span class="material-symbols-outlined text-error flex-shrink-0" style="font-variation-settings:'FILL' 1">warning</span>
+        <p id="alert-text" class="font-label-lg text-on-error-container flex-1"></p>
+        <button onclick="document.getElementById('alert-banner').classList.add('hidden')" class="p-1 rounded-full hover:bg-error/10 transition-colors flex-shrink-0">
+            <span class="material-symbols-outlined text-error text-[18px]">close</span>
+        </button>
+    </div>
+
+    <!-- Overall Health Score -->
+    <section class="mb-lg">
+        <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-sm p-md flex items-center gap-lg">
+            <!-- SVG Ring -->
+            <div class="relative flex-shrink-0 w-28 h-28">
+                <svg viewBox="0 0 110 110" class="w-full h-full">
+                    <circle class="ring-track" cx="55" cy="55" r="50"/>
+                    <circle id="score-ring" class="ring-fill great" cx="55" cy="55" r="50"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span id="score-number" class="font-display-lg text-[28px] leading-none text-primary font-bold"></span>
+                    <span class="font-label-sm text-outline">Health</span>
+                </div>
+            </div>
+            <!-- Score breakdown -->
+            <div class="flex-1 min-w-0">
+                <h3 id="score-headline" class="font-headline-md text-headline-md text-on-surface mb-xs"></h3>
+                <p id="score-sub" class="font-body-md text-on-surface-variant mb-md"></p>
+                <div class="grid grid-cols-2 gap-x-md gap-y-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+                        <span id="stat-thriving" class="font-label-sm text-on-surface-variant"></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-outline flex-shrink-0"></span>
+                        <span id="stat-good" class="font-label-sm text-on-surface-variant"></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-tertiary flex-shrink-0"></span>
+                        <span id="stat-attention" class="font-label-sm text-on-surface-variant"></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-error flex-shrink-0"></span>
+                        <span id="stat-critical" class="font-label-sm text-on-surface-variant"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter + Sort Bar -->
+    <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar mb-md pb-1">
+        <button onclick="setFilter('all')" id="chip-all" class="filter-chip active flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">All</button>
+        <button onclick="setFilter('critical')" id="chip-critical" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">🔴 Critical</button>
+        <button onclick="setFilter('attention')" id="chip-attention" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">🟠 Needs Attention</button>
+        <button onclick="setFilter('good')" id="chip-good" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">🟡 Good</button>
+        <button onclick="setFilter('thriving')" id="chip-thriving" class="filter-chip flex-shrink-0 font-label-lg text-label-lg px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">🟢 Thriving</button>
+        <div class="flex-shrink-0 w-px h-6 bg-outline-variant/40 mx-1"></div>
+        <button onclick="cycleSortMode()" id="sort-btn" class="flex-shrink-0 flex items-center gap-1 font-label-lg text-label-lg px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant transition-all duration-200">
+            <span class="material-symbols-outlined text-[16px]">sort</span>
+            <span id="sort-label">Urgency</span>
+        </button>
+    </div>
+
+    <!-- Plant Cards -->
+    <section id="plant-list" class="space-y-3 mb-lg"></section>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden py-xl flex flex-col items-center text-center">
+        <span class="material-symbols-outlined text-[64px] text-outline mb-md" style="font-variation-settings:'FILL' 1">yard</span>
+        <p class="font-headline-md text-on-surface-variant">No plants match this filter</p>
+        <button onclick="setFilter('all')" class="mt-md font-label-lg text-label-lg text-primary hover:underline">Show all plants</button>
+    </div>
+
+    <!-- Seasonal Tips -->
+    <section class="mb-xl pb-4">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-md">💡 Seasonal Tips</h3>
+        <div id="tips-list" class="space-y-3"></div>
+    </section>
+
+</main>
+
+<!-- Log Care Slide-up Panel -->
+<div id="log-overlay" class="fixed inset-0 z-50 hidden bg-on-background/30 backdrop-blur-sm" onclick="closeLogPanel()"></div>
+<div id="log-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl px-container-margin pt-md pb-xl border-t border-outline-variant/40 max-w-screen-lg mx-auto">
+    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-md"></div>
+    <div class="flex items-center gap-md mb-lg">
+        <div id="log-plant-img-wrap" class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container flex-shrink-0">
+            <img id="log-plant-img" src="" alt="" class="w-full h-full object-cover"/>
+        </div>
+        <div>
+            <h3 id="log-plant-name" class="font-headline-md text-headline-md text-on-surface"></h3>
+            <p id="log-plant-loc" class="font-label-lg text-on-surface-variant text-label-lg"></p>
+        </div>
+    </div>
+    <p class="font-label-lg text-on-surface-variant text-label-lg mb-md uppercase tracking-wider">What did you do?</p>
+    <div class="grid grid-cols-3 gap-3 mb-lg" id="care-action-grid"></div>
+    <div class="mb-md">
+        <label class="font-label-lg text-label-lg text-on-surface-variant mb-1 block">Notes (optional)</label>
+        <input id="log-notes" type="text" placeholder="e.g. Leaves looking perkier today" class="form-input w-full h-12 px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline"/>
+    </div>
+    <button onclick="saveLog()" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3 rounded-xl active:scale-95 transition-transform shadow-sm">
+        Save Care Log
+    </button>
+</div>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="my-garden.html">
+        <span class="material-symbols-outlined active-icon">psychology_alt</span>
+        <span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
+        <span class="material-symbols-outlined">filter_center_focus</span>
+        <span class="font-label-sm text-label-sm">Identify</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
+        <span class="material-symbols-outlined">group</span>
+        <span class="font-label-sm text-label-sm">Community</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
+        <span class="material-symbols-outlined">school</span>
+        <span class="font-label-sm text-label-sm">Learn</span>
+    </a>
+</div>
+</nav>
+
+<script>
+// ─── Plant Data ──────────────────────────────────────────────────────────────
+// status: 'thriving' | 'good' | 'attention' | 'critical'
+// indicators: water/light/temp each: 'ok' | 'warn' | 'bad'
+const plants = [
+    {
+        id: 1,
+        name: 'Fiddle Leaf Fig',
+        species: 'Ficus lyrata',
+        location: 'Living Room',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4',
+        status: 'critical',
+        healthPct: 32,
+        urgentAction: 'Watering overdue by 4 days',
+        lastCared: '4 days ago',
+        water: 'bad',
+        light: 'warn',
+        temp: 'ok',
+        careLogs: []
+    },
+    {
+        id: 2,
+        name: 'Monstera Deliciosa',
+        species: 'Monstera deliciosa',
+        location: 'Study',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM',
+        status: 'thriving',
+        healthPct: 94,
+        urgentAction: null,
+        lastCared: 'Today',
+        water: 'ok',
+        light: 'ok',
+        temp: 'ok',
+        careLogs: [{ action: 'Watered', date: 'Today', note: 'Looking lush!' }]
+    },
+    {
+        id: 3,
+        name: 'Snake Plant',
+        species: 'Sansevieria trifasciata',
+        location: 'Bedroom',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA',
+        status: 'good',
+        healthPct: 71,
+        urgentAction: 'Water due tomorrow',
+        lastCared: '6 days ago',
+        water: 'warn',
+        light: 'ok',
+        temp: 'ok',
+        careLogs: []
+    },
+    {
+        id: 4,
+        name: 'Calathea Orbifolia',
+        species: 'Calathea orbifolia',
+        location: 'Dining Area',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8',
+        status: 'attention',
+        healthPct: 51,
+        urgentAction: 'Humidity too low — leaves curling',
+        lastCared: '2 days ago',
+        water: 'ok',
+        light: 'warn',
+        temp: 'warn',
+        careLogs: []
+    },
+    {
+        id: 5,
+        name: 'Peace Lily',
+        species: 'Spathiphyllum wallisii',
+        location: 'Balcony',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y',
+        status: 'attention',
+        healthPct: 58,
+        urgentAction: 'Direct sun exposure — move to shade',
+        lastCared: 'Yesterday',
+        water: 'ok',
+        light: 'bad',
+        temp: 'warn',
+        careLogs: []
+    },
+    {
+        id: 6,
+        name: 'Pothos',
+        species: 'Epipremnum aureum',
+        location: 'Kitchen',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE',
+        status: 'thriving',
+        healthPct: 88,
+        urgentAction: null,
+        lastCared: '2 days ago',
+        water: 'ok',
+        light: 'ok',
+        temp: 'ok',
+        careLogs: []
+    },
+];
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let currentFilter = 'all';
+let currentSort = 'urgency'; // 'urgency' | 'name' | 'location'
+let logTargetId = null;
+let selectedCareAction = null;
+
+const sortModes = ['urgency', 'name', 'location'];
+const sortLabels = { urgency: 'Urgency', name: 'Name', location: 'Location' };
+
+const careActions = [
+    { id: 'water',     icon: 'water_drop',    label: 'Watered' },
+    { id: 'fertilise', icon: 'compost',        label: 'Fertilised' },
+    { id: 'prune',     icon: 'content_cut',   label: 'Pruned' },
+    { id: 'mist',      icon: 'air',           label: 'Misted' },
+    { id: 'repot',     icon: 'yard',          label: 'Repotted' },
+    { id: 'rotate',    icon: 'rotate_right',  label: 'Rotated' },
+];
+
+// ─── Score + Stats ────────────────────────────────────────────────────────────
+function computeScore() {
+    const avg = Math.round(plants.reduce((s, p) => s + p.healthPct, 0) / plants.length);
+    return avg;
+}
+
+function renderScore() {
+    const score = computeScore();
+    const counts = { thriving: 0, good: 0, attention: 0, critical: 0 };
+    plants.forEach(p => counts[p.status]++);
+
+    // Ring animation: circumference = 2π×50 ≈ 314
+    const offset = 314 - (314 * score / 100);
+    const ring = document.getElementById('score-ring');
+    setTimeout(() => { ring.style.strokeDashoffset = offset; }, 80);
+
+    // Ring colour class
+    ring.className = 'ring-fill ' + (score >= 80 ? 'great' : score >= 60 ? 'good' : score >= 40 ? 'warning' : 'critical');
+
+    document.getElementById('score-number').textContent = score + '%';
+
+    let headline, sub;
+    if (score >= 80) { headline = 'Garden is thriving 🌿'; sub = 'Your plants are well cared for. Keep it up!'; }
+    else if (score >= 60) { headline = 'Looking pretty good'; sub = 'A few plants need some extra love.'; }
+    else if (score >= 40) { headline = 'Needs some attention'; sub = 'Several plants are struggling — check the list below.'; }
+    else { headline = 'Garden needs urgent care'; sub = 'Act now to prevent further plant stress.'; }
+
+    document.getElementById('score-headline').textContent = headline;
+    document.getElementById('score-sub').textContent = sub;
+
+    document.getElementById('stat-thriving').textContent = `${counts.thriving} Thriving`;
+    document.getElementById('stat-good').textContent = `${counts.good} Good`;
+    document.getElementById('stat-attention').textContent = `${counts.attention} Needs Attention`;
+    document.getElementById('stat-critical').textContent = `${counts.critical} Critical`;
+
+    // Alert banner
+    const urgent = plants.filter(p => p.status === 'critical');
+    const banner = document.getElementById('alert-banner');
+    if (urgent.length > 0) {
+        banner.classList.remove('hidden');
+        document.getElementById('alert-text').textContent =
+            urgent.length === 1
+                ? `${urgent[0].name} needs urgent attention right now.`
+                : `${urgent.length} plants need urgent attention — ${urgent.map(p=>p.name).join(', ')}.`;
+    } else {
+        banner.classList.add('hidden');
+    }
+}
+
+// ─── Filter & Sort ─────────────────────────────────────────────────────────────
+function setFilter(f) {
+    currentFilter = f;
+    ['all','critical','attention','good','thriving'].forEach(id => {
+        const chip = document.getElementById('chip-' + id);
+        if (chip) chip.classList.toggle('active', id === f);
+    });
+    renderPlants();
+}
+
+function cycleSortMode() {
+    const idx = sortModes.indexOf(currentSort);
+    currentSort = sortModes[(idx + 1) % sortModes.length];
+    document.getElementById('sort-label').textContent = sortLabels[currentSort];
+    renderPlants();
+}
+
+function sortedFiltered() {
+    let list = currentFilter === 'all' ? [...plants] : plants.filter(p => p.status === currentFilter);
+    const urgencyOrder = { critical: 0, attention: 1, good: 2, thriving: 3 };
+    if (currentSort === 'urgency') list.sort((a,b) => urgencyOrder[a.status] - urgencyOrder[b.status]);
+    else if (currentSort === 'name') list.sort((a,b) => a.name.localeCompare(b.name));
+    else list.sort((a,b) => a.location.localeCompare(b.location));
+    return list;
+}
+
+// ─── Plant Cards ──────────────────────────────────────────────────────────────
+function statusMeta(status) {
+    return {
+        thriving:  { pillClass: 'pill-thriving',  border: 'border-thriving',  label: 'Thriving' },
+        good:      { pillClass: 'pill-good',       border: 'border-good',      label: 'Good' },
+        attention: { pillClass: 'pill-attention',  border: 'border-attention', label: 'Needs Attention' },
+        critical:  { pillClass: 'pill-critical',   border: 'border-critical',  label: 'Critical' },
+    }[status];
+}
+
+function indicatorIcon(type, state) {
+    const icons = { water: 'water_drop', light: 'wb_sunny', temp: 'thermostat' };
+    const labels = { water: 'Water', light: 'Light', temp: 'Temp' };
+    const cls = { ok: 'icon-ok', warn: 'icon-warn', bad: 'icon-bad' }[state];
+    const fill = state !== 'ok' ? '' : '';
+    const fillSetting = state === 'ok' ? "'FILL' 1" : "'FILL' 0";
+    return `
+        <div class="flex flex-col items-center gap-0.5">
+            <span class="material-symbols-outlined text-[20px] ${cls}" style="font-variation-settings:${fillSetting}">${icons[type]}</span>
+            <span class="font-label-sm text-[10px] ${cls}">${labels[type]}</span>
+        </div>`;
+}
+
+function healthBarColour(pct) {
+    if (pct >= 80) return 'bg-primary';
+    if (pct >= 60) return 'bg-primary/70';
+    if (pct >= 40) return 'bg-tertiary';
+    return 'bg-error';
+}
+
+function renderPlants() {
+    const list = sortedFiltered();
+    const container = document.getElementById('plant-list');
+    const empty = document.getElementById('empty-state');
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+
+    list.forEach((plant, idx) => {
+        const meta = statusMeta(plant.status);
+        const card = document.createElement('div');
+        card.className = `plant-card bg-surface-container-lowest rounded-2xl border-l-4 ${meta.border} border border-outline-variant/20 shadow-sm overflow-hidden`;
+        card.style.animationDelay = (idx * 0.05) + 's';
+
+        card.innerHTML = `
+            <div class="flex items-start gap-md p-md">
+                <!-- Plant image -->
+                <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-outline-variant/20">
+                    <img src="${plant.img}" alt="${plant.name}" class="w-full h-full object-cover"/>
+                </div>
+                <!-- Main info -->
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2 mb-1">
+                        <div class="min-w-0">
+                            <h4 class="font-label-lg text-on-surface truncate">${plant.name}</h4>
+                            <p class="font-label-sm text-outline italic">${plant.species}</p>
+                        </div>
+                        <span class="font-label-sm px-2 py-0.5 rounded-full flex-shrink-0 ${meta.pillClass}">${meta.label}</span>
+                    </div>
+                    <div class="flex items-center gap-1 mb-sm">
+                        <span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+                        <span class="font-label-sm text-outline">${plant.location}</span>
+                    </div>
+                    <!-- Health bar -->
+                    <div class="flex items-center gap-2 mb-sm">
+                        <div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+                            <div class="health-bar-fill h-full rounded-full ${healthBarColour(plant.healthPct)}" style="width:0%" data-target="${plant.healthPct}"></div>
+                        </div>
+                        <span class="font-label-sm text-on-surface-variant flex-shrink-0 w-8 text-right">${plant.healthPct}%</span>
+                    </div>
+                    <!-- Urgent action -->
+                    ${plant.urgentAction ? `
+                    <div class="flex items-center gap-1 mb-sm">
+                        <span class="material-symbols-outlined text-[14px] ${plant.status === 'critical' ? 'text-error' : 'text-tertiary'}" style="font-variation-settings:'FILL' 1">priority_high</span>
+                        <span class="font-label-sm ${plant.status === 'critical' ? 'text-error' : 'text-on-tertiary-fixed-variant'}">${plant.urgentAction}</span>
+                    </div>` : `
+                    <div class="flex items-center gap-1 mb-sm">
+                        <span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings:'FILL' 1">check_circle</span>
+                        <span class="font-label-sm text-primary">All good — no action needed</span>
+                    </div>`}
+                    <!-- Indicators row -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-md">
+                            ${indicatorIcon('water', plant.water)}
+                            ${indicatorIcon('light', plant.light)}
+                            ${indicatorIcon('temp', plant.temp)}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-label-sm text-outline">${plant.lastCared}</span>
+                            <button onclick="openLogPanel(${plant.id})" class="flex items-center gap-1 bg-primary text-on-primary font-label-lg text-label-lg px-3 py-1.5 rounded-full active:scale-95 transition-transform text-[12px]">
+                                <span class="material-symbols-outlined text-[14px]">edit_note</span>
+                                Log Care
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Care log history (collapsed) -->
+            ${plant.careLogs.length > 0 ? `
+            <div class="border-t border-outline-variant/20 px-md py-sm bg-surface-container/40">
+                <p class="font-label-sm text-outline uppercase tracking-wider mb-1">Recent Care</p>
+                ${plant.careLogs.slice(-2).map(l => `
+                    <div class="flex items-center gap-2 py-0.5">
+                        <span class="material-symbols-outlined text-[14px] text-primary">check</span>
+                        <span class="font-label-sm text-on-surface-variant">${l.action} · ${l.date}${l.note ? ' — ' + l.note : ''}</span>
+                    </div>`).join('')}
+            </div>` : ''}
+        `;
+        container.appendChild(card);
+    });
+
+    // Animate health bars after paint
+    setTimeout(() => {
+        document.querySelectorAll('.health-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.target + '%';
+        });
+    }, 80);
+}
+
+// ─── Seasonal Tips ────────────────────────────────────────────────────────────
+function renderTips() {
+    const tipsContainer = document.getElementById('tips-list');
+    const criticalPlants = plants.filter(p => p.status === 'critical');
+    const attentionPlants = plants.filter(p => p.status === 'attention');
+    const lowLightPlants = plants.filter(p => p.light === 'bad' || p.light === 'warn');
+
+    const tips = [];
+
+    if (criticalPlants.length > 0)
+        tips.push({ icon: 'water_drop', colour: 'bg-error-container text-on-error-container', title: 'Urgent: Water overdue', body: `${criticalPlants.map(p=>p.name).join(' and ')} ${criticalPlants.length > 1 ? 'are' : 'is'} critically dehydrated. Water thoroughly and check drainage.` });
+
+    if (lowLightPlants.length > 0)
+        tips.push({ icon: 'wb_sunny', colour: 'bg-tertiary-fixed text-on-tertiary-fixed-variant', title: 'Light check needed', body: `${lowLightPlants.map(p=>p.name).join(', ')} ${lowLightPlants.length > 1 ? 'aren\'t getting' : 'isn\'t getting'} enough — or too much — light. Try rotating or relocating.` });
+
+    tips.push({ icon: 'thermostat', colour: 'bg-primary-fixed text-on-primary-fixed-variant', title: 'Autumn tip', body: 'As temperatures drop, move tropical plants away from cold windows and reduce watering frequency by about 20%.' });
+
+    tips.push({ icon: 'compost', colour: 'bg-secondary-container text-on-secondary-container', title: 'Fertilising season ending', body: 'Stop feeding most houseplants in autumn — they slow growth in winter and excess fertiliser can burn roots.' });
+
+    tipsContainer.innerHTML = tips.map(t => `
+        <div class="tip-card rounded-2xl p-md flex items-start gap-md border border-outline-variant/20">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${t.colour}">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">${t.icon}</span>
+            </div>
+            <div>
+                <h4 class="font-label-lg text-on-surface mb-0.5">${t.title}</h4>
+                <p class="font-body-md text-on-surface-variant">${t.body}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ─── Log Care Panel ───────────────────────────────────────────────────────────
+function openLogPanel(plantId) {
+    logTargetId = plantId;
+    selectedCareAction = null;
+    const plant = plants.find(p => p.id === plantId);
+    document.getElementById('log-plant-name').textContent = plant.name;
+    document.getElementById('log-plant-loc').textContent = plant.location;
+    document.getElementById('log-plant-img').src = plant.img;
+    document.getElementById('log-plant-img').alt = plant.name;
+    document.getElementById('log-notes').value = '';
+
+    const grid = document.getElementById('care-action-grid');
+    grid.innerHTML = careActions.map(a => `
+        <button onclick="selectCareAction('${a.id}')" id="care-${a.id}"
+            class="care-action-btn flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-outline-variant/40 bg-surface-container transition-all">
+            <span class="material-symbols-outlined text-primary text-[24px]" style="font-variation-settings:'FILL' 1">${a.icon}</span>
+            <span class="font-label-sm text-on-surface">${a.label}</span>
+        </button>
+    `).join('');
+
+    document.getElementById('log-panel').classList.add('open');
+    document.getElementById('log-overlay').classList.remove('hidden');
+}
+
+function selectCareAction(id) {
+    selectedCareAction = id;
+    document.querySelectorAll('.care-action-btn').forEach(btn => {
+        btn.classList.remove('border-primary', 'bg-primary-fixed/30');
+        btn.classList.add('border-outline-variant/40', 'bg-surface-container');
+    });
+    const btn = document.getElementById('care-' + id);
+    btn.classList.add('border-primary', 'bg-primary-fixed/30');
+    btn.classList.remove('border-outline-variant/40', 'bg-surface-container');
+}
+
+function closeLogPanel() {
+    document.getElementById('log-panel').classList.remove('open');
+    document.getElementById('log-overlay').classList.add('hidden');
+    logTargetId = null;
+}
+
+function saveLog() {
+    if (!selectedCareAction) { alert('Please select what you did.'); return; }
+    const plant = plants.find(p => p.id === logTargetId);
+    const action = careActions.find(a => a.id === selectedCareAction);
+    const note = document.getElementById('log-notes').value.trim();
+
+    // Log the care
+    plant.careLogs.push({ action: action.label, date: 'Today', note });
+
+    // Update plant state based on action
+    if (selectedCareAction === 'water') {
+        plant.water = 'ok';
+        plant.lastCared = 'Today';
+        plant.healthPct = Math.min(100, plant.healthPct + 20);
+        plant.urgentAction = plant.urgentAction?.toLowerCase().includes('water') ? null : plant.urgentAction;
+    } else if (selectedCareAction === 'mist') {
+        plant.temp = 'ok';
+        plant.healthPct = Math.min(100, plant.healthPct + 8);
+    } else if (selectedCareAction === 'rotate') {
+        plant.light = 'ok';
+        plant.healthPct = Math.min(100, plant.healthPct + 5);
+        plant.urgentAction = plant.urgentAction?.toLowerCase().includes('sun') || plant.urgentAction?.toLowerCase().includes('light') ? null : plant.urgentAction;
+    } else {
+        plant.healthPct = Math.min(100, plant.healthPct + 5);
+        plant.lastCared = 'Today';
+    }
+
+    // Recalculate status from healthPct
+    if (plant.healthPct >= 80) plant.status = 'thriving';
+    else if (plant.healthPct >= 60) plant.status = 'good';
+    else if (plant.healthPct >= 35) plant.status = 'attention';
+    else plant.status = 'critical';
+
+    closeLogPanel();
+    renderAll();
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+function renderAll() {
+    renderScore();
+    renderPlants();
+    renderTips();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLogPanel(); });
+
+renderAll();
+</script>
+</body></html>
