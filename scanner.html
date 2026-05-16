@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Identify Plant - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -100,65 +100,37 @@
     </script>
 <style>
 
-    /* Nav Drawer */
-    #nav-overlay { transition: opacity 0.25s ease; }
-    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer {
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: min(320px, 85vw);
-    }
-    #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
-    .nav-item.active { background: #bcf0ae; color: #002201; }
-    .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item { transition: background 0.15s ease; }
-    .nav-sub-item.active { color: #154212; font-weight: 700; }
-    .nav-sub-item:hover { background: #efeeea; }
-    .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
-    .nav-chevron { transition: transform 0.2s ease; }
-    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
-    .nav-sub-list.collapsed { max-height: 0 !important; }
-    /* Swipe from left edge */
-    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #faf9f5;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    
-    body { font-family: 'Plus Jakarta Sans', sans-serif; min-height: max(884px,100dvh); }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px,100dvh); }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    #video-feed { object-fit: cover; }
-    .scanner-overlay { background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.5) 100%); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    #nav-overlay { transition: opacity 0.25s ease; }
+    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
+    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px,85vw); }
+    #nav-drawer.open { transform: translateX(0); }
+    .nav-item { transition: background 0.15s ease; }
+    .nav-item.active { background: #bcf0ae; color: #002201; }
+    .nav-item:not(.active):hover { background: #efeeea; }
+    .nav-sub-item:hover { background: #efeeea; }
+    .nav-section { border-top: 1px solid #c2c9bb40; }
+    .nav-chevron { transition: transform 0.2s ease; }
+    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
+    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
+    .nav-sub-list.collapsed { max-height: 0 !important; }
+    #swipe-zone { position:fixed; left:0; top:0; bottom:0; width:20px; z-index:45; }
+
+    .scanner-overlay { background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.55) 100%); }
     .corner { position:absolute; width:36px; height:36px; border-color:#fff; border-width:3px; }
     .corner-tl { top:0; left:0; border-right:none; border-bottom:none; border-radius:4px 0 0 0; }
     .corner-tr { top:0; right:0; border-left:none; border-bottom:none; border-radius:0 4px 0 0; }
     .corner-bl { bottom:0; left:0; border-right:none; border-top:none; border-radius:0 0 0 4px; }
     .corner-br { bottom:0; right:0; border-left:none; border-top:none; border-radius:0 0 4px 0; }
-    .scan-line {
-        position:absolute; left:0; right:0; height:2px;
-        background:linear-gradient(90deg, transparent, #a1d494, transparent);
-        box-shadow: 0 0 12px rgba(161,212,148,0.8);
-        animation: scanAnim 2s ease-in-out infinite;
-    }
+    .scan-line { position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#a1d494,transparent); box-shadow:0 0 12px rgba(161,212,148,0.8); animation:scanAnim 2s ease-in-out infinite; }
     @keyframes scanAnim { 0%,100%{top:10%} 50%{top:85%} }
-    .result-fade { animation: slideUp 0.35s ease; }
-    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    .confidence-bar { transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
+    .result-fade { animation:slideUp 0.3s ease; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .confidence-bar { transition:width 0.6s ease; }
 </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col">
@@ -219,123 +191,112 @@
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div></div>
 
-<!-- Header - sticky, dark for camera feel -->
-<header class="bg-on-background/90 w-full top-0 sticky z-40 border-b border-white/10">
+<!-- Header -->
+<header class="bg-black/80 backdrop-blur-sm w-full top-0 sticky z-40 border-b border-white/10">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button onclick="openNav()" class="hover:bg-white/20 transition-colors p-2 rounded-full active:scale-95" aria-label="Open menu">
-<span class="material-symbols-outlined text-white">menu</span>
-</button>
-<h1 class="font-headline-lg text-headline-lg text-white">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer" onclick="openNav()">
-<img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+    <button onclick="openNav()" class="p-2 rounded-full hover:bg-white/20 transition-colors">
+        <span class="material-symbols-outlined text-white">menu</span>
+    </button>
+    <h1 class="font-headline-lg text-headline-lg text-white">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer" onclick="openNav()">
+        <img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+    </div>
 </div>
 </header>
 
-<!-- Camera / Main Area -->
+<!-- Camera area -->
 <main class="flex-grow relative overflow-hidden bg-black flex flex-col">
-    <!-- Live video feed -->
-    <video id="video-feed" class="absolute inset-0 w-full h-full" autoplay playsinline muted></video>
-    <!-- Hidden canvas for capture -->
+    <video id="video-feed" class="absolute inset-0 w-full h-full object-cover" autoplay playsinline muted></video>
     <canvas id="capture-canvas" class="hidden"></canvas>
-    <!-- Captured image preview -->
     <img id="captured-preview" class="absolute inset-0 w-full h-full object-cover hidden"/>
-    <!-- Scanner overlay -->
     <div class="absolute inset-0 scanner-overlay pointer-events-none"></div>
 
-    <!-- Framing guides -->
+    <!-- Frame guides -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="relative w-72 h-72 md:w-96 md:h-96">
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80">
             <div class="corner corner-tl"></div>
             <div class="corner corner-tr"></div>
             <div class="corner corner-bl"></div>
             <div class="corner corner-br"></div>
-            <div class="scan-line" id="scan-line"></div>
+            <div class="scan-line hidden" id="scan-line"></div>
         </div>
     </div>
 
-    <!-- Status pill -->
-    <div class="absolute top-4 left-0 right-0 flex justify-center pointer-events-none z-10">
-        <div id="status-pill" class="bg-black/40 backdrop-blur-md rounded-full px-md py-sm border border-white/20">
-            <p id="status-text" class="text-white font-label-lg text-label-lg tracking-wide">Align plant in frame</p>
+    <!-- Status -->
+    <div class="absolute top-4 left-0 right-0 flex justify-center z-10 pointer-events-none">
+        <div class="bg-black/50 backdrop-blur-sm rounded-full px-md py-xs border border-white/20">
+            <p id="status-text" class="text-white font-label-lg text-label-lg">Initialising…</p>
         </div>
     </div>
 
-    <!-- Camera controls - only visible when camera is active -->
-    <div id="camera-controls" class="hidden mt-auto relative z-10 px-container-margin pb-32 flex flex-col items-center gap-lg">
-        <div class="flex items-center justify-between w-full max-w-sm">
-            <!-- Gallery picker -->
-            <button onclick="openGallery()" class="p-md rounded-full bg-black/40 text-white active:scale-90 transition-transform border border-white/20" title="Choose from gallery">
-                <span class="material-symbols-outlined">image</span>
-            </button>
-            <!-- Capture button -->
-            <button onclick="capturePhoto()" id="capture-btn" class="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center bg-white/20 active:scale-90 transition-transform shadow-lg">
-                <div class="w-14 h-14 rounded-full bg-white"></div>
-            </button>
-            <!-- Flash toggle -->
-            <button onclick="toggleFlash()" id="flash-btn" class="p-md rounded-full bg-black/40 text-white active:scale-90 transition-transform border border-white/20" title="Toggle flash">
-                <span class="material-symbols-outlined">flash_off</span>
-            </button>
+    <!-- No-camera fallback (shown by default) -->
+    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10 px-container-margin text-center">
+        <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-lg">
+            <span class="material-symbols-outlined text-[40px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
         </div>
-    </div>
-
-    <!-- No camera fallback - shown by default, hidden once camera starts -->
-    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10 px-container-margin">
-        <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-lg">
-            <span class="material-symbols-outlined text-[48px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
-        </div>
-        <p class="font-headline-md text-headline-md text-white mb-sm text-center">Identify a Plant</p>
-        <p id="no-camera-msg" class="font-body-md text-white/70 mb-lg text-center max-w-xs">Tap Enable Camera to start, or pick a photo from your gallery.</p>
+        <p class="font-headline-md text-headline-md text-white mb-sm">Identify a Plant</p>
+        <p id="no-camera-msg" class="font-body-md text-white/70 mb-lg max-w-xs">Point your camera at any plant to identify it, or pick a photo from your gallery.</p>
         <div class="flex flex-col gap-3 w-full max-w-xs">
-            <button id="enable-camera-btn" onclick="requestCamera()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform text-center">
+            <button id="enable-camera-btn" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform">
                 Enable Camera
             </button>
-            <button onclick="openGallery()" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform border border-white/30 text-center">
+            <button id="gallery-trigger-btn" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full border border-white/30 active:scale-95 transition-transform">
                 Choose from Gallery
             </button>
         </div>
-        <input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="handleGalleryImage(event)"/>
+    </div>
+
+    <!-- Camera controls (hidden until camera live) -->
+    <div id="camera-controls" class="hidden absolute bottom-32 left-0 right-0 flex items-center justify-center gap-xl px-container-margin z-10">
+        <button id="gallery-btn-live" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
+            <span class="material-symbols-outlined text-white">image</span>
+        </button>
+        <button id="capture-btn" class="w-20 h-20 rounded-full border-4 border-white bg-white/20 flex items-center justify-center active:scale-90 transition-transform shadow-lg">
+            <div class="w-14 h-14 rounded-full bg-white"></div>
+        </button>
+        <button id="flash-btn" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
+            <span class="material-symbols-outlined text-white">flash_off</span>
+        </button>
     </div>
 </main>
 
+<!-- Hidden file input -->
+<input type="file" id="gallery-input" accept="image/*" class="hidden"/>
+
 <!-- Results sheet -->
 <div id="results-sheet" class="hidden fixed inset-0 z-50 flex items-end">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="dismissResults()"></div>
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="results-backdrop"></div>
     <div class="relative w-full bg-background rounded-t-3xl shadow-2xl max-h-[85vh] overflow-y-auto">
-        <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mt-md mb-md"></div>
-        <!-- Captured photo thumb -->
+        <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mt-md mb-sm"></div>
         <div class="px-container-margin mb-md flex items-center gap-md">
-            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-outline-variant/30">
+            <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-outline-variant/20 bg-surface-container">
                 <img id="result-thumb" src="" alt="" class="w-full h-full object-cover"/>
             </div>
             <div class="flex-1">
-                <h2 class="font-headline-md text-headline-md text-on-surface">Identification Results</h2>
-                <p class="font-label-sm text-outline">Powered by PlantNet · Tap a result to learn more</p>
+                <h2 class="font-headline-md text-headline-md text-on-surface">Results</h2>
+                <p class="font-label-sm text-outline">Powered by PlantNet</p>
             </div>
-            <button onclick="dismissResults()" class="p-2 rounded-full hover:bg-surface-container flex-shrink-0">
+            <button id="close-results-btn" class="p-2 rounded-full hover:bg-surface-container">
                 <span class="material-symbols-outlined text-on-surface-variant">close</span>
             </button>
         </div>
-        <!-- Loading -->
         <div id="results-loading" class="px-container-margin pb-lg space-y-3">
-            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-1"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div><div class="h-2 bg-surface-container rounded w-full mt-2"></div></div></div>
-            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-1"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div><div class="h-2 bg-surface-container rounded w-full mt-2"></div></div></div>
+            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div><div class="h-2 bg-surface-container rounded w-full mt-2"></div></div></div>
+            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div></div></div>
         </div>
-        <!-- Results list -->
-        <div id="results-list" class="hidden px-container-margin pb-4 space-y-3"></div>
-        <!-- Error -->
-        <div id="results-error" class="hidden px-container-margin pb-lg text-center">
-            <span class="material-symbols-outlined text-[40px] text-outline mb-sm">search_off</span>
-            <p class="font-headline-md text-on-surface-variant">Could not identify plant</p>
-            <p class="font-body-md text-outline mt-1">Try a clearer photo with good lighting</p>
-            <button onclick="dismissResults()" class="mt-md font-label-lg text-primary hover:underline">Try again</button>
+        <div id="results-list" class="hidden px-container-margin pb-lg space-y-3"></div>
+        <div id="results-error" class="hidden px-container-margin pb-lg text-center py-lg">
+            <span class="material-symbols-outlined text-[40px] text-outline">search_off</span>
+            <p class="font-headline-md text-on-surface-variant mt-2">Could not identify plant</p>
+            <p class="font-body-md text-outline mt-1">Try a clearer photo with good lighting and a visible leaf</p>
+            <button id="retry-btn" class="mt-md font-label-lg text-primary hover:underline">Try again</button>
         </div>
     </div>
 </div>
 
-<!-- Bottom Navigation Bar -->
+<!-- Bottom Nav -->
 <nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
 <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
@@ -346,309 +307,299 @@
 </div>
 </nav>
 
+<!-- NAV SCRIPT (isolated) -->
 <script>
-// ── Nav Drawer (isolated) ─────────────────────────────────────────────────
-try {
-// ── Nav Drawer ────────────────────────────────────────────────────────────
+
 function openNav() {
-    document.getElementById('nav-drawer').classList.add('open');
-    document.getElementById('nav-overlay').classList.remove('hidden');
+    var d = document.getElementById('nav-drawer');
+    var o = document.getElementById('nav-overlay');
+    if(d) d.classList.add('open');
+    if(o) o.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
 function closeNav() {
-    document.getElementById('nav-drawer').classList.remove('open');
-    document.getElementById('nav-overlay').classList.add('hidden');
+    var d = document.getElementById('nav-drawer');
+    var o = document.getElementById('nav-overlay');
+    if(d) d.classList.remove('open');
+    if(o) o.classList.add('hidden');
     document.body.style.overflow = '';
 }
 function toggleGroup(id) {
-    const list = document.getElementById(id);
+    var list = document.getElementById(id);
     if (!list) return;
-    const btn = list.previousElementSibling;
-    const isCollapsed = list.classList.contains('collapsed');
-    list.classList.toggle('collapsed', !isCollapsed);
-    if (btn) btn.classList.toggle('open', isCollapsed);
-    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
+    var btn = list.previousElementSibling;
+    var collapsed = list.classList.contains('collapsed');
+    list.classList.toggle('collapsed', !collapsed);
+    if (btn) btn.classList.toggle('open', collapsed);
+    list.style.maxHeight = collapsed ? list.scrollHeight + 'px' : null;
 }
-
-// Set active nav item
 function setActiveNav(pageId) {
-    // Map of pageId to nav element id and which group to open
-    const map = {
-        'home':           { item: 'nav-home', group: null },
-        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
-        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
-        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
-        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
-        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
-        'scanner':        { item: 'nav-scanner', group: null },
-        'community':      { item: 'nav-community', group: null },
-        'learn':          { item: 'nav-learn', group: 'learn-group' },
-        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
-        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
-        'articles':       { item: 'nav-articles', group: 'learn-group' },
-        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
-        'recommendations':{ item: 'nav-recommendations', group: null },
-        'calendar':       { item: 'nav-calendar', group: null },
-        'profile':        { item: 'nav-profile', group: null },
-        'settings':       { item: 'nav-settings', group: null },
+    var map = {
+        'home':'nav-home','my-garden':'nav-my-garden','garden-health':'nav-garden-health',
+        'garden-planner':'nav-garden-planner','garden-diary':'nav-garden-diary',
+        'add-plant':'nav-add-plant','scanner':'nav-scanner','community':'nav-community',
+        'learn':'nav-learn','encyclopedia':'nav-encyclopedia','search-guides':'nav-search-guides',
+        'articles':'nav-articles','journeys':'nav-journeys','recommendations':'nav-recommendations',
+        'calendar':'nav-calendar','profile':'nav-profile','settings':'nav-settings'
     };
-    const entry = map[pageId];
-    if (!entry) return;
-    // Highlight active item
-    const el = document.getElementById(entry.item);
-    if (el) el.classList.add('active');
-    // Open parent group if needed
-    if (entry.group) {
-        const group = document.getElementById(entry.group);
-        const btn = group?.previousElementSibling;
-        if (group) {
-            group.classList.remove('collapsed');
-            group.style.maxHeight = '500px';
-            if (btn) btn.classList.add('open');
-        }
+    var groups = {
+        'garden-health':'garden-group','garden-planner':'garden-group',
+        'garden-diary':'garden-group','add-plant':'garden-group','my-garden':'garden-group',
+        'learn':'learn-group','encyclopedia':'learn-group','search-guides':'learn-group',
+        'articles':'learn-group','journeys':'learn-group'
+    };
+    var itemId = map[pageId];
+    if (itemId) {
+        var el = document.getElementById(itemId);
+        if (el) el.classList.add('active');
+    }
+    var groupId = groups[pageId];
+    if (groupId) {
+        var g = document.getElementById(groupId);
+        var b = g && g.previousElementSibling;
+        if (g) { g.classList.remove('collapsed'); g.style.maxHeight = '500px'; }
+        if (b) b.classList.add('open');
     }
 }
-
-// Swipe from left edge to open
 (function() {
-    const zone = document.getElementById('swipe-zone');
-    let startX = 0, startY = 0;
-    document.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    document.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = Math.abs(e.changedTouches[0].clientY - startY);
-        if (startX < 30 && dx > 60 && dy < 60) openNav();
-    }, { passive: true });
-    // Swipe left to close
-    const drawer = document.getElementById('nav-drawer');
-if (drawer) {
-drawer.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-}, { passive: true });
-drawer.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - startX;
-    if (dx < -60) closeNav();
-}, { passive: true });
-}
+    try {
+        var loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
+        if (loc && loc.name) {
+            var el = document.getElementById('nav-location');
+            if (el) el.textContent = loc.name;
+        }
+    } catch(e) {}
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches[0].clientX < 30) window._swipeStartX = e.touches[0].clientX;
+    }, {passive:true});
+    document.addEventListener('touchend', function(e) {
+        if (window._swipeStartX && e.changedTouches[0].clientX - window._swipeStartX > 60) openNav();
+        window._swipeStartX = null;
+    }, {passive:true});
+    var drawer = document.getElementById('nav-drawer');
+    if (drawer) {
+        drawer.addEventListener('touchend', function(e) {
+            if (window._swipeStartX !== undefined) {
+                var dx = e.changedTouches[0].clientX - (window._swipeStartX || 0);
+                if (dx < -60) closeNav();
+            }
+        }, {passive:true});
+    }
 })();
-} catch(e) { console.warn('Nav error:', e); }
+
+try { setActiveNav('scanner'); } catch(e) {}
+try {
+    document.querySelectorAll('.nav-sub-list').forEach(function(l) {
+        l.style.maxHeight = l.classList.contains('collapsed') ? '0px' : '500px';
+    });
+} catch(e) {}
 </script>
 
+<!-- SCANNER SCRIPT (isolated) -->
 <script>
-// ── Scanner Camera (isolated) ─────────────────────────────────────────────
-// ── PlantNet Camera ────────────────────────────────────────────────────────
-const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
-const PLANTNET_URL = 'https://my-api.plantnet.org/v2/identify/all';
+(function() {
+    'use strict';
 
-let stream = null, flashOn = false, capturedBlob = null, track = null;
+    var PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
+    var PLANTNET_URL = 'https://my-api.plantnet.org/v2/identify/all';
+    var stream = null;
+    var track = null;
+    var flashOn = false;
 
-// ── State management ──────────────────────────────────────────────────────
-function showState(state) {
-    const noCamera = document.getElementById('no-camera');
-    const msg      = document.getElementById('no-camera-msg');
-    const enableBtn= document.getElementById('enable-camera-btn');
-    const controls = document.getElementById('camera-controls');
-    const scanLine = document.getElementById('scan-line');
+    // ── Elements ──────────────────────────────────────────────────────────
+    var video       = document.getElementById('video-feed');
+    var canvas      = document.getElementById('capture-canvas');
+    var preview     = document.getElementById('captured-preview');
+    var noCamera    = document.getElementById('no-camera');
+    var noCameraMsg = document.getElementById('no-camera-msg');
+    var enableBtn   = document.getElementById('enable-camera-btn');
+    var galleryTrig = document.getElementById('gallery-trigger-btn');
+    var galleryBtnL = document.getElementById('gallery-btn-live');
+    var captureBtn  = document.getElementById('capture-btn');
+    var flashBtn    = document.getElementById('flash-btn');
+    var controls    = document.getElementById('camera-controls');
+    var scanLine    = document.getElementById('scan-line');
+    var statusText  = document.getElementById('status-text');
+    var galInput    = document.getElementById('gallery-input');
+    var sheet       = document.getElementById('results-sheet');
+    var loading     = document.getElementById('results-loading');
+    var resultsList = document.getElementById('results-list');
+    var resultsErr  = document.getElementById('results-error');
+    var resultThumb = document.getElementById('result-thumb');
+    var closeBtn    = document.getElementById('close-results-btn');
+    var backdrop    = document.getElementById('results-backdrop');
+    var retryBtn    = document.getElementById('retry-btn');
 
-    const states = {
-        idle:       { msg: 'Tap Enable Camera to start, or pick a photo from your gallery.', btn: 'Enable Camera',   cameraOn: false },
-        requesting: { msg: 'Requesting camera access…',                                       btn: null,              cameraOn: false },
-        live:       { msg: null,                                                               btn: null,              cameraOn: true  },
-        denied:     { msg: 'Camera access was denied. You can still use the gallery.',         btn: 'Try Again',       cameraOn: false },
-    };
-    const s = states[state] || states.idle;
+    // ── State ─────────────────────────────────────────────────────────────
+    function setStatus(txt) { if (statusText) statusText.textContent = txt; }
 
-    if (s.cameraOn) {
-        noCamera.classList.add('hidden');
-        controls.classList.remove('hidden');
-        if (scanLine) scanLine.style.display = 'block';
-    } else {
-        noCamera.classList.remove('hidden');
-        controls.classList.add('hidden');
+    function showIdle() {
+        noCamera.style.display = 'flex';
+        controls.style.display = 'none';
         if (scanLine) scanLine.style.display = 'none';
-        if (msg) msg.textContent = s.msg || '';
-        if (enableBtn) {
-            if (s.btn) { enableBtn.textContent = s.btn; enableBtn.classList.remove('hidden'); }
-            else        { enableBtn.classList.add('hidden'); }
+        if (enableBtn) { enableBtn.style.display = 'block'; enableBtn.textContent = 'Enable Camera'; }
+        setStatus('Tap Enable Camera or pick a photo');
+    }
+
+    function showRequesting() {
+        if (noCameraMsg) noCameraMsg.textContent = 'Requesting camera access…';
+        if (enableBtn) enableBtn.style.display = 'none';
+        setStatus('Requesting camera…');
+    }
+
+    function showLive() {
+        noCamera.style.display = 'none';
+        controls.style.display = 'flex';
+        if (scanLine) scanLine.style.display = 'block';
+        setStatus('Align plant in frame');
+    }
+
+    function showDenied(reason) {
+        noCamera.style.display = 'flex';
+        controls.style.display = 'none';
+        if (scanLine) scanLine.style.display = 'none';
+        if (noCameraMsg) noCameraMsg.textContent = reason || 'Camera not available. Use the gallery below.';
+        if (enableBtn) { enableBtn.style.display = 'block'; enableBtn.textContent = 'Try Again'; }
+        setStatus('Camera unavailable');
+    }
+
+    // ── Camera ────────────────────────────────────────────────────────────
+    function startCamera() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            showDenied('Camera API not available in this browser. Use Choose from Gallery instead.');
+            return;
         }
-    }
-}
-
-// ── Camera ────────────────────────────────────────────────────────────────
-async function requestCamera() {
-    const msg = document.getElementById('no-camera-msg');
-
-    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-        if (msg) msg.textContent = '❌ Camera requires HTTPS — make sure you are on saiyanstar.github.io (https)';
-        showState('denied'); return;
-    }
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        if (msg) msg.textContent = '❌ Camera API not available in this browser. Please use the gallery below.';
-        showState('denied'); return;
+        showRequesting();
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+            .then(function(s) {
+                stream = s;
+                video.srcObject = s;
+                track = s.getVideoTracks()[0];
+                video.play().then(showLive).catch(function(e) { showDenied('Video play error: ' + e.message); });
+            })
+            .catch(function(e) {
+                showDenied(e.name + ': ' + e.message);
+            });
     }
 
-    showState('requesting');
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
-        const video = document.getElementById('video-feed');
-        video.srcObject = stream;
-        await video.play();
-        track = stream.getVideoTracks()[0];
-        showState('live');
-    } catch(e) {
-        console.warn('Camera error:', e.name, e.message);
-        if (msg) msg.textContent = '❌ ' + e.name + ': ' + e.message;
-        showState('denied');
+    function capturePhoto() {
+        if (!video.videoWidth) { setStatus('Camera not ready yet'); return; }
+        canvas.width  = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.toBlob(function(blob) {
+            var url = URL.createObjectURL(blob);
+            preview.src = url;
+            preview.style.display = 'block';
+            resultThumb.src = url;
+            processImage(blob);
+        }, 'image/jpeg', 0.9);
     }
-}
 
-function capturePhoto() {
-    const video  = document.getElementById('video-feed');
-    const canvas = document.getElementById('capture-canvas');
-    canvas.width  = video.videoWidth  || 640;
-    canvas.height = video.videoHeight || 480;
-    canvas.getContext('2d').drawImage(video, 0, 0);
-    canvas.toBlob(blob => processImage(blob, URL.createObjectURL(blob)), 'image/jpeg', 0.9);
-}
+    function openGallery() { if (galInput) galInput.click(); }
 
-function openGallery() {
-    const input = document.getElementById('gallery-input');
-    if (!input) {
-        const msg = document.getElementById('no-camera-msg');
-        if (msg) msg.textContent = '❌ Gallery not found — try refreshing the page';
-        return;
-    }
-    input.click();
-}
+    // ── PlantNet ──────────────────────────────────────────────────────────
+    function processImage(blob) {
+        sheet.style.display = 'flex';
+        loading.style.display = 'block';
+        resultsList.style.display = 'none';
+        resultsErr.style.display = 'none';
+        setStatus('Identifying plant…');
 
-function handleGalleryImage(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    e.target.value = ''; // allow re-selecting same file
-    processImage(file, URL.createObjectURL(file));
-}
-
-// ── Image processing ──────────────────────────────────────────────────────
-function processImage(blob, previewUrl) {
-    capturedBlob = blob;
-    const preview = document.getElementById('captured-preview');
-    preview.src = previewUrl;
-    preview.classList.remove('hidden');
-    document.getElementById('result-thumb').src = previewUrl;
-    showResultsLoading();
-    identifyPlant(blob);
-}
-
-async function toggleFlash() {
-    if (!track) return;
-    flashOn = !flashOn;
-    try {
-        await track.applyConstraints({ advanced: [{ torch: flashOn }] });
-        document.getElementById('flash-btn').querySelector('span').textContent = flashOn ? 'flash_on' : 'flash_off';
-    } catch(e) { flashOn = false; }
-}
-
-// ── Results ───────────────────────────────────────────────────────────────
-function showResultsLoading() {
-    document.getElementById('results-sheet').classList.remove('hidden');
-    document.getElementById('results-loading').classList.remove('hidden');
-    document.getElementById('results-list').classList.add('hidden');
-    document.getElementById('results-error').classList.add('hidden');
-    setStatus('Identifying plant…');
-}
-
-async function identifyPlant(imageBlob) {
-    try {
-        const form = new FormData();
-        form.append('images', imageBlob, 'plant.jpg');
+        var form = new FormData();
+        form.append('images', blob, 'plant.jpg');
         form.append('organs', 'leaf');
 
-        const res = await fetch(`${PLANTNET_URL}?api-key=${PLANTNET_KEY}&nb-results=3&lang=en`, {
+        fetch(PLANTNET_URL + '?api-key=' + PLANTNET_KEY + '&nb-results=3&lang=en', {
             method: 'POST', body: form
+        })
+        .then(function(r) {
+            if (!r.ok) throw new Error('API ' + r.status);
+            return r.json();
+        })
+        .then(function(data) {
+            if (!data.results || !data.results.length) throw new Error('No results');
+            showResults(data.results);
+        })
+        .catch(function(e) {
+            loading.style.display = 'none';
+            resultsErr.style.display = 'block';
+            setStatus('Could not identify — try again');
+            console.warn('PlantNet error:', e);
         });
-        if (!res.ok) throw new Error('API ' + res.status);
-        const data = await res.json();
-        if (!data.results?.length) throw new Error('No results');
-        renderResults(data.results);
-    } catch(e) {
-        console.warn('PlantNet:', e);
-        document.getElementById('results-loading').classList.add('hidden');
-        document.getElementById('results-error').classList.remove('hidden');
-        setStatus('Could not identify — try again');
     }
-}
 
-function renderResults(results) {
-    document.getElementById('results-loading').classList.add('hidden');
-    document.getElementById('results-list').classList.remove('hidden');
-    setStatus('Best match: ' + (results[0].species.commonNames?.[0] || results[0].species.scientificNameWithoutAuthor));
+    function showResults(results) {
+        loading.style.display = 'none';
+        resultsList.style.display = 'block';
+        var top = results[0];
+        setStatus('Best match: ' + (top.species.commonNames && top.species.commonNames[0] || top.species.scientificNameWithoutAuthor));
+        resultsList.innerHTML = results.map(function(r) {
+            var name = (r.species.commonNames && r.species.commonNames[0]) || 'Unknown';
+            var sci  = r.species.scientificNameWithoutAuthor;
+            var pct  = Math.round(r.score * 100);
+            var img  = r.images && r.images[0] && r.images[0].url && r.images[0].url.m || '';
+            var bar  = pct > 70 ? 'bg-primary' : pct > 40 ? 'bg-tertiary' : 'bg-outline';
+            var badge = pct > 70 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-surface-container text-on-surface-variant';
+            return '<div class="result-fade flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">' +
+                '<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container flex items-center justify-center">' +
+                (img ? '<img src="' + img + '" alt="' + name + '" class="w-full h-full object-cover"/>' : '<span class="material-symbols-outlined text-outline text-[28px]">eco</span>') +
+                '</div><div class="flex-1 min-w-0">' +
+                '<div class="flex items-start justify-between gap-2 mb-1">' +
+                '<div class="min-w-0"><p class="font-label-lg text-on-surface truncate">' + name + '</p><p class="font-label-sm text-outline italic truncate">' + sci + '</p></div>' +
+                '<span class="font-label-sm px-2 py-0.5 rounded-full flex-shrink-0 ' + badge + '">' + pct + '%</span></div>' +
+                '<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-2"><div class="confidence-bar h-full rounded-full ' + bar + '" style="width:' + pct + '%"></div></div>' +
+                '<div class="flex gap-3 flex-wrap">' +
+                '<a href="article-detail.html?topic=' + encodeURIComponent(sci) + '&category=Plant+ID" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">info</span> Learn more</a>' +
+                '<button onclick="addToGarden('' + name.replace(/'/g,"\'") + '','' + sci.replace(/'/g,"\'") + '','' + img + '')" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">add_circle</span> Add to My Garden</button>' +
+                '</div></div></div>';
+        }).join('');
+    }
 
-    document.getElementById('results-list').innerHTML = results.map(r => {
-        const name  = r.species.commonNames?.[0] || 'Unknown';
-        const sci   = r.species.scientificNameWithoutAuthor;
-        const pct   = Math.round(r.score * 100);
-        const img   = r.images?.[0]?.url?.m || '';
-        const barCl = pct > 70 ? 'bg-primary' : pct > 40 ? 'bg-tertiary' : 'bg-outline';
-        const bdgCl = pct > 70 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-surface-container text-on-surface-variant';
-        const safeName = name.replace(/'/g, "\'");
-        const safeSci  = sci.replace(/'/g, "\'");
+    function addToGarden(name, species, img) {
+        localStorage.setItem('gt_prefill_plant', JSON.stringify({ name: name, species: species, img: img }));
+        window.location.href = 'add-plant.html';
+    }
 
-        return `<div class="result-fade flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">
-            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container border border-outline-variant/20 flex items-center justify-center">
-                ${img ? `<img src="${img}" alt="${name}" class="w-full h-full object-cover"/>` : '<span class="material-symbols-outlined text-outline text-[28px]" style="font-variation-settings:'FILL' 1">eco</span>'}
-            </div>
-            <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-2 mb-1">
-                    <div class="min-w-0">
-                        <p class="font-label-lg text-on-surface truncate">${name}</p>
-                        <p class="font-label-sm text-outline italic truncate">${sci}</p>
-                    </div>
-                    <span class="font-label-sm px-2 py-0.5 rounded-full ${bdgCl} flex-shrink-0">${pct}%</span>
-                </div>
-                <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-2">
-                    <div class="confidence-bar h-full rounded-full ${barCl}" style="width:${pct}%"></div>
-                </div>
-                <div class="flex gap-3 flex-wrap">
-                    <a href="article-detail.html?topic=${encodeURIComponent(sci)}&category=Plant+ID"
-                       class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
-                        <span class="material-symbols-outlined text-[14px]">info</span> Learn more
-                    </a>
-                    <button onclick="addToGarden('${safeName}','${safeSci}','${img}')"
-                            class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
-                        <span class="material-symbols-outlined text-[14px]">add_circle</span> Add to My Garden
-                    </button>
-                </div>
-            </div>
-        </div>`;
-    }).join('');
-}
+    function closeResults() {
+        sheet.style.display = 'none';
+        preview.style.display = 'none';
+        setStatus('Align plant in frame');
+    }
 
-function addToGarden(name, species, img) {
-    localStorage.setItem('gt_prefill_plant', JSON.stringify({ name, species, img }));
-    window.location.href = 'add-plant.html';
-}
-
-function dismissResults() {
-    document.getElementById('results-sheet').classList.add('hidden');
-    document.getElementById('captured-preview').classList.add('hidden');
-    setStatus('Align plant in frame');
-}
-
-function setStatus(text) {
-    const el = document.getElementById('status-text');
-    if (el) el.textContent = text;
-}
-
-// ── Init ─────────────────────────────────────────────────────────────────
-showState('idle');
-try {
-    setActiveNav('scanner');
-    document.querySelectorAll('.nav-sub-list').forEach(list => {
-        list.style.maxHeight = list.classList.contains('collapsed') ? '0px' : '500px';
+    // ── Wire up buttons ───────────────────────────────────────────────────
+    if (enableBtn)   enableBtn.addEventListener('click', startCamera);
+    if (galleryTrig) galleryTrig.addEventListener('click', openGallery);
+    if (galleryBtnL) galleryBtnL.addEventListener('click', openGallery);
+    if (captureBtn)  captureBtn.addEventListener('click', capturePhoto);
+    if (closeBtn)    closeBtn.addEventListener('click', closeResults);
+    if (backdrop)    backdrop.addEventListener('click', closeResults);
+    if (retryBtn)    retryBtn.addEventListener('click', closeResults);
+    if (flashBtn)    flashBtn.addEventListener('click', function() {
+        if (!track) return;
+        flashOn = !flashOn;
+        try {
+            track.applyConstraints({ advanced: [{ torch: flashOn }] });
+            flashBtn.querySelector('span').textContent = flashOn ? 'flash_on' : 'flash_off';
+        } catch(e) { flashOn = false; }
     });
-} catch(e) { console.warn('Nav init:', e); }
+    if (galInput) galInput.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        e.target.value = '';
+        var url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.style.display = 'block';
+        resultThumb.src = url;
+        processImage(file);
+    });
+
+    // ── Make addToGarden global for onclick ───────────────────────────────
+    window.addToGarden = addToGarden;
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    showIdle();
+
+})();
 </script>
 </body></html>
