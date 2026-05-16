@@ -100,6 +100,29 @@
       }
     </script>
 <style>
+    /* Nav Drawer */
+    #nav-overlay { transition: opacity 0.25s ease; }
+    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
+    #nav-drawer {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: min(320px, 85vw);
+    }
+    #nav-drawer.open { transform: translateX(0); }
+    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
+    .nav-item.active { background: #bcf0ae; color: #002201; }
+    .nav-item:not(.active):hover { background: #efeeea; }
+    .nav-sub-item { transition: background 0.15s ease; }
+    .nav-sub-item.active { color: #154212; font-weight: 700; }
+    .nav-sub-item:hover { background: #efeeea; }
+    .nav-section { border-top: 1px solid #c2c9bb40; }
+    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
+    .nav-chevron { transition: transform 0.2s ease; }
+    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
+    .nav-sub-list.collapsed { max-height: 0 !important; }
+    /* Swipe from left edge */
+    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #faf9f5;
@@ -118,15 +141,73 @@
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen pb-32">
-<!-- Top AppBar -->
-<header class="bg-background dark:bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-high rounded-full transition-colors p-2 active:scale-95 transition-transform">
-<span class="material-symbols-outlined text-primary dark:text-inverse-primary">menu</span>
+<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
+<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
+<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-sm">
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
+<span class="font-label-lg text-label-lg text-on-surface">Home</span>
+</a>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
 </button>
-<h1 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform">
-<img alt="User Profile" data-alt="A professional headshot of a smiling young adult with warm, natural lighting. The subject has a friendly expression, set against a softly blurred background of lush indoor plants. The image has a clean, high-fidelity look that fits a modern lifestyle app aesthetic, emphasizing a connection with nature and personal well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+<div id="garden-group" class="nav-sub-list collapsed pl-md">
+<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div>
+</div>
+<div class="mx-sm">
+<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
+</button>
+<div id="learn-group" class="nav-sub-list collapsed pl-md">
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
+</div>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+</div>
+</nav>
+<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
+</aside>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+
+<!-- Top AppBar -->
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" aria-label="Open menu">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform cursor-pointer" onclick="openNav()">
+<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
 </div>
 </div>
 </header>
@@ -303,4 +384,111 @@
 </a>
 </div>
 </nav>
+
+<script>
+// ── Nav Drawer ────────────────────────────────────────────────────────────
+function openNav() {
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+function closeNav() {
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+function toggleGroup(id) {
+    const list = document.getElementById(id);
+    const btn = list.previousElementSibling;
+    const isCollapsed = list.classList.contains('collapsed');
+    list.classList.toggle('collapsed', !isCollapsed);
+    btn.classList.toggle('open', isCollapsed);
+    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
+}
+
+// Set active nav item
+function setActiveNav(pageId) {
+    // Map of pageId to nav element id and which group to open
+    const map = {
+        'home':           { item: 'nav-home', group: null },
+        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
+        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
+        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
+        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
+        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
+        'scanner':        { item: 'nav-scanner', group: null },
+        'community':      { item: 'nav-community', group: null },
+        'learn':          { item: 'nav-learn', group: 'learn-group' },
+        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
+        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
+        'articles':       { item: 'nav-articles', group: 'learn-group' },
+        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
+        'recommendations':{ item: 'nav-recommendations', group: null },
+        'calendar':       { item: 'nav-calendar', group: null },
+        'profile':        { item: 'nav-profile', group: null },
+        'settings':       { item: 'nav-settings', group: null },
+    };
+    const entry = map[pageId];
+    if (!entry) return;
+    // Highlight active item
+    const el = document.getElementById(entry.item);
+    if (el) el.classList.add('active');
+    // Open parent group if needed
+    if (entry.group) {
+        const group = document.getElementById(entry.group);
+        const btn = group?.previousElementSibling;
+        if (group) {
+            group.classList.remove('collapsed');
+            group.style.maxHeight = '500px';
+            if (btn) btn.classList.add('open');
+        }
+    }
+}
+
+// Swipe from left edge to open
+(function() {
+    const zone = document.getElementById('swipe-zone');
+    let startX = 0, startY = 0;
+    document.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = Math.abs(e.changedTouches[0].clientY - startY);
+        if (startX < 30 && dx > 60 && dy < 60) openNav();
+    }, { passive: true });
+    // Swipe left to close
+    document.getElementById('nav-drawer').addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+    document.getElementById('nav-drawer').addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx < -60) closeNav();
+    }, { passive: true });
+})();
+
+// Keyboard
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+// Set location in drawer from saved location
+(function() {
+    try {
+        const loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
+        if (loc && loc.name) document.getElementById('nav-location').textContent = loc.name;
+    } catch(e) {}
+})();
+
+// Init active state
+setActiveNav('my-garden');
+
+// Init all sub-lists collapsed except active group
+document.querySelectorAll('.nav-sub-list').forEach(list => {
+    if (!list.classList.contains('collapsed')) {
+        list.style.maxHeight = '500px';
+    } else {
+        list.style.maxHeight = '0px';
+    }
+});
+</script>
 </body></html>
