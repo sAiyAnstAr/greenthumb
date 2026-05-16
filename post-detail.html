@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Detail - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffdbd0",
+                    "secondary-container": "#fed3c7",
+                    "primary-fixed-dim": "#a1d494",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f2f1ed",
+                    "surface-container-high": "#e9e8e4",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "primary-fixed": "#bcf0ae",
+                    "background": "#faf9f5",
+                    "on-tertiary-container": "#ffaf9e",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad3",
+                    "surface-bright": "#faf9f5",
+                    "primary-container": "#2d5a27",
+                    "on-background": "#1b1c1a",
+                    "on-secondary-fixed": "#2c160e",
+                    "on-primary-fixed-variant": "#23501e",
+                    "surface-variant": "#e3e2df",
+                    "outline-variant": "#c2c9bb",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
+                    "outline": "#72796e",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#42493e",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+
+    /* Nav Drawer */
+    #nav-overlay { transition: opacity 0.25s ease; }
+    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
+    #nav-drawer {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: min(320px, 85vw);
+    }
+    #nav-drawer.open { transform: translateX(0); }
+    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
+    .nav-item.active { background: #bcf0ae; color: #002201; }
+    .nav-item:not(.active):hover { background: #efeeea; }
+    .nav-sub-item { transition: background 0.15s ease; }
+    .nav-sub-item.active { color: #154212; font-weight: 700; }
+    .nav-sub-item:hover { background: #efeeea; }
+    .nav-section { border-top: 1px solid #c2c9bb40; }
+    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
+    .nav-chevron { transition: transform 0.2s ease; }
+    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
+    .nav-sub-list.collapsed { max-height: 0 !important; }
+    /* Swipe from left edge */
+    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #faf9f5;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px, 100dvh); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .comment-fade { animation: fadeUp 0.2s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+    .liked { color: #ba1a1a; }
+    .chip.active { background:#154212; color:#fff; }
+
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
+<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
+<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-sm">
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
+<span class="font-label-lg text-label-lg text-on-surface">Home</span>
+</a>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
+</button>
+<div id="garden-group" class="nav-sub-list collapsed pl-md">
+<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div>
+</div>
+<div class="mx-sm">
+<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
+</button>
+<div id="learn-group" class="nav-sub-list collapsed pl-md">
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
+</div>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+</div>
+</nav>
+<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
+</aside>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45">
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+<a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="community.html"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
+<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
+</div>
+</header>
+<main class="max-w-screen-lg mx-auto pb-32">
+<!-- Original Post -->
+<article id="post-content" class="bg-surface-container-lowest border-b border-outline-variant/30">
+    <!-- Post header -->
+    <div class="flex items-center justify-between px-container-margin pt-md pb-sm">
+        <div class="flex items-center gap-sm">
+            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container flex-shrink-0">MJ</div>
+            <div>
+                <p class="font-label-lg text-on-surface">Maya Jensen</p>
+                <p class="font-label-sm text-outline">2 hours ago</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="bg-error-container text-on-error-container font-label-sm px-3 py-1 rounded-full">Help Needed</span>
+            <button class="p-1 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-outline text-[20px]">more_vert</span></button>
+        </div>
+    </div>
+    <!-- Post body -->
+    <div class="px-container-margin pb-md">
+        <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Fiddle Leaf Fig leaves turning brown?</h2>
+        <p class="font-body-md text-on-surface-variant mb-md">I've noticed these spots appearing on the lower leaves over the past week. I water once a week and it gets indirect bright light. Is this root rot or something else entirely? Any advice would be so appreciated — it's my favourite plant!</p>
+    </div>
+    <div class="w-full h-64 overflow-hidden">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3cv2UcYIHZsk77RRtUzb8SxJI5Kq2QScMeJiU1hldcMW4fDvBK6ZP_z3WC-s1idqBEq3BsXXed92BLJBge2hshsG44NVhL9S2mnOyUW2o_oem5g5DaJ4ZV0pJ1_3Z-UUarBbDwa9EUH53esT0U5phQSln335ywVxQbFb6gVPJ30W_f3PI8MsKOpr6wk0-5sEtTcHX4Ex4XioQlXOOm75dOSrF7WY7YSnAZjm1CscrDztxhlHPJHrH6q4x0lqB36d0-nqIf4yXN0" alt="Fiddle Leaf Fig brown spots"/>
+    </div>
+    <!-- Post actions -->
+    <div class="flex items-center gap-lg px-container-margin py-sm border-t border-outline-variant/30">
+        <button onclick="togglePostLike()" id="post-like-btn" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
+            <span class="material-symbols-outlined" id="post-like-icon">favorite_border</span>
+            <span id="post-like-count">24</span>
+        </button>
+        <div class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant">
+            <span class="material-symbols-outlined">chat_bubble</span>
+            <span id="comment-count">12</span>
+        </div>
+        <button onclick="sharePost()" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Expert tip card -->
+<div class="mx-container-margin my-md bg-primary-fixed/30 rounded-2xl p-md flex items-start gap-md border border-primary-container/30">
+    <span class="material-symbols-outlined text-primary flex-shrink-0" style="font-variation-settings:'FILL' 1">lightbulb</span>
+    <div>
+        <p class="font-label-lg text-on-surface mb-0.5">Common cause: overwatering or root rot</p>
+        <p class="font-body-md text-on-surface-variant">Brown spots on lower leaves with yellowing edges usually indicate overwatering. Check if soil is staying wet between waterings and ensure the pot has drainage holes.</p>
+    </div>
+</div>
+
+<!-- Comments section -->
+<div class="px-container-margin">
+    <div class="flex items-center justify-between mb-md">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Replies <span id="reply-count" class="font-label-lg text-on-surface-variant"></span></h3>
+        <div class="flex gap-2">
+            <button onclick="sortComments('top')" id="sort-top" class="chip active font-label-sm px-3 py-1 rounded-full bg-surface-container text-on-surface-variant transition-all">Top</button>
+            <button onclick="sortComments('new')" id="sort-new" class="chip font-label-sm px-3 py-1 rounded-full bg-surface-container text-on-surface-variant transition-all">Newest</button>
+        </div>
+    </div>
+    <div id="comments-list" class="space-y-md mb-lg"></div>
+</div>
+</main>
+
+<!-- Reply input — fixed bottom above nav -->
+<div class="fixed bottom-16 left-0 right-0 z-20 bg-background border-t border-outline-variant/40 px-container-margin py-sm max-w-screen-lg mx-auto">
+    <div class="flex items-center gap-sm">
+        <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-on-primary-container text-[16px]" style="font-variation-settings:'FILL' 1">person</span>
+        </div>
+        <input id="reply-input" type="text" placeholder="Add a reply…" class="form-input flex-1 h-10 px-3 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline text-sm"/>
+        <button onclick="postReply()" class="bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform flex-shrink-0">
+            <span class="material-symbols-outlined text-[20px]">send</span>
+        </button>
+    </div>
+</div>
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="community.html"><span class="material-symbols-outlined active-icon">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html"><span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
+</div>
+</nav>
+<script>
+// ── Nav Drawer ────────────────────────────────────────────────────────────
+function openNav() {
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+function closeNav() {
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+function toggleGroup(id) {
+    const list = document.getElementById(id);
+    const btn = list.previousElementSibling;
+    const isCollapsed = list.classList.contains('collapsed');
+    list.classList.toggle('collapsed', !isCollapsed);
+    btn.classList.toggle('open', isCollapsed);
+    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
+}
+
+// Set active nav item
+function setActiveNav(pageId) {
+    // Map of pageId to nav element id and which group to open
+    const map = {
+        'home':           { item: 'nav-home', group: null },
+        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
+        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
+        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
+        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
+        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
+        'scanner':        { item: 'nav-scanner', group: null },
+        'community':      { item: 'nav-community', group: null },
+        'learn':          { item: 'nav-learn', group: 'learn-group' },
+        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
+        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
+        'articles':       { item: 'nav-articles', group: 'learn-group' },
+        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
+        'recommendations':{ item: 'nav-recommendations', group: null },
+        'calendar':       { item: 'nav-calendar', group: null },
+        'profile':        { item: 'nav-profile', group: null },
+        'settings':       { item: 'nav-settings', group: null },
+    };
+    const entry = map[pageId];
+    if (!entry) return;
+    // Highlight active item
+    const el = document.getElementById(entry.item);
+    if (el) el.classList.add('active');
+    // Open parent group if needed
+    if (entry.group) {
+        const group = document.getElementById(entry.group);
+        const btn = group?.previousElementSibling;
+        if (group) {
+            group.classList.remove('collapsed');
+            group.style.maxHeight = '500px';
+            if (btn) btn.classList.add('open');
+        }
+    }
+}
+
+// Swipe from left edge to open
+(function() {
+    const zone = document.getElementById('swipe-zone');
+    let startX = 0, startY = 0;
+    document.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = Math.abs(e.changedTouches[0].clientY - startY);
+        if (startX < 30 && dx > 60 && dy < 60) openNav();
+    }, { passive: true });
+    // Swipe left to close
+    document.getElementById('nav-drawer').addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+    document.getElementById('nav-drawer').addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx < -60) closeNav();
+    }, { passive: true });
+})();
+
+const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
+
+let postLiked = false;
+let postLikes = 24;
+let sortMode = 'top';
+
+let comments = [
+    { id:1, author:'Tom Garden', initials:'TG', colour:'bg-primary-container text-on-primary-container', time:'1 hour ago', text:"This looks like it could be bacterial leaf spot rather than root rot. The pattern of the spots matters — are they spreading outward from the centre or starting at the edges?", likes:18, liked:false },
+    { id:2, author:'Sarah Bloom', initials:'SB', colour:'bg-secondary-container text-on-secondary-container', time:'45 min ago', text:"I had the exact same issue! It turned out my pot had no drainage and the roots were sitting in water. Try lifting the pot and checking underneath — if you can smell anything earthy/musty it's likely root rot.", likes:31, liked:false },
+    { id:3, author:'Plant Expert', initials:'PE', colour:'bg-tertiary-fixed text-on-tertiary-fixed-variant', time:'30 min ago', text:"Water less frequently and always let the top 2-3cm of soil dry out completely between waterings. Fiddle Leaf Figs are very sensitive to overwatering. Also avoid moving it around — they hate change.", likes:47, liked:false },
+    { id:4, author:'GreenThumb_Au', initials:'GA', colour:'bg-surface-container-high text-on-surface', time:'20 min ago', text:"Check the humidity too. Gold Coast can get quite humid but indoor air con dries things out. A pebble tray with water near the base helps a lot.", likes:12, liked:false },
+    { id:5, author:'Maya Jensen', initials:'MJ', colour:'bg-secondary-container text-on-secondary-container', time:'10 min ago', text:"Thank you all so much! I'll check the drainage today. @Sarah Bloom — I can actually smell something! Will repot this weekend.", likes:8, liked:false },
+];
+let nextCommentId = 10;
+
+function togglePostLike() {
+    postLiked = !postLiked;
+    postLikes += postLiked ? 1 : -1;
+    document.getElementById('post-like-count').textContent = postLikes;
+    const icon = document.getElementById('post-like-icon');
+    icon.textContent = postLiked ? 'favorite' : 'favorite_border';
+    icon.style.color = postLiked ? '#ba1a1a' : '';
+}
+
+function toggleCommentLike(id) {
+    const c = comments.find(c=>c.id===id);
+    if (!c) return;
+    c.liked = !c.liked;
+    c.likes += c.liked ? 1 : -1;
+    renderComments();
+}
+
+function sortComments(mode) {
+    sortMode = mode;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    document.getElementById('sort-'+mode).classList.add('active');
+    renderComments();
+}
+
+function renderComments() {
+    const list = [...comments];
+    if (sortMode === 'top') list.sort((a,b)=>b.likes-a.likes);
+    else list.sort((a,b)=>b.id-a.id);
+    
+    const container = document.getElementById('comments-list');
+    container.innerHTML = list.map(c=>`
+        <div class="comment-fade flex gap-sm" id="comment-${c.id}">
+            <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-[12px] ${c.colour}">${c.initials}</div>
+            <div class="flex-1 min-w-0">
+                <div class="bg-surface-container rounded-2xl px-md py-sm">
+                    <div class="flex items-center justify-between mb-0.5">
+                        <span class="font-label-lg text-on-surface">${c.author}</span>
+                        <span class="font-label-sm text-outline">${c.time}</span>
+                    </div>
+                    <p class="font-body-md text-on-surface">${c.text}</p>
+                </div>
+                <div class="flex items-center gap-md mt-1 px-sm">
+                    <button onclick="toggleCommentLike(${c.id})" class="flex items-center gap-1 font-label-sm ${c.liked ? 'text-error' : 'text-outline'} hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-[14px]">${c.liked ? 'favorite' : 'favorite_border'}</span>
+                        ${c.likes}
+                    </button>
+                    <button onclick="document.getElementById('reply-input').value='@${c.author} ';document.getElementById('reply-input').focus()" class="font-label-sm text-outline hover:text-primary transition-colors">Reply</button>
+                </div>
+            </div>
+        </div>`).join('');
+    
+    document.getElementById('reply-count').textContent = `(${comments.length})`;
+    document.getElementById('comment-count').textContent = comments.length;
+}
+
+function postReply() {
+    const input = document.getElementById('reply-input');
+    const text = input.value.trim();
+    if (!text) return;
+    comments.push({
+        id: nextCommentId++,
+        author: 'You',
+        initials: 'YO',
+        colour: 'bg-primary-container text-on-primary-container',
+        time: 'Just now',
+        text,
+        likes: 0,
+        liked: false
+    });
+    input.value = '';
+    sortMode = 'new';
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    document.getElementById('sort-new').classList.add('active');
+    renderComments();
+}
+
+function sharePost() {
+    if (navigator.share) {
+        navigator.share({ title: 'Fiddle Leaf Fig help - Greenthumb Community', url: window.location.href });
+    } else {
+        navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'));
+    }
+}
+
+renderComments();
+
+
+setActiveNav('community');
+</script>
+</body></html>
