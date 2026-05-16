@@ -530,6 +530,52 @@ function resetForm() {
 
 // Set default date to today
 document.getElementById('plant-date').value = new Date().toISOString().split('T')[0];
+
+// ── Read prefill from scanner ─────────────────────────────────────────────
+(function() {
+    try {
+        const prefill = localStorage.getItem('gt_prefill_plant');
+        if (!prefill) return;
+        const plant = JSON.parse(prefill);
+        localStorage.removeItem('gt_prefill_plant'); // consume it
+
+        // Find matching plant in catalogue or create a custom entry
+        const match = POPULAR.find(p =>
+            p.name.toLowerCase() === plant.name.toLowerCase() ||
+            p.species.toLowerCase() === (plant.species || '').toLowerCase()
+        );
+
+        if (match) {
+            selectPlant(match.id);
+        } else {
+            // Build a custom plant entry from the scanner result
+            selectedPlant = {
+                id: 'scanned',
+                name: plant.name || 'Identified Plant',
+                species: plant.species || '',
+                water: 'Weekly',
+                light: 'Bright indirect',
+                difficulty: 'Unknown',
+                desc: `Identified by Greenthumb AI scanner. Scientific name: ${plant.species || 'unknown'}.`,
+                img: plant.img || ''
+            };
+            // Populate confirm card manually and jump to step 2
+            document.getElementById('confirm-img').src = plant.img || '';
+            document.getElementById('confirm-img').style.display = plant.img ? 'block' : 'none';
+            document.getElementById('confirm-name').textContent = plant.name || 'Identified Plant';
+            document.getElementById('confirm-species').textContent = plant.species || '';
+            document.getElementById('confirm-water').textContent = 'Weekly';
+            document.getElementById('confirm-light').textContent = 'Bright indirect';
+            document.getElementById('confirm-diff').textContent = 'Check care guide';
+            document.getElementById('confirm-desc').textContent = selectedPlant.desc;
+            selectedWater = 'Weekly';
+            selectedLight = 'Bright indirect';
+            goStep(2);
+        }
+    } catch(e) {
+        console.warn('Prefill error:', e);
+    }
+})();
 </script>
 
 <script>
