@@ -249,12 +249,26 @@
 
 <!-- Reply input — fixed bottom above nav -->
 <div class="fixed bottom-16 left-0 right-0 z-20 bg-background border-t border-outline-variant/40 px-container-margin py-sm max-w-screen-lg mx-auto">
+    <div id="reply-context" class="hidden mb-xs ml-10 flex items-center justify-between rounded-xl bg-surface-container px-sm py-xs">
+        <span id="reply-context-text" class="font-label-sm text-on-surface-variant"></span>
+        <button onclick="clearReplyTarget()" class="font-label-sm text-primary px-2 py-1 rounded-full hover:bg-surface-container-high">Cancel</button>
+    </div>
+    <div id="reply-img-preview-wrap" class="hidden mb-xs ml-10">
+        <div class="relative inline-block">
+            <img id="reply-img-preview" src="" class="h-20 rounded-xl object-cover border border-outline-variant/30"/>
+            <button onclick="removeReplyImage()" class="absolute -top-2 -right-2 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-xs shadow">×</button>
+        </div>
+    </div>
     <div class="flex items-center gap-sm">
         <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
             <span class="material-symbols-outlined text-on-primary-container text-[16px]" style="font-variation-settings:'FILL' 1">person</span>
         </div>
+        <button onclick="document.getElementById('reply-img-input').click()" class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high flex-shrink-0" aria-label="Attach image">
+            <span class="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+        </button>
+        <input type="file" id="reply-img-input" accept="image/*" class="hidden" onchange="handleReplyImageSelect(event)"/>
         <input id="reply-input" type="text" placeholder="Add a reply…" class="form-input flex-1 h-10 px-3 rounded-full border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md placeholder:text-outline text-sm"/>
-        <button onclick="postReply()" class="bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform flex-shrink-0">
+        <button onclick="postReply()" id="send-reply-btn" class="bg-primary text-on-primary p-2 rounded-full active:scale-95 transition-transform flex-shrink-0">
             <span class="material-symbols-outlined text-[20px]">send</span>
         </button>
     </div>
@@ -372,6 +386,10 @@ let sortMode = 'top';
 
 let comments = [];
 let nextCommentId = 1;
+let replyParentId = null;
+let replyParentAuthor = '';
+let selectedReplyImgFile = null;
+let isReplySubmitting = false;
 
 function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -426,7 +444,10 @@ function commentFromRow(row) {
         initials: initials(author),
         colour: author === 'Gardener' ? 'bg-primary-container text-on-primary-container' : 'bg-secondary-container text-on-secondary-container',
         time: timeAgo(row.created_at),
+        createdAt: row.created_at || new Date().toISOString(),
         text: row.body || row.text || '',
+        imageUrl: row.image_url || null,
+        parentId: row.parent_id || null,
         likes: row.likes || 0,
         liked: false,
         _sbId: row.id
@@ -476,8 +497,9 @@ function togglePostLike() {
     icon.style.color = postLiked ? '#ba1a1a' : '';
 }
 
-function toggleCommentLike(id) {
-    const c = comments.find(c=>c.id===id);
+function toggleCommentLike(encodedId) {
+    const id = decodeURIComponent(encodedId);
+    const c = comments.find(c=>String(c.id)===id);
     if (!c || c.liked) return;
     c.liked = true;
     c.likes += 1;
@@ -491,6 +513,49 @@ function setReplyTo(encodedAuthor) {
     input.focus();
 }
 
+function setCommentReplyTarget(encodedId, encodedAuthor) {
+    replyParentId = decodeURIComponent(encodedId);
+    replyParentAuthor = decodeURIComponent(encodedAuthor);
+    const context = document.getElementById('reply-context');
+    document.getElementById('reply-context-text').textContent = 'Replying to ' + replyParentAuthor;
+    context.classList.remove('hidden');
+    document.getElementById('reply-input').focus();
+}
+
+function clearReplyTarget() {
+    replyParentId = null;
+    replyParentAuthor = '';
+    document.getElementById('reply-context').classList.add('hidden');
+}
+
+function handleReplyImageSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+        alert('Image must be under 5MB');
+        e.target.value = '';
+        return;
+    }
+    selectedReplyImgFile = file;
+    const reader = new FileReader();
+    reader.onload = ev => {
+        document.getElementById('reply-img-preview').src = ev.target.result;
+        document.getElementById('reply-img-preview-wrap').classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeReplyImage() {
+    selectedReplyImgFile = null;
+    document.getElementById('reply-img-preview-wrap').classList.add('hidden');
+    document.getElementById('reply-img-input').value = '';
+}
+
+function commentSortTime(c) {
+    const parsed = new Date(c.createdAt || '').getTime();
+    return Number.isFinite(parsed) ? parsed : (Number(c.id) || 0);
+}
+
 function sortComments(mode) {
     sortMode = mode;
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
@@ -499,13 +564,33 @@ function sortComments(mode) {
 }
 
 function renderComments() {
-    const list = [...comments];
-    if (sortMode === 'top') list.sort((a,b)=>b.likes-a.likes);
-    else list.sort((a,b)=>b.id-a.id);
-    
+    const byParent = {};
+    comments.forEach(c => {
+        const key = c.parentId ? String(c.parentId) : 'root';
+        if (!byParent[key]) byParent[key] = [];
+        byParent[key].push(c);
+    });
+    const roots = [...(byParent.root || [])];
+    if (sortMode === 'top') roots.sort((a,b)=>(b.likes-a.likes) || commentSortTime(b)-commentSortTime(a));
+    else roots.sort((a,b)=>commentSortTime(b)-commentSortTime(a));
+    Object.keys(byParent).forEach(key => {
+        if (key !== 'root') byParent[key].sort((a,b)=>commentSortTime(a)-commentSortTime(b));
+    });
+
     const container = document.getElementById('comments-list');
-    container.innerHTML = list.map(c=>`
-        <div class="comment-fade flex gap-sm" id="comment-${c.id}">
+    container.innerHTML = roots.length ? roots.map(c=>renderComment(c, byParent, 0)).join('') : '<div class="bg-surface-container rounded-2xl px-md py-sm text-outline font-label-lg">No replies yet.</div>';
+
+    document.getElementById('reply-count').textContent = `(${comments.length})`;
+    const commentCount = document.getElementById('comment-count');
+    if (commentCount) commentCount.textContent = comments.length;
+}
+
+function renderComment(c, byParent, depth) {
+    const children = byParent[String(c.id)] || [];
+    const margin = depth ? 'ml-8 border-l border-outline-variant/50 pl-sm mt-sm' : '';
+    return `
+        <div class="comment-fade ${margin}" id="comment-${esc(c.id)}">
+        <div class="flex gap-sm">
             <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-[12px] ${c.colour}">${c.initials}</div>
             <div class="flex-1 min-w-0">
                 <div class="bg-surface-container rounded-2xl px-md py-sm">
@@ -513,38 +598,74 @@ function renderComments() {
                         <span class="font-label-lg text-on-surface">${esc(c.author)}</span>
                         <span class="font-label-sm text-outline">${esc(c.time)}</span>
                     </div>
-                    <p class="font-body-md text-on-surface">${esc(c.text)}</p>
+                    ${c.text ? `<p class="font-body-md text-on-surface">${esc(c.text)}</p>` : ''}
+                    ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="Reply image" class="mt-sm max-h-64 rounded-xl object-cover border border-outline-variant/30"/>` : ''}
                 </div>
                 <div class="flex items-center gap-md mt-1 px-sm">
-                    <button onclick="toggleCommentLike(${c.id})" class="flex items-center gap-1 font-label-sm ${c.liked ? 'text-error' : 'text-outline'} hover:text-error transition-colors">
+                    <button onclick="toggleCommentLike('${encodeURIComponent(c.id)}')" class="flex items-center gap-1 font-label-sm ${c.liked ? 'text-error' : 'text-outline'} hover:text-error transition-colors">
                         <span class="material-symbols-outlined text-[14px]">${c.liked ? 'favorite' : 'favorite_border'}</span>
                         ${c.likes}
                     </button>
-                    <button onclick="setReplyTo('${encodeURIComponent(c.author || '')}')" class="font-label-sm text-outline hover:text-primary transition-colors">Reply</button>
+                    <button onclick="setCommentReplyTarget('${encodeURIComponent(c.id)}','${encodeURIComponent(c.author || '')}')" class="font-label-sm text-outline hover:text-primary transition-colors">Reply</button>
                 </div>
             </div>
-        </div>`).join('');
-    
-    document.getElementById('reply-count').textContent = `(${comments.length})`;
-    const commentCount = document.getElementById('comment-count');
-    if (commentCount) commentCount.textContent = comments.length;
+        </div>
+        ${children.map(child=>renderComment(child, byParent, depth + 1)).join('')}
+        </div>`;
 }
 
 function postReply() {
+    if (isReplySubmitting) return;
     const input = document.getElementById('reply-input');
     const text = input.value.trim();
-    if (!text || !postId || !currentPost) return;
-    const newComment = { post_id: postId, author: 'Gardener', body: text, likes: 0 };
-    sb.from('comments').insert(newComment).select().single().then(res => {
-        if (res.error) { alert('Could not post reply: ' + res.error.message); return; }
-        comments.push(commentFromRow(res.data));
-        renderPost();
-        renderComments();
-    });
-    input.value = '';
-    sortMode = 'new';
-    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-    document.getElementById('sort-new').classList.add('active');
+    if ((!text && !selectedReplyImgFile) || !postId || !currentPost) return;
+    isReplySubmitting = true;
+    const sendBtn = document.getElementById('send-reply-btn');
+    sendBtn.disabled = true;
+
+    function doInsert(imageUrl) {
+        const newComment = { post_id: postId, author: 'Gardener', body: text || null, likes: 0 };
+        if (imageUrl) newComment.image_url = imageUrl;
+        if (replyParentId) newComment.parent_id = replyParentId;
+        sb.from('comments').insert(newComment).select().single().then(res => {
+            if (res.error) {
+                if ((imageUrl || replyParentId) && /image_url|parent_id|column/i.test(res.error.message || '')) {
+                    alert('Could not post this enhanced reply. The comments table needs image_url and parent_id columns.');
+                    return;
+                }
+                alert('Could not post reply: ' + res.error.message);
+                return;
+            }
+            comments.push(commentFromRow(res.data));
+            input.value = '';
+            clearReplyTarget();
+            removeReplyImage();
+            sortMode = 'new';
+            document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+            document.getElementById('sort-new').classList.add('active');
+            renderPost();
+            renderComments();
+        }).finally(() => {
+            isReplySubmitting = false;
+            sendBtn.disabled = false;
+        });
+    }
+
+    if (selectedReplyImgFile) {
+        const ext = selectedReplyImgFile.name.split('.').pop();
+        const path = 'comments/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+        sb.storage.from('post-images').upload(path, selectedReplyImgFile, { cacheControl:'3600', upsert:false })
+        .then(res => {
+            if (res.error) throw res.error;
+            doInsert(sb.storage.from('post-images').getPublicUrl(path).data.publicUrl);
+        }).catch(e => {
+            isReplySubmitting = false;
+            sendBtn.disabled = false;
+            alert('Could not upload image: ' + e.message);
+        });
+    } else {
+        doInsert(null);
+    }
 }
 
 function sharePost() {
