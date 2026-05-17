@@ -247,8 +247,18 @@ function startCamera(){
             setStatus('Align plant in frame');
         }).catch(function(e){setMsg('Video play error: '+e.message);});
     }).catch(function(e){
-        setMsg('Camera denied: '+e.name+' — '+e.message+'. Use gallery instead.');
-        setStatus('Camera unavailable');
+        var msg='';
+        if(e.name==='NotFoundError'||e.name==='DevicesNotFoundError'){
+            msg='Camera not found. Go to: Settings → Chrome → Permissions → Camera → Allow. Then try again.';
+        }else if(e.name==='NotAllowedError'||e.name==='PermissionDeniedError'){
+            msg='Camera access denied. Tap the camera icon in your browser address bar, or go to Settings → Chrome → Camera → Allow.';
+        }else if(e.name==='NotReadableError'){
+            msg='Camera is in use by another app. Close other camera apps and try again.';
+        }else{
+            msg='Camera error: '+e.name+' — '+e.message+'. You can still use the gallery below.';
+        }
+        setMsg(msg);
+        setStatus('Camera unavailable — use gallery');
     });
 }
 
