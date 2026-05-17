@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Garden Planner - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- Leaflet Draw -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
+<style>
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+.active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+#nav-overlay{transition:opacity 0.25s ease;}
+#nav-overlay.hidden{opacity:0;pointer-events:none;}
+#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
+#nav-drawer.open{transform:translateX(0);}
+.nav-item{transition:background 0.15s ease;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item:not(.active):hover{background:#efeeea;}
+.nav-sub-item:hover{background:#efeeea;}
+.nav-section{border-top:1px solid #c2c9bb40;}
+.nav-chevron{transition:transform 0.2s ease;}
+.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
+.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
+.nav-sub-list.collapsed{max-height:0!important;}
+#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
+/* Map */
+#map{width:100%;height:calc(100vh - 64px - 64px);min-height:400px;}
+.leaflet-container{background:#2d5a27;}
+/* Zone type buttons */
+.zone-type-btn{transition:all 0.15s ease;}
+.zone-type-btn.selected{ring:2px;ring-offset:1px;}
+/* Tool buttons */
+.tool-btn{transition:all 0.15s ease;}
+.tool-btn.active{background:#154212;color:white;}
+/* Side panel */
+#side-panel{transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);}
+#side-panel.open{transform:translateX(0);}
+/* Search dropdown */
+#search-results{max-height:240px;overflow-y:auto;}
+/* Plant pins */
+.plant-pin{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:white;border:2.5px solid #154212;box-shadow:0 2px 8px rgba(0,0,0,0.25);cursor:pointer;font-size:18px;transition:transform 0.15s ease;}
+.plant-pin:hover{transform:scale(1.15);}
+.plant-pin img{width:28px;height:28px;border-radius:50%;object-fit:cover;}
+/* Photo thumbnails */
+.zone-photo{width:72px;height:72px;object-fit:cover;border-radius:8px;border:2px solid #c2c9bb;}
+</style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+
+<!-- Nav Drawer -->
+<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
+<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
+<nav class="flex-1 overflow-y-auto py-sm">
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle open w-full flex items-center gap-md px-md py-sm rounded-xl nav-item active"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
+<div id="garden-group" class="nav-sub-list pl-md" style="max-height:500px">
+<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" style="color:#154212;font-weight:700"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div></div>
+<div class="mx-sm"><a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
+<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
+<div id="learn-group" class="nav-sub-list collapsed pl-md" style="max-height:0">
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+</div></div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+</div>
+</nav>
+<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
+</aside>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+
+<!-- Header -->
+<header class="bg-background w-full sticky top-0 z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+    <a href="my-garden.html" class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+    </a>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Garden Planner</h1>
+    <div class="flex items-center gap-sm">
+        <button onclick="savePlan()" id="save-btn" class="bg-primary text-on-primary font-label-lg text-label-lg px-sm py-1 rounded-full flex items-center gap-xs active:scale-95 transition-transform">
+            <span class="material-symbols-outlined text-[16px]">save</span> Save
+        </button>
+        <div class="w-9 h-9 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()">
+            <img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
+        </div>
+    </div>
+</div>
+</header>
+
+<!-- Toolbar -->
+<div class="bg-background border-b border-outline-variant/40 z-30 sticky top-[64px]">
+<div class="flex items-center gap-xs px-container-margin py-xs overflow-x-auto hide-scrollbar">
+    <!-- Address search -->
+    <div class="relative flex-1 min-w-[180px] max-w-xs">
+        <span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
+        <input id="address-input" type="text" placeholder="Search address…"
+            class="w-full pl-7 pr-2 py-1.5 text-sm bg-surface-container rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none"/>
+        <div id="search-results" class="absolute top-full left-0 right-0 mt-1 bg-background border border-outline-variant rounded-xl shadow-lg z-50 hidden"></div>
+    </div>
+
+    <div class="w-px h-6 bg-outline-variant/40 flex-shrink-0"></div>
+
+    <!-- Drawing tools -->
+    <button onclick="setTool('polygon')" id="tool-polygon" class="tool-btn flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all flex-shrink-0" title="Draw zone">
+        <span class="material-symbols-outlined text-[18px]">pentagon</span>
+        <span class="hidden sm:block">Zone</span>
+    </button>
+    <button onclick="setTool('rectangle')" id="tool-rectangle" class="tool-btn flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all flex-shrink-0" title="Draw rectangle">
+        <span class="material-symbols-outlined text-[18px]">rectangle</span>
+        <span class="hidden sm:block">Rect</span>
+    </button>
+    <button onclick="setTool('pin')" id="tool-pin" class="tool-btn flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all flex-shrink-0" title="Place plant pin">
+        <span class="material-symbols-outlined text-[18px]">eco</span>
+        <span class="hidden sm:block">Plant</span>
+    </button>
+    <button onclick="setTool(null)" id="tool-pan" class="tool-btn active flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm hover:bg-surface-container transition-all flex-shrink-0" title="Pan/Select">
+        <span class="material-symbols-outlined text-[18px]">pan_tool</span>
+        <span class="hidden sm:block">Pan</span>
+    </button>
+
+    <div class="w-px h-6 bg-outline-variant/40 flex-shrink-0"></div>
+
+    <!-- Zone type selector -->
+    <div class="flex items-center gap-xs flex-shrink-0">
+        <button onclick="setZoneType('bed')" id="zt-bed" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0 selected" style="background:#4ade80" title="Garden Bed"></button>
+        <button onclick="setZoneType('lawn')" id="zt-lawn" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0" style="background:#86efac" title="Lawn"></button>
+        <button onclick="setZoneType('veg')" id="zt-veg" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0" style="background:#a16207" title="Veggie Patch"></button>
+        <button onclick="setZoneType('water')" id="zt-water" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0" style="background:#38bdf8" title="Water Feature"></button>
+        <button onclick="setZoneType('patio')" id="zt-patio" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0" style="background:#94a3b8" title="Patio/Hard Surface"></button>
+        <button onclick="setZoneType('tree')" id="zt-tree" class="zone-type-btn w-6 h-6 rounded-full flex-shrink-0" style="background:#166534" title="Tree"></button>
+    </div>
+
+    <div class="w-px h-6 bg-outline-variant/40 flex-shrink-0"></div>
+    <button onclick="toggleLegend()" class="tool-btn flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all flex-shrink-0">
+        <span class="material-symbols-outlined text-[18px]">legend_toggle</span>
+    </button>
+    <button onclick="clearAll()" class="tool-btn flex items-center gap-xs px-sm py-1.5 rounded-lg font-label-sm text-error hover:bg-error-container transition-all flex-shrink-0">
+        <span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+    </button>
+</div>
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Legend overlay -->
+<div id="legend" class="hidden absolute bottom-20 left-container-margin z-30 bg-background/95 backdrop-blur-sm rounded-2xl p-md shadow-lg border border-outline-variant/30">
+    <p class="font-label-lg text-on-surface mb-sm">Zone Types</p>
+    <div class="space-y-1">
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#4ade80"></div><span class="font-label-sm text-on-surface-variant">Garden Bed</span></div>
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#86efac"></div><span class="font-label-sm text-on-surface-variant">Lawn</span></div>
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#a16207"></div><span class="font-label-sm text-on-surface-variant">Veggie Patch</span></div>
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#38bdf8"></div><span class="font-label-sm text-on-surface-variant">Water Feature</span></div>
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#94a3b8"></div><span class="font-label-sm text-on-surface-variant">Patio</span></div>
+        <div class="flex items-center gap-sm"><div class="w-3 h-3 rounded-full" style="background:#166534"></div><span class="font-label-sm text-on-surface-variant">Tree</span></div>
+        <div class="flex items-center gap-sm"><div class="w-5 h-5 rounded-full border-2 border-primary bg-white flex items-center justify-center text-[10px]">🌿</div><span class="font-label-sm text-on-surface-variant">Plant Pin</span></div>
+    </div>
+</div>
+
+<!-- Side panel (zone/pin detail) -->
+<div id="side-panel" class="fixed top-[112px] right-0 bottom-0 w-80 max-w-[90vw] bg-background border-l border-outline-variant/40 z-40 flex flex-col shadow-2xl overflow-y-auto">
+    <div class="flex items-center justify-between px-md py-sm border-b border-outline-variant/30 flex-shrink-0">
+        <h3 id="panel-title" class="font-headline-md text-headline-md text-on-surface">Zone Details</h3>
+        <button onclick="closePanel()" class="p-1 rounded-full hover:bg-surface-container">
+            <span class="material-symbols-outlined text-on-surface-variant">close</span>
+        </button>
+    </div>
+    <div id="panel-content" class="flex-1 px-md py-md space-y-md overflow-y-auto"></div>
+</div>
+
+<!-- Plant picker sheet (shown when pin tool active + map tapped) -->
+<div id="plant-picker" class="fixed bottom-0 left-0 right-0 z-50 bg-background rounded-t-3xl shadow-2xl border-t border-outline-variant/40 transform translate-y-full transition-transform duration-300 max-h-[60vh] overflow-y-auto">
+    <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mt-md mb-md"></div>
+    <div class="px-container-margin pb-md">
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Place a Plant</h3>
+        <p class="font-body-md text-on-surface-variant mb-md">Select a plant from your garden to pin at this location.</p>
+        <div id="plant-picker-list" class="space-y-2"></div>
+        <button onclick="closePicker()" class="mt-md w-full py-3 rounded-xl font-label-lg text-on-surface-variant border border-outline-variant hover:bg-surface-container transition-all">Cancel</button>
+    </div>
+</div>
+<div id="picker-overlay" class="fixed inset-0 bg-black/30 z-40 hidden" onclick="closePicker()"></div>
+
+<!-- Save toast -->
+<div id="save-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full shadow-lg z-50 transform translate-y-20 transition-transform duration-300 flex items-center gap-2">
+    <span class="material-symbols-outlined text-[18px]">check_circle</span> Plan saved!
+</div>
+
+<!-- Bottom nav -->
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="my-garden.html"><span class="material-symbols-outlined active-icon">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html"><span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
+</div>
+</nav>
+
+<script>
+// ── Nav ───────────────────────────────────────────────────────────────────
+function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
+function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
+
+// ── State ─────────────────────────────────────────────────────────────────
+var map, drawControl, drawnItems, satelliteLayer, streetLayer;
+var currentTool = null;
+var currentZoneType = 'bed';
+var pendingPinLatLng = null;
+var selectedLayer = null;
+var planData = { zones: [], pins: [] };
+
+var ZONE_TYPES = {
+    bed:   { label:'Garden Bed',       color:'#4ade80', fillOpacity:0.35 },
+    lawn:  { label:'Lawn',             color:'#86efac', fillOpacity:0.3  },
+    veg:   { label:'Veggie Patch',     color:'#a16207', fillOpacity:0.35 },
+    water: { label:'Water Feature',    color:'#38bdf8', fillOpacity:0.4  },
+    patio: { label:'Patio',            color:'#94a3b8', fillOpacity:0.3  },
+    tree:  { label:'Tree',             color:'#166534', fillOpacity:0.5  },
+};
+
+// ── Map init ──────────────────────────────────────────────────────────────
+function initMap() {
+    // Try to use saved location, fall back to Gold Coast
+    var savedLoc = null;
+    try { savedLoc = JSON.parse(localStorage.getItem('gt_weather_loc')); } catch(e) {}
+    var lat = savedLoc ? savedLoc.lat : -28.0167;
+    var lng = savedLoc ? savedLoc.lon : 153.4000;
+
+    map = L.map('map', {
+        center: [lat, lng],
+        zoom: 17,
+        zoomControl: true,
+        attributionControl: true
+    });
+
+    // Satellite tiles (Esri World Imagery - free with attribution)
+    satelliteLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        { attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics', maxZoom: 22 }
+    ).addTo(map);
+
+    // Street overlay for labels
+    streetLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+        { attribution: '', maxZoom: 22, opacity: 0.7 }
+    ).addTo(map);
+
+    // Layer for drawn items
+    drawnItems = new L.FeatureGroup().addTo(map);
+
+    // Draw control (hidden — we control it manually)
+    drawControl = new L.Control.Draw({
+        draw: {
+            polygon:   { shapeOptions: { color: '#4ade80', fillOpacity: 0.35, weight: 2 } },
+            rectangle: { shapeOptions: { color: '#4ade80', fillOpacity: 0.35, weight: 2 } },
+            circle:    false,
+            polyline:  false,
+            marker:    false,
+            circlemarker: false
+        },
+        edit: { featureGroup: drawnItems }
+    });
+
+    // Handle drawn shapes
+    map.on(L.Draw.Event.CREATED, function(e) {
+        var layer = e.layer;
+        var zt = ZONE_TYPES[currentZoneType] || ZONE_TYPES.bed;
+        layer.setStyle({ color: zt.color, fillColor: zt.color, fillOpacity: zt.fillOpacity, weight: 2 });
+        layer._zoneType = currentZoneType;
+        layer._zoneName = zt.label;
+        layer._photos = [];
+        drawnItems.addLayer(layer);
+
+        // Click to open panel
+        layer.on('click', function() { openZonePanel(layer); });
+        layer.on('touchend', function() { openZonePanel(layer); });
+
+        setTool(null); // revert to pan after drawing
+        showSaveIndicator();
+    });
+
+    // Pin tool — click map to place plant
+    map.on('click', function(e) {
+        if (currentTool !== 'pin') return;
+        pendingPinLatLng = e.latlng;
+        openPlantPicker();
+    });
+
+    // Load saved plan
+    loadPlan();
+}
+
+// ── Address search ────────────────────────────────────────────────────────
+var searchTimeout;
+document.getElementById('address-input').addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    var q = this.value.trim();
+    if (q.length < 3) { document.getElementById('search-results').classList.add('hidden'); return; }
+    searchTimeout = setTimeout(function() { searchAddress(q); }, 400);
+});
+document.getElementById('address-input').addEventListener('blur', function() {
+    setTimeout(function() { document.getElementById('search-results').classList.add('hidden'); }, 200);
+});
+
+function searchAddress(q) {
+    fetch('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + encodeURIComponent(q))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var box = document.getElementById('search-results');
+        if (!data.length) { box.classList.add('hidden'); return; }
+        box.innerHTML = data.map(function(r) {
+            return '<button onclick="flyTo(' + r.lat + ',' + r.lon + ',\'' + (r.display_name||'').replace(/'/g,"\\'").substring(0,60) + '\')" class="w-full text-left px-md py-sm hover:bg-surface-container transition-colors border-b border-outline-variant/20 last:border-0">' +
+            '<p class="font-label-lg text-on-surface truncate">' + (r.display_name||'').split(',')[0] + '</p>' +
+            '<p class="font-label-sm text-outline truncate">' + (r.display_name||'').split(',').slice(1,3).join(',') + '</p>' +
+            '</button>';
+        }).join('');
+        box.classList.remove('hidden');
+    }).catch(function() {});
+}
+
+function flyTo(lat, lng, name) {
+    map.flyTo([lat, lng], 19, { animate: true, duration: 1.2 });
+    document.getElementById('address-input').value = name;
+    document.getElementById('search-results').classList.add('hidden');
+}
+
+// ── Tool management ───────────────────────────────────────────────────────
+var activeDrawHandler = null;
+
+function setTool(tool) {
+    // Stop any active draw handler
+    if (activeDrawHandler) { activeDrawHandler.disable(); activeDrawHandler = null; }
+
+    currentTool = tool;
+
+    // Update button styles
+    ['polygon','rectangle','pin','pan'].forEach(function(t) {
+        var btn = document.getElementById('tool-' + t);
+        if (btn) btn.classList.toggle('active', t === (tool || 'pan'));
+    });
+
+    // Start draw handler
+    if (tool === 'polygon') {
+        var zt = ZONE_TYPES[currentZoneType] || ZONE_TYPES.bed;
+        activeDrawHandler = new L.Draw.Polygon(map, {
+            shapeOptions: { color: zt.color, fillColor: zt.color, fillOpacity: zt.fillOpacity, weight: 2 }
+        });
+        activeDrawHandler.enable();
+        map.getContainer().style.cursor = 'crosshair';
+    } else if (tool === 'rectangle') {
+        var zt2 = ZONE_TYPES[currentZoneType] || ZONE_TYPES.bed;
+        activeDrawHandler = new L.Draw.Rectangle(map, {
+            shapeOptions: { color: zt2.color, fillColor: zt2.color, fillOpacity: zt2.fillOpacity, weight: 2 }
+        });
+        activeDrawHandler.enable();
+        map.getContainer().style.cursor = 'crosshair';
+    } else if (tool === 'pin') {
+        map.getContainer().style.cursor = 'cell';
+    } else {
+        map.getContainer().style.cursor = '';
+    }
+}
+
+function setZoneType(type) {
+    currentZoneType = type;
+    document.querySelectorAll('.zone-type-btn').forEach(function(b) {
+        b.style.outline = '';
+        b.style.outlineOffset = '';
+    });
+    var btn = document.getElementById('zt-' + type);
+    if (btn) { btn.style.outline = '3px solid #154212'; btn.style.outlineOffset = '2px'; }
+}
+
+// ── Zone panel ────────────────────────────────────────────────────────────
+function openZonePanel(layer) {
+    selectedLayer = layer;
+    var zt = ZONE_TYPES[layer._zoneType] || ZONE_TYPES.bed;
+
+    document.getElementById('panel-title').textContent = layer._zoneName || zt.label;
+
+    var photos = layer._photos || [];
+    var photosHtml = photos.length
+        ? photos.map(function(url) { return '<img src="' + url + '" class="zone-photo"/>'; }).join('')
+        : '<p class="font-label-sm text-outline">No photos yet</p>';
+
+    document.getElementById('panel-content').innerHTML =
+        '<div>' +
+        '<label class="font-label-lg text-on-surface-variant mb-1 block">Zone Name</label>' +
+        '<input id="zone-name-input" type="text" value="' + (layer._zoneName || zt.label) + '" class="w-full h-10 px-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary text-body-md"/>' +
+        '</div>' +
+        '<div>' +
+        '<label class="font-label-lg text-on-surface-variant mb-2 block">Zone Type</label>' +
+        '<div class="grid grid-cols-3 gap-2">' +
+        Object.entries(ZONE_TYPES).map(function(entry) {
+            var k = entry[0], v = entry[1];
+            return '<button onclick="changeZoneType(\'' + k + '\')" class="flex flex-col items-center gap-1 p-2 rounded-xl border-2 ' +
+            (layer._zoneType === k ? 'border-primary bg-primary-fixed/20' : 'border-outline-variant/40 hover:bg-surface-container') + ' transition-all">' +
+            '<div class="w-6 h-6 rounded-full" style="background:' + v.color + '"></div>' +
+            '<span class="font-label-sm text-on-surface text-center leading-tight">' + v.label + '</span></button>';
+        }).join('') +
+        '</div></div>' +
+        '<div>' +
+        '<div class="flex items-center justify-between mb-2"><label class="font-label-lg text-on-surface-variant">Photos</label>' +
+        '<button onclick="addZonePhoto()" class="font-label-sm text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">add_photo_alternate</span> Add</button></div>' +
+        '<div id="zone-photos-wrap" class="flex flex-wrap gap-2">' + photosHtml + '</div>' +
+        '<input type="file" id="zone-photo-input" accept="image/*" class="hidden" onchange="handleZonePhoto(event)"/>' +
+        '</div>' +
+        '<div class="flex gap-2 pt-md">' +
+        '<button onclick="applyZoneChanges()" class="flex-1 bg-primary text-on-primary font-label-lg py-2 rounded-xl active:scale-95 transition-transform">Apply</button>' +
+        '<button onclick="deleteZone()" class="bg-error-container text-on-error-container font-label-lg px-md py-2 rounded-xl active:scale-95 transition-transform"><span class="material-symbols-outlined text-[18px]">delete</span></button>' +
+        '</div>';
+
+    document.getElementById('side-panel').classList.add('open');
+}
+
+function applyZoneChanges() {
+    if (!selectedLayer) return;
+    var name = document.getElementById('zone-name-input').value.trim();
+    if (name) selectedLayer._zoneName = name;
+    selectedLayer.bindTooltip(selectedLayer._zoneName, { permanent: true, direction: 'center', className: 'zone-label' });
+    document.getElementById('panel-title').textContent = selectedLayer._zoneName;
+    showSaveIndicator();
+}
+
+function changeZoneType(type) {
+    if (!selectedLayer) return;
+    var zt = ZONE_TYPES[type] || ZONE_TYPES.bed;
+    selectedLayer._zoneType = type;
+    selectedLayer._zoneName = zt.label;
+    selectedLayer.setStyle({ color: zt.color, fillColor: zt.color, fillOpacity: zt.fillOpacity });
+    // Re-open panel to refresh type buttons
+    openZonePanel(selectedLayer);
+}
+
+function deleteZone() {
+    if (!selectedLayer) return;
+    if (!confirm('Delete this zone?')) return;
+    drawnItems.removeLayer(selectedLayer);
+    selectedLayer = null;
+    closePanel();
+    showSaveIndicator();
+}
+
+function addZonePhoto() {
+    document.getElementById('zone-photo-input').click();
+}
+
+function handleZonePhoto(e) {
+    var file = e.target.files[0];
+    if (!file || !selectedLayer) return;
+    e.target.value = '';
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+        if (!selectedLayer._photos) selectedLayer._photos = [];
+        selectedLayer._photos.push(ev.target.result);
+        var wrap = document.getElementById('zone-photos-wrap');
+        if (wrap) {
+            wrap.innerHTML = selectedLayer._photos.map(function(url) {
+                return '<img src="' + url + '" class="zone-photo"/>';
+            }).join('');
+        }
+        showSaveIndicator();
+    };
+    reader.readAsDataURL(file);
+}
+
+function closePanel() {
+    document.getElementById('side-panel').classList.remove('open');
+    selectedLayer = null;
+}
+
+// ── Plant pins ────────────────────────────────────────────────────────────
+function openPlantPicker() {
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+
+    var list = document.getElementById('plant-picker-list');
+    if (!plants.length) {
+        list.innerHTML = '<div class="text-center py-lg">' +
+            '<span class="material-symbols-outlined text-[40px] text-outline">eco</span>' +
+            '<p class="font-body-md text-on-surface-variant mt-2">No plants in your garden yet.</p>' +
+            '<a href="add-plant.html" class="mt-md font-label-lg text-primary hover:underline block">Add a plant first</a>' +
+            '</div>';
+    } else {
+        list.innerHTML = plants.map(function(p) {
+            return '<button onclick="placePlantPin(\'' + p.id + '\')" class="w-full flex items-center gap-md p-md rounded-xl border border-outline-variant/20 hover:bg-surface-container transition-all active:scale-95">' +
+            (p.img ? '<img src="' + p.img + '" class="w-12 h-12 rounded-full object-cover flex-shrink-0 border border-outline-variant/20"/>' :
+                     '<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary-fixed-variant" style="font-variation-settings:\'FILL\' 1">eco</span></div>') +
+            '<div class="text-left min-w-0"><p class="font-label-lg text-on-surface truncate">' + (p.nickname || p.name) + '</p>' +
+            '<p class="font-label-sm text-outline truncate">' + (p.species || '') + '</p></div>' +
+            '</button>';
+        }).join('');
+    }
+
+    document.getElementById('plant-picker').style.transform = 'translateY(0)';
+    document.getElementById('picker-overlay').classList.remove('hidden');
+}
+
+function closePicker() {
+    document.getElementById('plant-picker').style.transform = 'translateY(100%)';
+    document.getElementById('picker-overlay').classList.add('hidden');
+    pendingPinLatLng = null;
+    setTool(null);
+}
+
+function placePlantPin(plantId) {
+    if (!pendingPinLatLng) { closePicker(); return; }
+
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+    var plant = plants.find(function(p) { return String(p.id) === String(plantId); });
+    if (!plant) { closePicker(); return; }
+
+    var iconHtml = plant.img
+        ? '<div class="plant-pin"><img src="' + plant.img + '" alt="' + plant.name + '"/></div>'
+        : '<div class="plant-pin" style="font-size:20px">🌿</div>';
+
+    var icon = L.divIcon({ html: iconHtml, className: '', iconSize: [36, 36], iconAnchor: [18, 18] });
+    var marker = L.marker(pendingPinLatLng, { icon: icon, draggable: true }).addTo(drawnItems);
+    marker._plantId = plantId;
+    marker._plantName = plant.nickname || plant.name;
+    marker.bindPopup(
+        '<div class="text-center p-2">' +
+        '<p class="font-label-lg text-on-surface">' + (plant.nickname || plant.name) + '</p>' +
+        '<p class="font-label-sm text-outline">' + (plant.species || '') + '</p>' +
+        '<a href="plant-detail.html?id=' + plantId + '" class="mt-2 font-label-sm text-primary block hover:underline">View profile →</a>' +
+        '</div>'
+    );
+    marker.on('dragend', function() { showSaveIndicator(); });
+
+    closePicker();
+    showSaveIndicator();
+}
+
+// ── Save / Load ───────────────────────────────────────────────────────────
+function savePlan() {
+    var zones = [];
+    var pins = [];
+
+    drawnItems.eachLayer(function(layer) {
+        if (layer instanceof L.Marker) {
+            var ll = layer.getLatLng();
+            pins.push({ plantId: layer._plantId, lat: ll.lat, lng: ll.lng });
+        } else if (layer.getLatLngs) {
+            var lls = layer.getLatLngs();
+            zones.push({
+                type: layer._zoneType || 'bed',
+                name: layer._zoneName || 'Zone',
+                coords: lls,
+                photos: layer._photos || []
+            });
+        }
+    });
+
+    localStorage.setItem('gt_garden_plan', JSON.stringify({ zones: zones, pins: pins }));
+
+    // Show toast
+    var toast = document.getElementById('save-toast');
+    toast.style.transform = 'translateY(0)';
+    setTimeout(function() { toast.style.transform = 'translateY(80px)'; }, 2000);
+
+    var btn = document.getElementById('save-btn');
+    btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Saved';
+    setTimeout(function() { btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Save'; }, 2000);
+}
+
+function loadPlan() {
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem('gt_garden_plan')); } catch(e) {}
+    if (!saved) return;
+
+    // Restore zones
+    (saved.zones || []).forEach(function(z) {
+        var zt = ZONE_TYPES[z.type] || ZONE_TYPES.bed;
+        var layer;
+        try {
+            // coords may be nested arrays for polygon
+            layer = L.polygon(z.coords, {
+                color: zt.color, fillColor: zt.color,
+                fillOpacity: zt.fillOpacity, weight: 2
+            });
+        } catch(e) { return; }
+
+        layer._zoneType = z.type;
+        layer._zoneName = z.name;
+        layer._photos = z.photos || [];
+        layer.bindTooltip(z.name, { permanent: true, direction: 'center', className: 'zone-label' });
+        layer.on('click', function() { openZonePanel(layer); });
+        drawnItems.addLayer(layer);
+    });
+
+    // Restore pins
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+
+    (saved.pins || []).forEach(function(pin) {
+        var plant = plants.find(function(p) { return String(p.id) === String(pin.plantId); });
+        if (!plant) return;
+
+        var iconHtml = plant.img
+            ? '<div class="plant-pin"><img src="' + plant.img + '" alt="' + plant.name + '"/></div>'
+            : '<div class="plant-pin" style="font-size:20px">🌿</div>';
+
+        var icon = L.divIcon({ html: iconHtml, className: '', iconSize: [36, 36], iconAnchor: [18, 18] });
+        var marker = L.marker([pin.lat, pin.lng], { icon: icon, draggable: true }).addTo(drawnItems);
+        marker._plantId = pin.plantId;
+        marker._plantName = plant.nickname || plant.name;
+        marker.bindPopup(
+            '<div class="text-center p-2">' +
+            '<p class="font-label-lg text-on-surface">' + (plant.nickname || plant.name) + '</p>' +
+            '<a href="plant-detail.html?id=' + pin.plantId + '" class="mt-1 font-label-sm text-primary block hover:underline">View profile →</a>' +
+            '</div>'
+        );
+        marker.on('dragend', function() { showSaveIndicator(); });
+        drawnItems.addLayer(marker);
+    });
+}
+
+function clearAll() {
+    if (!confirm('Clear all zones and pins from the map?')) return;
+    drawnItems.clearLayers();
+    localStorage.removeItem('gt_garden_plan');
+    closePanel();
+    showSaveIndicator();
+}
+
+// ── UI helpers ────────────────────────────────────────────────────────────
+var saveIndicatorTimeout;
+function showSaveIndicator() {
+    var btn = document.getElementById('save-btn');
+    btn.classList.add('bg-secondary');
+    clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(function() { btn.classList.remove('bg-secondary'); }, 2000);
+}
+
+function toggleLegend() {
+    document.getElementById('legend').classList.toggle('hidden');
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+// Suppress Leaflet.Draw deprecation warning
+window.L.drawLocal = window.L.drawLocal || {};
+
+// Custom zone label CSS
+var style = document.createElement('style');
+style.textContent = '.zone-label{background:rgba(255,255,255,0.85);border:none;box-shadow:none;font-family:\'Plus Jakarta Sans\',sans-serif;font-size:11px;font-weight:600;color:#154212;padding:2px 6px;border-radius:4px;white-space:nowrap;}' +
+'.leaflet-draw-toolbar a{background-color:#154212!important;}' +
+'.hide-scrollbar::-webkit-scrollbar{display:none}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}';
+document.head.appendChild(style);
+
+// Init after DOM ready (Leaflet needs the map div to exist)
+initMap();
+</script>
+</body></html>
