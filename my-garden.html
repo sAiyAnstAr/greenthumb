@@ -222,7 +222,7 @@
 <a href="garden-health.html" class="md:col-span-2 bg-surface-container-lowest p-md rounded-xl shadow-sm border border-surface-container flex items-center justify-between overflow-hidden hover:shadow-md hover:border-primary-container/40 transition-all active:scale-[0.98] duration-200 group">
 <div>
 <span class="font-label-lg text-label-lg text-on-surface-variant">Collection Health</span>
-<div class="font-headline-lg text-headline-lg text-primary mt-xs">84% Healthy</div>
+<div class="font-headline-lg text-headline-lg text-primary mt-xs" id="stat-health">0% Healthy</div>
 <div class="flex items-center gap-1 mt-xs">
 <span class="font-label-sm text-primary group-hover:underline">View Garden Health</span>
 <span class="material-symbols-outlined text-primary text-[14px]">arrow_forward</span>
@@ -235,119 +235,29 @@
 <div class="bg-primary-container p-md rounded-xl shadow-sm text-on-primary-container flex flex-col justify-between">
 <span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
 <div>
-<div class="font-headline-md text-headline-md">3</div>
+<div class="font-headline-md text-headline-md" id="stat-needs-water">0</div>
 <div class="font-label-sm text-label-sm">Needs Water</div>
 </div>
 </div>
 <div class="bg-secondary-container p-md rounded-xl shadow-sm text-on-secondary-container flex flex-col justify-between">
 <span class="material-symbols-outlined" data-icon="eco">eco</span>
 <div>
-<div class="font-headline-md text-headline-md">12</div>
+<div class="font-headline-md text-headline-md" id="stat-total">0</div>
 <div class="font-label-sm text-label-sm">Total Plants</div>
 </div>
 </div>
 </div>
 <!-- Plant Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
-<!-- Monstera Card -->
-<a class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container group hover:shadow-md transition-all block" href="plant-detail.html">
-<div class="relative h-64 overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A lush Monstera Deliciosa with large, vibrant green fenestrated leaves. The plant sits in a minimalist ceramic pot within a bright, airy room flooded with natural morning sunlight. The lighting creates soft shadows and highlights the waxy texture of the leaves, embodying a peaceful, organic modern gardening atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh2ks461Hm0JO1liLVjppgZCW3wUdo5tgAyzbSIfi-d3r7VR0ymMoYFUk6S5DVTrZkzjB4JCU-aA2xW-DRfKijaCEe6sR70hUkWiolhVt2hQt1tALVwkjtNat14tyb3E5nocaHinE8c4k8gKyvxJwRbZYBVP6lgvWH33erQo4YMUknWmHA-okQIMP5mGx4KRepDEfs7Z5b4lvmyOlS_F8uvw-saI_p8qR2rhDkDEIeL8GvIGxDGI7cdQyYUNr648KoH1qfA92YoYQ"/>
-<div class="absolute top-base right-base bg-primary-container text-on-primary-container font-label-sm px-sm py-xs rounded-full flex items-center gap-xs">
-<span class="material-symbols-outlined text-[16px] active-icon" data-icon="check_circle">check_circle</span>
-                        Thriving
-                    </div>
+<div id="plant-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Plants loaded dynamically -->
 </div>
-<div class="p-md">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Monstera</h3>
-<p class="font-label-sm text-label-sm text-on-surface-variant italic">Monstera deliciosa</p>
-</div>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert" onclick="event.preventDefault();">more_vert</button>
-</div>
-<div class="flex gap-sm mt-md">
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="light_mode">light_mode</span>
-<span class="font-label-sm text-label-sm mt-xs">Bright</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="opacity">opacity</span>
-<span class="font-label-sm text-label-sm mt-xs">Weekly</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="thermometer">thermometer</span>
-<span class="font-label-sm text-label-sm mt-xs">22°C</span>
-</div>
-</div>
-</div>
-</a>
-<!-- Fiddle Leaf Fig Card -->
-<a class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container group hover:shadow-md transition-all block" href="plant-detail.html">
-<div class="relative h-64 overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A tall Fiddle Leaf Fig plant with broad, leathery dark green leaves. It is placed in a stylish terracotta pot against a soft, neutral-colored wall. The room is illuminated by warm, indirect sunlight, creating a cozy and reliable environment for indoor plants, consistent with a premium botanical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxXXw3OfzzSYq5iBsGJeF5RcNmQoMs-7Wq8eHCvizrhSyTCFLjrZYS_Zka3Dt8QbwQRvXuDH0FpA1bA8VN1ICZpAff_1wTPTDB0grOfqYaF4EQtvQwdtrpzUFCV2t48ESQM230LooimzgPaLrO5opmf6MtHOCy9isZgVFtW8ES1uNE2-ZnvQ2wY-RDKJnb-dIQj8iAzzIM3E4cjM1zfT5yJyYlTNS6mlLNaSNGEeK0sF__auIqwdxIWSaybadnpKpWIJ2N-zlDyFE"/>
-<div class="absolute top-base right-base bg-tertiary-container text-on-tertiary-container font-label-sm px-sm py-xs rounded-full flex items-center gap-xs">
-<span class="material-symbols-outlined text-[16px] active-icon" data-icon="warning">warning</span>
-                        Needs Water
-                    </div>
-</div>
-<div class="p-md">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Fiddle Leaf Fig</h3>
-<p class="font-label-sm text-label-sm text-on-surface-variant italic">Ficus lyrata</p>
-</div>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert" onclick="event.preventDefault();">more_vert</button>
-</div>
-<div class="flex gap-sm mt-md">
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center border border-tertiary">
-<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="water_drop">water_drop</span>
-<span class="font-label-sm text-label-sm mt-xs text-tertiary">Dry</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="light_mode">light_mode</span>
-<span class="font-label-sm text-label-sm mt-xs">High</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="calendar_today">calendar_today</span>
-<span class="font-label-sm text-label-sm mt-xs">12 Days</span>
-</div>
-</div>
-</div>
-</a>
-<!-- Snake Plant Card -->
-<a class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container group hover:shadow-md transition-all block" href="plant-detail.html">
-<div class="relative h-64 overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vertical Snake Plant with striking yellow-edged, sword-like leaves standing tall in a clean white planter. The setting is a modern workspace with soft natural light coming from a side window. The overall mood is calm, clean, and structured, reflecting a healthy, low-maintenance indoor gardening lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuc27kv_YsKceInZDgZaLpchERHNWyLdnB7m-UUhzB1EOa7RIyFxTJbxnowJIEevthjgkNpMxN7_w7jKF4cg-QgV9QVU97oMYmvXm-AGrEo0gdton-y7yTqA2M7aayNFnpOL_4Ri9iDQ8CCsQ05WC8RPPc1yqafbRNGl7B56euOvPV1uvC-BkHQKTk6xjcpToxJxlzfa_UWd2bxERlnbk7gr9wKVeJGQivtHcPdKdI_dYTF-7i9KiWNFuNOXrjvLebABZ9L8TJbiM"/>
-<div class="absolute top-base right-base bg-primary-container text-on-primary-container font-label-sm px-sm py-xs rounded-full flex items-center gap-xs">
-<span class="material-symbols-outlined text-[16px] active-icon" data-icon="check_circle">check_circle</span>
-                        Thriving
-                    </div>
-</div>
-<div class="p-md">
-<div class="flex justify-between items-start mb-base">
-<div>
-<h3 class="font-headline-md text-headline-md text-primary">Snake Plant</h3>
-<p class="font-label-sm text-label-sm text-on-surface-variant italic">Dracaena trifasciata</p>
-</div>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="more_vert" onclick="event.preventDefault();">more_vert</button>
-</div>
-<div class="flex gap-sm mt-md">
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="bedtime">bedtime</span>
-<span class="font-label-sm text-label-sm mt-xs">Low</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="opacity">opacity</span>
-<span class="font-label-sm text-label-sm mt-xs">3 Weeks</span>
-</div>
-<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[20px]" data-icon="air">air</span>
-<span class="font-label-sm text-label-sm mt-xs">Purifying</span>
-</div>
-</div>
-</div>
-</a>
+<div id="empty-garden" class="hidden text-center py-xl">
+    <span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:'FILL' 1">eco</span>
+    <p class="font-headline-md text-on-surface-variant mt-md">No plants yet</p>
+    <p class="font-body-md text-outline mt-sm">Add your first plant to get started</p>
+    <a href="add-plant.html" class="mt-lg inline-flex items-center gap-2 bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg active:scale-95 transition-transform">
+        <span class="material-symbols-outlined">add</span> Add Plant
+    </a>
 </div>
 <!-- Floating Action Button -->
 <button class="fixed right-container-margin bottom-[100px] bg-primary text-on-primary w-14 h-14 rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
@@ -499,5 +409,68 @@ document.querySelectorAll('.nav-sub-list').forEach(list => {
 } catch(navErr) {
     console.warn('Nav init error:', navErr);
 }
+</script>
+
+<script>
+function loadGarden() {
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+
+    // Update stats
+    var total = plants.length;
+    var needsWater = plants.filter(function(p) {
+        if (!p.lastWatered) return true;
+        var days = (Date.now() - new Date(p.lastWatered)) / 86400000;
+        var freq = p.water || 'Weekly';
+        var threshold = freq.includes('Daily') ? 1 : freq.includes('2') ? 3 : freq.includes('3') ? 4 : 7;
+        return days >= threshold;
+    }).length;
+    var avgHealth = total ? Math.round(plants.reduce(function(s,p){return s+(p.healthPct||80);},0)/total) : 0;
+
+    var sw = document.getElementById('stat-needs-water');
+    var st = document.getElementById('stat-total');
+    var sh = document.getElementById('stat-health');
+    if(sw) sw.textContent = needsWater;
+    if(st) st.textContent = total;
+    if(sh) sh.textContent = avgHealth + '% Healthy';
+
+    var grid = document.getElementById('plant-grid');
+    var empty = document.getElementById('empty-garden');
+    if (!total) {
+        if(grid) grid.innerHTML = '';
+        if(empty) empty.classList.remove('hidden');
+        return;
+    }
+    if(empty) empty.classList.add('hidden');
+
+    var WATER_ICONS = { 'Daily':'water_drop', 'Twice weekly':'water_drop', 'Weekly':'opacity', 'Every 2 weeks':'opacity', 'Monthly':'water_drop', 'Every 2–3 weeks':'opacity' };
+    var LIGHT_ICONS = { 'Full sun':'light_mode', 'Bright indirect':'light_mode', 'Indirect':'wb_cloudy', 'Low':'bedtime', 'Low to bright indirect':'bedtime' };
+
+    grid.innerHTML = plants.map(function(p) {
+        var wIcon = WATER_ICONS[p.water] || 'opacity';
+        var lIcon = LIGHT_ICONS[p.light] || 'light_mode';
+        var health = p.healthPct || 80;
+        var healthCls = health >= 70 ? 'text-primary' : health >= 40 ? 'text-tertiary' : 'text-error';
+        var img = p.img || '';
+        return '<a class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container group hover:shadow-md transition-all block" href="plant-detail.html?id=' + p.id + '">' +
+        '<div class="relative h-48 overflow-hidden bg-surface-container">' +
+        (img ? '<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="' + img + '" alt="' + p.name + '"/>' :
+               '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:'FILL' 1">eco</span></div>') +
+        '<div class="absolute top-sm left-sm"><span class="bg-background/80 backdrop-blur-sm rounded-full px-2 py-0.5 font-label-sm text-on-surface">' + (p.location || 'Unspecified') + '</span></div>' +
+        '</div>' +
+        '<div class="p-md">' +
+        '<div class="flex items-start justify-between">' +
+        '<div class="min-w-0"><h3 class="font-headline-md text-headline-md text-on-surface truncate">' + (p.nickname || p.name) + '</h3>' +
+        '<p class="font-label-sm text-outline italic truncate">' + (p.species || p.name) + '</p></div>' +
+        '<button onclick="event.preventDefault()" class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors p-1">more_vert</button>' +
+        '</div>' +
+        '<div class="flex gap-sm mt-md">' +
+        '<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center"><span class="material-symbols-outlined text-primary text-[18px]">' + lIcon + '</span><span class="font-label-sm text-on-surface-variant mt-0.5">' + (p.light || 'Indirect') + '</span></div>' +
+        '<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center"><span class="material-symbols-outlined text-primary text-[18px]">' + wIcon + '</span><span class="font-label-sm text-on-surface-variant mt-0.5">' + (p.water || 'Weekly') + '</span></div>' +
+        '<div class="flex-1 bg-surface-container rounded-lg p-base flex flex-col items-center"><span class="material-symbols-outlined ' + healthCls + ' text-[18px]">favorite</span><span class="font-label-sm text-on-surface-variant mt-0.5">' + health + '%</span></div>' +
+        '</div></div></a>';
+    }).join('');
+}
+loadGarden();
 </script>
 </body></html>
