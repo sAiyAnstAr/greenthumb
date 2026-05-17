@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Scanner Test - Greenthumb</title>
+<style>
+  body { font-family: sans-serif; background: #154212; color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; margin: 0; }
+  button { background: white; color: #154212; border: none; padding: 16px 32px; font-size: 18px; font-weight: bold; border-radius: 50px; margin: 10px; cursor: pointer; width: 280px; display: block; }
+  button:active { opacity: 0.7; }
+  #log { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-top: 20px; width: 100%; max-width: 340px; min-height: 80px; font-size: 14px; text-align: left; white-space: pre-wrap; word-break: break-all; }
+  video { width: 100%; max-width: 340px; border-radius: 12px; background: #000; }
+  input[type=file] { display: none; }
+</style>
+</head>
+<body>
+
+<h2 style="margin-bottom:8px">Scanner Test</h2>
+<p style="opacity:0.7;margin-bottom:24px">Tap buttons to test</p>
+
+<button id="btn-test">1. Test JS (alert)</button>
+<button id="btn-cam">2. Enable Camera</button>
+<button id="btn-gallery">3. Choose from Gallery</button>
+<button id="btn-snap" style="display:none">4. Take Photo</button>
+
+<video id="vid" autoplay playsinline muted style="display:none"></video>
+<canvas id="canvas" style="display:none"></canvas>
+<input type="file" id="file-input" accept="image/*"/>
+<img id="preview" style="display:none;width:100%;max-width:340px;border-radius:12px;margin-top:10px"/>
+
+<div id="log">Log output will appear here...</div>
+
+<script>
+var log = document.getElementById('log');
+function addLog(msg) {
+    log.textContent = new Date().toLocaleTimeString() + ': ' + msg + '\n' + log.textContent;
+}
+
+addLog('Page loaded OK');
+
+document.getElementById('btn-test').onclick = function() {
+    addLog('TEST BUTTON CLICKED - JS is working!');
+    alert('JavaScript works! Buttons are functional.');
+};
+
+document.getElementById('btn-cam').onclick = function() {
+    addLog('Camera button clicked');
+    addLog('Protocol: ' + location.protocol);
+    addLog('mediaDevices: ' + (!!navigator.mediaDevices));
+    addLog('getUserMedia: ' + (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)));
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        addLog('ERROR: Camera API not available');
+        alert('Camera API not available in this browser on this page. Protocol: ' + location.protocol);
+        return;
+    }
+
+    addLog('Requesting camera...');
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+    .then(function(stream) {
+        addLog('SUCCESS: Camera stream obtained!');
+        var vid = document.getElementById('vid');
+        vid.srcObject = stream;
+        vid.style.display = 'block';
+        document.getElementById('btn-snap').style.display = 'block';
+        return vid.play();
+    })
+    .then(function() {
+        addLog('Video playing!');
+    })
+    .catch(function(err) {
+        addLog('Camera ERROR: ' + err.name + ': ' + err.message);
+        alert('Camera error: ' + err.name + '\n' + err.message);
+    });
+};
+
+document.getElementById('btn-gallery').onclick = function() {
+    addLog('Gallery button clicked - opening picker...');
+    document.getElementById('file-input').click();
+};
+
+document.getElementById('file-input').onchange = function(e) {
+    var file = e.target.files[0];
+    if (!file) { addLog('No file selected'); return; }
+    addLog('File selected: ' + file.name + ' (' + Math.round(file.size/1024) + 'KB)');
+    var url = URL.createObjectURL(file);
+    var img = document.getElementById('preview');
+    img.src = url;
+    img.style.display = 'block';
+    addLog('Preview shown - gallery works!');
+};
+
+document.getElementById('btn-snap').onclick = function() {
+    var vid = document.getElementById('vid');
+    var canvas = document.getElementById('canvas');
+    canvas.width = vid.videoWidth;
+    canvas.height = vid.videoHeight;
+    canvas.getContext('2d').drawImage(vid, 0, 0);
+    addLog('Snapshot taken: ' + canvas.width + 'x' + canvas.height);
+    canvas.toBlob(function(blob) {
+        addLog('Blob created: ' + Math.round(blob.size/1024) + 'KB - sending to PlantNet...');
+        var form = new FormData();
+        form.append('images', blob, 'plant.jpg');
+        form.append('organs', 'leaf');
+        fetch('https://my-api.plantnet.org/v2/identify/all?api-key=2b10jzN7Tpx56loqC6ifqfhQuu&nb-results=1&lang=en', {
+            method: 'POST', body: form
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.results && data.results[0]) {
+                var name = data.results[0].species.scientificNameWithoutAuthor;
+                var score = Math.round(data.results[0].score * 100);
+                addLog('IDENTIFIED: ' + name + ' (' + score + '%)');
+                alert('Plant identified!\n' + name + '\nConfidence: ' + score + '%');
+            } else {
+                addLog('No results from PlantNet');
+            }
+        })
+        .catch(function(e) { addLog('PlantNet error: ' + e.message); });
+    }, 'image/jpeg', 0.9);
+};
+</script>
+
+<p style="margin-top:30px;opacity:0.5;font-size:12px">
+<a href="index.html" style="color:white">← Back to Home</a>
+</p>
+
+</body>
+</html>
