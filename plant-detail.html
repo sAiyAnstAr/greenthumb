@@ -209,123 +209,94 @@
 </div>
 </div>
 </header>
-<main class="max-w-screen-lg mx-auto">
-<!-- Hero Image Section -->
-<div class="relative w-full aspect-[4/5] md:aspect-video overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A lush, vibrant Monstera Deliciosa plant with large fenestrated leaves standing in a minimalist ceramic pot. The lighting is soft and natural, coming from a large window, creating an airy, peaceful morning atmosphere. The background is a clean, neutral stone-colored wall, emphasizing the deep lush green of the foliage and the modern organic aesthetic of a high-end digital gardening app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSCE1mwfM3rZ_fU4UwKOM8k73_O3h-F0FHM89gX3y9lQhkEU8x_fzBbZ7tP7bQ-Wo5x8ckZBS8SG83jCuuWEy4Ybl5yAA6tCZM3ucFznhJEDPcZBUiu1mc-_N0JiAdpB9qH7URBof9CamW_czMILWjYLudviORb9X_rV-ywTA4fQ_8wghrHfYx-j_-hC643vlghflOCVrTbEO2pcn-WWIW_Q9BQdRia2IRuGLB60T5ST5j4AI5xN9MyS5zno_WCIpzVR1PcUK9cnw"/>
-<div class="absolute bottom-6 left-6 flex flex-col gap-2">
-<div class="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg">
-<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-<span class="text-label-sm font-bold text-primary">Thriving</span>
+<main class="max-w-screen-lg mx-auto pb-32">
+
+<!-- Loading -->
+<div id="plant-loading" class="px-container-margin pt-xl text-center">
+    <div class="w-full h-64 bg-surface-container rounded-2xl animate-pulse mb-md"></div>
+    <div class="h-8 bg-surface-container rounded w-1/2 mx-auto animate-pulse mb-sm"></div>
+    <div class="h-4 bg-surface-container rounded w-1/3 mx-auto animate-pulse"></div>
 </div>
-<h2 class="text-display-lg text-white drop-shadow-md font-display-lg">Monstera Deliciosa</h2>
+
+<!-- Not found -->
+<div id="plant-not-found" class="hidden px-container-margin pt-xl text-center">
+    <span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:'FILL' 1">search_off</span>
+    <p class="font-headline-md text-on-surface-variant mt-md">Plant not found</p>
+    <a href="my-garden.html" class="mt-md font-label-lg text-primary hover:underline block">Back to My Garden</a>
 </div>
+
+<!-- Plant content -->
+<div id="plant-content" class="hidden">
+    <!-- Hero image -->
+    <div id="plant-hero" class="relative h-72 bg-surface-container overflow-hidden">
+        <img id="plant-img" src="" alt="" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 px-container-margin pb-md">
+            <h1 id="plant-name" class="font-display-lg text-display-lg text-white"></h1>
+            <p id="plant-species" class="font-label-lg text-white/70 italic"></p>
+        </div>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="grid grid-cols-3 gap-sm px-container-margin pt-md">
+        <div class="bg-surface-container-lowest rounded-xl p-md text-center border border-outline-variant/20">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">light_mode</span>
+            <p class="font-label-sm text-outline mt-1">Light</p>
+            <p id="plant-light" class="font-label-lg text-on-surface mt-0.5"></p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-md text-center border border-outline-variant/20">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">water_drop</span>
+            <p class="font-label-sm text-outline mt-1">Water</p>
+            <p id="plant-water" class="font-label-lg text-on-surface mt-0.5"></p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-md text-center border border-outline-variant/20">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">favorite</span>
+            <p class="font-label-sm text-outline mt-1">Health</p>
+            <p id="plant-health" class="font-label-lg text-on-surface mt-0.5"></p>
+        </div>
+    </div>
+
+    <!-- Details -->
+    <div class="px-container-margin pt-md space-y-md">
+        <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20">
+            <h3 class="font-label-lg text-outline mb-sm">DETAILS</h3>
+            <div class="space-y-2">
+                <div class="flex justify-between"><span class="font-label-lg text-on-surface-variant">Location</span><span id="plant-location" class="font-label-lg text-on-surface"></span></div>
+                <div class="flex justify-between"><span class="font-label-lg text-on-surface-variant">Added</span><span id="plant-added" class="font-label-lg text-on-surface"></span></div>
+                <div class="flex justify-between"><span class="font-label-lg text-on-surface-variant">Nickname</span><span id="plant-nickname" class="font-label-lg text-on-surface"></span></div>
+            </div>
+        </div>
+
+        <!-- Photos -->
+        <div>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Photos</h3>
+            <div id="plant-photos" class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+                <div class="text-center py-lg w-full">
+                    <span class="material-symbols-outlined text-[40px] text-outline">add_photo_alternate</span>
+                    <p class="font-label-sm text-outline mt-1">No photos yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Care log -->
+        <div>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Care Log</h3>
+            <div id="care-log" class="space-y-2">
+                <p class="font-body-md text-on-surface-variant">No care logged yet.</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-sm pb-xl">
+            <button onclick="logWatering()" class="flex-1 bg-primary text-on-primary font-label-lg py-3 rounded-xl active:scale-95 transition-transform flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">water_drop</span> Log Watering
+            </button>
+            <button onclick="deletePlant()" class="bg-error-container text-on-error-container font-label-lg py-3 px-md rounded-xl active:scale-95 transition-transform flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </div>
+    </div>
 </div>
-<!-- Care Requirements Bento Grid -->
-<section class="px-container-margin mt-lg space-y-md">
-<h3 class="text-headline-md font-headline-md text-primary">Core Care</h3>
-<div class="grid grid-cols-3 gap-gutter">
-<div class="bg-surface-container-low p-md rounded-2xl flex flex-col items-center text-center gap-2 border border-stone-100">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container">light_mode</span>
-</div>
-<div>
-<p class="text-label-sm text-outline">Light</p>
-<p class="text-label-lg text-on-surface">Bright Indirect</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-md rounded-2xl flex flex-col items-center text-center gap-2 border border-stone-100">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-container">water_drop</span>
-</div>
-<div>
-<p class="text-label-sm text-outline">Water</p>
-<p class="text-label-lg text-on-surface">Weekly</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-md rounded-2xl flex flex-col items-center text-center gap-2 border border-stone-100">
-<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary">thermostat</span>
-</div>
-<div>
-<p class="text-label-sm text-outline">Temp</p>
-<p class="text-label-lg text-on-surface">18-30°C</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Care Log Timeline -->
-<section class="px-container-margin mt-lg space-y-md">
-<div class="flex justify-between items-center">
-<h3 class="text-headline-md font-headline-md text-primary">Care Log</h3>
-<button class="text-label-lg text-secondary">View All</button>
-</div>
-<div class="bg-white rounded-3xl p-md shadow-sm border border-stone-100 relative overflow-hidden">
-<div class="absolute left-[39px] top-md bottom-md w-0.5 bg-stone-100"></div>
-<div class="space-y-6">
-<div class="relative flex items-center gap-4">
-<div class="z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-4 ring-white">
-<span class="material-symbols-outlined text-white text-[18px]">water_drop</span>
-</div>
-<div class="flex-1">
-<p class="text-body-md font-semibold text-on-surface">Watered</p>
-<p class="text-label-sm text-outline">2 days ago • Soil was dry</p>
-</div>
-</div>
-<div class="relative flex items-center gap-4">
-<div class="z-10 w-8 h-8 rounded-full bg-tertiary flex items-center justify-center ring-4 ring-white">
-<span class="material-symbols-outlined text-white text-[18px]">eco</span>
-</div>
-<div class="flex-1">
-<p class="text-body-md font-semibold text-on-surface">Fertilized</p>
-<p class="text-label-sm text-outline">1 week ago • Liquid bloom feed</p>
-</div>
-</div>
-<div class="relative flex items-center gap-4">
-<div class="z-10 w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center ring-4 ring-white">
-<span class="material-symbols-outlined text-stone-500 text-[18px]">content_cut</span>
-</div>
-<div class="flex-1">
-<p class="text-body-md font-semibold text-on-surface">Pruned</p>
-<p class="text-label-sm text-outline">2 weeks ago • Removed 2 yellow leaves</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Growth Diary Gallery -->
-<section class="mt-lg space-y-md pb-12">
-<div class="px-container-margin flex justify-between items-center">
-<h3 class="text-headline-md font-headline-md text-primary">Growth Diary</h3>
-<button class="inline-flex items-center gap-1 bg-primary text-white px-4 py-2 rounded-full text-label-lg transition-transform active:scale-95">
-<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
-                    Add Entry
-                </button>
-</div>
-<div class="flex overflow-x-auto hide-scrollbar gap-gutter px-container-margin">
-<div class="flex-none w-48 space-y-2">
-<div class="aspect-square rounded-2xl overflow-hidden bg-stone-100">
-<img class="w-full h-full object-cover" data-alt="A close-up vertical shot of a new Monstera leaf unfurling its bright lime green coil. The lighting is soft and editorial, highlighting the waxy texture and delicate structure of the young plant growth against a blurred garden background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmdTRL1b1eYj99Su-b0frvRQ-rla65BM794cIqW1zySb_cbqktAOP-v64gGDMBHBUarbDcpwyytJwJZDw4Zw4HFqo9EoVibGWhGvnlwXab4JiOLwAIdrmL4UmHmLjSsgdKnbYPifeDYEuUvPoWEXnZ8QcNkooQ1tYyc99OzpMBcgGYgY2mfXLpMce-UejHaB6t2fL1vqPM8a53N2jK42ZHYR2tfyDV655aFFsAO-UoBqWH40R3ra_s5TjyKYd_Ym3QhTxwc5MOSk4"/>
-</div>
-<p class="text-label-sm text-outline">Today</p>
-<p class="text-label-lg font-bold text-on-surface">New Leaf!</p>
-</div>
-<div class="flex-none w-48 space-y-2">
-<div class="aspect-square rounded-2xl overflow-hidden bg-stone-100">
-<img class="w-full h-full object-cover opacity-80" data-alt="A Monstera plant positioned on a wooden stool in a sun-drenched corner of a modern living room. Warm evening sunlight creates dramatic shadows of the leaves on the white wall behind it, evoking a sense of calm and organic beauty." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmpryor_J0OC9UQ8FS7f4WWYbrC0bY_yANSdIESo6FTkflRX7865AurYwUpULyJ35GhGPG6oqS45pMQCpiJ4Dd5Nlcck0p-l4Ox1gHFrfAGA-5-3q2y3izw1qp959iRIXTDxwYGRZku9KEILWFKTGXhuiIGGnrrtvG5F4BbZ5kdfLHZjus4vlx0LX70OxKyozquL8DOd4aQq1MFGWyY9KwZ45augaiQ_gJ-EVrCNhPl7FfCZ_colbuS1eO5MigChP_V49ybIfi54I"/>
-</div>
-<p class="text-label-sm text-outline">Nov 12, 2023</p>
-<p class="text-label-lg font-bold text-on-surface">Repotted</p>
-</div>
-<div class="flex-none w-48 space-y-2">
-<div class="aspect-square rounded-2xl overflow-hidden bg-stone-100">
-<img class="w-full h-full object-cover opacity-60" data-alt="A small, young Monstera cutting in a glass jar of water, showing initial root growth. The scene is bright and clinical but warm, shot in a high-key lighting style to emphasize the simplicity and hope of plant propagation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrdZXgoUEFcYLqBMFKA0hjXyret_e25J7v16XVSJoyjsBz3mk_XJUW1EolSug2X86A4Da3BC61kEsKSF51X9P7HC-oqrU9KG97xBZKjjEnkB7CCTLS5RYgzcLi5tRwsw1UCFQyc6H3VhKcnH4BLTDdssKgqJHQP0cGe6CN9wy05B1a6OmVUBzJISSKqlglP8S1jgdxEgLsgd-AkvnxPg9jPyG3PBLQFsMxsNMgPf1U726T9Kba_lBkH5caEJNmAUv5hRx4GByszZU"/>
-</div>
-<p class="text-label-sm text-outline">Aug 05, 2023</p>
-<p class="text-label-lg font-bold text-on-surface">Propagation</p>
-</div>
-</div>
-</section>
 </main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
@@ -472,5 +443,104 @@ document.querySelectorAll('.nav-sub-list').forEach(list => {
 } catch(navErr) {
     console.warn('Nav init error:', navErr);
 }
+</script>
+
+<script>
+var PLANT_ID = new URLSearchParams(window.location.search).get('id');
+var currentPlant = null;
+
+function loadPlant() {
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+    
+    // Match by id (string or number)
+    var plant = plants.find(function(p) { return String(p.id) === String(PLANT_ID); });
+    
+    document.getElementById('plant-loading').classList.add('hidden');
+    
+    if (!plant) {
+        document.getElementById('plant-not-found').classList.remove('hidden');
+        return;
+    }
+    
+    currentPlant = plant;
+    renderPlant(plant);
+}
+
+function renderPlant(p) {
+    document.getElementById('plant-content').classList.remove('hidden');
+    document.title = (p.nickname || p.name) + ' - Greenthumb';
+    
+    // Hero
+    var img = document.getElementById('plant-img');
+    if (p.img) { img.src = p.img; img.alt = p.name; }
+    else { document.getElementById('plant-hero').style.background = '#2d5a27'; }
+    
+    document.getElementById('plant-name').textContent = p.nickname || p.name;
+    document.getElementById('plant-species').textContent = p.species || p.name;
+    
+    // Stats
+    document.getElementById('plant-light').textContent = p.light || 'Indirect';
+    document.getElementById('plant-water').textContent = p.water || 'Weekly';
+    document.getElementById('plant-health').textContent = (p.healthPct || 80) + '%';
+    
+    // Details
+    document.getElementById('plant-location').textContent = p.location || 'Unspecified';
+    document.getElementById('plant-added').textContent = p.added ? new Date(p.added).toLocaleDateString() : 'Unknown';
+    document.getElementById('plant-nickname').textContent = p.nickname || '—';
+    
+    // Photos
+    if (p.photos && p.photos.length) {
+        document.getElementById('plant-photos').innerHTML = p.photos.map(function(url) {
+            return '<img src="' + url + '" class="h-32 w-32 object-cover rounded-xl flex-shrink-0 border border-outline-variant/20"/>';
+        }).join('');
+    }
+    
+    // Care log
+    if (p.careLogs && p.careLogs.length) {
+        document.getElementById('care-log').innerHTML = p.careLogs.slice().reverse().slice(0,10).map(function(log) {
+            return '<div class="flex items-center justify-between py-2 border-b border-outline-variant/20">' +
+            '<div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[18px]">water_drop</span>' +
+            '<span class="font-label-lg text-on-surface">' + log.action + '</span></div>' +
+            '<span class="font-label-sm text-outline">' + new Date(log.date).toLocaleDateString() + '</span></div>';
+        }).join('');
+    }
+}
+
+function logWatering() {
+    if (!currentPlant) return;
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+    var idx = plants.findIndex(function(p) { return String(p.id) === String(PLANT_ID); });
+    if (idx === -1) return;
+    
+    if (!plants[idx].careLogs) plants[idx].careLogs = [];
+    plants[idx].careLogs.push({ action: 'Watered', date: new Date().toISOString() });
+    plants[idx].lastWatered = new Date().toISOString();
+    plants[idx].healthPct = Math.min(100, (plants[idx].healthPct || 80) + 5);
+    
+    localStorage.setItem('gt_plants', JSON.stringify(plants));
+    currentPlant = plants[idx];
+    renderPlant(plants[idx]);
+    
+    // Flash confirmation
+    var btn = event.target.closest('button');
+    var orig = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined">check</span> Logged!';
+    btn.classList.add('bg-secondary');
+    setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('bg-secondary'); }, 1500);
+}
+
+function deletePlant() {
+    if (!currentPlant) return;
+    if (!confirm('Remove ' + (currentPlant.nickname || currentPlant.name) + ' from your garden?')) return;
+    var plants = [];
+    try { plants = JSON.parse(localStorage.getItem('gt_plants') || '[]'); } catch(e) {}
+    plants = plants.filter(function(p) { return String(p.id) !== String(PLANT_ID); });
+    localStorage.setItem('gt_plants', JSON.stringify(plants));
+    window.location.href = 'my-garden.html';
+}
+
+loadPlant();
 </script>
 </body></html>
