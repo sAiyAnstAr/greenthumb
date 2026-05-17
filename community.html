@@ -152,6 +152,7 @@ document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.ch
 
 var sb=supabase.createClient('https://vgvldoegptvzijlpsrtu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
 var allPosts=[],currentFilter='all',currentSearch='',selectedCat=null,selectedImgFile=null,isSubmitting=false;
+var deletedIds={};
 var CAT_META={help:{label:'Help Needed',cls:'bg-error-container text-on-error-container'},tips:{label:'Plant Tips',cls:'bg-primary-fixed text-on-primary-fixed-variant'},showcase:{label:'Showcase',cls:'bg-secondary-container text-on-secondary-container'},swap:{label:'Swap',cls:'bg-tertiary-fixed text-on-tertiary-fixed-variant'}};
 function catMeta(c){return CAT_META[c]||{label:c,cls:'bg-surface-container text-on-surface-variant'};}
 function timeAgo(iso){var d=(Date.now()-new Date(iso))/1000;if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago';}
@@ -160,7 +161,7 @@ function initials(n){return((n||'G').split(' ').map(function(w){return w[0]||'';
 function loadPosts(){
     sb.from('posts').select('*').order('created_at',{ascending:false}).then(function(res){
         if(res.error)throw res.error;
-        allPosts=res.data||[];renderFeed();
+        allPosts=(res.data||[]).filter(function(p){return !deletedIds[p.id];});renderFeed();
     }).catch(function(e){
         document.getElementById('feed').innerHTML='<div class="bg-error-container rounded-2xl p-md text-center"><p class="font-label-lg text-on-error-container">'+e.message+'</p><button onclick="loadPosts()" class="mt-md font-label-lg text-primary bg-white px-4 py-2 rounded-full mt-2 block mx-auto">Retry</button></div>';
     });
@@ -206,9 +207,15 @@ function likePost(id,btn){
 }
 function deletePost(id){
     if(!confirm('Delete this post?'))return;
+    deletedIds[id]=true;
+    allPosts=allPosts.filter(function(p){return p.id!==id;});
+    renderFeed();
     sb.from('posts').delete().eq('id',id).then(function(res){
-        if(res.error){alert('Could not delete: '+res.error.message);return;}
-        allPosts=allPosts.filter(function(p){return p.id!==id;});renderFeed();
+        if(res.error){
+            console.warn('Delete error:',res.error.message);
+            delete deletedIds[id];
+            loadPosts();
+        }
     });
 }
 function openNewPost(){
@@ -262,7 +269,7 @@ function submitPost(){
     }else{doInsert(null);}
 }
 sb.channel('posts').on('postgres_changes',{event:'INSERT',schema:'public',table:'posts'},function(payload){
-    if(!allPosts.find(function(p){return p.id===payload.new.id;})){allPosts.unshift(payload.new);renderFeed();}
+    if(!deletedIds[payload.new.id]&&!allPosts.find(function(p){return p.id===payload.new.id;})){allPosts.unshift(payload.new);renderFeed();}
 }).subscribe();
 loadPosts();
 </script>
