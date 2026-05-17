@@ -357,18 +357,34 @@ document.getElementById('plant-search').addEventListener('input', function() {
 });
 
 function searchPlants(q) {
-    // Filter from popular + simulate API search results
-    const local = POPULAR.filter(p => p.name.toLowerCase().includes(q) || p.species.toLowerCase().includes(q));
-    // Additional hardcoded results for common searches
-    const extra = [
-        { id:'zz', name:'ZZ Plant', species:'Zamioculcas zamiifolia', water:'Every 2–3 weeks', light:'Low to bright indirect', difficulty:'Very easy', desc:'Waxy, architectural leaves. One of the most drought-tolerant houseplants available.', img:'https://images.unsplash.com/photo-1598880940342-d56579403e61?w=400' },
-        { id:'rubber', name:'Rubber Plant', species:'Ficus elastica', water:'Weekly', light:'Bright indirect', difficulty:'Easy', desc:'Bold, glossy leaves in dark green or burgundy. A classic statement plant.', img:'https://images.unsplash.com/photo-1597055181449-53a7d1c00fe3?w=400' },
-        { id:'spidey', name:'Spider Plant', species:'Chlorophytum comosum', water:'Weekly', light:'Bright indirect', difficulty:'Very easy', desc:'Fast-growing with arching leaves and dangling offshoots. Great air purifier.', img:'https://images.unsplash.com/photo-1615218370895-0b35b0a54c43?w=400' },
-        { id:'aloe', name:'Aloe Vera', species:'Aloe barbadensis miller', water:'Every 3 weeks', light:'Full sun', difficulty:'Easy', desc:'Succulent with medicinal gel. Loves sun and minimal watering.', img:'https://images.unsplash.com/photo-1567748157439-651aca2ff064?w=400' },
-    ].filter(p => p.name.toLowerCase().includes(q) || p.species.toLowerCase().includes(q));
-
-    const results = [...new Map([...local,...extra].map(p=>[p.id,p])).values()];
-    renderSearchResults(results, q);
+    if (!q || q.length < 2) { renderSearchResults([]); return; }
+    // First show local matches instantly
+    const local = POPULAR.filter(p =>
+        p.name.toLowerCase().includes(q) || p.species.toLowerCase().includes(q)
+    );
+    renderSearchResults(local);
+    // Then fetch from Perenual API
+    fetch('https://perenual.com/api/species-list?key=sk-H63g6a085fb86f4c417329&q=' + encodeURIComponent(q) + '&page=1')
+    .then(r => r.json())
+    .then(data => {
+        if (!data.data || !data.data.length) return;
+        const apiResults = data.data.slice(0, 8).map(p => ({
+            id: 'p_' + p.id,
+            name: p.common_name ? p.common_name.charAt(0).toUpperCase() + p.common_name.slice(1) : p.scientific_name[0],
+            species: p.scientific_name[0] || '',
+            water: p.watering || 'Weekly',
+            light: Array.isArray(p.sunlight) ? p.sunlight[0] : (p.sunlight || 'Bright indirect'),
+            difficulty: p.care_level || 'Moderate',
+            desc: p.description || ('A beautiful ' + (p.common_name || p.scientific_name[0]) + '.'),
+            img: p.default_image?.medium_url || p.default_image?.regular_url || '',
+            perenualId: p.id
+        }));
+        // Merge — dedupe by species name
+        const existing = new Set(local.map(x => x.species.toLowerCase()));
+        const merged = [...local, ...apiResults.filter(x => !existing.has(x.species.toLowerCase()))];
+        renderSearchResults(merged);
+    })
+    .catch(() => {}); // Keep local results on API error
 }
 
 function renderSearchResults(results, q) {
