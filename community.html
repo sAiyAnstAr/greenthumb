@@ -157,6 +157,7 @@ var CAT_META={help:{label:'Help Needed',cls:'bg-error-container text-on-error-co
 function catMeta(c){return CAT_META[c]||{label:c,cls:'bg-surface-container text-on-surface-variant'};}
 function timeAgo(iso){var d=(Date.now()-new Date(iso))/1000;if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago';}
 function initials(n){return((n||'G').split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2)||'G').toUpperCase();}
+function postDetailHref(id){return 'post-detail.html?id='+encodeURIComponent(id);}
 
 function loadPosts(){
     sb.from('posts').select('*').order('created_at',{ascending:false}).then(function(res){
@@ -185,7 +186,7 @@ function renderFeed(){
         (p.image_url?'<div class="w-full overflow-hidden max-h-72"><img src="'+p.image_url+'" class="w-full object-cover"/></div>':'')+
         '<div class="flex items-center gap-lg px-md py-sm border-t border-outline-variant/20">'+
         '<button onclick="likePost(\''+p.id+'\',this)" class="flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined">favorite_border</span><span>'+(p.likes||0)+'</span></button>'+
-        '<a href="post-detail.html?id='+p.id+'" class="flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">chat_bubble</span><span>Reply</span></a>'+
+        '<a href="'+postDetailHref(p.id)+'" class="flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">chat_bubble</span><span>Reply</span></a>'+
         (p.author==='Gardener'?'<button onclick="deletePost(\''+p.id+'\')" class="ml-auto flex items-center gap-xs font-label-lg text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>':'<span class="ml-auto"></span>')+
         '</div></article>';
     }).join('');

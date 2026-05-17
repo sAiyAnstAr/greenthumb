@@ -4,6 +4,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Post Detail - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -219,41 +220,8 @@
 <main class="max-w-screen-lg mx-auto pb-32">
 <!-- Original Post -->
 <article id="post-content" class="bg-surface-container-lowest border-b border-outline-variant/30">
-    <!-- Post header -->
-    <div class="flex items-center justify-between px-container-margin pt-md pb-sm">
-        <div class="flex items-center gap-sm">
-            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container flex-shrink-0">MJ</div>
-            <div>
-                <p class="font-label-lg text-on-surface">Maya Jensen</p>
-                <p class="font-label-sm text-outline">2 hours ago</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-2">
-            <span class="bg-error-container text-on-error-container font-label-sm px-3 py-1 rounded-full">Help Needed</span>
-            <button class="p-1 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-outline text-[20px]">more_vert</span></button>
-        </div>
-    </div>
-    <!-- Post body -->
-    <div class="px-container-margin pb-md">
-        <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Fiddle Leaf Fig leaves turning brown?</h2>
-        <p class="font-body-md text-on-surface-variant mb-md">I've noticed these spots appearing on the lower leaves over the past week. I water once a week and it gets indirect bright light. Is this root rot or something else entirely? Any advice would be so appreciated — it's my favourite plant!</p>
-    </div>
-    <div class="w-full h-64 overflow-hidden">
-        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3cv2UcYIHZsk77RRtUzb8SxJI5Kq2QScMeJiU1hldcMW4fDvBK6ZP_z3WC-s1idqBEq3BsXXed92BLJBge2hshsG44NVhL9S2mnOyUW2o_oem5g5DaJ4ZV0pJ1_3Z-UUarBbDwa9EUH53esT0U5phQSln335ywVxQbFb6gVPJ30W_f3PI8MsKOpr6wk0-5sEtTcHX4Ex4XioQlXOOm75dOSrF7WY7YSnAZjm1CscrDztxhlHPJHrH6q4x0lqB36d0-nqIf4yXN0" alt="Fiddle Leaf Fig brown spots"/>
-    </div>
-    <!-- Post actions -->
-    <div class="flex items-center gap-lg px-container-margin py-sm border-t border-outline-variant/30">
-        <button onclick="togglePostLike()" id="post-like-btn" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors">
-            <span class="material-symbols-outlined" id="post-like-icon">favorite_border</span>
-            <span id="post-like-count">24</span>
-        </button>
-        <div class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant">
-            <span class="material-symbols-outlined">chat_bubble</span>
-            <span id="comment-count">12</span>
-        </div>
-        <button onclick="sharePost()" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">
-            <span class="material-symbols-outlined">share</span>
-        </button>
+    <div class="px-container-margin py-lg text-center">
+        <p class="font-label-lg text-outline">Loading post...</p>
     </div>
 </article>
 
@@ -261,8 +229,8 @@
 <div class="mx-container-margin my-md bg-primary-fixed/30 rounded-2xl p-md flex items-start gap-md border border-primary-container/30">
     <span class="material-symbols-outlined text-primary flex-shrink-0" style="font-variation-settings:'FILL' 1">lightbulb</span>
     <div>
-        <p class="font-label-lg text-on-surface mb-0.5">Common cause: overwatering or root rot</p>
-        <p class="font-body-md text-on-surface-variant">Brown spots on lower leaves with yellowing edges usually indicate overwatering. Check if soil is staying wet between waterings and ensure the pot has drainage holes.</p>
+        <p class="font-label-lg text-on-surface mb-0.5">Community tip</p>
+        <p class="font-body-md text-on-surface-variant">Add useful details like watering, light, climate, and recent changes so other gardeners can give more accurate advice.</p>
     </div>
 </div>
 
@@ -389,18 +357,84 @@ function setActiveNav(pageId) {
 
 const PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
 
+const sb = supabase.createClient('https://vgvldoegptvzijlpsrtu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZndmxkb2VncHR2emlqbHBzcnR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5MzA1NTIsImV4cCI6MjA5NDUwNjU1Mn0.A1gFTHM2ahB4XUwZ_274mAPXL2uq0cwy4nWgl6wuR-c');
+const postId = new URLSearchParams(window.location.search).get('id');
+const CAT_META = {
+    help: { label:'Help Needed', cls:'bg-error-container text-on-error-container' },
+    tips: { label:'Plant Tips', cls:'bg-primary-fixed text-on-primary-fixed-variant' },
+    showcase: { label:'Showcase', cls:'bg-secondary-container text-on-secondary-container' },
+    swap: { label:'Swap', cls:'bg-tertiary-fixed text-on-tertiary-fixed-variant' }
+};
+let currentPost = null;
 let postLiked = false;
-let postLikes = 24;
+let postLikes = 0;
 let sortMode = 'top';
 
-let comments = [
-    { id:1, author:'Tom Garden', initials:'TG', colour:'bg-primary-container text-on-primary-container', time:'1 hour ago', text:"This looks like it could be bacterial leaf spot rather than root rot. The pattern of the spots matters — are they spreading outward from the centre or starting at the edges?", likes:18, liked:false },
-    { id:2, author:'Sarah Bloom', initials:'SB', colour:'bg-secondary-container text-on-secondary-container', time:'45 min ago', text:"I had the exact same issue! It turned out my pot had no drainage and the roots were sitting in water. Try lifting the pot and checking underneath — if you can smell anything earthy/musty it's likely root rot.", likes:31, liked:false },
-    { id:3, author:'Plant Expert', initials:'PE', colour:'bg-tertiary-fixed text-on-tertiary-fixed-variant', time:'30 min ago', text:"Water less frequently and always let the top 2-3cm of soil dry out completely between waterings. Fiddle Leaf Figs are very sensitive to overwatering. Also avoid moving it around — they hate change.", likes:47, liked:false },
-    { id:4, author:'GreenThumb_Au', initials:'GA', colour:'bg-surface-container-high text-on-surface', time:'20 min ago', text:"Check the humidity too. Gold Coast can get quite humid but indoor air con dries things out. A pebble tray with water near the base helps a lot.", likes:12, liked:false },
-    { id:5, author:'Maya Jensen', initials:'MJ', colour:'bg-secondary-container text-on-secondary-container', time:'10 min ago', text:"Thank you all so much! I'll check the drainage today. @Sarah Bloom — I can actually smell something! Will repot this weekend.", likes:8, liked:false },
-];
-let nextCommentId = 10;
+let comments = [];
+let nextCommentId = 1;
+
+function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function catMeta(cat) {
+    return CAT_META[cat] || { label: cat || 'Post', cls: 'bg-surface-container text-on-surface-variant' };
+}
+function initials(name) {
+    return ((name || 'G').split(' ').map(w => w[0] || '').join('').slice(0,2) || 'G').toUpperCase();
+}
+function timeAgo(iso) {
+    const d = (Date.now() - new Date(iso || Date.now())) / 1000;
+    if (d < 60) return 'just now';
+    if (d < 3600) return Math.floor(d / 60) + 'm ago';
+    if (d < 86400) return Math.floor(d / 3600) + 'h ago';
+    return Math.floor(d / 86400) + 'd ago';
+}
+function savedCommentKey() {
+    return 'gt_post_comments_' + (postId || 'missing');
+}
+function loadSavedComments() {
+    try { return JSON.parse(localStorage.getItem(savedCommentKey()) || '[]'); }
+    catch (e) { return []; }
+}
+function saveComments() {
+    localStorage.setItem(savedCommentKey(), JSON.stringify(comments));
+}
+function renderPost() {
+    const article = document.getElementById('post-content');
+    if (!postId) {
+        article.innerHTML = '<div class="px-container-margin py-lg text-center"><p class="font-headline-md text-error mb-sm">Post link is missing its id.</p><a href="community.html" class="inline-flex bg-primary text-on-primary px-md py-2 rounded-full font-label-lg">Back to Community</a></div>';
+        return;
+    }
+    if (!currentPost) {
+        article.innerHTML = '<div class="px-container-margin py-lg text-center"><p class="font-headline-md text-error mb-sm">Post not found.</p><a href="community.html" class="inline-flex bg-primary text-on-primary px-md py-2 rounded-full font-label-lg">Back to Community</a></div>';
+        return;
+    }
+    const meta = catMeta(currentPost.category);
+    postLikes = currentPost.likes || 0;
+    article.innerHTML =
+        '<div class="flex items-center justify-between px-container-margin pt-md pb-sm">'+
+        '<div class="flex items-center gap-sm"><div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container flex-shrink-0">'+initials(currentPost.author)+'</div>'+
+        '<div><p class="font-label-lg text-on-surface">'+esc(currentPost.author || 'Gardener')+'</p><p class="font-label-sm text-outline">'+timeAgo(currentPost.created_at)+'</p></div></div>'+
+        '<div class="flex items-center gap-2"><span class="'+meta.cls+' font-label-sm px-3 py-1 rounded-full">'+esc(meta.label)+'</span><button class="p-1 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-outline text-[20px]">more_vert</span></button></div></div>'+
+        '<div class="px-container-margin pb-md"><h2 class="font-headline-md text-headline-md text-on-surface mb-sm">'+esc(currentPost.title)+'</h2>'+(currentPost.body ? '<p class="font-body-md text-on-surface-variant mb-md whitespace-pre-wrap">'+esc(currentPost.body)+'</p>' : '')+'</div>'+
+        (currentPost.image_url ? '<div class="w-full h-64 overflow-hidden"><img class="w-full h-full object-cover" src="'+esc(currentPost.image_url)+'" alt="Post image"/></div>' : '')+
+        '<div class="flex items-center gap-lg px-container-margin py-sm border-t border-outline-variant/30"><button onclick="togglePostLike()" id="post-like-btn" class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined" id="post-like-icon">favorite_border</span><span id="post-like-count">'+postLikes+'</span></button><div class="flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant"><span class="material-symbols-outlined">chat_bubble</span><span id="comment-count">'+comments.length+'</span></div><button onclick="sharePost()" class="ml-auto flex items-center gap-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">share</span></button></div>';
+}
+function loadPost() {
+    if (!postId) { renderPost(); renderComments(); return; }
+    sb.from('posts').select('*').eq('id', postId).single().then(res => {
+        if (res.error) throw res.error;
+        currentPost = res.data;
+        comments = loadSavedComments();
+        nextCommentId = comments.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0) + 1;
+        renderPost();
+        renderComments();
+    }).catch(() => {
+        currentPost = null;
+        renderPost();
+        renderComments();
+    });
+}
 
 function togglePostLike() {
     postLiked = !postLiked;
@@ -416,7 +450,14 @@ function toggleCommentLike(id) {
     if (!c) return;
     c.liked = !c.liked;
     c.likes += c.liked ? 1 : -1;
+    saveComments();
     renderComments();
+}
+
+function setReplyTo(encodedAuthor) {
+    const input = document.getElementById('reply-input');
+    input.value = '@' + decodeURIComponent(encodedAuthor) + ' ';
+    input.focus();
 }
 
 function sortComments(mode) {
@@ -438,29 +479,30 @@ function renderComments() {
             <div class="flex-1 min-w-0">
                 <div class="bg-surface-container rounded-2xl px-md py-sm">
                     <div class="flex items-center justify-between mb-0.5">
-                        <span class="font-label-lg text-on-surface">${c.author}</span>
-                        <span class="font-label-sm text-outline">${c.time}</span>
+                        <span class="font-label-lg text-on-surface">${esc(c.author)}</span>
+                        <span class="font-label-sm text-outline">${esc(c.time)}</span>
                     </div>
-                    <p class="font-body-md text-on-surface">${c.text}</p>
+                    <p class="font-body-md text-on-surface">${esc(c.text)}</p>
                 </div>
                 <div class="flex items-center gap-md mt-1 px-sm">
                     <button onclick="toggleCommentLike(${c.id})" class="flex items-center gap-1 font-label-sm ${c.liked ? 'text-error' : 'text-outline'} hover:text-error transition-colors">
                         <span class="material-symbols-outlined text-[14px]">${c.liked ? 'favorite' : 'favorite_border'}</span>
                         ${c.likes}
                     </button>
-                    <button onclick="document.getElementById('reply-input').value='@${c.author} ';document.getElementById('reply-input').focus()" class="font-label-sm text-outline hover:text-primary transition-colors">Reply</button>
+                    <button onclick="setReplyTo('${encodeURIComponent(c.author || '')}')" class="font-label-sm text-outline hover:text-primary transition-colors">Reply</button>
                 </div>
             </div>
         </div>`).join('');
     
     document.getElementById('reply-count').textContent = `(${comments.length})`;
-    document.getElementById('comment-count').textContent = comments.length;
+    const commentCount = document.getElementById('comment-count');
+    if (commentCount) commentCount.textContent = comments.length;
 }
 
 function postReply() {
     const input = document.getElementById('reply-input');
     const text = input.value.trim();
-    if (!text) return;
+    if (!text || !postId || !currentPost) return;
     comments.push({
         id: nextCommentId++,
         author: 'You',
@@ -471,6 +513,7 @@ function postReply() {
         likes: 0,
         liked: false
     });
+    saveComments();
     input.value = '';
     sortMode = 'new';
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
@@ -480,13 +523,13 @@ function postReply() {
 
 function sharePost() {
     if (navigator.share) {
-        navigator.share({ title: 'Fiddle Leaf Fig help - Greenthumb Community', url: window.location.href });
+        navigator.share({ title: (currentPost && currentPost.title) || 'Greenthumb Community post', url: window.location.href });
     } else {
         navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'));
     }
 }
 
-renderComments();
+loadPost();
 
 
 setActiveNav('community');
