@@ -248,21 +248,74 @@
 </div>
 </div>
 <!-- Plant Grid -->
+<section class="mb-md">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Your Plants</h3>
+<a href="add-plant.html" class="hidden sm:inline-flex items-center gap-2 bg-primary text-on-primary px-md py-2 rounded-full font-label-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">add</span>Add Plant
+</a>
+</div>
 <div id="plant-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
 <!-- Plants loaded dynamically -->
 </div>
-<div id="empty-garden" class="hidden text-center py-xl">
-    <span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:'FILL' 1">eco</span>
-    <p class="font-headline-md text-on-surface-variant mt-md">No plants yet</p>
-    <p class="font-body-md text-outline mt-sm">Add your first plant to get started</p>
-    <a href="add-plant.html" class="mt-lg inline-flex items-center gap-2 bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg active:scale-95 transition-transform">
-        <span class="material-symbols-outlined">add</span> Add Plant
-    </a>
+<div id="empty-garden" class="hidden py-lg">
+    <div class="bg-surface-container-lowest rounded-xl border border-surface-container p-md shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-md">
+            <div class="w-16 h-16 rounded-xl bg-primary-fixed flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-[36px]" style="font-variation-settings:'FILL' 1">psychiatry</span>
+            </div>
+            <div class="flex-1">
+                <p class="font-headline-md text-on-surface">Start your garden collection</p>
+                <p class="font-body-md text-on-surface-variant mt-xs">Add a plant, scan one you already own, or open health tools when your collection grows.</p>
+            </div>
+            <a href="add-plant.html" class="inline-flex items-center justify-center gap-2 bg-primary text-on-primary px-lg py-sm rounded-full font-label-lg active:scale-95 transition-transform">
+                <span class="material-symbols-outlined">add</span>Add Plant
+            </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-sm mt-md">
+            <a href="scanner.html" class="bg-surface-container rounded-xl p-sm flex items-center gap-sm hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-primary">filter_center_focus</span>
+                <span class="font-label-lg text-on-surface">Identify a plant</span>
+            </a>
+            <a href="recommendations.html" class="bg-surface-container rounded-xl p-sm flex items-center gap-sm hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-primary">star</span>
+                <span class="font-label-lg text-on-surface">Get suggestions</span>
+            </a>
+            <a href="garden-diary.html" class="bg-surface-container rounded-xl p-sm flex items-center gap-sm hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-primary">book_2</span>
+                <span class="font-label-lg text-on-surface">Open diary</span>
+            </a>
+        </div>
+    </div>
 </div>
+</section>
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-md mb-xl">
+    <a href="add-plant.html" class="bg-surface-container-lowest border border-surface-container rounded-xl p-md flex items-center gap-sm hover:shadow-md hover:border-primary-container/40 transition-all">
+        <span class="material-symbols-outlined text-primary">add_circle</span>
+        <div>
+            <p class="font-label-lg text-on-surface">Add Plant</p>
+            <p class="font-label-sm text-outline">Save care details</p>
+        </div>
+    </a>
+    <a href="garden-health.html" class="bg-surface-container-lowest border border-surface-container rounded-xl p-md flex items-center gap-sm hover:shadow-md hover:border-primary-container/40 transition-all">
+        <span class="material-symbols-outlined text-primary">favorite</span>
+        <div>
+            <p class="font-label-lg text-on-surface">Health Check</p>
+            <p class="font-label-sm text-outline">Review care needs</p>
+        </div>
+    </a>
+    <a href="calendar.html" class="bg-surface-container-lowest border border-surface-container rounded-xl p-md flex items-center gap-sm hover:shadow-md hover:border-primary-container/40 transition-all">
+        <span class="material-symbols-outlined text-primary">calendar_month</span>
+        <div>
+            <p class="font-label-lg text-on-surface">Task Calendar</p>
+            <p class="font-label-sm text-outline">Plan watering</p>
+        </div>
+    </a>
+</section>
 <!-- Floating Action Button -->
-<button class="fixed right-container-margin bottom-[100px] bg-primary text-on-primary w-14 h-14 rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<a href="add-plant.html" aria-label="Add plant" class="fixed right-container-margin bottom-[100px] bg-primary text-on-primary w-14 h-14 rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
 <span class="material-symbols-outlined" data-icon="add">add</span>
-</button>
+</a>
 </main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
@@ -455,7 +508,7 @@ function loadGarden() {
         return '<a class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-surface-container group hover:shadow-md transition-all block" href="plant-detail.html?id=' + p.id + '">' +
         '<div class="relative h-48 overflow-hidden bg-surface-container">' +
         (img ? '<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="' + img + '" alt="' + p.name + '"/>' :
-               '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:'FILL' 1">eco</span></div>') +
+               '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-[64px] text-outline" style="font-variation-settings:&quot;FILL&quot; 1">eco</span></div>') +
         '<div class="absolute top-sm left-sm"><span class="bg-background/80 backdrop-blur-sm rounded-full px-2 py-0.5 font-label-sm text-on-surface">' + (p.location || 'Unspecified') + '</span></div>' +
         '</div>' +
         '<div class="p-md">' +
