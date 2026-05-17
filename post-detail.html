@@ -425,10 +425,8 @@ function loadPost() {
     sb.from('posts').select('*').eq('id', postId).single().then(res => {
         if (res.error) throw res.error;
         currentPost = res.data;
-        comments = loadSavedComments();
-        nextCommentId = comments.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0) + 1;
         renderPost();
-        renderComments();
+        loadSavedComments(); // loads from Supabase and calls renderComments
     }).catch(() => {
         currentPost = null;
         renderPost();
@@ -447,11 +445,11 @@ function togglePostLike() {
 
 function toggleCommentLike(id) {
     const c = comments.find(c=>c.id===id);
-    if (!c) return;
-    c.liked = !c.liked;
-    c.likes += c.liked ? 1 : -1;
-    saveComments();
+    if (!c || c.liked) return;
+    c.liked = true;
+    c.likes += 1;
     renderComments();
+    sb.from('comments').update({ likes: c.likes }).eq('id', id).then(() => {});
 }
 
 function setReplyTo(encodedAuthor) {
@@ -503,17 +501,21 @@ function postReply() {
     const input = document.getElementById('reply-input');
     const text = input.value.trim();
     if (!text || !postId || !currentPost) return;
-    comments.push({
-        id: nextCommentId++,
-        author: 'You',
-        initials: 'YO',
-        colour: 'bg-primary-container text-on-primary-container',
-        time: 'Just now',
-        text,
-        likes: 0,
-        liked: false
+    const newComment = { post_id: postId, author: 'Gardener', body: text, likes: 0 };
+    sb.from('comments').insert(newComment).select().single().then(res => {
+        if (res.error) { alert('Could not post reply: ' + res.error.message); return; }
+        comments.push({
+            id: res.data.id,
+            author: 'Gardener',
+            initials: 'YO',
+            colour: 'bg-primary-container text-on-primary-container',
+            time: 'Just now',
+            text,
+            likes: 0,
+            liked: false,
+            _sbId: res.data.id
+        });
     });
-    saveComments();
     input.value = '';
     sortMode = 'new';
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
