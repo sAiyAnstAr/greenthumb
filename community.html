@@ -328,9 +328,9 @@ async function likePost(id, btn) {
         .eq('id', id);
 }
 
-async function deletePost(id) {
+async function deletePost(id){
 
-    if (!confirm('Delete this post?')) return;
+    if(!confirm('Delete this post?')) return;
 
     try {
 
@@ -339,21 +339,23 @@ async function deletePost(id) {
             .delete()
             .eq('id', id);
 
-        if (error) {
+        if(error){
             throw error;
         }
 
-        allPosts = allPosts.filter(function (p) {
+        allPosts = allPosts.filter(function(p){
             return p.id !== id;
         });
 
         renderFeed();
 
-    } catch (err) {
+    } catch(err){
 
         console.error('Delete failed:', err.message);
 
         alert('Could not delete post: ' + err.message);
+
+        loadPosts();
     }
 }
 
@@ -472,17 +474,18 @@ sb.channel('posts')
 .on(
     'postgres_changes',
     {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'posts'
+        event:'INSERT',
+        schema:'public',
+        table:'posts'
     },
-    function (payload) {
+    function(payload){
 
-        if (!allPosts.find(function (p) {
+        if(!allPosts.find(function(p){
             return p.id === payload.new.id;
-        })) {
+        })){
 
             allPosts.unshift(payload.new);
+
             renderFeed();
         }
     }
@@ -491,13 +494,13 @@ sb.channel('posts')
 .on(
     'postgres_changes',
     {
-        event: 'DELETE',
-        schema: 'public',
-        table: 'posts'
+        event:'DELETE',
+        schema:'public',
+        table:'posts'
     },
-    function (payload) {
+    function(payload){
 
-        allPosts = allPosts.filter(function (p) {
+        allPosts = allPosts.filter(function(p){
             return p.id !== payload.old.id;
         });
 
@@ -506,7 +509,7 @@ sb.channel('posts')
 )
 
 .subscribe();
-
+    
 loadPosts();
 
 </script>
