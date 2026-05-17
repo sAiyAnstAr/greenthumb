@@ -353,98 +353,38 @@
 // ─── Plant Data ──────────────────────────────────────────────────────────────
 // status: 'thriving' | 'good' | 'attention' | 'critical'
 // indicators: water/light/temp each: 'ok' | 'warn' | 'bad'
-const plants = [
-    {
-        id: 1,
-        name: 'Fiddle Leaf Fig',
-        species: 'Ficus lyrata',
-        location: 'Living Room',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBiA2jSIK9Al2lcxxDH9fs15N1GjIKbetbo9G4Ue_inDX6ZNHGaUNeXtr6kYg1XmoA9rxceJjgmGhGFfi6KTfRbj0yPSQ_pfMNbQKcTcn5GFq7kzi1NTYPkwQpLxrhLg8GfYcqngh4cFEHZZjixO9U3DA0RYBm7cyO4AozwnqdTUzkgvj-qyNvokUV2pSO3ZAIbRMYx5KrlDnIKXaImEqwtMqRPymBOb7SZKy8ygsSwbV9vsooWtEVdmuNbgTbbMynXVKgh1zgP4i4',
-        status: 'critical',
-        healthPct: 32,
-        urgentAction: 'Watering overdue by 4 days',
-        lastCared: '4 days ago',
-        water: 'bad',
-        light: 'warn',
-        temp: 'ok',
-        careLogs: []
-    },
-    {
-        id: 2,
-        name: 'Monstera Deliciosa',
-        species: 'Monstera deliciosa',
-        location: 'Study',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBaElgsXvyxdZ2WofPltnMHj0lh9ucSqVN5L7oS70jGiyE0BGo06BXCS34uIyDpKFz15DmgHl2QwRe1-aC_eNYt91zbljIutfSxTKJ7IvJqZ5n-57X-9oBTZokAW3XmhJYtS0XqQENuM0D0G9rU6SCja02Jtyu_3n5SHezKDeOzkwwz4e9OH68ypgwsexO9cCZkY1OOIfZikYg82dU8xwAW_J3YO1eOsU1XT6Kybi2Wwp0epgo9BpBskIej_xPcWsMsctaKw_PfVQM',
-        status: 'thriving',
-        healthPct: 94,
-        urgentAction: null,
-        lastCared: 'Today',
-        water: 'ok',
-        light: 'ok',
-        temp: 'ok',
-        careLogs: [{ action: 'Watered', date: 'Today', note: 'Looking lush!' }]
-    },
-    {
-        id: 3,
-        name: 'Snake Plant',
-        species: 'Sansevieria trifasciata',
-        location: 'Bedroom',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD4bp2_RYim9xiUmxj5U7WKJGnztUzMFoqdVWGittXt8vJ8-mjzLPzNkwBufA0H1Krtt3Kd1CGodwvsP9UyFbIXr99HiFi4ohFlIZQdheGh_-kfGrKY1yE4Jifevv5_7KWFlcFnQjqb_DD0x2VzZ2MiIkLnhA8q_mZqIUx4m2Nl9YUpk4Fjioad0hsT1VN-dD9UbFhdgxZJYmXeWu50ZXivE20gJX5YNB8p_fIAatVekUqROn6Df90w1T4fA6bbuPyXOCr9lDt2jAA',
-        status: 'good',
-        healthPct: 71,
-        urgentAction: 'Water due tomorrow',
-        lastCared: '6 days ago',
-        water: 'warn',
-        light: 'ok',
-        temp: 'ok',
-        careLogs: []
-    },
-    {
-        id: 4,
-        name: 'Calathea Orbifolia',
-        species: 'Calathea orbifolia',
-        location: 'Dining Area',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD25YGbXZBweIp5p7j0gX2i_PkBNqQgW9ZBAx7R-EXetEw73wkaBzTNbiHUd2xIu1I1ToOCFYgSemDbONXvXYIxXZEaR4L-TVxC7NK7u1XwU0td_zr0CxtXYIplSFgYpF5Fa6oU0xLoFzz3PesNmPdBwzKpzMy5PGItrISzOkcRah2jlPC6Nj0rZ7HJ39NxaWxLYovoB68fHyC3aBZBTvX3PmKDTz6RvePJqQNuWwKZQ0zj5u50JOaSj0srzdYjga_Q2aEdTJwOLl8',
-        status: 'attention',
-        healthPct: 51,
-        urgentAction: 'Humidity too low — leaves curling',
-        lastCared: '2 days ago',
-        water: 'ok',
-        light: 'warn',
-        temp: 'warn',
-        careLogs: []
-    },
-    {
-        id: 5,
-        name: 'Peace Lily',
-        species: 'Spathiphyllum wallisii',
-        location: 'Balcony',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y',
-        status: 'attention',
-        healthPct: 58,
-        urgentAction: 'Direct sun exposure — move to shade',
-        lastCared: 'Yesterday',
-        water: 'ok',
-        light: 'bad',
-        temp: 'warn',
-        careLogs: []
-    },
-    {
-        id: 6,
-        name: 'Pothos',
-        species: 'Epipremnum aureum',
-        location: 'Kitchen',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE',
-        status: 'thriving',
-        healthPct: 88,
-        urgentAction: null,
-        lastCared: '2 days ago',
-        water: 'ok',
-        light: 'ok',
-        temp: 'ok',
-        careLogs: []
-    },
-];
+// Load plants from localStorage (set by add-plant.html)
+const plants = (function() {
+    try {
+        var stored = JSON.parse(localStorage.getItem('gt_plants') || '[]');
+        return stored.map(function(p) {
+            // Map localStorage schema to health page schema
+            var lastCaredDays = 'Unknown';
+            if (p.lastWatered) {
+                var days = Math.floor((Date.now() - new Date(p.lastWatered)) / 86400000);
+                lastCaredDays = days === 0 ? 'Today' : days + ' day' + (days === 1 ? '' : 's') + ' ago';
+            }
+            var freq = p.water || 'Weekly';
+            var threshold = freq.includes('Daily') ? 1 : freq.includes('2') ? 3 : freq.includes('3') ? 4 : 7;
+            var overdue = p.lastWatered ? (Date.now() - new Date(p.lastWatered)) / 86400000 >= threshold : true;
+            var health = p.healthPct || 80;
+            return {
+                id: p.id,
+                name: p.nickname || p.name,
+                species: p.species || p.name,
+                location: p.location || 'Unspecified',
+                img: p.img || '',
+                status: health < 40 ? 'critical' : health < 70 ? 'warning' : 'healthy',
+                healthPct: health,
+                urgentAction: overdue ? 'Watering overdue' : 'On track',
+                lastCared: lastCaredDays,
+                water: p.water || 'Weekly',
+                light: p.light || 'Indirect',
+                reminders: p.reminders !== false
+            };
+        });
+    } catch(e) { return []; }
+})();
 
 // ─── State ────────────────────────────────────────────────────────────────────
 let currentFilter = 'all';
