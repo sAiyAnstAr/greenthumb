@@ -7,186 +7,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary-container": "#fed3c7",
-                    "primary-fixed-dim": "#a1d494",
-                    "surface-container-low": "#f4f4f0",
-                    "on-error-container": "#93000a",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-high": "#e9e8e4",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "primary-fixed": "#bcf0ae",
-                    "background": "#faf9f5",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "error-container": "#ffdad6",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-bright": "#faf9f5",
-                    "primary-container": "#2d5a27",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-fixed": "#2c160e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "surface-variant": "#e3e2df",
-                    "outline-variant": "#c2c9bb",
-                    "surface-container-lowest": "#ffffff",
-                    "primary": "#154212",
-                    "on-tertiary": "#ffffff",
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface": "#faf9f5",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
-                    "surface-container": "#efeeea",
-                    "on-secondary-container": "#795950",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed": "#3e0500",
-                    "inverse-surface": "#2f312e",
-                    "surface-tint": "#3b6934",
-                    "tertiary-container": "#8d3220",
-                    "outline": "#72796e",
-                    "on-primary-container": "#9dd090",
-                    "on-error": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "on-surface-variant": "#42493e",
-                    "surface-dim": "#dbdad6",
-                    "secondary": "#77574d",
-                    "inverse-primary": "#a1d494",
-                    "on-primary-fixed": "#002201"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "lg": "40px",
-                    "base": "8px",
-                    "gutter": "16px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "sm": "12px",
-                    "container-margin": "20px"
-            },
-            "fontFamily": {
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
+tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
 <style>
-
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px,100dvh); }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    #nav-overlay { transition: opacity 0.25s ease; }
-    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: min(320px,85vw); }
-    #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease; }
-    .nav-item.active { background: #bcf0ae; color: #002201; }
-    .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item:hover { background: #efeeea; }
-    .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-chevron { transition: transform 0.2s ease; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
-    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
-    .nav-sub-list.collapsed { max-height: 0 !important; }
-    #swipe-zone { position:fixed; left:0; top:0; bottom:0; width:20px; z-index:45; }
-
-    .scanner-overlay { background: radial-gradient(circle, transparent 55%, rgba(0,0,0,0.55) 100%); }
-    .corner { position:absolute; width:36px; height:36px; border-color:#fff; border-width:3px; }
-    .corner-tl { top:0; left:0; border-right:none; border-bottom:none; border-radius:4px 0 0 0; }
-    .corner-tr { top:0; right:0; border-left:none; border-bottom:none; border-radius:0 4px 0 0; }
-    .corner-bl { bottom:0; left:0; border-right:none; border-top:none; border-radius:0 0 0 4px; }
-    .corner-br { bottom:0; right:0; border-left:none; border-top:none; border-radius:0 0 4px 0; }
-    .scan-line { position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#a1d494,transparent); box-shadow:0 0 12px rgba(161,212,148,0.8); animation:scanAnim 2s ease-in-out infinite; }
-    @keyframes scanAnim { 0%,100%{top:10%} 50%{top:85%} }
-    .result-fade { animation:slideUp 0.3s ease; }
-    @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-    .confidence-bar { transition:width 0.6s ease; }
+body{font-family:'Plus Jakarta Sans',sans-serif;min-height:max(884px,100dvh);}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+.active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+#nav-overlay{transition:opacity 0.25s ease;}
+#nav-overlay.hidden{opacity:0;pointer-events:none;}
+#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
+#nav-drawer.open{transform:translateX(0);}
+.nav-item{transition:background 0.15s ease;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item:not(.active):hover{background:#efeeea;}
+.nav-sub-item:hover{background:#efeeea;}
+.nav-section{border-top:1px solid #c2c9bb40;}
+.nav-chevron{transition:transform 0.2s ease;}
+.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
+.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
+.nav-sub-list.collapsed{max-height:0!important;}
+#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
+.scanner-overlay{background:radial-gradient(circle,transparent 55%,rgba(0,0,0,0.55) 100%);}
+.corner{position:absolute;width:36px;height:36px;border-color:#fff;border-width:3px;}
+.corner-tl{top:0;left:0;border-right:none;border-bottom:none;border-radius:4px 0 0 0;}
+.corner-tr{top:0;right:0;border-left:none;border-bottom:none;border-radius:0 4px 0 0;}
+.corner-bl{bottom:0;left:0;border-right:none;border-top:none;border-radius:0 0 0 4px;}
+.corner-br{bottom:0;right:0;border-left:none;border-top:none;border-radius:0 0 4px 0;}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#a1d494,transparent);box-shadow:0 0 12px rgba(161,212,148,0.8);animation:scanAnim 2s ease-in-out infinite;}
+@keyframes scanAnim{0%,100%{top:10%}50%{top:85%}}
+.result-fade{animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.confidence-bar{transition:width 0.6s ease;}
 </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col">
 
+<!-- Nav Drawer -->
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
-<div class="flex items-center gap-md">
-<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
-<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
-</div>
-</div>
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
 <nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
-<span class="font-label-lg text-label-lg text-on-surface">Home</span>
-</a>
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="garden-group" class="nav-sub-list collapsed pl-md">
-<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div>
-</div>
-<div class="mx-sm">
-<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
-</div>
+<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div></div>
+<div class="mx-sm"><a href="scanner.html" class="nav-item active flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
+<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="learn-group" class="nav-sub-list collapsed pl-md">
-<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
-<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
-</div>
-</div>
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+</div></div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
 </div>
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
@@ -196,104 +76,87 @@
 <!-- Header -->
 <header class="bg-black/80 backdrop-blur-sm w-full top-0 sticky z-40 border-b border-white/10">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-    <button onclick="openNav()" class="p-2 rounded-full hover:bg-white/20 transition-colors">
-        <span class="material-symbols-outlined text-white">menu</span>
-    </button>
-    <h1 class="font-headline-lg text-headline-lg text-white">Greenthumb</h1>
-    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer" onclick="openNav()">
-        <img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-    </div>
+<button onclick="openNav()" class="p-2 rounded-full hover:bg-white/20 transition-colors"><span class="material-symbols-outlined text-white">menu</span></button>
+<h1 class="font-headline-lg text-headline-lg text-white">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
 
 <!-- Camera area -->
 <main class="flex-grow relative overflow-hidden bg-black flex flex-col">
-    <video id="video-feed" class="absolute inset-0 w-full h-full object-cover" autoplay playsinline muted></video>
-    <canvas id="capture-canvas" class="hidden"></canvas>
-    <img id="captured-preview" class="absolute inset-0 w-full h-full object-cover hidden"/>
-    <div class="absolute inset-0 scanner-overlay pointer-events-none"></div>
+<video id="video-feed" class="absolute inset-0 w-full h-full object-cover" autoplay playsinline muted></video>
+<canvas id="capture-canvas" class="hidden"></canvas>
+<img id="captured-preview" class="absolute inset-0 w-full h-full object-cover hidden"/>
+<div class="absolute inset-0 scanner-overlay pointer-events-none"></div>
 
-    <!-- Frame guides -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="relative w-64 h-64 sm:w-80 sm:h-80">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-            <div class="scan-line hidden" id="scan-line"></div>
-        </div>
-    </div>
+<!-- Frame guides -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="relative w-64 h-64 sm:w-80 sm:h-80">
+<div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div><div class="corner corner-br"></div>
+<div class="scan-line hidden" id="scan-line"></div>
+</div>
+</div>
 
-    <!-- Status -->
-    <div class="absolute top-4 left-0 right-0 flex justify-center z-10 pointer-events-none">
-        <div class="bg-black/50 backdrop-blur-sm rounded-full px-md py-xs border border-white/20">
-            <p id="status-text" class="text-white font-label-lg text-label-lg">Initialising…</p>
-        </div>
-    </div>
+<!-- Status -->
+<div class="absolute top-4 left-0 right-0 flex justify-center z-10 pointer-events-none">
+<div class="bg-black/50 backdrop-blur-sm rounded-full px-md py-xs border border-white/20">
+<p id="status-text" class="text-white font-label-lg text-label-lg">Ready</p>
+</div>
+</div>
 
-    <!-- No-camera fallback (shown by default) -->
-    <div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10 px-container-margin text-center">
-        <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-lg">
-            <span class="material-symbols-outlined text-[40px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
-        </div>
-        <p class="font-headline-md text-headline-md text-white mb-sm">Identify a Plant</p>
-        <p id="no-camera-msg" class="font-body-md text-white/70 mb-lg max-w-xs">Point your camera at any plant to identify it, or pick a photo from your gallery.</p>
-        <div class="flex flex-col gap-3 w-full max-w-xs">
-            <button id="enable-camera-btn" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform">
-                Enable Camera
-            </button>
-            <button id="gallery-trigger-btn" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full border border-white/30 active:scale-95 transition-transform">
-                Choose from Gallery
-            </button>
-        </div>
-    </div>
+<!-- Main fallback panel -->
+<div id="no-camera" class="absolute inset-0 flex flex-col items-center justify-center bg-primary z-10 px-container-margin text-center">
+<div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-[40px] text-white" style="font-variation-settings:'FILL' 1">photo_camera</span>
+</div>
+<p class="font-headline-md text-headline-md text-white mb-sm">Identify a Plant</p>
+<p id="no-camera-msg" class="font-body-md text-white/70 mb-lg max-w-xs">Point your camera at any plant to identify it, or pick a photo from your gallery.</p>
+<div class="flex flex-col gap-3 w-full max-w-xs">
+<button onclick="btnEnableCamera()" class="bg-white text-primary font-label-lg text-label-lg py-3 rounded-full active:scale-95 transition-transform">Enable Camera</button>
+<button onclick="btnGallery()" class="bg-white/20 text-white font-label-lg text-label-lg py-3 rounded-full border border-white/30 active:scale-95 transition-transform">Choose from Gallery</button>
+</div>
+</div>
 
-    <!-- Camera controls (hidden until camera live) -->
-    <div id="camera-controls" class="hidden absolute bottom-32 left-0 right-0 flex items-center justify-center gap-xl px-container-margin z-10">
-        <button id="gallery-btn-live" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-white">image</span>
-        </button>
-        <button id="capture-btn" class="w-20 h-20 rounded-full border-4 border-white bg-white/20 flex items-center justify-center active:scale-90 transition-transform shadow-lg">
-            <div class="w-14 h-14 rounded-full bg-white"></div>
-        </button>
-        <button id="flash-btn" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-white">flash_off</span>
-        </button>
-    </div>
+<!-- Camera controls -->
+<div id="camera-controls" class="hidden absolute bottom-32 left-0 right-0 flex items-center justify-center gap-xl px-container-margin z-10">
+<button onclick="btnGallery()" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white">image</span>
+</button>
+<button onclick="btnCapture()" class="w-20 h-20 rounded-full border-4 border-white bg-white/20 flex items-center justify-center active:scale-90 transition-transform shadow-lg">
+<div class="w-14 h-14 rounded-full bg-white"></div>
+</button>
+<button onclick="btnFlash()" id="flash-btn" class="p-md rounded-full bg-black/40 border border-white/20 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-white">flash_off</span>
+</button>
+</div>
 </main>
 
 <!-- Hidden file input -->
-<input type="file" id="gallery-input" accept="image/*" class="hidden"/>
+<input type="file" id="gallery-input" accept="image/*" class="hidden" onchange="onGalleryChange(event)"/>
 
 <!-- Results sheet -->
 <div id="results-sheet" class="hidden fixed inset-0 z-50 flex items-end">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="results-backdrop"></div>
-    <div class="relative w-full bg-background rounded-t-3xl shadow-2xl max-h-[85vh] overflow-y-auto">
-        <div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mt-md mb-sm"></div>
-        <div class="px-container-margin mb-md flex items-center gap-md">
-            <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-outline-variant/20 bg-surface-container">
-                <img id="result-thumb" src="" alt="" class="w-full h-full object-cover"/>
-            </div>
-            <div class="flex-1">
-                <h2 class="font-headline-md text-headline-md text-on-surface">Results</h2>
-                <p class="font-label-sm text-outline">Powered by PlantNet</p>
-            </div>
-            <button id="close-results-btn" class="p-2 rounded-full hover:bg-surface-container">
-                <span class="material-symbols-outlined text-on-surface-variant">close</span>
-            </button>
-        </div>
-        <div id="results-loading" class="px-container-margin pb-lg space-y-3">
-            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div><div class="h-2 bg-surface-container rounded w-full mt-2"></div></div></div>
-            <div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div></div></div>
-        </div>
-        <div id="results-list" class="hidden px-container-margin pb-lg space-y-3"></div>
-        <div id="results-error" class="hidden px-container-margin pb-lg text-center py-lg">
-            <span class="material-symbols-outlined text-[40px] text-outline">search_off</span>
-            <p class="font-headline-md text-on-surface-variant mt-2">Could not identify plant</p>
-            <p class="font-body-md text-outline mt-1">Try a clearer photo with good lighting and a visible leaf</p>
-            <button id="retry-btn" class="mt-md font-label-lg text-primary hover:underline">Try again</button>
-        </div>
-    </div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeResults()"></div>
+<div class="relative w-full bg-background rounded-t-3xl shadow-2xl max-h-[85vh] overflow-y-auto">
+<div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mt-md mb-sm"></div>
+<div class="px-container-margin mb-md flex items-center gap-md">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-outline-variant/20 bg-surface-container"><img id="result-thumb" src="" alt="" class="w-full h-full object-cover"/></div>
+<div class="flex-1"><h2 class="font-headline-md text-headline-md text-on-surface">Identification Results</h2><p class="font-label-sm text-outline">Powered by PlantNet</p></div>
+<button onclick="closeResults()" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined text-on-surface-variant">close</span></button>
+</div>
+<div id="results-loading" class="px-container-margin pb-lg space-y-3">
+<div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div></div></div>
+<div class="flex gap-md animate-pulse"><div class="w-16 h-16 bg-surface-container rounded-xl flex-shrink-0"></div><div class="flex-1 space-y-2 py-2"><div class="h-4 bg-surface-container rounded w-3/4"></div><div class="h-3 bg-surface-container rounded w-1/2"></div></div></div>
+</div>
+<div id="results-list" class="hidden px-container-margin pb-lg space-y-3"></div>
+<div id="results-error" class="hidden px-container-margin pb-lg text-center py-lg">
+<span class="material-symbols-outlined text-[40px] text-outline">search_off</span>
+<p class="font-headline-md text-on-surface-variant mt-2">Could not identify plant</p>
+<p class="font-body-md text-outline mt-1">Try a clearer photo with a visible leaf</p>
+<button onclick="closeResults()" class="mt-md font-label-lg text-primary hover:underline">Try again</button>
+</div>
+</div>
 </div>
 
 <!-- Bottom Nav -->
@@ -307,299 +170,159 @@
 </div>
 </nav>
 
-<!-- NAV SCRIPT (isolated) -->
 <script>
+// ── Nav ───────────────────────────────────────────────────────────────────
+function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
+function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
+document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
 
-function openNav() {
-    var d = document.getElementById('nav-drawer');
-    var o = document.getElementById('nav-overlay');
-    if(d) d.classList.add('open');
-    if(o) o.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+// ── Scanner ───────────────────────────────────────────────────────────────
+var PLANTNET_KEY='2b10jzN7Tpx56loqC6ifqfhQuu';
+var PLANTNET_URL='https://my-api.plantnet.org/v2/identify/all';
+var stream=null,track=null,flashOn=false;
+
+function setMsg(txt){var el=document.getElementById('no-camera-msg');if(el)el.textContent=txt;}
+function setStatus(txt){var el=document.getElementById('status-text');if(el)el.textContent=txt;}
+
+// ── Button handlers — these use simple onclick= so we can prove they fire ─
+function btnEnableCamera(){
+    // First show alert to confirm button works
+    var msg='Button clicked!\n\n';
+    msg+='Protocol: '+location.protocol+'\n';
+    msg+='Hostname: '+location.hostname+'\n';
+    msg+='mediaDevices exists: '+(!!navigator.mediaDevices)+'\n';
+    msg+='getUserMedia exists: '+(!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia))+'\n\n';
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+        msg+='Camera API not available in this browser.';
+        alert(msg);
+        setMsg('Camera not available. Use gallery instead.');
+        return;
+    }
+    alert(msg+'Camera API available — requesting access now...');
+    startCamera();
 }
-function closeNav() {
-    var d = document.getElementById('nav-drawer');
-    var o = document.getElementById('nav-overlay');
-    if(d) d.classList.remove('open');
-    if(o) o.classList.add('hidden');
-    document.body.style.overflow = '';
+
+function btnGallery(){
+    alert('Gallery button clicked! Opening file picker...');
+    document.getElementById('gallery-input').click();
 }
-function toggleGroup(id) {
-    var list = document.getElementById(id);
-    if (!list) return;
-    var btn = list.previousElementSibling;
-    var collapsed = list.classList.contains('collapsed');
-    list.classList.toggle('collapsed', !collapsed);
-    if (btn) btn.classList.toggle('open', collapsed);
-    list.style.maxHeight = collapsed ? list.scrollHeight + 'px' : null;
+
+function btnCapture(){
+    var video=document.getElementById('video-feed');
+    if(!video.videoWidth){setStatus('Camera not ready');return;}
+    var canvas=document.getElementById('capture-canvas');
+    canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+    canvas.getContext('2d').drawImage(video,0,0);
+    canvas.toBlob(function(blob){
+        var url=URL.createObjectURL(blob);
+        document.getElementById('captured-preview').src=url;
+        document.getElementById('captured-preview').classList.remove('hidden');
+        document.getElementById('result-thumb').src=url;
+        runIdentify(blob);
+    },'image/jpeg',0.9);
 }
-function setActiveNav(pageId) {
-    var map = {
-        'home':'nav-home','my-garden':'nav-my-garden','garden-health':'nav-garden-health',
-        'garden-planner':'nav-garden-planner','garden-diary':'nav-garden-diary',
-        'add-plant':'nav-add-plant','scanner':'nav-scanner','community':'nav-community',
-        'learn':'nav-learn','encyclopedia':'nav-encyclopedia','search-guides':'nav-search-guides',
-        'articles':'nav-articles','journeys':'nav-journeys','recommendations':'nav-recommendations',
-        'calendar':'nav-calendar','profile':'nav-profile','settings':'nav-settings'
-    };
-    var groups = {
-        'garden-health':'garden-group','garden-planner':'garden-group',
-        'garden-diary':'garden-group','add-plant':'garden-group','my-garden':'garden-group',
-        'learn':'learn-group','encyclopedia':'learn-group','search-guides':'learn-group',
-        'articles':'learn-group','journeys':'learn-group'
-    };
-    var itemId = map[pageId];
-    if (itemId) {
-        var el = document.getElementById(itemId);
-        if (el) el.classList.add('active');
-    }
-    var groupId = groups[pageId];
-    if (groupId) {
-        var g = document.getElementById(groupId);
-        var b = g && g.previousElementSibling;
-        if (g) { g.classList.remove('collapsed'); g.style.maxHeight = '500px'; }
-        if (b) b.classList.add('open');
-    }
+
+function btnFlash(){
+    if(!track)return;
+    flashOn=!flashOn;
+    try{track.applyConstraints({advanced:[{torch:flashOn}]});}catch(e){flashOn=false;}
+    document.getElementById('flash-btn').querySelector('span').textContent=flashOn?'flash_on':'flash_off';
 }
-(function() {
-    try {
-        var loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
-        if (loc && loc.name) {
-            var el = document.getElementById('nav-location');
-            if (el) el.textContent = loc.name;
-        }
-    } catch(e) {}
-    document.addEventListener('touchstart', function(e) {
-        if (e.touches[0].clientX < 30) window._swipeStartX = e.touches[0].clientX;
-    }, {passive:true});
-    document.addEventListener('touchend', function(e) {
-        if (window._swipeStartX && e.changedTouches[0].clientX - window._swipeStartX > 60) openNav();
-        window._swipeStartX = null;
-    }, {passive:true});
-    var drawer = document.getElementById('nav-drawer');
-    if (drawer) {
-        drawer.addEventListener('touchend', function(e) {
-            if (window._swipeStartX !== undefined) {
-                var dx = e.changedTouches[0].clientX - (window._swipeStartX || 0);
-                if (dx < -60) closeNav();
-            }
-        }, {passive:true});
-    }
-})();
 
-try { setActiveNav('scanner'); } catch(e) {}
-try {
-    document.querySelectorAll('.nav-sub-list').forEach(function(l) {
-        l.style.maxHeight = l.classList.contains('collapsed') ? '0px' : '500px';
-    });
-} catch(e) {}
-</script>
-
-<!-- SCANNER SCRIPT (isolated) -->
-<script>
-(function() {
-    'use strict';
-
-    var PLANTNET_KEY = '2b10jzN7Tpx56loqC6ifqfhQuu';
-    var PLANTNET_URL = 'https://my-api.plantnet.org/v2/identify/all';
-    var stream = null;
-    var track = null;
-    var flashOn = false;
-
-    // ── Elements ──────────────────────────────────────────────────────────
-    var video       = document.getElementById('video-feed');
-    var canvas      = document.getElementById('capture-canvas');
-    var preview     = document.getElementById('captured-preview');
-    var noCamera    = document.getElementById('no-camera');
-    var noCameraMsg = document.getElementById('no-camera-msg');
-    var enableBtn   = document.getElementById('enable-camera-btn');
-    var galleryTrig = document.getElementById('gallery-trigger-btn');
-    var galleryBtnL = document.getElementById('gallery-btn-live');
-    var captureBtn  = document.getElementById('capture-btn');
-    var flashBtn    = document.getElementById('flash-btn');
-    var controls    = document.getElementById('camera-controls');
-    var scanLine    = document.getElementById('scan-line');
-    var statusText  = document.getElementById('status-text');
-    var galInput    = document.getElementById('gallery-input');
-    var sheet       = document.getElementById('results-sheet');
-    var loading     = document.getElementById('results-loading');
-    var resultsList = document.getElementById('results-list');
-    var resultsErr  = document.getElementById('results-error');
-    var resultThumb = document.getElementById('result-thumb');
-    var closeBtn    = document.getElementById('close-results-btn');
-    var backdrop    = document.getElementById('results-backdrop');
-    var retryBtn    = document.getElementById('retry-btn');
-
-    // ── State ─────────────────────────────────────────────────────────────
-    function setStatus(txt) { if (statusText) statusText.textContent = txt; }
-
-    function showIdle() {
-        noCamera.style.display = 'flex';
-        controls.style.display = 'none';
-        if (scanLine) scanLine.style.display = 'none';
-        if (enableBtn) { enableBtn.style.display = 'block'; enableBtn.textContent = 'Enable Camera'; }
-        setStatus('Tap Enable Camera or pick a photo');
-    }
-
-    function showRequesting() {
-        if (noCameraMsg) noCameraMsg.textContent = 'Requesting camera access…';
-        if (enableBtn) enableBtn.style.display = 'none';
-        setStatus('Requesting camera…');
-    }
-
-    function showLive() {
-        noCamera.style.display = 'none';
-        controls.style.display = 'flex';
-        if (scanLine) scanLine.style.display = 'block';
-        setStatus('Align plant in frame');
-    }
-
-    function showDenied(reason) {
-        noCamera.style.display = 'flex';
-        controls.style.display = 'none';
-        if (scanLine) scanLine.style.display = 'none';
-        if (noCameraMsg) noCameraMsg.textContent = reason || 'Camera not available. Use the gallery below.';
-        if (enableBtn) { enableBtn.style.display = 'block'; enableBtn.textContent = 'Try Again'; }
+function startCamera(){
+    setMsg('Requesting camera access...');
+    navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})
+    .then(function(s){
+        stream=s;
+        var video=document.getElementById('video-feed');
+        video.srcObject=s;track=s.getVideoTracks()[0];
+        video.play().then(function(){
+            document.getElementById('no-camera').classList.add('hidden');
+            document.getElementById('camera-controls').classList.remove('hidden');
+            var sl=document.getElementById('scan-line');if(sl)sl.style.display='block';
+            setStatus('Align plant in frame');
+        }).catch(function(e){setMsg('Video play error: '+e.message);});
+    }).catch(function(e){
+        setMsg('Camera denied: '+e.name+' — '+e.message+'. Use gallery instead.');
         setStatus('Camera unavailable');
-    }
-
-    // ── Camera ────────────────────────────────────────────────────────────
-    function startCamera() {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            showDenied('Camera API not available in this browser. Use Choose from Gallery instead.');
-            return;
-        }
-        showRequesting();
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
-            .then(function(s) {
-                stream = s;
-                video.srcObject = s;
-                track = s.getVideoTracks()[0];
-                video.play().then(showLive).catch(function(e) { showDenied('Video play error: ' + e.message); });
-            })
-            .catch(function(e) {
-                showDenied(e.name + ': ' + e.message);
-            });
-    }
-
-    function capturePhoto() {
-        if (!video.videoWidth) { setStatus('Camera not ready yet'); return; }
-        canvas.width  = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext('2d').drawImage(video, 0, 0);
-        canvas.toBlob(function(blob) {
-            var url = URL.createObjectURL(blob);
-            preview.src = url;
-            preview.style.display = 'block';
-            resultThumb.src = url;
-            processImage(blob);
-        }, 'image/jpeg', 0.9);
-    }
-
-    function openGallery() { if (galInput) galInput.click(); }
-
-    // ── PlantNet ──────────────────────────────────────────────────────────
-    function processImage(blob) {
-        sheet.style.display = 'flex';
-        loading.style.display = 'block';
-        resultsList.style.display = 'none';
-        resultsErr.style.display = 'none';
-        setStatus('Identifying plant…');
-
-        var form = new FormData();
-        form.append('images', blob, 'plant.jpg');
-        form.append('organs', 'leaf');
-
-        fetch(PLANTNET_URL + '?api-key=' + PLANTNET_KEY + '&nb-results=3&lang=en', {
-            method: 'POST', body: form
-        })
-        .then(function(r) {
-            if (!r.ok) throw new Error('API ' + r.status);
-            return r.json();
-        })
-        .then(function(data) {
-            if (!data.results || !data.results.length) throw new Error('No results');
-            showResults(data.results);
-        })
-        .catch(function(e) {
-            loading.style.display = 'none';
-            resultsErr.style.display = 'block';
-            setStatus('Could not identify — try again');
-            console.warn('PlantNet error:', e);
-        });
-    }
-
-    function showResults(results) {
-        loading.style.display = 'none';
-        resultsList.style.display = 'block';
-        var top = results[0];
-        setStatus('Best match: ' + (top.species.commonNames && top.species.commonNames[0] || top.species.scientificNameWithoutAuthor));
-        resultsList.innerHTML = results.map(function(r) {
-            var name = (r.species.commonNames && r.species.commonNames[0]) || 'Unknown';
-            var sci  = r.species.scientificNameWithoutAuthor;
-            var pct  = Math.round(r.score * 100);
-            var img  = r.images && r.images[0] && r.images[0].url && r.images[0].url.m || '';
-            var bar  = pct > 70 ? 'bg-primary' : pct > 40 ? 'bg-tertiary' : 'bg-outline';
-            var badge = pct > 70 ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-surface-container text-on-surface-variant';
-            return '<div class="result-fade flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">' +
-                '<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container flex items-center justify-center">' +
-                (img ? '<img src="' + img + '" alt="' + name + '" class="w-full h-full object-cover"/>' : '<span class="material-symbols-outlined text-outline text-[28px]">eco</span>') +
-                '</div><div class="flex-1 min-w-0">' +
-                '<div class="flex items-start justify-between gap-2 mb-1">' +
-                '<div class="min-w-0"><p class="font-label-lg text-on-surface truncate">' + name + '</p><p class="font-label-sm text-outline italic truncate">' + sci + '</p></div>' +
-                '<span class="font-label-sm px-2 py-0.5 rounded-full flex-shrink-0 ' + badge + '">' + pct + '%</span></div>' +
-                '<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-2"><div class="confidence-bar h-full rounded-full ' + bar + '" style="width:' + pct + '%"></div></div>' +
-                '<div class="flex gap-3 flex-wrap">' +
-                '<a href="article-detail.html?topic=' + encodeURIComponent(sci) + '&category=Plant+ID" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">info</span> Learn more</a>' +
-                '<button onclick="addToGarden('' + name.replace(/'/g,"\'") + '','' + sci.replace(/'/g,"\'") + '','' + img + '')" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">add_circle</span> Add to My Garden</button>' +
-                '</div></div></div>';
-        }).join('');
-    }
-
-    function addToGarden(name, species, img) {
-        localStorage.setItem('gt_prefill_plant', JSON.stringify({ name: name, species: species, img: img }));
-        window.location.href = 'add-plant.html';
-    }
-
-    function closeResults() {
-        sheet.style.display = 'none';
-        preview.style.display = 'none';
-        setStatus('Align plant in frame');
-    }
-
-    // ── Wire up buttons ───────────────────────────────────────────────────
-    if (enableBtn)   enableBtn.addEventListener('click', startCamera);
-    if (galleryTrig) galleryTrig.addEventListener('click', openGallery);
-    if (galleryBtnL) galleryBtnL.addEventListener('click', openGallery);
-    if (captureBtn)  captureBtn.addEventListener('click', capturePhoto);
-    if (closeBtn)    closeBtn.addEventListener('click', closeResults);
-    if (backdrop)    backdrop.addEventListener('click', closeResults);
-    if (retryBtn)    retryBtn.addEventListener('click', closeResults);
-    if (flashBtn)    flashBtn.addEventListener('click', function() {
-        if (!track) return;
-        flashOn = !flashOn;
-        try {
-            track.applyConstraints({ advanced: [{ torch: flashOn }] });
-            flashBtn.querySelector('span').textContent = flashOn ? 'flash_on' : 'flash_off';
-        } catch(e) { flashOn = false; }
     });
-    if (galInput) galInput.addEventListener('change', function(e) {
-        var file = e.target.files[0];
-        if (!file) return;
-        e.target.value = '';
-        var url = URL.createObjectURL(file);
-        preview.src = url;
-        preview.style.display = 'block';
-        resultThumb.src = url;
-        processImage(file);
+}
+
+function onGalleryChange(e){
+    var file=e.target.files[0];
+    if(!file)return;
+    e.target.value='';
+    var url=URL.createObjectURL(file);
+    document.getElementById('captured-preview').src=url;
+    document.getElementById('captured-preview').classList.remove('hidden');
+    document.getElementById('result-thumb').src=url;
+    runIdentify(file);
+}
+
+function runIdentify(blob){
+    document.getElementById('results-sheet').style.display='flex';
+    document.getElementById('results-loading').style.display='block';
+    document.getElementById('results-list').style.display='none';
+    document.getElementById('results-error').style.display='none';
+    setStatus('Identifying plant...');
+    var form=new FormData();
+    form.append('images',blob,'plant.jpg');
+    form.append('organs','leaf');
+    fetch(PLANTNET_URL+'?api-key='+PLANTNET_KEY+'&nb-results=3&lang=en',{method:'POST',body:form})
+    .then(function(r){if(!r.ok)throw new Error('API '+r.status);return r.json();})
+    .then(function(data){
+        if(!data.results||!data.results.length)throw new Error('No results');
+        showResults(data.results);
+    }).catch(function(e){
+        document.getElementById('results-loading').style.display='none';
+        document.getElementById('results-error').style.display='block';
+        setStatus('Could not identify');
+        console.warn('PlantNet:',e);
     });
+}
 
-    // ── Make addToGarden global for onclick ───────────────────────────────
-    window.addToGarden = addToGarden;
+function showResults(results){
+    document.getElementById('results-loading').style.display='none';
+    document.getElementById('results-list').style.display='block';
+    var top=results[0];
+    setStatus('Best match: '+((top.species.commonNames&&top.species.commonNames[0])||top.species.scientificNameWithoutAuthor));
+    var html='';
+    for(var i=0;i<results.length;i++){
+        var r=results[i];
+        var name=(r.species.commonNames&&r.species.commonNames[0])||'Unknown';
+        var sci=r.species.scientificNameWithoutAuthor;
+        var pct=Math.round(r.score*100);
+        var img=(r.images&&r.images[0]&&r.images[0].url&&r.images[0].url.m)||'';
+        var bar=pct>70?'bg-primary':pct>40?'bg-tertiary':'bg-outline';
+        var badge=pct>70?'bg-primary-fixed text-on-primary-fixed-variant':'bg-surface-container text-on-surface-variant';
+        html+='<div class="result-fade flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">';
+        html+='<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container flex items-center justify-center">';
+        html+=img?'<img src="'+img+'" alt="'+name+'" class="w-full h-full object-cover"/>':(
+            '<span class="material-symbols-outlined text-outline text-[28px]">eco</span>');
+        html+='</div><div class="flex-1 min-w-0">';
+        html+='<div class="flex items-start justify-between gap-2 mb-1"><div class="min-w-0"><p class="font-label-lg text-on-surface truncate">'+name+'</p><p class="font-label-sm text-outline italic truncate">'+sci+'</p></div>';
+        html+='<span class="font-label-sm px-2 py-0.5 rounded-full flex-shrink-0 '+badge+'">'+pct+'%</span></div>';
+        html+='<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mb-2"><div class="confidence-bar h-full rounded-full '+bar+'" style="width:'+pct+'%"></div></div>';
+        html+='<div class="flex gap-3 flex-wrap">';
+        html+='<a href="article-detail.html?topic='+encodeURIComponent(sci)+'&category=Plant+ID" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">info</span> Learn more</a>';
+        html+='<button onclick="addToGarden(\''+name.replace(/'/g,"\\'")+'\')" class="font-label-sm text-primary hover:underline flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">add_circle</span> Add to My Garden</button>';
+        html+='</div></div></div>';
+    }
+    document.getElementById('results-list').innerHTML=html;
+}
 
-    // ── Init ──────────────────────────────────────────────────────────────
-    showIdle();
-
-})();
+function addToGarden(name){
+    localStorage.setItem('gt_prefill_plant',JSON.stringify({name:name}));
+    window.location.href='add-plant.html';
+}
+function closeResults(){
+    document.getElementById('results-sheet').style.display='none';
+    document.getElementById('captured-preview').classList.add('hidden');
+    setStatus('Ready');
+}
 </script>
 </body></html>
