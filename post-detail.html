@@ -393,11 +393,44 @@ function savedCommentKey() {
     return 'gt_post_comments_' + (postId || 'missing');
 }
 function loadSavedComments() {
+    if (!postId) {
+        comments = [];
+        renderComments();
+        return;
+    }
+    sb.from('comments').select('*').eq('post_id', postId).order('created_at', { ascending: true }).then(res => {
+        if (res.error) throw res.error;
+        comments = (res.data || []).map(commentFromRow);
+        nextCommentId = comments.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0) + 1;
+        renderPost();
+        renderComments();
+    }).catch(() => {
+        comments = loadLocalComments();
+        nextCommentId = comments.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0) + 1;
+        renderPost();
+        renderComments();
+    });
+}
+function loadLocalComments() {
     try { return JSON.parse(localStorage.getItem(savedCommentKey()) || '[]'); }
     catch (e) { return []; }
 }
 function saveComments() {
     localStorage.setItem(savedCommentKey(), JSON.stringify(comments));
+}
+function commentFromRow(row) {
+    const author = row.author || 'Gardener';
+    return {
+        id: row.id,
+        author,
+        initials: initials(author),
+        colour: author === 'Gardener' ? 'bg-primary-container text-on-primary-container' : 'bg-secondary-container text-on-secondary-container',
+        time: timeAgo(row.created_at),
+        text: row.body || row.text || '',
+        likes: row.likes || 0,
+        liked: false,
+        _sbId: row.id
+    };
 }
 function renderPost() {
     const article = document.getElementById('post-content');
@@ -504,23 +537,14 @@ function postReply() {
     const newComment = { post_id: postId, author: 'Gardener', body: text, likes: 0 };
     sb.from('comments').insert(newComment).select().single().then(res => {
         if (res.error) { alert('Could not post reply: ' + res.error.message); return; }
-        comments.push({
-            id: res.data.id,
-            author: 'Gardener',
-            initials: 'YO',
-            colour: 'bg-primary-container text-on-primary-container',
-            time: 'Just now',
-            text,
-            likes: 0,
-            liked: false,
-            _sbId: res.data.id
-        });
+        comments.push(commentFromRow(res.data));
+        renderPost();
+        renderComments();
     });
     input.value = '';
     sortMode = 'new';
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
     document.getElementById('sort-new').classList.add('active');
-    renderComments();
 }
 
 function sharePost() {
