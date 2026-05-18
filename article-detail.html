@@ -1,460 +1,301 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Article - Greenthumb</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed": "#ffdbd0",
-                    "secondary-container": "#fed3c7",
-                    "primary-fixed-dim": "#a1d494",
-                    "surface-container-low": "#f4f4f0",
-                    "on-error-container": "#93000a",
-                    "inverse-on-surface": "#f2f1ed",
-                    "surface-container-high": "#e9e8e4",
-                    "secondary-fixed-dim": "#e7bdb1",
-                    "primary-fixed": "#bcf0ae",
-                    "background": "#faf9f5",
-                    "on-tertiary-container": "#ffaf9e",
-                    "on-secondary-fixed-variant": "#5d4037",
-                    "error-container": "#ffdad6",
-                    "tertiary-fixed": "#ffdad3",
-                    "surface-bright": "#faf9f5",
-                    "primary-container": "#2d5a27",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-fixed": "#2c160e",
-                    "on-primary-fixed-variant": "#23501e",
-                    "surface-variant": "#e3e2df",
-                    "outline-variant": "#c2c9bb",
-                    "surface-container-lowest": "#ffffff",
-                    "primary": "#154212",
-                    "on-tertiary": "#ffffff",
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918",
-                    "surface": "#faf9f5",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5",
-                    "on-surface": "#1b1c1a",
-                    "surface-container-highest": "#e3e2df",
-                    "surface-container": "#efeeea",
-                    "on-secondary-container": "#795950",
-                    "tertiary": "#6e1c0c",
-                    "on-tertiary-fixed": "#3e0500",
-                    "inverse-surface": "#2f312e",
-                    "surface-tint": "#3b6934",
-                    "tertiary-container": "#8d3220",
-                    "outline": "#72796e",
-                    "on-primary-container": "#9dd090",
-                    "on-error": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "on-surface-variant": "#42493e",
-                    "surface-dim": "#dbdad6",
-                    "secondary": "#77574d",
-                    "inverse-primary": "#a1d494",
-                    "on-primary-fixed": "#002201"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "lg": "40px",
-                    "base": "8px",
-                    "gutter": "16px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "sm": "12px",
-                    "container-margin": "20px"
-            },
-            "fontFamily": {
-                    "label-sm": ["Plus Jakarta Sans"],
-                    "headline-lg": ["Plus Jakarta Sans"],
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "body-md": ["Plus Jakarta Sans"],
-                    "label-lg": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Plus Jakarta Sans"]
-            },
-            "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
 <style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;color:#1b1c1a;padding-bottom:80px;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-family:'Material Symbols Outlined';font-size:24px;display:inline-block;}
 
+/* Reading progress */
+#progress{position:fixed;top:0;left:0;height:3px;background:#154212;width:0;z-index:100;transition:width 0.1s;}
 
-    /* Nav Drawer */
-    #nav-overlay { transition: opacity 0.25s ease; }
-    #nav-overlay
-    #nav-drawer {
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: min(320px, 85vw);
-    }
-    #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
-    .nav-item.active { background: #bcf0ae; color: #002201; }
-    .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item { transition: background 0.15s ease; }
-    .nav-sub-item.active { color: #154212; font-weight: 700; }
-    .nav-sub-item:hover { background: #efeeea; }
-    .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
-    .nav-chevron { transition: transform 0.2s ease; }
-    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
-    .nav-sub-list.collapsed { max-height: 0 !important; }
-    /* Swipe from left edge */
-    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
+/* Header */
+#hdr{position:sticky;top:0;z-index:40;background:rgba(250,249,245,0.97);border-bottom:1px solid rgba(194,201,187,0.4);backdrop-filter:blur(8px);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+#hdr a{color:#154212;text-decoration:none;padding:6px;border-radius:50%;display:flex;align-items:center;background:none;border:none;cursor:pointer;flex-shrink:0;}
+#hdr a:hover{background:#efeeea;}
+#hdr-title{font-size:20px;font-weight:700;color:#154212;letter-spacing:-0.01em;}
+#hdr-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #2d5a27;flex-shrink:0;}
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #faf9f5;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f5; min-height: max(884px, 100dvh); }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .active-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* Content */
+#s-loading{padding:24px 20px;}
+.sk{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:sh 1.4s infinite;border-radius:8px;margin-bottom:12px;}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-    .comment-fade { animation: fadeUp 0.2s ease; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
-    .liked { color: #ba1a1a; }
-    .chip.active { background:#154212; color:#fff; }
+#s-error{display:none;text-align:center;padding:60px 20px;}
+#s-error .icon{font-size:56px;color:#c2c9bb;display:block;margin-bottom:16px;}
+#s-error p{font-size:18px;font-weight:600;color:#72796e;margin-bottom:8px;}
+#s-error small{font-size:14px;color:#c2c9bb;display:block;margin-bottom:24px;}
+#s-error button{background:#154212;color:white;border:none;padding:12px 28px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
 
+#s-content{display:none;}
+#c-hero{width:100%;max-height:260px;object-fit:cover;display:none;}
+#c-meta{padding:20px 20px 0;}
+#c-cat{display:inline-block;background:#bcf0ae;color:#002201;font-size:12px;font-weight:700;padding:4px 14px;border-radius:50px;margin-bottom:14px;letter-spacing:0.02em;}
+#c-title{font-size:28px;font-weight:700;color:#1b1c1a;line-height:1.2;margin-bottom:10px;}
+#c-info{display:flex;align-items:center;gap:16px;color:#72796e;font-size:13px;margin-bottom:0;}
+#c-info span{display:flex;align-items:center;gap:4px;}
+#c-info .material-symbols-outlined{font-size:14px;}
 
-#reading-progress{position:fixed;top:0;left:0;height:3px;background:#154212;width:0;z-index:100;transition:width 0.1s;}
-.article-body p{font-size:16px;line-height:1.8;color:#42493e;margin-bottom:16px;}
-.article-body h2{font-size:20px;font-weight:700;color:#1b1c1a;margin:28px 0 10px;}
-.skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+#c-body{padding:20px;font-size:16px;line-height:1.8;color:#42493e;}
+#c-body p{margin-bottom:16px;}
+#c-body h2{font-size:20px;font-weight:700;color:#1b1c1a;margin:28px 0 10px;}
+
+#c-yt{display:none;padding:0 20px 24px;border-top:1px solid rgba(194,201,187,0.4);}
+#c-yt h3{font-size:20px;font-weight:700;color:#1b1c1a;margin:20px 0 14px;}
 .yt-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:8px;}
 .yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+.yt-title{font-size:13px;color:#72796e;margin-bottom:16px;}
+
+#c-related{padding:20px;border-top:1px solid rgba(194,201,187,0.4);}
+#c-related h3{font-size:20px;font-weight:700;color:#1b1c1a;margin-bottom:16px;}
+.rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.rel-card{background:white;border-radius:14px;padding:14px;border:1px solid rgba(194,201,187,0.3);box-shadow:0 1px 4px rgba(0,0,0,0.06);text-decoration:none;display:block;}
+.rel-cat{font-size:11px;color:#72796e;margin-bottom:4px;}
+.rel-title{font-size:14px;font-weight:600;color:#1b1c1a;margin-bottom:8px;}
+.rel-link{font-size:12px;color:#154212;display:flex;align-items:center;gap:2px;}
+.rel-link .material-symbols-outlined{font-size:14px;}
+
+/* Complete bar */
 #complete-bar{display:none;position:fixed;bottom:64px;left:12px;right:12px;background:white;border-radius:20px;padding:14px 16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:50;align-items:center;gap:12px;border:2px solid #bcf0ae;}
+#cb-icon{width:40px;height:40px;border-radius:50%;background:#bcf0ae;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#cb-icon .material-symbols-outlined{color:#154212;font-size:20px;font-variation-settings:'FILL' 1;}
+#cb-text{flex:1;min-width:0;}
+#cb-title{font-size:14px;font-weight:700;color:#154212;display:block;}
+#cb-sub{font-size:12px;color:#72796e;display:block;margin-top:2px;}
+#cb-btn{background:#154212;color:white;border:none;border-radius:12px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;flex-shrink:0;white-space:nowrap;}
+
+/* Bottom nav */
+#bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid rgba(194,201,187,0.4);display:flex;justify-content:space-around;align-items:center;padding:6px 0;z-index:30;box-shadow:0 -2px 12px rgba(0,0,0,0.06);}
+.nav-item{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#72796e;font-size:11px;font-weight:500;gap:2px;padding:4px 12px;border-radius:50px;}
+.nav-item .material-symbols-outlined{font-size:22px;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
 </style>
 </head>
-<body class="bg-background text-on-surface min-h-screen pb-32">
-<div id="reading-progress"></div>
+<body>
+<div id="progress"></div>
 
-<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
-<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
-<div class="flex items-center gap-md">
-<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
-<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
-</div>
-</div>
-<nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
-<span class="font-label-lg text-label-lg text-on-surface">Home</span>
-</a>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
-<div id="garden-group" class="nav-sub-list collapsed pl-md">
-<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div>
-</div>
-<div class="mx-sm">
-<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
-<div id="learn-group" class="nav-sub-list collapsed pl-md">
-<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
-<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
-</div>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
-</div>
-</nav>
-<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
-</aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
-
-<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
-<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="learn.html"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
-<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
-</div>
-</header>
-
-<main class="max-w-screen-lg mx-auto">
-
-<!-- Loading skeletons -->
-<div id="s-loading" class="px-container-margin pt-lg space-y-md">
-<div class="skeleton h-5 w-24 rounded-full"></div>
-<div class="skeleton h-9 w-3/4 rounded-xl"></div>
-<div class="skeleton h-4 w-32 rounded-lg"></div>
-<div class="skeleton h-52 w-full rounded-2xl mt-sm"></div>
-<div class="space-y-2 mt-md">
-<div class="skeleton h-4 rounded w-full"></div>
-<div class="skeleton h-4 rounded w-5/6"></div>
-<div class="skeleton h-4 rounded w-full"></div>
-<div class="skeleton h-4 rounded w-4/5"></div>
-<div class="skeleton h-4 rounded w-full"></div>
-</div>
+<div id="hdr">
+  <a href="learn.html" id="back-btn"><span class="material-symbols-outlined">arrow_back</span></a>
+  <span id="hdr-title">Greenthumb</span>
+  <img id="hdr-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile"/>
 </div>
 
-<!-- Error -->
-<div id="s-error" class="hidden px-container-margin pt-xl text-center">
-<span class="material-symbols-outlined text-[56px] text-outline">wifi_off</span>
-<p class="font-headline-md text-on-surface-variant mt-md">Could not load article</p>
-<p id="s-error-msg" class="font-body-md text-outline mt-sm mb-lg"></p>
-<button onclick="loadArticle()" class="bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full active:scale-95 transition-transform">Try again</button>
+<div id="s-loading">
+  <div class="sk" style="height:18px;width:80px;"></div>
+  <div class="sk" style="height:32px;width:75%;margin-top:4px;"></div>
+  <div class="sk" style="height:14px;width:120px;"></div>
+  <div class="sk" style="height:220px;width:100%;margin-top:16px;border-radius:12px;"></div>
+  <div class="sk" style="height:14px;width:100%;margin-top:20px;"></div>
+  <div class="sk" style="height:14px;width:90%;"></div>
+  <div class="sk" style="height:14px;width:95%;"></div>
+  <div class="sk" style="height:14px;width:80%;"></div>
+  <div class="sk" style="height:14px;width:100%;"></div>
 </div>
 
-<!-- Content -->
-<div id="s-content" class="hidden">
-<div id="c-hero-wrap" class="hidden w-full overflow-hidden max-h-64">
-<img id="c-hero" src="" alt="" class="w-full object-cover"/>
-</div>
-<div class="px-container-margin pt-lg pb-sm">
-<span id="c-category" class="font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant inline-block mb-md"></span>
-<h2 id="c-title" class="font-display-lg text-display-lg text-on-surface mb-sm leading-tight"></h2>
-<div class="flex items-center gap-md text-outline font-label-sm mb-lg">
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">schedule</span><span id="c-time"></span></span>
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">import_contacts</span>Wikipedia</span>
-</div>
-</div>
-<div id="c-body" class="article-body px-container-margin pb-lg"></div>
-<div id="c-yt" class="hidden px-container-margin pb-lg">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Watch & Learn</h3>
-<div id="c-yt-list" class="space-y-md"></div>
-</div>
-<div class="px-container-margin pb-xl border-t border-outline-variant/40 pt-lg">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-md">More to Explore</h3>
-<div id="c-related" class="grid grid-cols-1 sm:grid-cols-2 gap-md"></div>
-</div>
+<div id="s-error">
+  <span class="material-symbols-outlined icon">wifi_off</span>
+  <p>Could not load article</p>
+  <small id="s-error-msg"></small>
+  <button onclick="loadArticle()">Try again</button>
 </div>
 
-</main>
+<div id="s-content">
+  <img id="c-hero" alt=""/>
+  <div id="c-meta">
+    <span id="c-cat"></span>
+    <h1 id="c-title"></h1>
+    <div id="c-info">
+      <span><span class="material-symbols-outlined">schedule</span><span id="c-time"></span></span>
+      <span><span class="material-symbols-outlined">import_contacts</span>Wikipedia</span>
+    </div>
+  </div>
+  <div id="c-body"></div>
+  <div id="c-yt"><h3>Watch & Learn</h3><div id="c-yt-list"></div></div>
+  <div id="c-related"><h3>More to Explore</h3><div class="rel-grid" id="c-rel-grid"></div></div>
+</div>
 
-<!-- Complete bar -->
 <div id="complete-bar">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">school</span>
-</div>
-<div class="flex-1 min-w-0">
-<p id="cb-title" class="font-label-lg text-on-surface"></p>
-<p id="cb-sub" class="font-label-sm text-outline"></p>
-</div>
-<button id="cb-btn" class="bg-primary text-on-primary font-label-lg text-label-lg px-sm py-2 rounded-xl flex-shrink-0" style="border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;"></button>
+  <div id="cb-icon"><span class="material-symbols-outlined">school</span></div>
+  <div id="cb-text"><span id="cb-title"></span><span id="cb-sub"></span></div>
+  <button id="cb-btn"></button>
 </div>
 
-<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
-<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="community.html"><span class="material-symbols-outlined active-icon">group</span><span class="font-label-sm text-label-sm">Community</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
-</div>
+<nav id="bottom-nav">
+  <a href="index.html" class="nav-item"><span class="material-symbols-outlined">home</span>Home</a>
+  <a href="my-garden.html" class="nav-item"><span class="material-symbols-outlined">psychology_alt</span>My Garden</a>
+  <a href="scanner.html" class="nav-item"><span class="material-symbols-outlined">filter_center_focus</span>Identify</a>
+  <a href="community.html" class="nav-item"><span class="material-symbols-outlined">group</span>Community</a>
+  <a href="learn.html" class="nav-item active"><span class="material-symbols-outlined">school</span>Learn</a>
 </nav>
 
 <script>
-// ── Nav ──────────────────────────────────────────────────────────────────
-function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
-function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
-function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
-try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
-document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
-document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
-document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
-window.addEventListener('scroll',function(){var d=document.documentElement;document.getElementById('reading-progress').style.width=Math.min(d.scrollTop/(d.scrollHeight-d.clientHeight)*100,100)+'%';});
+// Reading progress
+window.addEventListener('scroll', function(){
+    var d = document.documentElement;
+    var pct = d.scrollTop / (d.scrollHeight - d.clientHeight) * 100;
+    document.getElementById('progress').style.width = Math.min(pct, 100) + '%';
+});
 
-// ── Params ────────────────────────────────────────────────────────────────
+// URL params
 var P = {};
 window.location.search.slice(1).split('&').forEach(function(p){
-    var eq=p.indexOf('=');
-    if(eq>0) P[decodeURIComponent(p.slice(0,eq))]=decodeURIComponent(p.slice(eq+1).replace(/\+/g,' '));
+    var eq = p.indexOf('=');
+    if(eq > 0) P[decodeURIComponent(p.slice(0,eq))] = decodeURIComponent(p.slice(eq+1).replace(/\+/g,' '));
 });
 var TOPIC    = P.topic    || 'Gardening';
 var CATEGORY = P.category || 'Learn';
 var MOD_ID   = P.module   || '';
-var MOD_XP   = parseInt(P.xp||'0');
-var YT_KEY   =  + YT_KEY + ;
+var MOD_XP   = parseInt(P.xp || '0');
+var YT_KEY   = 'AIzaSyAN9eJwek4cxcAcTzqkKMqn5KNmaC3u960';
 document.title = TOPIC + ' - Greenthumb';
 
-// ── XHR helper (proven pattern) ───────────────────────────────────────────
+// XHR helper
 function doXHR(url, onOK, onFail){
-    var xhr=new XMLHttpRequest();
-    xhr.open('GET',url,true);
-    xhr.timeout=12000;
-    xhr.ontimeout=function(){if(onFail)onFail('Timeout');};
-    xhr.onerror=function(){if(onFail)onFail('Network error');};
-    xhr.onload=function(){
-        if(xhr.status===200){onOK(xhr.responseText);}
-        else{if(onFail)onFail('HTTP '+xhr.status);}
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 12000;
+    xhr.ontimeout = function(){ if(onFail) onFail('Timeout'); };
+    xhr.onerror   = function(){ if(onFail) onFail('Network error'); };
+    xhr.onload    = function(){
+        if(xhr.status === 200){ onOK(xhr.responseText); }
+        else { if(onFail) onFail('HTTP ' + xhr.status); }
     };
     xhr.send();
 }
 
 function showError(msg){
-    document.getElementById('s-loading').classList.add('hidden');
-    document.getElementById('s-error').classList.remove('hidden');
-    document.getElementById('s-error-msg').textContent=msg||'';
+    document.getElementById('s-loading').style.display = 'none';
+    document.getElementById('s-error').style.display   = 'block';
+    document.getElementById('s-error-msg').textContent  = msg || '';
 }
 
 function loadArticle(){
-    document.getElementById('s-loading').classList.remove('hidden');
-    document.getElementById('s-content').classList.add('hidden');
-    document.getElementById('s-error').classList.add('hidden');
-    var url='https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles='+encodeURIComponent(TOPIC);
-    doXHR(url,function(text){
+    document.getElementById('s-loading').style.display = 'block';
+    document.getElementById('s-error').style.display   = 'none';
+    document.getElementById('s-content').style.display = 'none';
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(TOPIC);
+    doXHR(url, function(text){
         try{
-            var data=JSON.parse(text);
-            var pages=data.query&&data.query.pages;
-            if(!pages){showError('No data returned');return;}
-            var pid=Object.keys(pages)[0];
-            var page=pages[pid];
-            if(pid==='-1'||!page.extract){searchFallback(TOPIC);}
-            else{render(page);}
-        }catch(e){showError('Parse error: '+e.message);}
-    },showError);
+            var data  = JSON.parse(text);
+            var pages = data.query && data.query.pages;
+            if(!pages){ showError('No data returned'); return; }
+            var pid   = Object.keys(pages)[0];
+            var page  = pages[pid];
+            if(pid === '-1' || !page.extract){ searchFallback(TOPIC); }
+            else { render(page); }
+        }catch(e){ showError('Parse error: ' + e.message); }
+    }, showError);
 }
 
 function searchFallback(q){
-    var url='https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+encodeURIComponent(q)+'&format=json&origin=*&srlimit=1';
-    doXHR(url,function(text){
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + encodeURIComponent(q) + '&format=json&origin=*&srlimit=1';
+    doXHR(url, function(text){
         try{
-            var data=JSON.parse(text);
-            var hit=data.query&&data.query.search&&data.query.search[0];
-            if(!hit){showError('No article found for: '+q);return;}
-            var url2='https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles='+encodeURIComponent(hit.title);
-            doXHR(url2,function(t2){
+            var data = JSON.parse(text);
+            var hit  = data.query && data.query.search && data.query.search[0];
+            if(!hit){ showError('No article found for: ' + q); return; }
+            var url2 = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(hit.title);
+            doXHR(url2, function(t2){
                 try{
-                    var d2=JSON.parse(t2);
-                    var p2=d2.query&&d2.query.pages&&d2.query.pages[Object.keys(d2.query.pages)[0]];
-                    if(p2&&p2.extract){render(p2);}else{showError('Article has no content');}
-                }catch(e){showError('Parse error: '+e.message);}
-            },showError);
-        }catch(e){showError('Search error: '+e.message);}
-    },showError);
+                    var d2 = JSON.parse(t2);
+                    var p2 = d2.query && d2.query.pages && d2.query.pages[Object.keys(d2.query.pages)[0]];
+                    if(p2 && p2.extract){ render(p2); }
+                    else { showError('Article has no content'); }
+                }catch(e){ showError('Parse error: ' + e.message); }
+            }, showError);
+        }catch(e){ showError('Search error: ' + e.message); }
+    }, showError);
 }
 
 function render(page){
-    document.getElementById('s-loading').classList.add('hidden');
-    document.getElementById('s-content').classList.remove('hidden');
-    document.getElementById('c-category').textContent=CATEGORY;
-    document.getElementById('c-title').textContent=page.title||TOPIC;
-    document.title=(page.title||TOPIC)+' - Greenthumb';
-    var words=(page.extract||'').split(' ').length;
-    document.getElementById('c-time').textContent=Math.max(2,Math.ceil(words/200))+' min read';
-    if(page.thumbnail&&page.thumbnail.source){
-        document.getElementById('c-hero').src=page.thumbnail.source;
-        document.getElementById('c-hero-wrap').classList.remove('hidden');
+    document.getElementById('s-loading').style.display = 'none';
+    document.getElementById('s-content').style.display = 'block';
+
+    document.getElementById('c-cat').textContent   = CATEGORY;
+    document.getElementById('c-title').textContent = page.title || TOPIC;
+    document.title = (page.title || TOPIC) + ' - Greenthumb';
+
+    var words = (page.extract || '').split(' ').length;
+    document.getElementById('c-time').textContent = Math.max(2, Math.ceil(words / 200)) + ' min read';
+
+    if(page.thumbnail && page.thumbnail.source){
+        var img = document.getElementById('c-hero');
+        img.src = page.thumbnail.source;
+        img.style.display = 'block';
     }
-    var paras=(page.extract||'').split('\n\n').filter(function(p){return p.trim().length>30;});
-    document.getElementById('c-body').innerHTML=paras.slice(0,8).map(function(p){return'<p>'+p.trim()+'</p>';}).join('')||'<p>'+(page.extract||'')+'</p>';
+
+    var extract = page.extract || '';
+    var paras   = extract.split('\n\n').filter(function(p){ return p.trim().length > 30; });
+    var html    = paras.length
+        ? paras.slice(0, 8).map(function(p){ return '<p>' + p.trim() + '</p>'; }).join('')
+        : '<p>' + extract + '</p>';
+    document.getElementById('c-body').innerHTML = html;
+
     renderRelated();
-    if(MOD_ID)showComplete();
-    if(YT_KEY)loadYT();
+    if(MOD_ID) showComplete();
+    if(YT_KEY)  loadYT();
 }
 
 function loadYT(){
-    var url='https://www.googleapis.com/youtube/v3/search?part=snippet&q='+encodeURIComponent(TOPIC+' gardening')+'&type=video&maxResults=2&key='+YT_KEY;
-    doXHR(url,function(text){
+    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + encodeURIComponent(TOPIC + ' gardening') + '&type=video&maxResults=2&key=' + YT_KEY;
+    doXHR(url, function(text){
         try{
-            var data=JSON.parse(text);
-            if(!data.items||!data.items.length)return;
-            var html=data.items.map(function(v){
-                return'<div class="yt-wrap"><iframe src="https://www.youtube.com/embed/'+v.id.videoId+'" frameborder="0" allowfullscreen></iframe></div>'+
-                '<p class="font-label-sm text-on-surface-variant mt-xs mb-md">'+v.snippet.title+'</p>';
+            var data = JSON.parse(text);
+            if(!data.items || !data.items.length) return;
+            var html = data.items.map(function(v){
+                return '<div class="yt-wrap"><iframe src="https://www.youtube.com/embed/' + v.id.videoId + '" frameborder="0" allowfullscreen></iframe></div>' +
+                       '<p class="yt-title">' + v.snippet.title + '</p>';
             }).join('');
-            document.getElementById('c-yt-list').innerHTML=html;
-            document.getElementById('c-yt').classList.remove('hidden');
+            document.getElementById('c-yt-list').innerHTML = html;
+            document.getElementById('c-yt').style.display = 'block';
         }catch(e){}
-    },null);
+    }, null);
 }
 
-var RELATED=[
-    {title:'Composting Guide',topic:'Compost',cat:'Soil'},
-    {title:'Watering Techniques',topic:'Plant watering',cat:'Watering'},
-    {title:'Companion Planting',topic:'Companion planting',cat:'Plants'},
-    {title:'Pest Management',topic:'Integrated pest management',cat:'Pests'},
-    {title:'Seasonal Gardening',topic:'Gardening',cat:'Seasonal'},
-    {title:'Plant Propagation',topic:'Plant propagation',cat:'Plants'},
-    {title:'Soil pH Guide',topic:'Soil pH',cat:'Soil'},
-    {title:'No-Dig Gardening',topic:'No-dig gardening',cat:'Soil'},
+var RELATED = [
+    {title:'Composting Guide',     topic:'Compost',                      cat:'Soil'},
+    {title:'Watering Techniques',  topic:'Plant watering',               cat:'Watering'},
+    {title:'Companion Planting',   topic:'Companion planting',           cat:'Plants'},
+    {title:'Pest Management',      topic:'Integrated pest management',   cat:'Pests'},
+    {title:'Seasonal Gardening',   topic:'Gardening',                    cat:'Seasonal'},
+    {title:'Plant Propagation',    topic:'Plant propagation',            cat:'Plants'},
+    {title:'Soil pH Guide',        topic:'Soil pH',                      cat:'Soil'},
+    {title:'No-Dig Gardening',     topic:'No-dig gardening',             cat:'Soil'},
 ];
 function renderRelated(){
-    var list=RELATED.filter(function(r){return r.topic!==TOPIC;}).slice(0,4);
-    document.getElementById('c-related').innerHTML=list.map(function(r){
-        return'<a href="article-detail.html?topic='+encodeURIComponent(r.topic)+'&category='+encodeURIComponent(r.cat)+'" class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all block">'+
-        '<p class="font-label-sm text-outline mb-xs">'+r.cat+'</p>'+
-        '<p class="font-label-lg text-on-surface">'+r.title+'</p>'+
-        '<div class="flex items-center gap-xs mt-sm text-primary font-label-sm"><span>Read</span><span class="material-symbols-outlined text-[14px]">arrow_forward</span></div>'+
-        '</a>';
+    var list = RELATED.filter(function(r){ return r.topic !== TOPIC; }).slice(0, 4);
+    document.getElementById('c-rel-grid').innerHTML = list.map(function(r){
+        return '<a href="article-detail.html?topic=' + encodeURIComponent(r.topic) + '&category=' + encodeURIComponent(r.cat) + '" class="rel-card">' +
+               '<div class="rel-cat">' + r.cat + '</div>' +
+               '<div class="rel-title">' + r.title + '</div>' +
+               '<div class="rel-link"><span class="material-symbols-outlined">arrow_forward</span>Read</div>' +
+               '</a>';
     }).join('');
 }
 
 function showComplete(){
-    var prog={};
-    try{prog=JSON.parse(localStorage.getItem('gt_learn_progress')||'{}');}catch(e){}
-    var done=prog[MOD_ID]==='done';
-    var bar=document.getElementById('complete-bar');
-    bar.style.display='flex';
-    document.getElementById('cb-title').textContent=done?'Already completed!':'Mark as Complete';
-    document.getElementById('cb-sub').textContent=done?'XP already earned':'Earn '+MOD_XP+' XP';
-    var btn=document.getElementById('cb-btn');
-    btn.textContent=done?'Back':'Complete ✓';
-    btn.onclick=done?function(){window.location.href='learn.html';}:function(){
-        var p={};try{p=JSON.parse(localStorage.getItem('gt_learn_progress')||'{}');}catch(e){}
-        p[MOD_ID]='done';localStorage.setItem('gt_learn_progress',JSON.stringify(p));
-        window.location.href='learn.html?completed='+MOD_ID+'&xp='+MOD_XP;
-    };
+    var prog = {};
+    try{ prog = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); }catch(e){}
+    var done = prog[MOD_ID] === 'done';
+    document.getElementById('complete-bar').style.display = 'flex';
+    document.getElementById('cb-title').textContent = done ? 'Already completed!' : 'Mark as Complete';
+    document.getElementById('cb-sub').textContent   = done ? 'XP already earned'  : 'Earn ' + MOD_XP + ' XP';
+    var btn = document.getElementById('cb-btn');
+    btn.textContent = done ? 'Back' : 'Complete ✓';
+    btn.onclick = done
+        ? function(){ window.location.href = 'learn.html'; }
+        : function(){
+            var p = {};
+            try{ p = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); }catch(e){}
+            p[MOD_ID] = 'done';
+            localStorage.setItem('gt_learn_progress', JSON.stringify(p));
+            window.location.href = 'learn.html?completed=' + MOD_ID + '&xp=' + MOD_XP;
+        };
 }
 
 loadArticle();
