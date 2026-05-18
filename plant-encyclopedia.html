@@ -1,421 +1,338 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Plant Encyclopedia - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-    tailwind.config = {
-        darkMode: "class",
-        theme: {
-            extend: {
-                "colors": {
-                    "secondary-fixed": "#ffdbd0","secondary-container": "#fed3c7","primary-fixed-dim": "#a1d494",
-                    "surface-container-low": "#f4f4f0","on-error-container": "#93000a","inverse-on-surface": "#f2f1ed",
-                    "surface-container-high": "#e9e8e4","secondary-fixed-dim": "#e7bdb1","primary-fixed": "#bcf0ae",
-                    "background": "#faf9f5","on-tertiary-container": "#ffaf9e","on-secondary-fixed-variant": "#5d4037",
-                    "error-container": "#ffdad6","tertiary-fixed": "#ffdad3","surface-bright": "#faf9f5",
-                    "primary-container": "#2d5a27","on-background": "#1b1c1a","on-secondary-fixed": "#2c160e",
-                    "on-primary-fixed-variant": "#23501e","surface-variant": "#e3e2df","outline-variant": "#c2c9bb",
-                    "surface-container-lowest": "#ffffff","primary": "#154212","on-tertiary": "#ffffff","error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#802918","surface": "#faf9f5","on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb4a5","on-surface": "#1b1c1a","surface-container-highest": "#e3e2df",
-                    "surface-container": "#efeeea","on-secondary-container": "#795950","tertiary": "#6e1c0c",
-                    "on-tertiary-fixed": "#3e0500","inverse-surface": "#2f312e","surface-tint": "#3b6934",
-                    "tertiary-container": "#8d3220","outline": "#72796e","on-primary-container": "#9dd090",
-                    "on-error": "#ffffff","on-primary": "#ffffff","on-surface-variant": "#42493e",
-                    "surface-dim": "#dbdad6","secondary": "#77574d","inverse-primary": "#a1d494","on-primary-fixed": "#002201"
-                },
-                "borderRadius": {"DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px"},
-                "spacing": {"xl": "64px","lg": "40px","base": "8px","gutter": "16px","xs": "4px","md": "24px","sm": "12px","container-margin": "20px"},
-                "fontFamily": {"label-sm": ["Plus Jakarta Sans"],"headline-lg": ["Plus Jakarta Sans"],"headline-md": ["Plus Jakarta Sans"],"body-md": ["Plus Jakarta Sans"],"label-lg": ["Plus Jakarta Sans"],"display-lg": ["Plus Jakarta Sans"],"body-lg": ["Plus Jakarta Sans"]},
-                "fontSize": {
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-                }
-            }
-        }
-    }
+tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
 </script>
 <style>
-    /* Nav Drawer */
-    #nav-overlay { transition: opacity 0.25s ease; }
-    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer {
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: min(320px, 85vw);
-    }
-    #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
-    .nav-item.active { background: #bcf0ae; color: #002201; }
-    .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item { transition: background 0.15s ease; }
-    .nav-sub-item.active { color: #154212; font-weight: 700; }
-    .nav-sub-item:hover { background: #efeeea; }
-    .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
-    .nav-chevron { transition: transform 0.2s ease; }
-    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
-    .nav-sub-list.collapsed { max-height: 0 !important; }
-    /* Swipe from left edge */
-    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
-
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #faf9f5;
-        min-height: max(884px, 100dvh);
-    }
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .active-icon {
-        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .material-symbols-outlined.fill {
-        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:100dvh;overflow-x:hidden;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+.active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+.hide-scrollbar::-webkit-scrollbar{display:none;}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+#nav-overlay{transition:opacity 0.25s ease;}
+#nav-overlay.hidden{opacity:0;pointer-events:none;}
+#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
+#nav-drawer.open{transform:translateX(0);}
+.nav-item{transition:background 0.15s ease;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item:not(.active):hover{background:#efeeea;}
+.nav-sub-item:hover{background:#efeeea;}
+.nav-section{border-top:1px solid #c2c9bb40;}
+.nav-chevron{transition:transform 0.2s ease;}
+.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
+.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
+.nav-sub-list.collapsed{max-height:0!important;}
+#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
+.filter-chip{transition:all 0.15s ease;}
+.filter-chip.active{background:#154212;color:#bcf0ae;}
+.plant-card{transition:all 0.15s ease;}
+.plant-card:active{transform:scale(0.97);}
+.skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.water-badge{background:#dbeafe;color:#1e40af;}
+.water-badge.frequent{background:#fde68a;color:#92400e;}
+.water-badge.minimal{background:#dcfce7;color:#166534;}
+.diff-badge.easy{background:#dcfce7;color:#166534;}
+.diff-badge.moderate{background:#fef9c3;color:#854d0e;}
+.diff-badge.hard{background:#fee2e2;color:#991b1b;}
 </style>
 </head>
-<body class="bg-background text-on-background min-h-screen pb-32">
+<body class="bg-background text-on-surface pb-32">
+
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
-<div class="flex items-center gap-md">
-<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
-<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
-</div>
-</div>
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
 <nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
-<span class="font-label-lg text-label-lg text-on-surface">Home</span>
-</a>
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="garden-group" class="nav-sub-list collapsed pl-md">
 <a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div>
-</div>
-<div class="mx-sm">
-<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
-</div>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div></div>
+<div class="mx-sm"><a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
+<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item active flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="learn-group" class="nav-sub-list collapsed pl-md">
-<a href="article-detail.html?topic=Plant+care&category=Encyclopedia" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="article-detail.html?topic=Plant+care&category=Guides" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
-<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
-</div>
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+</div></div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
 </div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
 </div>
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
 <div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
 
-<!-- Top AppBar -->
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<a class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" href="learn.html" aria-label="Go back">
-<span class="material-symbols-outlined text-primary">arrow_back</span>
-</a>
+<button onclick="openNav()" class="p-2 rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">menu</span></button>
 <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform cursor-pointer" onclick="openNav()">
-<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
-<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
-<!-- Hero Section -->
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg pb-8">
+
 <section class="mb-lg">
 <h2 class="font-display-lg text-display-lg text-primary mb-xs">Plant Encyclopedia</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Explore detailed care guides, growth habits, and expert tips for over 5,000 plant species.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Discover care guides for thousands of plants.</p>
 </section>
-<!-- Search Bar -->
-<div class="mb-lg">
-<div class="flex gap-3">
-<div class="relative flex-1">
-<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-<span class="material-symbols-outlined text-outline" style="font-size: 20px;">search</span>
-</div>
-<input class="form-input w-full h-12 pl-11 pr-4 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary transition-all text-body-md placeholder:text-outline shadow-sm" placeholder="Search guides, tips, and wisdom..." type="text"/>
-</div>
-<button class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container-low border border-outline-variant text-primary shadow-sm active:bg-surface-container transition-colors">
-<span class="material-symbols-outlined" style="font-size: 20px;">tune</span>
-</button>
-</div>
-</div>
-<!-- Featured Section -->
+
+<!-- Search -->
 <section class="mb-lg">
-<h2 class="font-headline-md text-headline-md text-primary font-bold mb-5">Featured</h2>
-<div class="relative overflow-hidden rounded-2xl bg-white shadow-sm border border-outline-variant/30 group cursor-pointer active:scale-[0.98] transition-transform duration-200">
-<div class="aspect-[16/9] w-full overflow-hidden">
-<img alt="Spring Planting Guide" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0ugIXWmZpnxFHJ2gXCnIX4bnWOE98Wq1at542AuwQsifoD1RcfdjuaiWENJF4Rsso9SmMRto7rSS-N-PlGVM0HWsHQbkJwEtf7nnEuEtgDHulL9tPtgSpP_pPDdlybdoTC8WJXacsepRRzYN_CCCMnZDeIiWYoW7IafN7k4M9vbnFuaDK5aB2J0PTh2L6w1aSN83WCfRlfHKtJsoeilgN2HfU6wPLoWa2hFEn-hrcTJZHbjDSe1PU4v7BX0Nh1oo2Zse5fmaaAgGFw"/>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input id="search-input" type="text" placeholder="Search plants by name…"
+class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface outline-none transition-all"/>
 </div>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent flex flex-col justify-end p-md">
-<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-3 py-1 rounded-full self-start mb-2">Editor's Pick</span>
-<h3 class="font-headline-lg text-headline-lg text-white mb-2">Spring Planting Guide</h3>
-<p class="text-white/90 text-body-md max-w-xl">Master the art of the early season. Everything you need to know.</p>
-</div>
-</div>
+<p id="search-hint" class="font-label-sm text-outline mt-sm text-center">Type to search 5,000+ plants</p>
 </section>
-<!-- Category Grid -->
+
+<!-- Category filters -->
 <section class="mb-lg">
-<div class="flex items-center justify-between mb-5">
-<h2 class="font-headline-md text-headline-md text-primary font-bold">Categories</h2>
-<a class="text-secondary font-label-lg text-label-lg font-bold" href="#">View All</a>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<a class="flex flex-col gap-2 group" href="#">
-<div class="aspect-square rounded-2xl bg-white shadow-sm border border-outline-variant/30 flex flex-col items-center justify-center transition-all group-active:scale-[0.98] relative overflow-hidden">
-<div class="absolute inset-0 bg-primary-container/10"></div>
-<span class="material-symbols-outlined text-[40px] text-primary relative z-10">menu_book</span>
-</div>
-<div class="px-1">
-<p class="font-bold text-label-lg text-on-surface truncate">Plant Encyclopedia</p>
-<p class="text-label-sm text-outline font-medium">250+ Species</p>
-</div>
-</a>
-<a class="flex flex-col gap-2 group" href="#">
-<div class="aspect-square rounded-2xl bg-white shadow-sm border border-outline-variant/30 overflow-hidden transition-all group-active:scale-[0.98]">
-<img alt="Garden Wisdom" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugl5T0LsY5iitCMqgJ92nKu5OflQ4ywtzBNWDvR-QzsWmCXXUIqJkXpY9Jyv8UeolEqrvlgTq_6PDvXjr_GciqwWpaCJD8XAtgTWVz0Ve4cjdLA39P8LBCCVfukuaOxhcMLs7CmCr_3cUgUqLtsNSlbLWtBpwxWhCfr3kBPoEhP0GosKyS72fqVFNmr8Ibluh5wngdf2CYWcTjcBeTW3EUeGpxhz1ppo21w-uDJ-FFFjqvhUe87sK-qwMcpsEkDr3VrJpD1cqH6"/>
-</div>
-<div class="px-1">
-<p class="font-bold text-label-lg text-on-surface truncate">Garden Wisdom</p>
-<p class="text-label-sm text-outline font-medium">42 Articles</p>
-</div>
-</a>
-<a class="flex flex-col gap-2 group" href="#">
-<div class="aspect-square rounded-2xl bg-white shadow-sm border border-outline-variant/30 overflow-hidden transition-all group-active:scale-[0.98]">
-<img alt="Pruning Guide" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujpwsNtQuzZJ6KwFHjglmhe1vM-eqG5Cn-e5vH7kteAjBYVGqq8CbMOPNzADH85woRngVRWZxD6m1LMw75avoWZQj8X_Z10RKczGIofOc0p01mepdpmSPHOejxkxOpx3SDUwwTpM2x7-AbOB4F-SSQxBUIjcs3hY2LEfn3p8xEMj2JnfCYNhNaT5b44lZoOrRpii8rvCiV6l-eH8TcTY7iOE7RZ18mjnLnIm9hbiAEfcO7rBGETYHhfYzeLTO0OW6v7xxx8Nso0OA"/>
-</div>
-<div class="px-1">
-<p class="font-bold text-label-lg text-on-surface truncate">Pruning</p>
-<p class="text-label-sm text-outline font-medium">15 Articles</p>
-</div>
-</a>
-<a class="flex flex-col gap-2 group" href="#">
-<div class="aspect-square rounded-2xl bg-white shadow-sm border border-outline-variant/30 flex flex-col items-center justify-center transition-all group-active:scale-[0.98] relative overflow-hidden">
-<div class="absolute inset-0 bg-secondary-container/10"></div>
-<span class="material-symbols-outlined text-[40px] text-secondary relative z-10">eco</span>
-</div>
-<div class="px-1">
-<p class="font-bold text-label-lg text-on-surface truncate">Soil Health</p>
-<p class="text-label-sm text-outline font-medium">28 Articles</p>
-</div>
-</a>
+<div class="flex gap-sm overflow-x-auto hide-scrollbar pb-xs">
+<button onclick="setCategory('all')" id="cat-all" class="filter-chip active flex-shrink-0 bg-primary text-on-primary px-md py-2 rounded-full font-label-lg transition-all">All</button>
+<button onclick="setCategory('flower')" id="cat-flower" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🌸 Flowering</button>
+<button onclick="setCategory('succulent')" id="cat-succulent" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🌵 Succulents</button>
+<button onclick="setCategory('tree')" id="cat-tree" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🌳 Trees</button>
+<button onclick="setCategory('vegetable')" id="cat-vegetable" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🥦 Vegetables</button>
+<button onclick="setCategory('herb')" id="cat-herb" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🌿 Herbs</button>
+<button onclick="setCategory('indoor')" id="cat-indoor" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg transition-all">🪴 Indoor</button>
 </div>
 </section>
-<!-- Video Guides Section -->
-<section class="mb-xl pb-4">
-<h2 class="font-headline-md text-headline-md text-primary font-bold mb-5">Video Guides</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="group cursor-pointer">
-<div class="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-sm border border-outline-variant/30 mb-3 active:scale-[0.98] transition-transform">
-<div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBAfRXB_s6vXCH35YwH3vCJuChJkBud__h5kj8vxrlNT5fuRHGNjBsEpJ7JevAZc9nSyBvKPNCcuEupQxaWdHThI6EhXkOs2c8CqeuiKIcdStJ0YwBp8Q7luksVWLwoJgT3Q5jAhMnP5Bb0J67sYFCTi4PZNYODtUSaMb-bR2oxZF2_dU2wVZcFbFiQhcJZHONcjJ9-1xPWbYLiriMIXAUVc8E0YVv7oVchaotSy8SUXwUCiUSTOJVmmn8KDh7cp00OvfKM0qHqSlE')"></div>
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:scale-110 transition-transform border border-white/30">
-<span class="material-symbols-outlined text-white text-3xl fill">play_arrow</span>
+
+<!-- Results header -->
+<div class="flex items-center justify-between mb-md">
+<p id="results-label" class="font-label-lg text-on-surface-variant">Popular plants</p>
+<button id="load-more-btn" onclick="loadMore()" style="display:none" class="font-label-sm text-primary hover:underline">Load more</button>
 </div>
+
+<!-- Plant grid -->
+<div id="plant-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-md">
+<div class="skeleton h-64 rounded-2xl"></div>
+<div class="skeleton h-64 rounded-2xl"></div>
+<div class="skeleton h-64 rounded-2xl"></div>
+<div class="skeleton h-64 rounded-2xl"></div>
+<div class="skeleton h-64 rounded-2xl hidden sm:block"></div>
+<div class="skeleton h-64 rounded-2xl hidden sm:block"></div>
 </div>
-<div class="absolute bottom-2 right-2 bg-black/60 text-white font-label-sm text-[10px] px-2 py-0.5 rounded-lg">08:45</div>
+
+<!-- Empty state -->
+<div id="empty-state" class="hidden text-center py-xl">
+<span class="material-symbols-outlined text-[56px] text-outline" style="font-variation-settings:'FILL' 1">search_off</span>
+<p class="font-headline-md text-on-surface-variant mt-md">No plants found</p>
+<p class="font-body-md text-outline mt-sm">Try a different search term or category</p>
 </div>
-<div class="px-1">
-<h4 class="font-bold text-label-lg text-on-surface group-hover:text-primary transition-colors">Compost Basics</h4>
-<p class="text-label-sm text-outline font-medium">Transform your kitchen waste into garden gold.</p>
-</div>
-</div>
-<div class="group cursor-pointer">
-<div class="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-sm border border-outline-variant/30 mb-3 active:scale-[0.98] transition-transform">
-<div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3lnaVFi3X9Pr0ClDqBvQPcpJx15BHPTV9-FwiMpDQWtejbCaQpzTKInxtwPI4S-qm-RTxxspkUgQc2tXQqW8pInP5oqwAS6-WzeRJIzu6nBFqatrZ_Ce1fU70NG8zpSp4AGZyq6viunxAWq0xzmCH--ZFBuaYNUqkmZajusMltApWPdpOnVyjee0oVgKg6KsVHDKmLHHOMRRHI0r_jZR3fuSgRHSgSiA9EtdAN8AevdPHMh0YQjwBRhErorpnrlxos9S4l0Jrx5Y')"></div>
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:scale-110 transition-transform border border-white/30">
-<span class="material-symbols-outlined text-white text-3xl fill">play_arrow</span>
-</div>
-</div>
-<div class="absolute bottom-2 right-2 bg-black/60 text-white font-label-sm text-[10px] px-2 py-0.5 rounded-lg">12:20</div>
-</div>
-<div class="px-1">
-<h4 class="font-bold text-label-lg text-on-surface group-hover:text-primary transition-colors">Attracting Pollinators</h4>
-<p class="text-label-sm text-outline font-medium">Create a buzzing sanctuary for pollinators.</p>
-</div>
-</div>
-</div>
-</section>
+
 </main>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="learn.html">
-<span class="material-symbols-outlined">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="learn.html"><span class="material-symbols-outlined active-icon">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
 </div>
 </nav>
 
 <script>
-// ── Nav Drawer ────────────────────────────────────────────────────────────
-function openNav() {
-    document.getElementById('nav-drawer').classList.add('open');
-    document.getElementById('nav-overlay').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-function closeNav() {
-    document.getElementById('nav-drawer').classList.remove('open');
-    document.getElementById('nav-overlay').classList.add('hidden');
-    document.body.style.overflow = '';
-}
-function toggleGroup(id) {
-    const list = document.getElementById(id);
-    if (!list) return;
-    const btn = list.previousElementSibling;
-    const isCollapsed = list.classList.contains('collapsed');
-    list.classList.toggle('collapsed', !isCollapsed);
-    if (btn) btn.classList.toggle('open', isCollapsed);
-    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
-}
+function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
+function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
+var nli=document.getElementById('nav-encyclopedia');if(nli)nli.classList.add('active');
+document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
 
-// Set active nav item
-function setActiveNav(pageId) {
-    // Map of pageId to nav element id and which group to open
-    const map = {
-        'home':           { item: 'nav-home', group: null },
-        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
-        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
-        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
-        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
-        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
-        'scanner':        { item: 'nav-scanner', group: null },
-        'community':      { item: 'nav-community', group: null },
-        'learn':          { item: 'nav-learn', group: 'learn-group' },
-        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
-        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
-        'articles':       { item: 'nav-articles', group: 'learn-group' },
-        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
-        'recommendations':{ item: 'nav-recommendations', group: null },
-        'calendar':       { item: 'nav-calendar', group: null },
-        'profile':        { item: 'nav-profile', group: null },
-        'settings':       { item: 'nav-settings', group: null },
+var KEY =  + PERENUAL_KEY + ;
+var currentCategory = 'all';
+var currentPage = 1;
+var searchTimer = null;
+var lastQuery = '';
+var CATEGORY_QUERIES = {
+    all: '',
+    flower: 'flowering',
+    succulent: 'succulent',
+    tree: 'tree',
+    vegetable: 'vegetable',
+    herb: 'herb',
+    indoor: 'indoor plant'
+};
+
+// ── XHR helper ─────────────────────────────────────────────────────────
+function doXHR(url, onOK, onFail){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 12000;
+    xhr.ontimeout = function(){ if(onFail) onFail('Timeout'); };
+    xhr.onerror   = function(){ if(onFail) onFail('Network error'); };
+    xhr.onload    = function(){
+        if(xhr.status === 200){ onOK(xhr.responseText); }
+        else { if(onFail) onFail('HTTP ' + xhr.status); }
     };
-    const entry = map[pageId];
-    if (!entry) return;
-    // Highlight active item
-    const el = document.getElementById(entry.item);
-    if (el) el.classList.add('active');
-    // Open parent group if needed
-    if (entry.group) {
-        const group = document.getElementById(entry.group);
-        const btn = group?.previousElementSibling;
-        if (group) {
-            group.classList.remove('collapsed');
-            group.style.maxHeight = '500px';
-            if (btn) btn.classList.add('open');
+    xhr.send();
+}
+
+// ── Fetch plants ────────────────────────────────────────────────────────
+function fetchPlants(query, page, append){
+    if(!append) showSkeletons();
+    var q = query || CATEGORY_QUERIES[currentCategory] || '';
+    var url = 'https://perenual.com/api/species-list?key=' + KEY + '&page=' + page + '&per_page=12';
+    if(q) url += '&q=' + encodeURIComponent(q);
+    doXHR(url, function(text){
+        try{
+            var data = JSON.parse(text);
+            var plants = data.data || [];
+            var hasMore = page < (data.last_page || 1);
+            document.getElementById('load-more-btn').style.display = hasMore ? 'block' : 'none';
+            if(!plants.length && !append){
+                showEmpty();
+            } else {
+                renderPlants(plants, append);
+                var label = query
+                    ? 'Results for "' + query + '" (' + (data.total || plants.length) + ')'
+                    : (currentCategory !== 'all' ? CATEGORY_QUERIES[currentCategory] + ' plants' : 'Popular plants') + ' (' + (data.total || '') + ')';
+                document.getElementById('results-label').textContent = label;
+            }
+        } catch(e){
+            if(!append) showEmpty();
         }
-    }
+    }, function(){
+        if(!append) showEmpty();
+    });
 }
 
-// Swipe from left edge to open
-(function() {
-    const zone = document.getElementById('swipe-zone');
-    let startX = 0, startY = 0;
-    document.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    document.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = Math.abs(e.changedTouches[0].clientY - startY);
-        if (startX < 30 && dx > 60 && dy < 60) openNav();
-    }, { passive: true });
-    // Swipe left to close
-    const navDrawerEl = document.getElementById('nav-drawer');
-    if (navDrawerEl) {
-        navDrawerEl.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-        navDrawerEl.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - startX;
-            if (dx < -60) closeNav();
-        }, { passive: true });
-    }
-})();
+// ── Render ──────────────────────────────────────────────────────────────
+function renderPlants(plants, append){
+    var grid = document.getElementById('plant-grid');
+    var empty = document.getElementById('empty-state');
+    empty.classList.add('hidden');
 
-// Keyboard
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+    var html = plants.map(function(p){
+        var name = p.common_name
+            ? p.common_name.charAt(0).toUpperCase() + p.common_name.slice(1)
+            : (p.scientific_name && p.scientific_name[0] || 'Unknown');
+        var sci  = (p.scientific_name && p.scientific_name[0]) || '';
+        var img  = p.default_image && (p.default_image.medium_url || p.default_image.regular_url || p.default_image.thumbnail);
+        var water = p.watering || 'Regular';
+        var sun   = Array.isArray(p.sunlight) ? p.sunlight[0] : (p.sunlight || '');
+        var diff  = (p.care_level || '').toLowerCase();
+        var diffCls = diff.includes('easy') ? 'easy' : diff.includes('hard') ? 'hard' : 'moderate';
+        var waterCls = water.toLowerCase().includes('frequent') ? 'frequent' : water.toLowerCase().includes('minimum') || water.toLowerCase().includes('none') ? 'minimal' : '';
+        var articleUrl = 'article-detail.html?topic=' + encodeURIComponent(sci || name) + '&category=Plants';
+        var addUrl = 'add-plant.html?prefill=' + encodeURIComponent(JSON.stringify({name:name,species:sci,water:water,img:img||''}));
 
-// Set location in drawer from saved location
-(function() {
-    try {
-        const loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
-        if (loc && loc.name) document.getElementById('nav-location').textContent = loc.name;
-    } catch(e) {}
-})();
+        return '<div class="plant-card bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant/20 flex flex-col">' +
+            '<a href="' + articleUrl + '" class="block">' +
+            '<div class="relative h-44 bg-surface-container overflow-hidden">' +
+            (img ? '<img src="' + img + '" alt="' + name + '" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>' : '') +
+            '<div class="w-full h-full flex items-center justify-center absolute inset-0' + (img ? ' hidden' : '') + '" style="display:' + (img ? 'none' : 'flex') + '"><span class="material-symbols-outlined text-[56px] text-outline" style="font-variation-settings:'FILL' 1">local_florist</span></div>' +
+            '</div>' +
+            '<div class="p-sm pb-0">' +
+            '<p class="font-label-lg text-on-surface leading-tight">' + name + '</p>' +
+            '<p class="font-label-sm text-outline italic truncate mt-0.5">' + sci + '</p>' +
+            '</div></a>' +
+            '<div class="px-sm pb-sm pt-xs flex flex-wrap gap-xs mt-auto">' +
+            '<span class="water-badge ' + waterCls + ' font-label-sm px-2 py-0.5 rounded-full text-[11px]">' + water + '</span>' +
+            (diff ? '<span class="diff-badge ' + diffCls + ' font-label-sm px-2 py-0.5 rounded-full text-[11px]">' + p.care_level + '</span>' : '') +
+            '</div>' +
+            '<div class="px-sm pb-sm">' +
+            '<button onclick="addToGarden('' + name.replace(/'/g,"\'") + '','' + sci.replace(/'/g,"\'") + '','' + (img||'').replace(/'/g,"\'") + '','' + water.replace(/'/g,"\'") + '')" ' +
+            'class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-1.5 rounded-xl active:scale-95 transition-transform text-[13px]">+ Add to Garden</button>' +
+            '</div></div>';
+    }).join('');
 
-// Init — wrapped in try/catch so page JS always runs
-try {
-// Init active state
-setActiveNav('encyclopedia');
-
-// Init all sub-lists collapsed except active group
-document.querySelectorAll('.nav-sub-list').forEach(list => {
-    if (!list.classList.contains('collapsed')) {
-        list.style.maxHeight = '500px';
+    if(append){
+        grid.innerHTML += html;
     } else {
-        list.style.maxHeight = '0px';
+        grid.innerHTML = html;
     }
-});
-} catch(navErr) {
-    console.warn('Nav init error:', navErr);
 }
+
+function showSkeletons(){
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('load-more-btn').style.display = 'none';
+    document.getElementById('plant-grid').innerHTML =
+        ['','','','','',''].map(function(){
+            return '<div class="skeleton h-64 rounded-2xl"></div>';
+        }).join('');
+}
+
+function showEmpty(){
+    document.getElementById('plant-grid').innerHTML = '';
+    document.getElementById('empty-state').classList.remove('hidden');
+    document.getElementById('load-more-btn').style.display = 'none';
+}
+
+// ── Search ──────────────────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', function(){
+    var q = this.value.trim();
+    clearTimeout(searchTimer);
+    document.getElementById('search-hint').textContent = q.length > 0 && q.length < 2 ? 'Keep typing...' : 'Type to search 5,000+ plants';
+    if(q.length < 2){
+        if(q.length === 0){
+            currentPage = 1;
+            lastQuery = '';
+            fetchPlants('', 1, false);
+        }
+        return;
+    }
+    searchTimer = setTimeout(function(){
+        lastQuery = q;
+        currentPage = 1;
+        fetchPlants(q, 1, false);
+    }, 400);
+});
+
+// ── Category filter ─────────────────────────────────────────────────────
+function setCategory(cat){
+    currentCategory = cat;
+    currentPage = 1;
+    lastQuery = '';
+    document.getElementById('search-input').value = '';
+    document.querySelectorAll('.filter-chip').forEach(function(c){
+        c.classList.remove('active','bg-primary','text-on-primary');
+        c.classList.add('bg-surface-container-high','text-on-surface-variant');
+    });
+    var btn = document.getElementById('cat-' + cat);
+    if(btn){
+        btn.classList.add('active','bg-primary','text-on-primary');
+        btn.classList.remove('bg-surface-container-high','text-on-surface-variant');
+    }
+    fetchPlants(CATEGORY_QUERIES[cat], 1, false);
+}
+
+// ── Load more ───────────────────────────────────────────────────────────
+function loadMore(){
+    currentPage++;
+    fetchPlants(lastQuery || CATEGORY_QUERIES[currentCategory], currentPage, true);
+}
+
+// ── Add to garden ───────────────────────────────────────────────────────
+function addToGarden(name, species, img, water){
+    localStorage.setItem('gt_prefill_plant', JSON.stringify({name:name, species:species, img:img, water:water}));
+    window.location.href = 'add-plant.html';
+}
+
+// ── Init ────────────────────────────────────────────────────────────────
+fetchPlants('', 1, false);
 </script>
 </body></html>
