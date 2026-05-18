@@ -1,563 +1,584 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Learn - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#ffb4a5",
-                        "surface-container-high": "#e9e8e4",
-                        "primary-container": "#2d5a27",
-                        "error": "#ba1a1a",
-                        "secondary-container": "#fed3c7",
-                        "on-tertiary-fixed-variant": "#802918",
-                        "on-secondary": "#ffffff",
-                        "inverse-primary": "#a1d494",
-                        "on-primary-fixed": "#002201",
-                        "on-background": "#1b1c1a",
-                        "surface": "#faf9f5",
-                        "surface-tint": "#3b6934",
-                        "surface-container-highest": "#e3e2df",
-                        "primary": "#154212",
-                        "on-error": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "on-secondary-fixed-variant": "#5d4037",
-                        "inverse-surface": "#2f312e",
-                        "primary-fixed": "#bcf0ae",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-container-low": "#f4f4f0",
-                        "surface-container": "#efeeea",
-                        "outline": "#72796e",
-                        "on-primary-fixed-variant": "#23501e",
-                        "surface-bright": "#faf9f5",
-                        "tertiary-fixed": "#ffdad3",
-                        "on-tertiary": "#ffffff",
-                        "surface-variant": "#e3e2df",
-                        "surface-dim": "#dbdad6",
-                        "secondary": "#77574d",
-                        "on-primary-container": "#9dd090",
-                        "on-tertiary-fixed": "#3e0500",
-                        "on-tertiary-container": "#ffaf9e",
-                        "inverse-on-surface": "#f2f1ed",
-                        "on-surface-variant": "#42493e",
-                        "tertiary": "#6e1c0c",
-                        "outline-variant": "#c2c9bb",
-                        "secondary-fixed-dim": "#e7bdb1",
-                        "on-secondary-fixed": "#2c160e",
-                        "secondary-fixed": "#ffdbd0",
-                        "on-primary": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "background": "#faf9f5",
-                        "tertiary-container": "#8d3220",
-                        "on-secondary-container": "#795950",
-                        "primary-fixed-dim": "#a1d494",
-                        "on-surface": "#1b1c1a"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "lg": "40px",
-                        "gutter": "16px",
-                        "md": "24px",
-                        "sm": "12px",
-                        "base": "8px",
-                        "container-margin": "20px",
-                        "xs": "4px",
-                        "xl": "64px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Plus Jakarta Sans"],
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "display-lg": ["Plus Jakarta Sans"],
-                        "label-lg": ["Plus Jakarta Sans"],
-                        "label-sm": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
-                    }
-                }
-            }
-        }
-    </script>
+tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
 <style>
-    /* Nav Drawer */
-    #nav-overlay { transition: opacity 0.25s ease; }
-    #nav-overlay.hidden { opacity: 0; pointer-events: none; }
-    #nav-drawer {
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: min(320px, 85vw);
-    }
-    #nav-drawer.open { transform: translateX(0); }
-    .nav-item { transition: background 0.15s ease, color 0.15s ease; }
-    .nav-item.active { background: #bcf0ae; color: #002201; }
-    .nav-item:not(.active):hover { background: #efeeea; }
-    .nav-sub-item { transition: background 0.15s ease; }
-    .nav-sub-item.active { color: #154212; font-weight: 700; }
-    .nav-sub-item:hover { background: #efeeea; }
-    .nav-section { border-top: 1px solid #c2c9bb40; }
-    .nav-group-toggle.open .nav-chevron { transform: rotate(180deg); }
-    .nav-chevron { transition: transform 0.2s ease; }
-    .nav-sub-list { overflow: hidden; transition: max-height 0.25s ease; }
-    .nav-sub-list.collapsed { max-height: 0 !important; }
-    /* Swipe from left edge */
-    #swipe-zone { position: fixed; left: 0; top: 0; bottom: 0; width: 20px; z-index: 45; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #faf9f5;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .material-symbols-outlined.fill-1 {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body {
-          min-height: max(884px, 100dvh);
-        }
-    </style>
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:100dvh;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+.active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+.hide-scrollbar::-webkit-scrollbar{display:none;}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+#nav-overlay{transition:opacity 0.25s ease;}
+#nav-overlay.hidden{opacity:0;pointer-events:none;}
+#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
+#nav-drawer.open{transform:translateX(0);}
+.nav-item{transition:background 0.15s ease;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item:not(.active):hover{background:#efeeea;}
+.nav-sub-item:hover{background:#efeeea;}
+.nav-section{border-top:1px solid #c2c9bb40;}
+.nav-chevron{transition:transform 0.2s ease;}
+.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
+.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
+.nav-sub-list.collapsed{max-height:0!important;}
+#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
+/* Progress ring */
+.ring-bg{stroke:#e3e2df;}
+.ring-fill{stroke:#154212;stroke-linecap:round;transition:stroke-dashoffset 0.8s ease;}
+/* Module card */
+.module-card{transition:all 0.15s ease;}
+.module-card:active{transform:scale(0.98);}
+.module-locked{opacity:0.55;}
+/* Filter chips */
+.filter-chip{transition:all 0.15s ease;}
+.filter-chip.active{background:#154212;color:#bcf0ae;}
+/* Article skeleton */
+.skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Journey progress bar */
+.journey-progress{height:4px;background:#e3e2df;border-radius:2px;overflow:hidden;}
+.journey-progress-fill{height:100%;background:#154212;border-radius:2px;transition:width 0.6s ease;}
+/* XP badge */
+.xp-badge{background:linear-gradient(135deg,#154212,#2d5a27);color:#bcf0ae;}
+/* Streak flame */
+.streak-active{color:#f97316;}
+/* Season tabs */
+.season-tab{transition:all 0.15s ease;border-bottom:2px solid transparent;}
+.season-tab.active{border-color:#154212;color:#154212;font-weight:700;}
+</style>
 </head>
-<body class="bg-background text-on-background min-h-screen pb-32">
+<body class="bg-background text-on-surface min-h-screen pb-32">
+
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
-<div class="flex items-center gap-md">
-<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
-<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
-</div>
-</div>
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
 <nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
-<span class="font-label-lg text-label-lg text-on-surface">Home</span>
-</a>
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="garden-group" class="nav-sub-list collapsed pl-md">
 <a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div>
-</div>
-<div class="mx-sm">
-<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
-</div>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div></div>
+<div class="mx-sm"><a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
+<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item active flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
-<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
-<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
-</button>
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
 <div id="learn-group" class="nav-sub-list collapsed pl-md">
-<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
-<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
-</div>
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+</div></div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
 </div>
 <div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
 </div>
 </nav>
 <div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
 </aside>
 <div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
 
-<!-- Top AppBar -->
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<button onclick="openNav()" class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150" aria-label="Open menu">
-<span class="material-symbols-outlined text-primary">menu</span>
-</button>
-<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container active:scale-95 transition-transform cursor-pointer" onclick="openNav()">
-<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/>
-</div>
+    <button onclick="openNav()" class="p-2 rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">menu</span></button>
+    <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
 </header>
-<main class="max-w-screen-lg mx-auto px-container-margin pt-lg">
-<!-- Header Section -->
-<section class="mb-lg">
-<h2 class="font-display-lg text-display-lg text-primary mb-xs">Learn</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Master the art of gardening with expert guides and journeys.</p>
+
+<main class="max-w-screen-lg mx-auto px-container-margin pt-lg space-y-xl pb-8">
+
+<!-- Page title -->
+<section>
+    <h2 class="font-display-lg text-display-lg text-primary mb-xs">Learn</h2>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">Master the art of gardening with expert guides and journeys.</p>
 </section>
-<!-- Sub-navigation -->
-<nav class="py-md overflow-x-auto hide-scrollbar flex gap-3">
-<button onclick="filterLearn('all')" id="lchip-all" class="learn-chip bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg whitespace-nowrap shadow-sm transition-all">All</button>
-<button onclick="filterLearn('journey')" id="lchip-journey" class="learn-chip bg-surface-container text-on-surface-variant px-6 py-2 rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-high transition-all">Learning Journeys</button>
-<button onclick="filterLearn('masterclass')" id="lchip-masterclass" class="learn-chip bg-surface-container text-on-surface-variant px-6 py-2 rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-high transition-all">Masterclasses</button>
-<button onclick="filterLearn('tips')" id="lchip-tips" class="learn-chip bg-surface-container text-on-surface-variant px-6 py-2 rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container-high transition-all">Quick Tips</button>
-</nav>
-<!-- Featured Article (Full Bleed Hero) -->
-<section data-learn="masterclass" class="mb-lg">
-<div class="relative w-full aspect-[4/5] md:aspect-[21/9] overflow-hidden group cursor-pointer">
-<img alt="The Art of Composting" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9USKaUjcSTsRFsfDEoJM_WZgD5i1k0QW2GFt7zOzprx0BUtogIhBaFcN2zXTGMx5qv9sJSa6PfMLu7wI3HmFXTlrdbBUChpd89rGJiVxydDwAXhAoFKJRXRhG0K-TrOxBf_L-VC3ZWxxfZsxjGqSvp7SbC_xBqemXd8ioyzCtj49KLLPTOpJGYsQcURtRMiVKGMQGoAzATZARb56OEkT391pmk4s2d04qBv0nrPJLc18Q_jiy-KegWTvZqsS4Y1zvfVaQaaqCBsI"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-container-margin md:p-xl">
-<span class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-label-sm w-fit mb-base uppercase tracking-widest font-bold">Featured Guide</span>
-<h2 class="font-display-lg text-white mb-md max-w-2xl leading-tight">The Art of Composting: A Masterclass in Soil Health</h2>
-<div class="flex flex-col md:flex-row md:items-center gap-md">
-<a href="article-detail.html?topic=Compost&category=Masterclass" class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-label-lg flex items-center justify-center gap-base active:scale-95 transition-transform hover:bg-primary-container/90 w-fit">Start Learning<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">play_circle</span></a>
-<span class="text-white/80 font-label-sm">45 min journey • 6 modules</span>
-</div>
-</div>
-</div>
+
+<!-- ── DASHBOARD ──────────────────────────────────────────────────────── -->
+<section class="bg-primary rounded-3xl p-lg text-on-primary overflow-hidden relative">
+    <div class="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-white/5"></div>
+    <div class="absolute -right-4 -bottom-12 w-32 h-32 rounded-full bg-white/5"></div>
+    <div class="flex items-start gap-lg relative z-10">
+        <!-- Progress ring -->
+        <div class="flex-shrink-0 flex flex-col items-center gap-xs">
+            <div class="relative w-20 h-20">
+                <svg width="80" height="80" viewBox="0 0 80 80" class="-rotate-90">
+                    <circle class="ring-bg" cx="40" cy="40" r="32" fill="none" stroke-width="6"/>
+                    <circle id="progress-ring" class="ring-fill" cx="40" cy="40" r="32" fill="none" stroke-width="6"
+                        stroke-dasharray="201" stroke-dashoffset="201"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <span id="progress-pct" class="font-headline-md text-headline-md text-on-primary">0%</span>
+                </div>
+            </div>
+            <p class="font-label-sm text-on-primary/70">Complete</p>
+        </div>
+        <!-- Stats -->
+        <div class="flex-1 min-w-0">
+            <p class="font-headline-md text-headline-md text-on-primary mb-sm">Your Learning Journey</p>
+            <div class="flex flex-wrap gap-sm">
+                <div class="xp-badge rounded-full px-sm py-1 flex items-center gap-xs">
+                    <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">star</span>
+                    <span id="xp-count" class="font-label-lg text-label-lg">0 XP</span>
+                </div>
+                <div class="bg-white/15 rounded-full px-sm py-1 flex items-center gap-xs">
+                    <span id="streak-icon" class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">local_fire_department</span>
+                    <span id="streak-count" class="font-label-lg text-label-lg text-on-primary">0 day streak</span>
+                </div>
+            </div>
+            <div id="continue-card" class="hidden mt-sm bg-white/15 rounded-xl p-sm">
+                <p class="font-label-sm text-on-primary/70">Continue where you left off</p>
+                <a id="continue-link" href="#" class="font-label-lg text-on-primary flex items-center gap-xs mt-1 hover:text-on-primary/80">
+                    <span id="continue-title" class="truncate"></span>
+                    <span class="material-symbols-outlined text-[16px] flex-shrink-0">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Module overview -->
+    <div class="grid grid-cols-3 gap-sm mt-lg relative z-10">
+        <div class="bg-white/10 rounded-xl p-sm text-center">
+            <p id="stat-completed" class="font-headline-md text-headline-md text-on-primary">0</p>
+            <p class="font-label-sm text-on-primary/70">Completed</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-sm text-center">
+            <p id="stat-inprogress" class="font-headline-md text-headline-md text-on-primary">0</p>
+            <p class="font-label-sm text-on-primary/70">In Progress</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-sm text-center">
+            <p id="stat-locked" class="font-headline-md text-headline-md text-on-primary">0</p>
+            <p class="font-label-sm text-on-primary/70">Locked</p>
+        </div>
+    </div>
 </section>
-<!-- Plant Encyclopedia Entry Point (Redesign Addition) -->
-<section data-learn="all" class="mb-xl">
-<a class="block group relative overflow-hidden rounded-3xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm hover:shadow-md transition-all duration-300" href="plant-encyclopedia.html">
-<div class="flex flex-col md:flex-row md:items-center">
-<div class="relative h-48 md:h-auto md:w-1/3 overflow-hidden">
-<img alt="Plant Encyclopedia" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGyw2PW9H2tOFXnoxU38BKr8oa1jiWuu8myFRmX_5rAT4mUkDFXMOZ1v36-0-J6ksLjAIoLrGHU6R86-KotVaCt7Lc5wRNAaTVLLvySXJk52eAoXu1aM33f6EbYxD8ZTCnPP44umC-EkvsO0ClJF70BGg7HJF62v5JmPy-eUhP0ghufgEEnjUXfjt7cw329syXqCoTiPKwyf_V-3xBKcxnl8jbiLOL9daH7kCfTpD_ITZ2IFECOSgloUqStOd0jteSvUWa5blZqbM"/>
-<div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors"></div>
-</div>
-<div class="p-md md:p-xl flex-1 flex flex-col justify-center">
-<div class="flex items-center gap-2 mb-2">
-<span class="material-symbols-outlined text-primary fill-1" data-icon="book_2">book_2</span>
-<span class="text-label-sm text-secondary font-bold uppercase tracking-widest">Digital Resource</span>
-</div>
-<h3 class="font-headline-lg text-on-surface mb-2">Plant Encyclopedia</h3>
-<p class="font-body-md text-on-surface-variant mb-4">Discover detailed care guides, light requirements, and growth habits for over 5,000+ species.</p>
-<div class="flex items-center gap-2 text-primary font-label-lg group-hover:translate-x-1 transition-transform">
-                            Browse Collection
-                            <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
-</div>
-</div>
-</div>
-</a>
+
+<!-- ── DAILY TIP ───────────────────────────────────────────────────────── -->
+<section class="bg-primary-fixed rounded-2xl p-md flex gap-md items-start">
+    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings:'FILL' 1">tips_and_updates</span>
+    </div>
+    <div class="flex-1 min-w-0">
+        <p class="font-label-lg text-label-lg text-on-primary-fixed-variant mb-xs">Daily Tip</p>
+        <p id="daily-tip" class="font-body-md text-on-primary-fixed-variant"></p>
+    </div>
 </section>
-<!-- Gardening Fundamentals -->
-<section data-learn="journey" class="mb-xl">
-<div class="flex justify-between items-end mb-md">
-<div>
-<h3 class="font-headline-lg text-primary">Gardening Fundamentals</h3>
-<p class="font-body-md text-on-surface-variant">Your foundation for a flourishing green space.</p>
-</div>
-<button class="text-secondary font-label-lg flex items-center gap-1 hover:underline">
-                    View Journey
-                    <span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
-</button>
-</div>
-<div class="flex overflow-x-auto gap-gutter pb-base hide-scrollbar snap-x">
-<!-- Card 1 -->
-<a href="article-detail.html?topic=Soil&category=Fundamentals" class="min-w-[280px] md:min-w-[340px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-outline-variant/30 block">
-<img alt="Soil Basics" class="w-full h-44 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGyw2PW9H2tOFXnoxU38BKr8oa1jiWuu8myFRmX_5rAT4mUkDFXMOZ1v36-0-J6ksLjAIoLrGHU6R86-KotVaCt7Lc5wRNAaTVLLvySXJk52eAoXu1aM33f6EbYxD8ZTCnPP44umC-EkvsO0ClJF70BGg7HJF62v5JmPy-eUhP0ghufgEEnjUXfjt7cw329syXqCoTiPKwyf_V-3xBKcxnl8jbiLOL9daH7kCfTpD_ITZ2IFECOSgloUqStOd0jteSvUWa5blZqbM"/>
-<div class="p-md">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-primary text-sm" data-icon="schedule">schedule</span>
-<span class="text-label-sm text-on-surface-variant uppercase tracking-tighter">12 min read</span>
-</div>
-<h4 class="font-headline-md text-on-surface mb-xs">Soil Basics</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Understanding the foundation of your garden.</p>
-<div class="h-1 w-full bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full bg-primary w-1/3"></div>
-</div>
-<p class="text-label-sm text-on-surface-variant mt-2 italic">Module 1 of 4</p>
-</div>
-</a>
-<!-- Card 2 -->
-<a href="article-detail.html?topic=Plant watering&category=Fundamentals" class="min-w-[280px] md:min-w-[340px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-outline-variant/30 block">
-<img alt="Watering 101" class="w-full h-44 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkDTqqwROH1ci5ObovDp73CBO8hTpXn9NGwOxHMfFYSVscrvoSKJE9SUbHW3K4iRD7FtkbYDeyihcmY-kpp63MeWVo07UUyLVNDspzrnSX14jSKGIJZ97v4SN2BWuAf--2q9PF8c0lodV-92Qj16dKElbWB0SwAgSnUeszyKYv9_IrYm7CNRiquDW5vQc09cyHmdIjah-L-dQSea6pdxw9L4VEb5EnAugA9YBAP4XnoVDIaJgcMmlJr0UU1DBRTFfR0IjTEzRITxk"/>
-<div class="p-md">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-primary text-sm" data-icon="schedule">schedule</span>
-<span class="text-label-sm text-on-surface-variant uppercase tracking-tighter">8 min read</span>
-</div>
-<h4 class="font-headline-md text-on-surface mb-xs">Watering 101</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">The science of hydration for every plant type.</p>
-<div class="h-1 w-full bg-surface-container-high rounded-full"></div>
-<p class="text-label-sm text-on-surface-variant mt-2">Locked</p>
-</div>
-</a>
-<!-- Card 3 -->
-<a href="article-detail.html?topic=Sunlight&category=Fundamentals" class="min-w-[280px] md:min-w-[340px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-outline-variant/30 block">
-<img alt="Sunlight Guide" class="w-full h-44 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBp_tcLutwdxZHK3iSuirZfsLR1d_k3XwcZrd4hDiqtvhCBWq7WFtDLYFOGRW50vSbJg4XCRF_gLyb3n7iSVXdFF9hvZkbZE6PWAD_IxgMxZVMuWfP4Q54YXArrRiyuMI5TD9x8MpOLJA-v7SImMHmuh5rOkH-OXUbHdPPovbEn88a1zEoXJvVDEaqC5gGEq59t6pa-UunpxpNJKtFVg3AwvIynLjkVgAFyIVCALajLQlCF6SCkqR9-BPKvudl38kSuvL0l2orQAA"/>
-<div class="p-md">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-primary text-sm" data-icon="schedule">schedule</span>
-<span class="text-label-sm text-on-surface-variant uppercase tracking-tighter">15 min read</span>
-</div>
-<h4 class="font-headline-md text-on-surface mb-xs">Sunlight Guide</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">Mastering light exposure and shade management.</p>
-<div class="h-1 w-full bg-surface-container-high rounded-full"></div>
-<p class="text-label-sm text-on-surface-variant mt-2">Locked</p>
-</div>
-</a>
-</div>
+
+<!-- ── LEARNING JOURNEYS ───────────────────────────────────────────────── -->
+<section>
+    <div class="flex items-center justify-between mb-md">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Learning Journeys</h3>
+        <span class="font-label-sm text-outline" id="journey-summary"></span>
+    </div>
+
+    <!-- Journey tabs -->
+    <div class="flex gap-lg border-b border-outline-variant/40 mb-lg overflow-x-auto hide-scrollbar">
+        <button onclick="showJourney('fundamentals')" id="tab-fundamentals" class="season-tab active font-label-lg text-label-lg text-on-surface-variant pb-sm px-xs whitespace-nowrap">Fundamentals</button>
+        <button onclick="showJourney('spring')" id="tab-spring" class="season-tab font-label-lg text-label-lg text-on-surface-variant pb-sm px-xs whitespace-nowrap">🌱 Spring</button>
+        <button onclick="showJourney('summer')" id="tab-summer" class="season-tab font-label-lg text-label-lg text-on-surface-variant pb-sm px-xs whitespace-nowrap">☀️ Summer</button>
+        <button onclick="showJourney('autumn')" id="tab-autumn" class="season-tab font-label-lg text-label-lg text-on-surface-variant pb-sm px-xs whitespace-nowrap">🍂 Autumn</button>
+        <button onclick="showJourney('winter')" id="tab-winter" class="season-tab font-label-lg text-label-lg text-on-surface-variant pb-sm px-xs whitespace-nowrap">❄️ Winter</button>
+    </div>
+
+    <!-- Journey content -->
+    <div id="journey-content" class="space-y-sm"></div>
 </section>
-<!-- Seasonal Tips -->
-<section data-learn="tips" class="mb-lg">
-<h3 class="font-headline-lg text-primary mb-md">Seasonal Tips</h3>
-<div class="grid grid-cols-1 gap-md">
-<!-- Spring -->
-<div class="group relative overflow-hidden rounded-2xl bg-primary-container p-md flex items-center gap-md transition-all hover:translate-x-1 cursor-pointer">
-<div class="absolute right-0 top-0 opacity-10 -translate-y-1/4 translate-x-1/4">
-<span class="material-symbols-outlined text-[120px]" data-icon="eco">eco</span>
-</div>
-<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-white text-[32px] font-variation-fill" data-icon="eco">eco</span>
-</div>
-<div class="flex-1 z-10">
-<h5 class="font-headline-md text-white">Spring Planting</h5>
-<p class="font-body-md text-white/90">Early bloomers &amp; seed starting guides.</p>
-</div>
-<span class="material-symbols-outlined text-white/60 group-hover:text-white transition-colors" data-icon="chevron_right">chevron_right</span>
-</div>
-<!-- Summer -->
-<div class="group relative overflow-hidden rounded-2xl bg-secondary-container p-md flex items-center gap-md transition-all hover:translate-x-1 cursor-pointer">
-<div class="absolute right-0 top-0 opacity-10 -translate-y-1/4 translate-x-1/4">
-<span class="material-symbols-outlined text-[120px]" data-icon="sunny">sunny</span>
-</div>
-<div class="w-16 h-16 rounded-full bg-white/40 backdrop-blur-sm flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-[32px] font-variation-fill" data-icon="sunny">sunny</span>
-</div>
-<div class="flex-1 z-10">
-<h5 class="font-headline-md text-on-secondary-container">Summer Pruning</h5>
-<p class="font-body-md text-on-secondary-container/90">Managing heat stress &amp; growth control.</p>
-</div>
-<span class="material-symbols-outlined text-on-secondary-container/60 group-hover:text-on-secondary-container transition-colors" data-icon="chevron_right">chevron_right</span>
-</div>
-<!-- Winter -->
-<div class="group relative overflow-hidden rounded-2xl bg-tertiary-container p-md flex items-center gap-md transition-all hover:translate-x-1 cursor-pointer">
-<div class="absolute right-0 top-0 opacity-10 -translate-y-1/4 translate-x-1/4">
-<span class="material-symbols-outlined text-[120px]" data-icon="ac_unit">ac_unit</span>
-</div>
-<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-white text-[32px] font-variation-fill" data-icon="ac_unit">ac_unit</span>
-</div>
-<div class="flex-1 z-10">
-<h5 class="font-headline-md text-white">Winter Protection</h5>
-<p class="font-body-md text-white/90">Cold-proofing your garden perennials.</p>
-</div>
-<span class="material-symbols-outlined text-white/60 group-hover:text-white transition-colors" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
+
+<!-- ── QUICK ACCESS ────────────────────────────────────────────────────── -->
+<section class="grid grid-cols-2 gap-md">
+    <a href="plant-encyclopedia.html" class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all group active:scale-98">
+        <div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center mb-sm">
+            <span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings:'FILL' 1">menu_book</span>
+        </div>
+        <p class="font-label-lg text-on-surface">Plant Encyclopedia</p>
+        <p class="font-label-sm text-outline mt-xs">5,000+ species</p>
+        <div class="flex items-center gap-xs mt-sm text-primary">
+            <span class="font-label-sm">Browse</span>
+            <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+    </a>
+    <a href="search-guides.html" class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all group active:scale-98">
+        <div class="w-10 h-10 rounded-xl bg-tertiary-container flex items-center justify-center mb-sm">
+            <span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings:'FILL' 1">search</span>
+        </div>
+        <p class="font-label-lg text-on-surface">Search Guides</p>
+        <p class="font-label-sm text-outline mt-xs">Find answers fast</p>
+        <div class="flex items-center gap-xs mt-sm text-primary">
+            <span class="font-label-sm">Search</span>
+            <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+    </a>
 </section>
-<!-- Magazine Feed Style: Recent Guides -->
-<section data-learn="all" class="mb-lg">
-<h3 class="font-headline-md text-primary mb-md">Latest Deep Dives</h3>
-<div class="flex flex-col gap-lg">
-<a href="article-detail.html?topic=Vertical+garden&category=Urban+Living" class="flex gap-md cursor-pointer group">
-<div class="flex-1">
-<p class="text-label-sm text-secondary font-bold uppercase mb-1">Urban Living</p>
-<h4 class="font-headline-md text-on-surface mb-base group-hover:text-primary transition-colors">Vertical Gardening for Small Balconies</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2">How to maximize your harvest when you only have a few square feet of space.</p>
-<p class="text-label-sm text-outline mt-md">May 12 • 6 min read</p>
-</div>
-<img alt="Vertical Garden" class="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBp_tcLutwdxZHK3iSuirZfsLR1d_k3XwcZrd4hDiqtvhCBWq7WFtDLYFOGRW50vSbJg4XCRF_gLyb3n7iSVXdFF9hvZkbZE6PWAD_IxgMxZVMuWfP4Q54YXArrRiyuMI5TD9x8MpOLJA-v7SImMHmuh5rOkH-OXUbHdPPovbEn88a1zEoXJvVDEaqC5gGEq59t6pa-UunpxpNJKtFVg3AwvIynLjkVgAFyIVCALajLQlCF6SCkqR9-BPKvudl38kSuvL0l2orQAA"/>
-</a>
-<hr class="border-outline-variant/30"/>
-<a href="article-detail.html?topic=Rainwater+harvesting&category=Sustainability" class="flex gap-md cursor-pointer group">
-<div class="flex-1">
-<p class="text-label-sm text-secondary font-bold uppercase mb-1">Sustainability</p>
-<h4 class="font-headline-md text-on-surface mb-base group-hover:text-primary transition-colors">Rainwater Harvesting Basics</h4>
-<p class="font-body-md text-on-surface-variant line-clamp-2">Simple systems to collect and use nature's hydration for your garden.</p>
-<p class="text-label-sm text-outline mt-md">May 10 • 10 min read</p>
-</div>
-<img alt="Rainwater" class="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkDTqqwROH1ci5ObovDp73CBO8hTpXn9NGwOxHMfFYSVscrvoSKJE9SUbHW3K4iRD7FtkbYDeyihcmY-kpp63MeWVo07UUyLVNDspzrnSX14jSKGIJZ97v4SN2BWuAf--2q9PF8c0lodV-92Qj16dKElbWB0SwAgSnUeszyKYv9_IrYm7CNRiquDW5vQc09cyHmdIjah-L-dQSea6pdxw9L4VEb5EnAugA9YBAP4XnoVDIaJgcMmlJr0UU1DBRTFfR0IjTEzRITxk"/>
-</a>
-</div>
+
+<!-- ── ARTICLE FEED ────────────────────────────────────────────────────── -->
+<section>
+    <div class="flex items-center justify-between mb-md">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Deep Dives</h3>
+        <span class="font-label-sm text-outline">Curated articles</span>
+    </div>
+    <!-- Filter chips -->
+    <div class="flex gap-sm overflow-x-auto hide-scrollbar mb-md pb-xs">
+        <button onclick="setArticleFilter('all')" id="fc-all" class="filter-chip active flex-shrink-0 bg-primary text-on-primary px-md py-2 rounded-full font-label-lg text-label-lg transition-all">All</button>
+        <button onclick="setArticleFilter('soil')" id="fc-soil" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg text-label-lg transition-all">🌍 Soil</button>
+        <button onclick="setArticleFilter('water')" id="fc-water" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg text-label-lg transition-all">💧 Water</button>
+        <button onclick="setArticleFilter('pests')" id="fc-pests" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg text-label-lg transition-all">🐛 Pests</button>
+        <button onclick="setArticleFilter('seasonal')" id="fc-seasonal" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg text-label-lg transition-all">📅 Seasonal</button>
+        <button onclick="setArticleFilter('plants')" id="fc-plants" class="filter-chip flex-shrink-0 bg-surface-container-high text-on-surface-variant px-md py-2 rounded-full font-label-lg text-label-lg transition-all">🌿 Plants</button>
+    </div>
+    <div id="article-feed" class="space-y-md">
+        <div class="skeleton h-28 rounded-2xl"></div>
+        <div class="skeleton h-28 rounded-2xl"></div>
+        <div class="skeleton h-28 rounded-2xl"></div>
+    </div>
 </section>
+
 </main>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<!-- My Garden -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html">
-<span class="material-symbols-outlined">psychology_alt</span>
-<span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span>
-</a>
-<!-- Identify -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html">
-<span class="material-symbols-outlined">filter_center_focus</span>
-<span class="font-label-sm text-label-sm">Identify</span>
-</a>
-<!-- Community -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm">Community</span>
-</a>
-<!-- Learn (active) -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="learn.html">
-<span class="material-symbols-outlined active-icon">school</span>
-<span class="font-label-sm text-label-sm">Learn</span>
-</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full duration-200" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200" href="learn.html"><span class="material-symbols-outlined active-icon">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
 </div>
 </nav>
 
 <script>
-// ── Nav Drawer ────────────────────────────────────────────────────────────
-function openNav() {
-    document.getElementById('nav-drawer').classList.add('open');
-    document.getElementById('nav-overlay').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+// ── Nav ───────────────────────────────────────────────────────────────────
+function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
+function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
+var nli=document.getElementById('nav-learn');if(nli)nli.classList.add('active');
+document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
+
+// ── Data ──────────────────────────────────────────────────────────────────
+var JOURNEYS = {
+    fundamentals: {
+        title: 'Gardening Fundamentals',
+        desc: 'Your foundation for a flourishing green space.',
+        icon: 'eco',
+        color: 'bg-primary-container text-on-primary-container',
+        modules: [
+            {id:'fund-1', title:'Soil Basics', desc:'Understanding the foundation of your garden.', mins:12, topic:'Soil science', category:'Soil & Compost', xp:50},
+            {id:'fund-2', title:'Watering 101', desc:'The science of hydration for every plant type.', mins:8, topic:'Plant watering', category:'Watering', xp:50},
+            {id:'fund-3', title:'Sunlight Guide', desc:'Mastering light exposure and shade management.', mins:15, topic:'Sunlight and plants', category:'Plants', xp:75},
+            {id:'fund-4', title:'Composting Masterclass', desc:'Turn waste into garden gold.', mins:20, topic:'Compost', category:'Soil & Compost', xp:100},
+        ]
+    },
+    spring: {
+        title: 'Spring Gardening',
+        desc: 'Wake up your garden and plan for abundance.',
+        icon: 'energy_savings_leaf',
+        color: 'bg-primary-fixed text-on-primary-fixed-variant',
+        modules: [
+            {id:'sp-1', title:'Soil Preparation', desc:'Prepare beds for the new growing season.', mins:10, topic:'Spring garden soil preparation', category:'Soil & Compost', xp:50},
+            {id:'sp-2', title:'Seed Sowing', desc:'What to plant and when in spring.', mins:12, topic:'Seed sowing spring', category:'Plants', xp:50},
+            {id:'sp-3', title:'Spring Pest Watch', desc:'Early season pest prevention and control.', mins:10, topic:'Garden pests spring', category:'Pests', xp:75},
+            {id:'sp-4', title:'Watering in Spring', desc:'Establishing good watering habits.', mins:8, topic:'Watering plants spring', category:'Watering', xp:50},
+        ]
+    },
+    summer: {
+        title: 'Summer Gardening',
+        desc: 'Keep your garden thriving through the heat.',
+        icon: 'wb_sunny',
+        color: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
+        modules: [
+            {id:'su-1', title:'Heat Stress Management', desc:'Protect plants from summer heat.', mins:10, topic:'Plant heat stress', category:'Plants', xp:50},
+            {id:'su-2', title:'Summer Watering', desc:'Deep watering and drought-resistant strategies.', mins:12, topic:'Summer garden watering', category:'Watering', xp:75},
+            {id:'su-3', title:'Pruning & Deadheading', desc:'Keep plants productive through summer.', mins:15, topic:'Summer pruning garden', category:'Plants', xp:75},
+            {id:'su-4', title:'Pest & Disease Control', desc:'Managing summer infestations.', mins:12, topic:'Summer garden pests diseases', category:'Pests', xp:100},
+        ]
+    },
+    autumn: {
+        title: 'Autumn Gardening',
+        desc: 'Harvest, prepare and set your garden up for winter.',
+        icon: 'park',
+        color: 'bg-secondary-container text-on-secondary-container',
+        modules: [
+            {id:'au-1', title:'Harvest Time', desc:'When and how to harvest your crops.', mins:10, topic:'Vegetable harvesting autumn', category:'Seasonal', xp:50},
+            {id:'au-2', title:'Bulb Planting', desc:'Plant now for spectacular spring blooms.', mins:12, topic:'Autumn bulb planting', category:'Plants', xp:75},
+            {id:'au-3', title:'Autumn Composting', desc:'Make the most of fallen leaves and garden waste.', mins:15, topic:'Autumn composting leaves', category:'Soil & Compost', xp:75},
+            {id:'au-4', title:'Winter Prep', desc:'Get your garden ready for the cold months.', mins:12, topic:'Garden winter preparation', category:'Seasonal', xp:100},
+        ]
+    },
+    winter: {
+        title: 'Winter Gardening',
+        desc: 'Protect, plan and make the most of the quiet season.',
+        icon: 'ac_unit',
+        color: 'bg-surface-container-highest text-on-surface',
+        modules: [
+            {id:'wi-1', title:'Frost Protection', desc:'Keep tender plants alive through frost.', mins:10, topic:'Frost protection plants', category:'Seasonal', xp:50},
+            {id:'wi-2', title:'Winter Pruning', desc:'The right cuts for healthy spring growth.', mins:12, topic:'Winter pruning trees shrubs', category:'Plants', xp:75},
+            {id:'wi-3', title:'Garden Planning', desc:'Design your dream garden for next season.', mins:15, topic:'Garden planning design', category:'Plants', xp:50},
+            {id:'wi-4', title:'Indoor Gardening', desc:'Keep growing through the cold months indoors.', mins:12, topic:'Indoor plants winter', category:'Plants', xp:75},
+        ]
+    }
+};
+
+var DAILY_TIPS = [
+    'Water deeply and infrequently — this encourages deep root growth and drought resistance.',
+    'Always water at the base of plants, not the leaves, to prevent fungal disease.',
+    'Add a 5cm layer of mulch around plants to retain moisture and suppress weeds.',
+    'Test your soil pH before planting — most vegetables prefer a pH of 6.0–7.0.',
+    'Deadhead flowers regularly to encourage continuous blooming throughout the season.',
+    'Plant companion crops together — basil near tomatoes deters aphids naturally.',
+    'Never compost diseased plant material — it can spread pathogens to your garden.',
+    'The best time to transplant seedlings is on a cloudy day or in the evening.',
+    'Coffee grounds are mildly acidic — great for blueberries, roses and hydrangeas.',
+    'Autumn is the best time to plant trees — cooler temperatures reduce transplant shock.',
+    'Turn your compost pile every 2 weeks to speed up decomposition.',
+    'Group plants with similar water needs together to make irrigation more efficient.',
+    'Pinch out the growing tips of basil to prevent bolting and keep it bushy.',
+    'Epsom salts (magnesium sulphate) can help with magnesium deficiency in roses and tomatoes.',
+    'A south-facing wall is the warmest spot in your garden — ideal for heat-loving plants.',
+];
+
+var ARTICLES = [
+    {title:'The Science of Composting',desc:'How microorganisms break down organic matter into nutrient-rich humus.',category:'soil',mins:8,topic:'Compost',emoji:'🌍'},
+    {title:'Companion Planting Guide',desc:'Which plants help each other grow and which should be kept apart.',category:'plants',mins:10,topic:'Companion planting',emoji:'🌿'},
+    {title:'Understanding Soil pH',desc:'How acidity and alkalinity affect nutrient availability for your plants.',category:'soil',mins:7,topic:'Soil pH',emoji:'🧪'},
+    {title:'Drip Irrigation Basics',desc:'Set up an efficient watering system that saves water and time.',category:'water',mins:9,topic:'Drip irrigation',emoji:'💧'},
+    {title:'Integrated Pest Management',desc:'A holistic approach to controlling garden pests without harsh chemicals.',category:'pests',mins:11,topic:'Integrated pest management',emoji:'🐛'},
+    {title:'Rainwater Harvesting',desc:'Collect and store rainwater for a more sustainable garden.',category:'water',mins:8,topic:'Rainwater harvesting',emoji:'🌧️'},
+    {title:'Seasonal Pruning Calendar',desc:'When and how to prune different plants throughout the year.',category:'seasonal',mins:12,topic:'Pruning plants',emoji:'✂️'},
+    {title:'No-Dig Gardening',desc:'Build healthy soil structure without disturbing the soil ecosystem.',category:'soil',mins:10,topic:'No-dig gardening',emoji:'🔰'},
+    {title:'Attracting Beneficial Insects',desc:'Plant flowers that invite pollinators and natural pest predators.',category:'pests',mins:7,topic:'Beneficial insects garden',emoji:'🦋'},
+    {title:'Vertical Gardening',desc:'Maximise growing space with trellises, walls and hanging systems.',category:'plants',mins:9,topic:'Vertical gardening',emoji:'🏗️'},
+    {title:'Spring Planting Calendar',desc:'What to sow and plant each week through spring for best results.',category:'seasonal',mins:10,topic:'Spring planting',emoji:'🌱'},
+    {title:'Fertiliser Guide',desc:'Understanding NPK ratios and when to feed your plants.',category:'soil',mins:8,topic:'Garden fertilizer',emoji:'🌾'},
+    {title:'Water-Wise Gardening',desc:'Strategies to reduce water use without sacrificing plant health.',category:'water',mins:11,topic:'Water conservation garden',emoji:'💡'},
+    {title:'Natural Pest Remedies',desc:'Homemade sprays and barriers to keep pests at bay organically.',category:'pests',mins:9,topic:'Natural pest control garden',emoji:'🌿'},
+    {title:'Autumn Garden Tasks',desc:'Essential jobs to prepare your garden for winter and spring.',category:'seasonal',mins:10,topic:'Autumn garden tasks',emoji:'🍂'},
+];
+
+// ── Progress ──────────────────────────────────────────────────────────────
+function getProgress(){
+    try{return JSON.parse(localStorage.getItem('gt_learn_progress')||'{}');}catch(e){return {};}
 }
-function closeNav() {
-    document.getElementById('nav-drawer').classList.remove('open');
-    document.getElementById('nav-overlay').classList.add('hidden');
-    document.body.style.overflow = '';
-}
-function toggleGroup(id) {
-    const list = document.getElementById(id);
-    if (!list) return;
-    const btn = list.previousElementSibling;
-    const isCollapsed = list.classList.contains('collapsed');
-    list.classList.toggle('collapsed', !isCollapsed);
-    if (btn) btn.classList.toggle('open', isCollapsed);
-    list.style.maxHeight = isCollapsed ? list.scrollHeight + 'px' : null;
+function saveProgress(p){ localStorage.setItem('gt_learn_progress',JSON.stringify(p)); }
+
+function getAllModules(){
+    var all=[];
+    Object.values(JOURNEYS).forEach(function(j){ j.modules.forEach(function(m){ all.push(m); }); });
+    return all;
 }
 
-// Set active nav item
-function setActiveNav(pageId) {
-    // Map of pageId to nav element id and which group to open
-    const map = {
-        'home':           { item: 'nav-home', group: null },
-        'my-garden':      { item: 'nav-my-garden', group: 'garden-group' },
-        'garden-health':  { item: 'nav-garden-health', group: 'garden-group' },
-        'garden-planner': { item: 'nav-garden-planner', group: 'garden-group' },
-        'garden-diary':   { item: 'nav-garden-diary', group: 'garden-group' },
-        'add-plant':      { item: 'nav-add-plant', group: 'garden-group' },
-        'scanner':        { item: 'nav-scanner', group: null },
-        'community':      { item: 'nav-community', group: null },
-        'learn':          { item: 'nav-learn', group: 'learn-group' },
-        'encyclopedia':   { item: 'nav-encyclopedia', group: 'learn-group' },
-        'search-guides':  { item: 'nav-search-guides', group: 'learn-group' },
-        'articles':       { item: 'nav-articles', group: 'learn-group' },
-        'journeys':       { item: 'nav-journeys', group: 'learn-group' },
-        'recommendations':{ item: 'nav-recommendations', group: null },
-        'calendar':       { item: 'nav-calendar', group: null },
-        'profile':        { item: 'nav-profile', group: null },
-        'settings':       { item: 'nav-settings', group: null },
-    };
-    const entry = map[pageId];
-    if (!entry) return;
-    // Highlight active item
-    const el = document.getElementById(entry.item);
-    if (el) el.classList.add('active');
-    // Open parent group if needed
-    if (entry.group) {
-        const group = document.getElementById(entry.group);
-        const btn = group?.previousElementSibling;
-        if (group) {
-            group.classList.remove('collapsed');
-            group.style.maxHeight = '500px';
-            if (btn) btn.classList.add('open');
+function calcStats(){
+    var progress=getProgress();
+    var all=getAllModules();
+    var completed=0,inprogress=0,locked=0,xp=0,lastDone=null;
+    all.forEach(function(m,i){
+        var st=progress[m.id]||'locked';
+        if(st==='done'){completed++;xp+=m.xp;lastDone=m;}
+        else if(st==='started'){inprogress++;}
+        else{locked++;}
+    });
+    return{completed,inprogress,locked,total:all.length,xp,lastDone};
+}
+
+function updateDashboard(){
+    var s=calcStats();
+    var pct=s.total>0?Math.round((s.completed/s.total)*100):0;
+    // Ring
+    var ring=document.getElementById('progress-ring');
+    if(ring){var circ=201;ring.style.strokeDashoffset=circ-(circ*pct/100);}
+    document.getElementById('progress-pct').textContent=pct+'%';
+    document.getElementById('xp-count').textContent=s.xp+' XP';
+    document.getElementById('stat-completed').textContent=s.completed;
+    document.getElementById('stat-inprogress').textContent=s.inprogress;
+    document.getElementById('stat-locked').textContent=s.locked;
+    // Streak
+    var streak=calcStreak();
+    document.getElementById('streak-count').textContent=streak+' day streak';
+    if(streak>0) document.getElementById('streak-icon').style.color='#f97316';
+    // Continue card
+    if(s.lastDone){
+        // Find next incomplete
+        var all=getAllModules();
+        var idx=all.findIndex(function(m){return m.id===s.lastDone.id;});
+        var next=all[idx+1];
+        if(next&&(getProgress()[next.id]||'locked')!=='done'){
+            document.getElementById('continue-card').classList.remove('hidden');
+            document.getElementById('continue-title').textContent=next.title;
+            document.getElementById('continue-link').href='article-detail.html?topic='+encodeURIComponent(next.topic)+'&category='+encodeURIComponent(next.category)+'&module='+next.id+'&xp='+next.xp;
         }
     }
+    // Journey summary
+    var progress2=getProgress();
+    var jKeys=Object.keys(JOURNEYS);
+    var jDone=jKeys.filter(function(k){return JOURNEYS[k].modules.every(function(m){return progress2[m.id]==='done';});}).length;
+    document.getElementById('journey-summary').textContent=jDone+' of '+jKeys.length+' completed';
 }
 
-// Swipe from left edge to open
-(function() {
-    const zone = document.getElementById('swipe-zone');
-    let startX = 0, startY = 0;
-    document.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    document.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = Math.abs(e.changedTouches[0].clientY - startY);
-        if (startX < 30 && dx > 60 && dy < 60) openNav();
-    }, { passive: true });
-    // Swipe left to close
-    const navDrawerEl = document.getElementById('nav-drawer');
-    if (navDrawerEl) {
-        navDrawerEl.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-        navDrawerEl.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - startX;
-            if (dx < -60) closeNav();
-        }, { passive: true });
-    }
-})();
-
-// Keyboard
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-
-// Set location in drawer from saved location
-(function() {
-    try {
-        const loc = JSON.parse(localStorage.getItem('gt_weather_loc') || 'null');
-        if (loc && loc.name) document.getElementById('nav-location').textContent = loc.name;
-    } catch(e) {}
-})();
-
-// Init — wrapped in try/catch so page JS always runs
-try {
-// Init active state
-setActiveNav('learn');
-
-// Init all sub-lists collapsed except active group
-document.querySelectorAll('.nav-sub-list').forEach(list => {
-    if (!list.classList.contains('collapsed')) {
-        list.style.maxHeight = '500px';
-    } else {
-        list.style.maxHeight = '0px';
-    }
-});
-} catch(navErr) {
-    console.warn('Nav init error:', navErr);
+function calcStreak(){
+    try{
+        var data=JSON.parse(localStorage.getItem('gt_learn_streak')||'{}');
+        var today=new Date().toDateString();
+        if(data.last===today) return data.count||0;
+        var yesterday=new Date(Date.now()-86400000).toDateString();
+        if(data.last===yesterday){
+            var newCount=(data.count||0)+1;
+            localStorage.setItem('gt_learn_streak',JSON.stringify({last:today,count:newCount}));
+            return newCount;
+        }
+        // Reset streak
+        localStorage.setItem('gt_learn_streak',JSON.stringify({last:today,count:1}));
+        return 1;
+    }catch(e){return 0;}
 }
-</script>
 
-<script>
-function filterLearn(cat) {
-    document.querySelectorAll('.learn-chip').forEach(c => {
-        c.classList.remove('bg-primary-container','text-on-primary-container','shadow-sm');
-        c.classList.add('bg-surface-container','text-on-surface-variant');
+// ── Journeys ──────────────────────────────────────────────────────────────
+var currentJourney='fundamentals';
+
+function showJourney(key){
+    currentJourney=key;
+    // Update tabs
+    document.querySelectorAll('.season-tab').forEach(function(t){t.classList.remove('active');});
+    var tab=document.getElementById('tab-'+key);if(tab)tab.classList.add('active');
+    // Render modules
+    renderJourney(key);
+}
+
+function renderJourney(key){
+    var j=JOURNEYS[key];
+    if(!j)return;
+    var progress=getProgress();
+    var content=document.getElementById('journey-content');
+
+    // Journey header
+    var completedCount=j.modules.filter(function(m){return progress[m.id]==='done';}).length;
+    var pct=Math.round((completedCount/j.modules.length)*100);
+
+    var html='<div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm mb-md">';
+    html+='<div class="flex items-center gap-md mb-sm">';
+    html+='<div class="w-10 h-10 rounded-xl '+j.color+' flex items-center justify-center flex-shrink-0">';
+    html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">'+j.icon+'</span></div>';
+    html+='<div class="flex-1 min-w-0"><p class="font-label-lg text-on-surface">'+j.title+'</p>';
+    html+='<p class="font-label-sm text-outline">'+j.desc+'</p></div>';
+    html+='<span class="font-label-sm text-outline">'+completedCount+'/'+j.modules.length+'</span></div>';
+    html+='<div class="journey-progress"><div class="journey-progress-fill" style="width:'+pct+'%"></div></div>';
+    html+='</div>';
+
+    // Modules
+    j.modules.forEach(function(m,i){
+        var st=progress[m.id]||'locked';
+        // First module always unlocked, rest unlock when previous done
+        var unlocked = i===0 || progress[j.modules[i-1].id]==='done';
+        if(!unlocked) st='locked';
+
+        var isDone=st==='done';
+        var isLocked=!unlocked;
+        var url='article-detail.html?topic='+encodeURIComponent(m.topic)+'&category='+encodeURIComponent(m.category)+'&module='+m.id+'&xp='+m.xp;
+
+        html+='<'+(isLocked?'div':'a href="'+url+'"')+' class="module-card '+(isLocked?'module-locked':'')+' flex items-center gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm">';
+        // Status icon
+        html+='<div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ';
+        if(isDone) html+='bg-primary">';
+        else if(isLocked) html+='bg-surface-container">';
+        else html+='bg-primary-fixed">';
+        html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">';
+        if(isDone) html+='check_circle';
+        else if(isLocked) html+='lock';
+        else html+='play_circle';
+        html+='</span></div>';
+        // Content
+        html+='<div class="flex-1 min-w-0">';
+        html+='<div class="flex items-center gap-xs mb-0.5"><p class="font-label-lg text-on-surface">'+m.title+'</p>';
+        if(isDone) html+='<span class="font-label-sm text-primary bg-primary-fixed/60 px-2 py-0.5 rounded-full">Done</span>';
+        html+='</div>';
+        html+='<p class="font-label-sm text-outline">'+m.desc+'</p>';
+        html+='<div class="flex items-center gap-md mt-xs"><span class="font-label-sm text-outline flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]">schedule</span>'+m.mins+' min</span>';
+        html+='<span class="font-label-sm text-primary flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]" style="font-variation-settings:'FILL' 1">star</span>'+m.xp+' XP</span></div>';
+        html+='</div>';
+        if(!isLocked&&!isDone) html+='<span class="material-symbols-outlined text-outline flex-shrink-0">chevron_right</span>';
+        html+='</'+(isLocked?'div':'a')+'>';
     });
-    const active = document.getElementById('lchip-' + cat);
-    if (active) {
-        active.classList.add('bg-primary-container','text-on-primary-container','shadow-sm');
-        active.classList.remove('bg-surface-container','text-on-surface-variant');
-    }
-    document.querySelectorAll('[data-learn]').forEach(s => {
-        const show = cat === 'all' || s.dataset.learn === cat || s.dataset.learn === 'all';
-        s.style.display = show ? '' : 'none';
+
+    content.innerHTML=html;
+}
+
+// ── Daily tip ─────────────────────────────────────────────────────────────
+function showDailyTip(){
+    var day=new Date().getDay();
+    var tip=DAILY_TIPS[day%DAILY_TIPS.length];
+    var el=document.getElementById('daily-tip');
+    if(el)el.textContent=tip;
+}
+
+// ── Article feed ──────────────────────────────────────────────────────────
+var currentFilter='all';
+
+function setArticleFilter(cat){
+    currentFilter=cat;
+    document.querySelectorAll('.filter-chip').forEach(function(c){
+        c.classList.remove('active','bg-primary','text-on-primary');
+        c.classList.add('bg-surface-container-high','text-on-surface-variant');
     });
+    var btn=document.getElementById('fc-'+cat);
+    if(btn){btn.classList.add('active','bg-primary','text-on-primary');btn.classList.remove('bg-surface-container-high','text-on-surface-variant');}
+    renderArticles();
+}
+
+function renderArticles(){
+    var feed=document.getElementById('article-feed');
+    var articles=ARTICLES;
+    if(currentFilter!=='all') articles=articles.filter(function(a){return a.category===currentFilter;});
+    if(!articles.length){feed.innerHTML='<div class="text-center py-lg"><span class="material-symbols-outlined text-[40px] text-outline">article</span><p class="font-body-md text-on-surface-variant mt-2">No articles in this category yet</p></div>';return;}
+    feed.innerHTML=articles.map(function(a){
+        var url='article-detail.html?topic='+encodeURIComponent(a.topic)+'&category='+encodeURIComponent(a.category);
+        return '<a href="'+url+'" class="flex gap-md bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all active:scale-98 block">' +
+        '<div class="w-14 h-14 rounded-xl bg-surface-container flex items-center justify-center flex-shrink-0 text-[28px]">'+a.emoji+'</div>'+
+        '<div class="flex-1 min-w-0">'+
+        '<p class="font-label-lg text-on-surface mb-xs">'+a.title+'</p>'+
+        '<p class="font-label-sm text-on-surface-variant line-clamp-2">'+a.desc+'</p>'+
+        '<div class="flex items-center gap-md mt-sm">'+
+        '<span class="font-label-sm text-outline flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]">schedule</span>'+a.mins+' min read</span>'+
+        '</div></div>'+
+        '<span class="material-symbols-outlined text-outline flex-shrink-0 self-center">chevron_right</span>'+
+        '</a>';
+    }).join('');
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+// Update streak on visit
+calcStreak();
+updateDashboard();
+showDailyTip();
+showJourney('fundamentals');
+renderArticles();
+
+// If returning from article-detail with module completion
+var urlP=new URLSearchParams(window.location.search);
+if(urlP.get('completed')){
+    var modId=urlP.get('completed');
+    var xpEarned=parseInt(urlP.get('xp')||'0');
+    var progress=getProgress();
+    progress[modId]='done';
+    saveProgress(progress);
+    updateDashboard();
+    // Find which journey this module belongs to and show it
+    Object.keys(JOURNEYS).forEach(function(k){
+        if(JOURNEYS[k].modules.find(function(m){return m.id===modId;})){
+            showJourney(k);
+        }
+    });
+    // Clean URL
+    window.history.replaceState({},'',window.location.pathname);
 }
 </script>
 </body></html>
