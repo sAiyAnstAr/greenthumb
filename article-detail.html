@@ -127,6 +127,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;}
 </head>
 <body class="bg-background text-on-surface pb-32">
 <div id="progress"></div>
+<div id="debug" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1b1c1a;color:#bcf0ae;font-family:monospace;font-size:11px;padding:8px;max-height:200px;overflow-y:auto;z-index:999;border-top:2px solid #154212;">
+<button onclick="document.getElementById('debug').style.display='none'" style="float:right;background:#154212;color:white;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;">✕</button>
+<div id="debug-log">Debug log:
+</div>
+</div>
+<button onclick="document.getElementById('debug').style.display='block'" style="position:fixed;bottom:80px;right:12px;background:#154212;color:white;border:none;padding:6px 10px;border-radius:8px;font-size:11px;cursor:pointer;z-index:998;">Debug</button>
+
 
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
@@ -303,13 +310,17 @@ function doXHR(url, onOK, onFail){
 
 // Show/hide states
 function showLoading(){document.getElementById('s-loading').classList.remove('hidden');document.getElementById('s-error').classList.add('hidden');document.getElementById('s-content').classList.add('hidden');}
-function showError(msg){document.getElementById('s-loading').classList.add('hidden');document.getElementById('s-error').classList.remove('hidden');document.getElementById('s-error-msg').textContent=msg||'';}
+function showError(msg){
+    dlog("ERROR: "+msg);document.getElementById('s-loading').classList.add('hidden');document.getElementById('s-error').classList.remove('hidden');document.getElementById('s-error-msg').textContent=msg||'';}
 function showContent(){document.getElementById('s-loading').classList.add('hidden');document.getElementById('s-content').classList.remove('hidden');}
 
 function loadArticle(){
+    dlog("loadArticle called, TOPIC="+TOPIC);
     showLoading();
     var url='https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles='+encodeURIComponent(TOPIC);
+    dlog("XHR sent to Wikipedia");
     doXHR(url, function(text){
+    dlog("XHR response received, length="+text.length);
         try{
             var data=JSON.parse(text);
             var pages=data.query&&data.query.pages;
@@ -341,6 +352,7 @@ function loadArticle(){
 }
 
 function renderPage(page){
+    dlog("renderPage called: "+page.title);
     showContent();
     document.getElementById('c-category').textContent=CATEGORY;
     document.getElementById('c-title').textContent=page.title||TOPIC;
@@ -421,6 +433,15 @@ function showComplete(){
     }
 }
 
+
+function dlog(msg){
+    var el=document.getElementById('debug-log');
+    if(el) el.textContent += new Date().toLocaleTimeString()+': '+msg+'\n';
+    console.log(msg);
+}
+
+dlog("Script started");
+dlog("TOPIC="+TOPIC+" MOD_ID="+MOD_ID);
 loadArticle();
 </script>
 </body></html>
