@@ -29,14 +29,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;overflow:hidd
 .nav-sub-list.collapsed{max-height:0!important;}
 #swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
 #screen-find,#screen-plan{position:fixed;inset:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
-#screen-find{z-index:10;display:flex;flex-direction:column;}
-#screen-plan{transform:translateX(100%);z-index:10;display:flex;flex-direction:column;}
+#screen-find{z-index:10;}
+#screen-plan{transform:translateX(100%);z-index:10;}
 #screen-plan.active{transform:translateX(0);}
 #screen-find.exit{transform:translateX(-30%);}
-#find-map,#plan-map{width:100%;height:100%;min-height:300px;}
-#screen-find,#screen-plan{display:flex;flex-direction:column;}
-#find-map{flex:1;}
-#plan-map{flex:1;}
+#find-map,#plan-map{width:100%;height:100%;}
 .tool-btn{transition:all 0.15s ease;background:white;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#42493e;box-shadow:0 1px 3px rgba(0,0,0,0.12);flex-shrink:0;}
 .tool-btn.active{background:#154212;color:white;border-color:#154212;}
 .tool-btn:hover:not(.active){background:#f4f4f0;}
@@ -106,7 +103,7 @@ onfocus="this.style.borderColor='#154212'" onblur="this.style.borderColor='#c2c9
 </div>
 </div>
 </div>
-<div id="find-map"></div>
+<div id="find-map" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
 <div id="find-instruction" style="position:absolute;top:140px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);backdrop-filter:blur(6px);color:white;padding:9px 20px;border-radius:50px;font-size:13px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;transition:opacity 0.3s;">
     Tap your property on the map
 </div>
@@ -170,7 +167,7 @@ Choose a different location
 <button onclick="clearAll()" class="tool-btn" style="color:#ba1a1a;" title="Clear all"><span class="material-symbols-outlined" style="font-size:18px;">delete_sweep</span></button>
 </div>
 </div>
-<div id="plan-map"></div>
+<div id="plan-map" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
 <!-- Hints -->
 <div id="draw-hint" style="display:none;position:absolute;top:110px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;">Click to place points · Double-click to finish</div>
 <div id="pin-hint" style="display:none;position:absolute;top:110px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;">Tap the map to place a plant</div>
@@ -221,18 +218,17 @@ document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.ch
 // ── Google Maps ──────────────────────────────────────────────────────────
 var GMAPS_KEY = 'AIzaSyA8xmhJJDELgPlAcAAZv-NIRnC_SWui8qw';
 function loadGoogleMaps(){
-    // Show loading state
     document.getElementById('find-map').innerHTML='<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#e8f5e8;gap:12px;"><div style="width:40px;height:40px;border:3px solid #154212;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></div><p style="font-size:14px;font-weight:600;color:#154212;">Loading map...</p></div>';
+    // Use the recommended bootstrap loader
     var s=document.createElement('script');
-    s.src='https://maps.googleapis.com/maps/api/js?key='+GMAPS_KEY+'&libraries=places,drawing&callback=onGoogleMapsReady';
-    s.async=true;s.defer=true;
-    s.onerror=function(){
-        document.getElementById('find-map').innerHTML='<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ffdad6;gap:12px;padding:24px;text-align:center;"><span style="font-size:48px;">⚠️</span><p style="font-size:16px;font-weight:700;color:#93000a;">Google Maps failed to load</p><p style="font-size:13px;color:#93000a;">Please check that Maps JavaScript API, Places API, and Drawing Library are enabled in Google Cloud Console, and that your API key allows this domain.</p><button onclick="loadGoogleMaps()" style="background:#154212;color:white;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;">Retry</button></div>';
-    };
+    s.src='https://maps.googleapis.com/maps/api/js?key='+GMAPS_KEY+'&loading=async&libraries=places,drawing&callback=onGoogleMapsReady&v=weekly';
+    s.async=true;
+    s.onerror=function(){ showMapError('Script failed to load. Check your internet connection and that Maps JavaScript API is enabled.'); };
     document.head.appendChild(s);
 }
 function onGoogleMapsReady(){
     clearTimeout(window._mapsTimeout);
+    window._mapCallbackFired = true;
     initFindMap();
     var saved=getSaved();
     if(saved&&saved.property){
@@ -242,19 +238,36 @@ function onGoogleMapsReady(){
 }
 loadGoogleMaps();
 
-// Timeout fallback — if Maps doesn't load in 8s, show error
+// Track if callback fired
+window._mapCallbackFired = false;
+
+// Capture any Google Maps errors
+window.gm_authFailure = function() {
+    window._gmAuthFailed = true;
+    showMapError('Authentication failed. Check: 1) Maps JavaScript API is enabled in Google Cloud Console, 2) API key HTTP referrer restrictions include your domain.');
+};
+
+function showMapError(msg) {
+    clearTimeout(window._mapsTimeout);
+    document.getElementById('find-map').innerHTML =
+        '<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff3cd;gap:12px;padding:20px;text-align:center;">' +
+        '<span style="font-size:40px;">⚠️</span>' +
+        '<p style="font-size:15px;font-weight:700;color:#664d03;">Maps failed to load</p>' +
+        '<p style="font-size:12px;color:#664d03;max-width:280px;">' + msg + '</p>' +
+        '<a href="https://console.cloud.google.com/apis/library/maps-backend.googleapis.com" target="_blank" style="font-size:12px;color:#154212;font-weight:700;">Open Google Cloud Console →</a>' +
+        '<button onclick="loadGoogleMaps();" style="background:#154212;color:white;border:none;border-radius:12px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;margin-top:4px;">Retry</button>' +
+        '</div>';
+}
+
+// Timeout — fires if callback never called after 10s
 window._mapsTimeout = setTimeout(function() {
-    if (!window.google || !window.google.maps) {
-        document.getElementById('find-map').innerHTML =
-            '<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff3cd;gap:12px;padding:24px;text-align:center;">' +
-            '<span style="font-size:48px;">⚠️</span>' +
-            '<p style="font-size:16px;font-weight:700;color:#664d03;">Google Maps timed out</p>' +
-            '<p style="font-size:13px;color:#664d03;max-width:300px;">Most likely cause: <strong>no billing account linked</strong> to your Google Cloud project. Maps requires billing even for free use.</p>' +
-            '<p style="font-size:13px;color:#664d03;max-width:300px;">Go to console.cloud.google.com → Billing → link your project.</p>' +
-            '<button onclick="clearTimeout(window._mapsTimeout);loadGoogleMaps();" style="background:#154212;color:white;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;">Retry</button>' +
-            '</div>';
+    if (!window._mapCallbackFired) {
+        var gmError = window._gmAuthFailed ? 'API key auth failure.' :
+            (window.google && window.google.maps) ? 'API loaded but callback did not fire. Check API key referrer restrictions allow this domain.' :
+            'Script did not load. Check internet connection and that Maps JavaScript API is enabled.';
+        showMapError(gmError);
     }
-}, 8000);
+}, 10000);
 </script>
 
 <script>
@@ -280,7 +293,10 @@ function getSaved(){try{return JSON.parse(localStorage.getItem('gt_garden_plan')
 function initFindMap(){
     var sl=null;try{sl=JSON.parse(localStorage.getItem('gt_weather_loc'));}catch(e){}
     var center=sl?{lat:sl.lat,lng:sl.lon}:{lat:-28.0167,lng:153.4000};
-    findMap=new google.maps.Map(document.getElementById('find-map'),{
+    // Force map container to be visible before init
+    var fm = document.getElementById('find-map');
+    fm.innerHTML = '';
+    findMap=new google.maps.Map(fm,{
         center:center,zoom:16,mapTypeId:'hybrid',
         disableDefaultUI:false,zoomControl:true,mapTypeControl:false,
         streetViewControl:false,fullscreenControl:false,gestureHandling:'greedy'
@@ -297,6 +313,8 @@ function initFindMap(){
         selectProperty(p.geometry.location,p.formatted_address||p.name);
     });
     findMap.addListener('click',function(e){reverseGeocode(e.latLng);});
+    // Force resize to ensure tiles render
+    google.maps.event.trigger(findMap, 'resize');
 }
 
 function reverseGeocode(latLng){
@@ -359,7 +377,9 @@ function goToFindScreen(){
 // ── SCREEN 2: Plan map ───────────────────────────────────────────────────
 function initPlanMap(){
     var center=selectedProperty?{lat:selectedProperty.lat,lng:selectedProperty.lng}:{lat:-28.0167,lng:153.4000};
-    planMap=new google.maps.Map(document.getElementById('plan-map'),{
+    var pm = document.getElementById('plan-map');
+    pm.innerHTML = '';
+    planMap=new google.maps.Map(pm,{
         center:center,zoom:20,mapTypeId:'satellite',tilt:0,
         disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'
     });
