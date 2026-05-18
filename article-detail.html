@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Article - Greenthumb</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -35,6 +35,463 @@
                     "outline-variant": "#c2c9bb",
                     "surface-container-lowest": "#ffffff",
                     "primary": "#154212",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "surface": "#faf9f5",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-highest": "#e3e2df",
+                    "surface-container": "#efeeea",
+                    "on-secondary-container": "#795950",
+                    "tertiary": "#6e1c0c",
+                    "on-tertiary-fixed": "#3e0500",
+                    "inverse-surface": "#2f312e",
+                    "surface-tint": "#3b6934",
+                    "tertiary-container": "#8d3220",
+                    "outline": "#72796e",
+                    "on-primary-container": "#9dd090",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#42493e",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#77574d",
+                    "inverse-primary": "#a1d494",
+                    "on-primary-fixed": "#002201"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:100dvh;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+#nav-overlay{transition:opacity 0.25s ease;}
+#nav-overlay.hidden{opacity:0;pointer-events:none;}
+#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
+#nav-drawer.open{transform:translateX(0);}
+.nav-item{transition:background 0.15s ease;}
+.nav-item.active{background:#bcf0ae;color:#002201;}
+.nav-item:not(.active):hover{background:#efeeea;}
+.nav-sub-item:hover{background:#efeeea;}
+.nav-section{border-top:1px solid #c2c9bb40;}
+.nav-chevron{transition:transform 0.2s ease;}
+.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
+.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
+.nav-sub-list.collapsed{max-height:0!important;}
+#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
+#reading-progress{height:3px;background:#154212;width:0;transition:width 0.1s linear;position:fixed;top:0;left:0;z-index:100;}
+.article-body h2{font-size:20px;font-weight:700;color:#1b1c1a;margin:24px 0 8px;}
+.article-body p{font-size:16px;line-height:1.7;color:#42493e;margin-bottom:16px;}
+.skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.yt-thumb{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;}
+.yt-thumb iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+#complete-banner{position:fixed;bottom:80px;left:16px;right:16px;background:white;border-radius:20px;padding:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:50;display:flex;align-items:center;gap:12px;border:2px solid #bcf0ae;transform:translateY(20px);opacity:0;transition:all 0.3s ease;}
+#complete-banner.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body class="bg-background text-on-surface pb-32">
+<div id="reading-progress"></div>
+
+<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
+<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
+<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div>
+<div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-sm">
+<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span>
+<span class="font-label-lg text-label-lg text-on-surface">Home</span>
+</a>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
+</button>
+<div id="garden-group" class="nav-sub-list collapsed pl-md">
+<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
+<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-planner"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
+<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-diary"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
+<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-add-plant"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
+</div>
+</div>
+<div class="mx-sm">
+<a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-scanner"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-learn">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span>
+<span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span>
+<span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span>
+</button>
+<div id="learn-group" class="nav-sub-list collapsed pl-md">
+<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-encyclopedia"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
+<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-search-guides"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
+<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-articles"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
+<a href="learning-journey.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-journeys"><span class="material-symbols-outlined text-[18px] text-outline">route</span><span class="font-label-lg text-label-lg text-on-surface-variant">Learning Journeys</span></a>
+</div>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-recommendations"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
+<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-calendar"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
+</div>
+<div class="nav-section pt-sm mt-sm mx-sm">
+<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-profile"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
+<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl" id="nav-settings"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
+</div>
+</nav>
+<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
+</aside>
+<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+
+<header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
+<div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
+<a href="learn.html" id="back-btn" class="p-2 rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
+<h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
+</div>
+</header>
+
+<main class="max-w-screen-lg mx-auto">
+
+<!-- Loading -->
+<div id="article-loading" class="px-container-margin pt-lg space-y-md">
+<div class="skeleton h-6 w-24 rounded-full"></div>
+<div class="skeleton h-10 w-3/4 rounded-xl"></div>
+<div class="skeleton h-4 w-32 rounded"></div>
+<div class="skeleton h-48 rounded-2xl mt-md"></div>
+<div class="space-y-2 mt-md">
+<div class="skeleton h-4 rounded w-full"></div>
+<div class="skeleton h-4 rounded w-5/6"></div>
+<div class="skeleton h-4 rounded w-full"></div>
+<div class="skeleton h-4 rounded w-4/5"></div>
+<div class="skeleton h-4 rounded w-full"></div>
+</div>
+</div>
+
+<!-- Error -->
+<div id="article-error" class="hidden px-container-margin pt-xl text-center">
+<span class="material-symbols-outlined text-[56px] text-outline">wifi_off</span>
+<p class="font-headline-md text-on-surface-variant mt-md">Could not load article</p>
+<p id="error-detail" class="font-body-md text-outline mt-sm"></p>
+<button onclick="loadArticle()" class="mt-lg bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full active:scale-95 transition-transform">Try again</button>
+</div>
+
+<!-- Content -->
+<div id="article-content" class="hidden">
+<div class="px-container-margin pt-lg pb-md">
+<span id="article-category" class="font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant inline-block mb-md"></span>
+<h2 id="article-title" class="font-display-lg text-display-lg text-on-surface mb-sm"></h2>
+<div class="flex items-center gap-md text-outline">
+<span class="font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">schedule</span><span id="article-read-time"></span></span>
+<span class="font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">import_contacts</span>Wikipedia</span>
+</div>
+</div>
+
+<!-- Hero image -->
+<div id="article-hero" class="hidden w-full overflow-hidden max-h-64 mb-lg">
+<img id="article-img" src="" alt="" class="w-full object-cover"/>
+</div>
+
+<!-- Body -->
+<div id="article-body" class="article-body px-container-margin pb-lg"></div>
+
+<!-- YouTube -->
+<div id="youtube-section" class="hidden px-container-margin pb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Watch & Learn</h3>
+<div id="youtube-videos" class="space-y-md"></div>
+</div>
+
+<!-- More articles -->
+<div class="px-container-margin pb-lg border-t border-outline-variant/40 pt-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">More to Explore</h3>
+<div id="related-list" class="grid grid-cols-1 sm:grid-cols-2 gap-md"></div>
+</div>
+</div>
+</main>
+
+<!-- Module completion banner -->
+<div id="complete-banner" class="hidden">
+<div id="complete-icon" class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">school</span>
+</div>
+<div style="flex:1;min-width:0;">
+<p id="complete-title" class="font-label-lg text-on-surface"></p>
+<p id="complete-subtitle" class="font-label-sm text-outline"></p>
+</div>
+<button id="complete-btn" class="bg-primary text-on-primary font-label-lg text-label-lg px-sm py-2 rounded-xl active:scale-95 transition-transform flex-shrink-0 border-none cursor-pointer"></button>
+</div>
+
+<nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
+<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="learn.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
+</div>
+</nav>
+
+<script>
+// ── Nav ───────────────────────────────────────────────────────────────────
+function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
+function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
+document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
+window.addEventListener('scroll',function(){var doc=document.documentElement;var pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;document.getElementById('reading-progress').style.width=Math.min(pct,100)+'%';});
+
+// ── Params ────────────────────────────────────────────────────────────────
+var PARAMS = {};
+try {
+    window.location.search.slice(1).split('&').forEach(function(p) {
+        var kv = p.split('=');
+        if(kv[0]) PARAMS[decodeURIComponent(kv[0])] = decodeURIComponent((kv[1]||'').replace(/\+/g,' '));
+    });
+} catch(e) {}
+var TOPIC = PARAMS.topic || 'Gardening';
+var CATEGORY = PARAMS.category || 'Learn';
+var MODULE_ID = PARAMS.module || '';
+var MODULE_XP = parseInt(PARAMS.xp || '0');
+var YT_KEY =  + YT_KEY + ;
+document.title = TOPIC + ' - Greenthumb';
+
+// Back button — go back to learn with correct tab if module
+var backBtn = document.getElementById('back-btn');
+if(backBtn && MODULE_ID) backBtn.href = 'learn.html';
+
+// ── Load article ──────────────────────────────────────────────────────────
+function showError(msg) {
+    document.getElementById('article-loading').classList.add('hidden');
+    document.getElementById('article-error').classList.remove('hidden');
+    document.getElementById('error-detail').textContent = msg || '';
+}
+
+function showContent() {
+    document.getElementById('article-loading').classList.add('hidden');
+    document.getElementById('article-content').classList.remove('hidden');
+}
+
+function loadArticle() {
+    document.getElementById('article-loading').classList.remove('hidden');
+    document.getElementById('article-content').classList.add('hidden');
+    document.getElementById('article-error').classList.add('hidden');
+
+    // Use Wikipedia Action API with origin=* — most reliable for CORS
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(TOPIC);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = function() { showError('Request timed out. Check your connection.'); };
+    xhr.onerror = function() { showError('Network error. Check your connection.'); };
+    xhr.onload = function() {
+        if (xhr.status !== 200) { showError('Server error: ' + xhr.status); return; }
+        try {
+            var data = JSON.parse(xhr.responseText);
+            var pages = data.query && data.query.pages;
+            if (!pages) { showError('No data returned from Wikipedia.'); return; }
+            var pageId = Object.keys(pages)[0];
+            var page = pages[pageId];
+            if (pageId === '-1' || !page.extract) {
+                // Try search
+                searchAndLoad(TOPIC);
+                return;
+            }
+            renderArticle(page);
+        } catch(e) {
+            showError('Could not parse response: ' + e.message);
+        }
+    };
+    xhr.send();
+}
+
+function searchAndLoad(q) {
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + encodeURIComponent(q) + '&format=json&origin=*&srlimit=1';
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = function() { showError('Search timed out.'); };
+    xhr.onerror = function() { showError('Network error during search.'); };
+    xhr.onload = function() {
+        try {
+            var data = JSON.parse(xhr.responseText);
+            var results = data.query && data.query.search;
+            if (!results || !results.length) { showError('No Wikipedia article found for: ' + q); return; }
+            var title = results[0].title;
+            var url2 = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(title);
+            var xhr2 = new XMLHttpRequest();
+            xhr2.open('GET', url2, true);
+            xhr2.timeout = 10000;
+            xhr2.ontimeout = function() { showError('Request timed out.'); };
+            xhr2.onerror = function() { showError('Network error.'); };
+            xhr2.onload = function() {
+                try {
+                    var data2 = JSON.parse(xhr2.responseText);
+                    var pages2 = data2.query && data2.query.pages;
+                    if (!pages2) { showError('No article found.'); return; }
+                    var page2 = pages2[Object.keys(pages2)[0]];
+                    if (!page2.extract) { showError('Article has no content.'); return; }
+                    renderArticle(page2);
+                } catch(e) { showError('Parse error: ' + e.message); }
+            };
+            xhr2.send();
+        } catch(e) { showError('Search parse error: ' + e.message); }
+    };
+    xhr.send();
+}
+
+function renderArticle(page) {
+    showContent();
+
+    document.getElementById('article-category').textContent = CATEGORY;
+    document.getElementById('article-title').textContent = page.title || TOPIC;
+    document.title = (page.title || TOPIC) + ' - Greenthumb';
+
+    var extract = page.extract || '';
+    var words = extract.split(' ').length;
+    document.getElementById('article-read-time').textContent = Math.max(2, Math.ceil(words/200)) + ' min read';
+
+    // Hero image
+    if (page.thumbnail && page.thumbnail.source) {
+        document.getElementById('article-img').src = page.thumbnail.source;
+        document.getElementById('article-hero').classList.remove('hidden');
+    }
+
+    // Body — split extract into paragraphs
+    var paras = extract.split('\n\n').filter(function(p) { return p.trim().length > 30; });
+    var bodyHtml = paras.slice(0, 8).map(function(p) { return '<p>' + p.trim() + '</p>'; }).join('');
+    document.getElementById('article-body').innerHTML = bodyHtml || '<p>' + extract.slice(0, 1500) + '</p>';
+
+    // Related articles
+    renderRelated();
+
+    // Module completion
+    if (MODULE_ID) showModuleComplete();
+
+    // YouTube (background)
+    if (YT_KEY) loadYouTube(TOPIC + ' gardening');
+}
+
+// ── YouTube ───────────────────────────────────────────────────────────────
+function loadYouTube(q) {
+    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + encodeURIComponent(q) + '&type=video&maxResults=2&key=' + YT_KEY;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = function() {
+        try {
+            var data = JSON.parse(xhr.responseText);
+            if (!data.items || !data.items.length) return;
+            var html = data.items.map(function(v) {
+                var vid = v.id.videoId;
+                var title = v.snippet.title;
+                return '<div class="yt-thumb"><iframe src="https://www.youtube.com/embed/' + vid + '" frameborder="0" allowfullscreen title="' + title + '"></iframe></div>' +
+                    '<p class="font-label-sm text-on-surface-variant mt-xs">' + title + '</p>';
+            }).join('<div class="mb-md"></div>');
+            document.getElementById('youtube-videos').innerHTML = html;
+            document.getElementById('youtube-section').classList.remove('hidden');
+        } catch(e) {}
+    };
+    xhr.send();
+}
+
+// ── Related ───────────────────────────────────────────────────────────────
+var RELATED = [
+    {title:'Soil & Composting',topic:'Compost',category:'Soil'},
+    {title:'Watering Techniques',topic:'Plant watering',category:'Watering'},
+    {title:'Companion Planting',topic:'Companion planting',category:'Plants'},
+    {title:'Pest Management',topic:'Integrated pest management',category:'Pests'},
+    {title:'Seasonal Gardening',topic:'Gardening',category:'Seasonal'},
+    {title:'Plant Propagation',topic:'Plant propagation',category:'Plants'},
+];
+function renderRelated() {
+    var filtered = RELATED.filter(function(r) { return r.topic !== TOPIC; }).slice(0, 4);
+    document.getElementById('related-list').innerHTML = filtered.map(function(r) {
+        return '<a href="article-detail.html?topic=' + encodeURIComponent(r.topic) + '&category=' + encodeURIComponent(r.category) + '" class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all block">' +
+            '<p class="font-label-sm text-outline mb-xs">' + r.category + '</p>' +
+            '<p class="font-label-lg text-on-surface">' + r.title + '</p>' +
+            '<div class="flex items-center gap-xs mt-sm text-primary"><span class="font-label-sm">Read</span><span class="material-symbols-outlined text-[14px]">arrow_forward</span></div>' +
+            '</a>';
+    }).join('');
+}
+
+// ── Module completion ─────────────────────────────────────────────────────
+function showModuleComplete() {
+    var progress = {};
+    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
+    var done = progress[MODULE_ID] === 'done';
+    var banner = document.getElementById('complete-banner');
+    banner.classList.remove('hidden');
+    document.getElementById('complete-title').textContent = done ? 'Already completed!' : 'Mark as Complete';
+    document.getElementById('complete-subtitle').textContent = done ? 'You earned the XP for this module.' : 'Earn ' + MODULE_XP + ' XP';
+    var btn = document.getElementById('complete-btn');
+    if (done) {
+        btn.textContent = 'Back';
+        btn.onclick = function() { window.location.href = 'learn.html'; };
+    } else {
+        btn.textContent = 'Complete ✓';
+        btn.onclick = function() { markDone(); };
+    }
+    setTimeout(function() { banner.classList.add('show'); }, 200);
+}
+
+function markDone() {
+    var progress = {};
+    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
+    progress[MODULE_ID] = 'done';
+    localStorage.setItem('gt_learn_progress', JSON.stringify(progress));
+    window.location.href = 'learn.html?completed=' + MODULE_ID + '&xp=' + MODULE_XP;
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+loadArticle();
+</script>
+</body></html>                    "primary": "#154212",
                     "on-tertiary": "#ffffff",
                     "error": "#ba1a1a",
                     "on-tertiary-fixed-variant": "#802918",
