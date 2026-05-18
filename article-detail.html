@@ -99,7 +99,7 @@
       }
     </script>
 <style>
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:100dvh;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;}
 .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
 #nav-overlay{transition:opacity 0.25s ease;}
 #nav-overlay.hidden{opacity:0;pointer-events:none;}
@@ -115,19 +115,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:10
 .nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
 .nav-sub-list.collapsed{max-height:0!important;}
 #swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
-#reading-progress{height:3px;background:#154212;width:0;transition:width 0.1s linear;position:fixed;top:0;left:0;z-index:100;}
-.article-body h2{font-size:20px;font-weight:700;color:#1b1c1a;margin:24px 0 8px;}
-.article-body p{font-size:16px;line-height:1.7;color:#42493e;margin-bottom:16px;}
+#progress{position:fixed;top:0;left:0;height:3px;background:#154212;width:0;z-index:100;transition:width 0.1s;}
+.article-body p{font-size:16px;line-height:1.75;color:#42493e;margin-bottom:16px;}
+.article-body h2{font-size:20px;font-weight:700;color:#1b1c1a;margin:28px 0 10px;}
 .skeleton{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.yt-thumb{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;}
-.yt-thumb iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
-#complete-banner{position:fixed;bottom:80px;left:16px;right:16px;background:white;border-radius:20px;padding:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:50;display:flex;align-items:center;gap:12px;border:2px solid #bcf0ae;transform:translateY(20px);opacity:0;transition:all 0.3s ease;}
-#complete-banner.show{transform:translateY(0);opacity:1;}
+.yt-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:8px;}
+.yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+#complete-bar{position:fixed;bottom:80px;left:16px;right:16px;background:white;border-radius:20px;padding:14px 16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:50;display:none;align-items:center;gap:12px;border:2px solid #bcf0ae;}
 </style>
 </head>
 <body class="bg-background text-on-surface pb-32">
-<div id="reading-progress"></div>
+<div id="progress"></div>
 
 <div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
 <aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
@@ -189,7 +188,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:10
 
 <header class="bg-background w-full top-0 sticky z-40 border-b border-outline-variant/40">
 <div class="flex items-center justify-between px-container-margin py-base w-full max-w-screen-lg mx-auto">
-<a href="learn.html" id="back-btn" class="p-2 rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
+<a id="back-btn" href="learn.html" class="p-2 rounded-full hover:bg-surface-container-high transition-colors flex-shrink-0"><span class="material-symbols-outlined text-primary">arrow_back</span></a>
 <h1 class="font-headline-lg text-headline-lg text-primary">Greenthumb</h1>
 <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container cursor-pointer" onclick="openNav()"><img alt="Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY"/></div>
 </div>
@@ -197,298 +196,231 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;min-height:10
 
 <main class="max-w-screen-lg mx-auto">
 
-<!-- Loading -->
-<div id="article-loading" class="px-container-margin pt-lg space-y-md">
-<div class="skeleton h-6 w-24 rounded-full"></div>
-<div class="skeleton h-10 w-3/4 rounded-xl"></div>
-<div class="skeleton h-4 w-32 rounded"></div>
-<div class="skeleton h-48 rounded-2xl mt-md"></div>
+<div id="s-loading" class="px-container-margin pt-lg space-y-md">
+<div class="skeleton h-5 w-24 rounded-full"></div>
+<div class="skeleton h-9 w-3/4 rounded-xl"></div>
+<div class="skeleton h-4 w-32 rounded-lg"></div>
+<div class="skeleton h-52 w-full rounded-2xl mt-sm"></div>
 <div class="space-y-2 mt-md">
 <div class="skeleton h-4 rounded w-full"></div>
 <div class="skeleton h-4 rounded w-5/6"></div>
 <div class="skeleton h-4 rounded w-full"></div>
 <div class="skeleton h-4 rounded w-4/5"></div>
 <div class="skeleton h-4 rounded w-full"></div>
+<div class="skeleton h-4 rounded w-3/4"></div>
 </div>
 </div>
 
-<!-- Error -->
-<div id="article-error" class="hidden px-container-margin pt-xl text-center">
+<div id="s-error" class="hidden px-container-margin pt-xl text-center">
 <span class="material-symbols-outlined text-[56px] text-outline">wifi_off</span>
 <p class="font-headline-md text-on-surface-variant mt-md">Could not load article</p>
-<p id="error-detail" class="font-body-md text-outline mt-sm"></p>
-<button onclick="loadArticle()" class="mt-lg bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full active:scale-95 transition-transform">Try again</button>
+<p id="s-error-msg" class="font-body-md text-outline mt-sm mb-lg"></p>
+<button onclick="loadArticle()" class="bg-primary text-on-primary font-label-lg px-lg py-sm rounded-full">Try again</button>
 </div>
 
-<!-- Content -->
-<div id="article-content" class="hidden">
-<div class="px-container-margin pt-lg pb-md">
-<span id="article-category" class="font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant inline-block mb-md"></span>
-<h2 id="article-title" class="font-display-lg text-display-lg text-on-surface mb-sm"></h2>
-<div class="flex items-center gap-md text-outline">
-<span class="font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">schedule</span><span id="article-read-time"></span></span>
-<span class="font-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">import_contacts</span>Wikipedia</span>
+<div id="s-content" class="hidden">
+<div class="px-container-margin pt-lg pb-sm">
+<span id="c-category" class="font-label-sm px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant inline-block mb-md"></span>
+<h2 id="c-title" class="font-display-lg text-display-lg text-on-surface mb-sm leading-tight"></h2>
+<div class="flex items-center gap-md text-outline font-label-sm">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">schedule</span><span id="c-time"></span></span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">import_contacts</span>Wikipedia</span>
 </div>
 </div>
-
-<!-- Hero image -->
-<div id="article-hero" class="hidden w-full overflow-hidden max-h-64 mb-lg">
-<img id="article-img" src="" alt="" class="w-full object-cover"/>
-</div>
-
-<!-- Body -->
-<div id="article-body" class="article-body px-container-margin pb-lg"></div>
-
-<!-- YouTube -->
-<div id="youtube-section" class="hidden px-container-margin pb-lg">
+<div id="c-hero" class="hidden w-full overflow-hidden max-h-64 my-md"><img id="c-img" src="" alt="" class="w-full object-cover"/></div>
+<div id="c-body" class="article-body px-container-margin py-md"></div>
+<div id="c-yt" class="hidden px-container-margin pb-lg">
 <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Watch & Learn</h3>
-<div id="youtube-videos" class="space-y-md"></div>
+<div id="c-yt-list" class="space-y-md"></div>
 </div>
-
-<!-- More articles -->
-<div class="px-container-margin pb-lg border-t border-outline-variant/40 pt-lg">
+<div class="px-container-margin pb-xl border-t border-outline-variant/40 pt-lg">
 <h3 class="font-headline-md text-headline-md text-on-surface mb-md">More to Explore</h3>
-<div id="related-list" class="grid grid-cols-1 sm:grid-cols-2 gap-md"></div>
+<div id="c-related" class="grid grid-cols-1 sm:grid-cols-2 gap-md"></div>
 </div>
 </div>
 </main>
 
-<!-- Module completion banner -->
-<div id="complete-banner" class="hidden">
-<div id="complete-icon" class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+<div id="complete-bar">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
 <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1">school</span>
 </div>
 <div style="flex:1;min-width:0;">
-<p id="complete-title" class="font-label-lg text-on-surface"></p>
-<p id="complete-subtitle" class="font-label-sm text-outline"></p>
+<p id="cb-title" class="font-label-lg text-on-surface"></p>
+<p id="cb-sub" class="font-label-sm text-outline"></p>
 </div>
-<button id="complete-btn" class="bg-primary text-on-primary font-label-lg text-label-lg px-sm py-2 rounded-xl active:scale-95 transition-transform flex-shrink-0 border-none cursor-pointer"></button>
+<button id="cb-btn" class="bg-primary text-on-primary font-label-lg text-label-lg px-sm py-2 rounded-xl flex-shrink-0" style="border:none;cursor:pointer;"></button>
 </div>
 
 <nav class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
 <div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 rounded-full" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 rounded-full" href="my-garden.html"><span class="material-symbols-outlined">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 rounded-full" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 rounded-full" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
 <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="learn.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
 </div>
 </nav>
 
 <script>
-// ── Nav ───────────────────────────────────────────────────────────────────
+// Nav
 function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
 function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
 function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
-try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){document.getElementById('nav-location').textContent=nl.name;}}catch(e){}
 document.querySelectorAll('.nav-sub-list').forEach(function(l){l.style.maxHeight=l.classList.contains('collapsed')?'0px':'500px';});
 document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
 document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
-window.addEventListener('scroll',function(){var doc=document.documentElement;var pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;document.getElementById('reading-progress').style.width=Math.min(pct,100)+'%';});
+window.addEventListener('scroll',function(){var d=document.documentElement;document.getElementById('progress').style.width=Math.min(d.scrollTop/(d.scrollHeight-d.clientHeight)*100,100)+'%';});
 
-// ── Params ────────────────────────────────────────────────────────────────
-var PARAMS = {};
-try {
-    window.location.search.slice(1).split('&').forEach(function(p) {
-        var kv = p.split('=');
-        if(kv[0]) PARAMS[decodeURIComponent(kv[0])] = decodeURIComponent((kv[1]||'').replace(/\+/g,' '));
-    });
-} catch(e) {}
-var TOPIC = PARAMS.topic || 'Gardening';
-var CATEGORY = PARAMS.category || 'Learn';
-var MODULE_ID = PARAMS.module || '';
-var MODULE_XP = parseInt(PARAMS.xp || '0');
-var YT_KEY =  + YT_KEY + ;
+// URL params — same proven method from test page
+var P = {};
+window.location.search.slice(1).split('&').forEach(function(p){
+    var eq=p.indexOf('=');
+    if(eq>0) P[decodeURIComponent(p.slice(0,eq))]=decodeURIComponent(p.slice(eq+1).replace(/\+/g,' '));
+});
+var TOPIC    = P.topic    || 'Gardening';
+var CATEGORY = P.category || 'Learn';
+var MOD_ID   = P.module   || '';
+var MOD_XP   = parseInt(P.xp||'0');
+var YT_KEY   =  + YT_KEY + ;
+
 document.title = TOPIC + ' - Greenthumb';
+if(MOD_ID) document.getElementById('back-btn').href='learn.html';
 
-// Back button — go back to learn with correct tab if module
-var backBtn = document.getElementById('back-btn');
-if(backBtn && MODULE_ID) backBtn.href = 'learn.html';
-
-// ── Load article ──────────────────────────────────────────────────────────
-function showError(msg) {
-    document.getElementById('article-loading').classList.add('hidden');
-    document.getElementById('article-error').classList.remove('hidden');
-    document.getElementById('error-detail').textContent = msg || '';
+// XHR helper — identical to test page
+function doXHR(url, onOK, onFail){
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET',url,true);
+    xhr.timeout=10000;
+    xhr.ontimeout=function(){if(onFail)onFail('Timeout');};
+    xhr.onerror=function(){if(onFail)onFail('Network error');};
+    xhr.onload=function(){
+        if(xhr.status===200){onOK(xhr.responseText);}
+        else{if(onFail)onFail('HTTP '+xhr.status);}
+    };
+    xhr.send();
 }
 
-function showContent() {
-    document.getElementById('article-loading').classList.add('hidden');
-    document.getElementById('article-content').classList.remove('hidden');
-}
+// Show/hide states
+function showLoading(){document.getElementById('s-loading').classList.remove('hidden');document.getElementById('s-error').classList.add('hidden');document.getElementById('s-content').classList.add('hidden');}
+function showError(msg){document.getElementById('s-loading').classList.add('hidden');document.getElementById('s-error').classList.remove('hidden');document.getElementById('s-error-msg').textContent=msg||'';}
+function showContent(){document.getElementById('s-loading').classList.add('hidden');document.getElementById('s-content').classList.remove('hidden');}
 
-function loadArticle() {
-    document.getElementById('article-loading').classList.remove('hidden');
-    document.getElementById('article-content').classList.add('hidden');
-    document.getElementById('article-error').classList.add('hidden');
-
-    // Use Wikipedia Action API with origin=* — most reliable for CORS
-    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(TOPIC);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.timeout = 10000;
-    xhr.ontimeout = function() { showError('Request timed out. Check your connection.'); };
-    xhr.onerror = function() { showError('Network error. Check your connection.'); };
-    xhr.onload = function() {
-        if (xhr.status !== 200) { showError('Server error: ' + xhr.status); return; }
-        try {
-            var data = JSON.parse(xhr.responseText);
-            var pages = data.query && data.query.pages;
-            if (!pages) { showError('No data returned from Wikipedia.'); return; }
-            var pageId = Object.keys(pages)[0];
-            var page = pages[pageId];
-            if (pageId === '-1' || !page.extract) {
-                // Try search
-                searchAndLoad(TOPIC);
-                return;
+function loadArticle(){
+    showLoading();
+    var url='https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles='+encodeURIComponent(TOPIC);
+    doXHR(url, function(text){
+        try{
+            var data=JSON.parse(text);
+            var pages=data.query&&data.query.pages;
+            var page=pages&&pages[Object.keys(pages)[0]];
+            if(page&&page.extract&&page.pageid!==-1){
+                renderPage(page);
+            } else {
+                // Search fallback
+                var surl='https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+encodeURIComponent(TOPIC)+'&format=json&origin=*&srlimit=1';
+                doXHR(surl, function(st){
+                    try{
+                        var sd=JSON.parse(st);
+                        var hit=sd.query&&sd.query.search&&sd.query.search[0];
+                        if(!hit){showError('No article found for: '+TOPIC);return;}
+                        var url2='https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles='+encodeURIComponent(hit.title);
+                        doXHR(url2, function(t2){
+                            try{
+                                var d2=JSON.parse(t2);
+                                var p2=d2.query&&d2.query.pages&&d2.query.pages[Object.keys(d2.query.pages)[0]];
+                                if(p2&&p2.extract){renderPage(p2);}
+                                else{showError('Article has no content.');}
+                            }catch(e){showError('Parse error: '+e.message);}
+                        }, showError);
+                    }catch(e){showError('Search error: '+e.message);}
+                }, showError);
             }
-            renderArticle(page);
-        } catch(e) {
-            showError('Could not parse response: ' + e.message);
-        }
-    };
-    xhr.send();
+        }catch(e){showError('Parse error: '+e.message);}
+    }, showError);
 }
 
-function searchAndLoad(q) {
-    var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + encodeURIComponent(q) + '&format=json&origin=*&srlimit=1';
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.timeout = 10000;
-    xhr.ontimeout = function() { showError('Search timed out.'); };
-    xhr.onerror = function() { showError('Network error during search.'); };
-    xhr.onload = function() {
-        try {
-            var data = JSON.parse(xhr.responseText);
-            var results = data.query && data.query.search;
-            if (!results || !results.length) { showError('No Wikipedia article found for: ' + q); return; }
-            var title = results[0].title;
-            var url2 = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=thumbnail&pithumbsize=800&redirects=1&format=json&origin=*&titles=' + encodeURIComponent(title);
-            var xhr2 = new XMLHttpRequest();
-            xhr2.open('GET', url2, true);
-            xhr2.timeout = 10000;
-            xhr2.ontimeout = function() { showError('Request timed out.'); };
-            xhr2.onerror = function() { showError('Network error.'); };
-            xhr2.onload = function() {
-                try {
-                    var data2 = JSON.parse(xhr2.responseText);
-                    var pages2 = data2.query && data2.query.pages;
-                    if (!pages2) { showError('No article found.'); return; }
-                    var page2 = pages2[Object.keys(pages2)[0]];
-                    if (!page2.extract) { showError('Article has no content.'); return; }
-                    renderArticle(page2);
-                } catch(e) { showError('Parse error: ' + e.message); }
-            };
-            xhr2.send();
-        } catch(e) { showError('Search parse error: ' + e.message); }
-    };
-    xhr.send();
-}
-
-function renderArticle(page) {
+function renderPage(page){
     showContent();
-
-    document.getElementById('article-category').textContent = CATEGORY;
-    document.getElementById('article-title').textContent = page.title || TOPIC;
-    document.title = (page.title || TOPIC) + ' - Greenthumb';
-
-    var extract = page.extract || '';
-    var words = extract.split(' ').length;
-    document.getElementById('article-read-time').textContent = Math.max(2, Math.ceil(words/200)) + ' min read';
-
-    // Hero image
-    if (page.thumbnail && page.thumbnail.source) {
-        document.getElementById('article-img').src = page.thumbnail.source;
-        document.getElementById('article-hero').classList.remove('hidden');
+    document.getElementById('c-category').textContent=CATEGORY;
+    document.getElementById('c-title').textContent=page.title||TOPIC;
+    document.title=(page.title||TOPIC)+' - Greenthumb';
+    var words=(page.extract||'').split(' ').length;
+    document.getElementById('c-time').textContent=Math.max(2,Math.ceil(words/200))+' min read';
+    if(page.thumbnail&&page.thumbnail.source){
+        document.getElementById('c-img').src=page.thumbnail.source;
+        document.getElementById('c-hero').classList.remove('hidden');
     }
+    var paras=(page.extract||'').split('
 
-    // Body — split extract into paragraphs
-    var paras = extract.split('\n\n').filter(function(p) { return p.trim().length > 30; });
-    var bodyHtml = paras.slice(0, 8).map(function(p) { return '<p>' + p.trim() + '</p>'; }).join('');
-    document.getElementById('article-body').innerHTML = bodyHtml || '<p>' + extract.slice(0, 1500) + '</p>';
-
-    // Related articles
+').filter(function(p){return p.trim().length>30;});
+    document.getElementById('c-body').innerHTML=paras.slice(0,8).map(function(p){return'<p>'+p.trim()+'</p>';}).join('')||'<p>'+(page.extract||'No content available.')+'</p>';
     renderRelated();
-
-    // Module completion
-    if (MODULE_ID) showModuleComplete();
-
-    // YouTube (background)
-    if (YT_KEY) loadYouTube(TOPIC + ' gardening');
+    if(MOD_ID) showComplete();
+    if(YT_KEY) loadYT(TOPIC+' gardening');
 }
 
-// ── YouTube ───────────────────────────────────────────────────────────────
-function loadYouTube(q) {
-    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + encodeURIComponent(q) + '&type=video&maxResults=2&key=' + YT_KEY;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = function() {
-        try {
-            var data = JSON.parse(xhr.responseText);
-            if (!data.items || !data.items.length) return;
-            var html = data.items.map(function(v) {
-                var vid = v.id.videoId;
-                var title = v.snippet.title;
-                return '<div class="yt-thumb"><iframe src="https://www.youtube.com/embed/' + vid + '" frameborder="0" allowfullscreen title="' + title + '"></iframe></div>' +
-                    '<p class="font-label-sm text-on-surface-variant mt-xs">' + title + '</p>';
-            }).join('<div class="mb-md"></div>');
-            document.getElementById('youtube-videos').innerHTML = html;
-            document.getElementById('youtube-section').classList.remove('hidden');
-        } catch(e) {}
-    };
-    xhr.send();
+function loadYT(q){
+    var url='https://www.googleapis.com/youtube/v3/search?part=snippet&q='+encodeURIComponent(q)+'&type=video&maxResults=2&key='+YT_KEY;
+    doXHR(url,function(text){
+        try{
+            var data=JSON.parse(text);
+            if(!data.items||!data.items.length)return;
+            var html=data.items.map(function(v){
+                return'<div class="yt-wrap"><iframe src="https://www.youtube.com/embed/'+v.id.videoId+'" frameborder="0" allowfullscreen></iframe></div>'+
+                '<p class="font-label-sm text-on-surface-variant mt-xs mb-lg">'+v.snippet.title+'</p>';
+            }).join('');
+            document.getElementById('c-yt-list').innerHTML=html;
+            document.getElementById('c-yt').classList.remove('hidden');
+        }catch(e){}
+    },null);
 }
 
-// ── Related ───────────────────────────────────────────────────────────────
-var RELATED = [
-    {title:'Soil & Composting',topic:'Compost',category:'Soil'},
-    {title:'Watering Techniques',topic:'Plant watering',category:'Watering'},
-    {title:'Companion Planting',topic:'Companion planting',category:'Plants'},
-    {title:'Pest Management',topic:'Integrated pest management',category:'Pests'},
-    {title:'Seasonal Gardening',topic:'Gardening',category:'Seasonal'},
-    {title:'Plant Propagation',topic:'Plant propagation',category:'Plants'},
+var RELATED=[
+    {title:'Composting Guide',topic:'Compost',cat:'Soil'},
+    {title:'Watering Techniques',topic:'Plant watering',cat:'Watering'},
+    {title:'Companion Planting',topic:'Companion planting',cat:'Plants'},
+    {title:'Pest Management',topic:'Integrated pest management',cat:'Pests'},
+    {title:'Seasonal Gardening',topic:'Gardening',cat:'Seasonal'},
+    {title:'Plant Propagation',topic:'Plant propagation',cat:'Plants'},
+    {title:'Soil pH',topic:'Soil pH',cat:'Soil'},
+    {title:'No-Dig Gardening',topic:'No-dig gardening',cat:'Soil'},
 ];
-function renderRelated() {
-    var filtered = RELATED.filter(function(r) { return r.topic !== TOPIC; }).slice(0, 4);
-    document.getElementById('related-list').innerHTML = filtered.map(function(r) {
-        return '<a href="article-detail.html?topic=' + encodeURIComponent(r.topic) + '&category=' + encodeURIComponent(r.category) + '" class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all block">' +
-            '<p class="font-label-sm text-outline mb-xs">' + r.category + '</p>' +
-            '<p class="font-label-lg text-on-surface">' + r.title + '</p>' +
-            '<div class="flex items-center gap-xs mt-sm text-primary"><span class="font-label-sm">Read</span><span class="material-symbols-outlined text-[14px]">arrow_forward</span></div>' +
-            '</a>';
+function renderRelated(){
+    var list=RELATED.filter(function(r){return r.topic!==TOPIC;}).slice(0,4);
+    document.getElementById('c-related').innerHTML=list.map(function(r){
+        return'<a href="article-detail.html?topic='+encodeURIComponent(r.topic)+'&category='+encodeURIComponent(r.cat)+'" class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/20 shadow-sm hover:shadow-md transition-all block">'+
+        '<p class="font-label-sm text-outline mb-xs">'+r.cat+'</p>'+
+        '<p class="font-label-lg text-on-surface">'+r.title+'</p>'+
+        '<div class="flex items-center gap-xs mt-sm text-primary font-label-sm"><span>Read</span><span class="material-symbols-outlined text-[14px]">arrow_forward</span></div>'+
+        '</a>';
     }).join('');
 }
 
-// ── Module completion ─────────────────────────────────────────────────────
-function showModuleComplete() {
-    var progress = {};
-    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
-    var done = progress[MODULE_ID] === 'done';
-    var banner = document.getElementById('complete-banner');
-    banner.classList.remove('hidden');
-    document.getElementById('complete-title').textContent = done ? 'Already completed!' : 'Mark as Complete';
-    document.getElementById('complete-subtitle').textContent = done ? 'You earned the XP for this module.' : 'Earn ' + MODULE_XP + ' XP';
-    var btn = document.getElementById('complete-btn');
-    if (done) {
-        btn.textContent = 'Back';
-        btn.onclick = function() { window.location.href = 'learn.html'; };
+function showComplete(){
+    var progress={};
+    try{progress=JSON.parse(localStorage.getItem('gt_learn_progress')||'{}');}catch(e){}
+    var done=progress[MOD_ID]==='done';
+    var bar=document.getElementById('complete-bar');
+    bar.style.display='flex';
+    document.getElementById('cb-title').textContent=done?'Already completed!':'Mark as Complete';
+    document.getElementById('cb-sub').textContent=done?'XP already earned':'Earn '+MOD_XP+' XP';
+    var btn=document.getElementById('cb-btn');
+    if(done){
+        btn.textContent='Back';
+        btn.onclick=function(){window.location.href='learn.html';};
     } else {
-        btn.textContent = 'Complete ✓';
-        btn.onclick = function() { markDone(); };
+        btn.textContent='Complete ✓';
+        btn.onclick=function(){
+            var p={};
+            try{p=JSON.parse(localStorage.getItem('gt_learn_progress')||'{}');}catch(e){}
+            p[MOD_ID]='done';
+            localStorage.setItem('gt_learn_progress',JSON.stringify(p));
+            window.location.href='learn.html?completed='+MOD_ID+'&xp='+MOD_XP;
+        };
     }
-    setTimeout(function() { banner.classList.add('show'); }, 200);
 }
 
-function markDone() {
-    var progress = {};
-    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
-    progress[MODULE_ID] = 'done';
-    localStorage.setItem('gt_learn_progress', JSON.stringify(progress));
-    window.location.href = 'learn.html?completed=' + MODULE_ID + '&xp=' + MODULE_XP;
-}
-
-// ── Init ──────────────────────────────────────────────────────────────────
 loadArticle();
 </script>
 </body></html>
