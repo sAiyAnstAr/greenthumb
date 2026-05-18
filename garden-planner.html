@@ -2,6 +2,7 @@
 <html><head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
 <title>Garden Planner - Greenthumb</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -33,7 +34,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;}
 #picker-bg{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:34;display:none;}
 #save-toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-50px);opacity:0;background:#154212;color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:14px;z-index:40;transition:all 0.3s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
 #save-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-#step-plan{display:none;}
+#step-find{display:block;min-height:100vh;}
+#step-plan{display:none;min-height:100vh;}
 
 /* Tool/zone buttons */
 .tb{background:white;border:1.5px solid #ccc;border-radius:8px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#42493e;box-shadow:0 1px 2px rgba(0,0,0,0.1);flex-shrink:0;}
@@ -175,7 +177,10 @@ function initFindMap(){
   var c={lat:-28.0167,lng:153.4};
   try{var l=JSON.parse(localStorage.getItem('gt_weather_loc'));if(l)c={lat:l.lat,lng:l.lon};}catch(e){}
   if(prop)c={lat:prop.lat,lng:prop.lng};
-  findMap=new google.maps.Map(document.getElementById('find-map'),{
+  // Explicitly set pixel height before Map init - CSS alone isn't enough sometimes
+  var fm=document.getElementById('find-map');
+  fm.style.height=(window.innerHeight-108)+'px';
+  findMap=new google.maps.Map(fm,{
     center:c,zoom:16,mapTypeId:'hybrid',
     zoomControl:true,mapTypeControl:false,streetViewControl:false,fullscreenControl:false,gestureHandling:'greedy'
   });
@@ -233,7 +238,9 @@ function backToFind(){
 }
 
 function initPlanMap(){
-  planMap=new google.maps.Map(document.getElementById('plan-map'),{
+  var pm=document.getElementById('plan-map');
+  pm.style.height=(window.innerHeight-106)+'px';
+  planMap=new google.maps.Map(pm,{
     center:{lat:prop.lat,lng:prop.lng},zoom:20,mapTypeId:'satellite',tilt:0,
     disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'
   });
@@ -340,5 +347,18 @@ function loadSaved(){
 }
 function undoLast(){if(!zones.length)return;var l=zones.pop();l.poly.setMap(null);if(l.lbl)l.lbl.setMap(null);}
 function clearAll(){if(!confirm('Clear all?'))return;zones.forEach(function(z){z.poly.setMap(null);if(z.lbl)z.lbl.setMap(null);});pins.forEach(function(p){p.marker.setMap(null);});zones=[];pins=[];closeZP();}
+
+window.addEventListener('resize',function(){
+  if(findMap){
+    var fm=document.getElementById('find-map');
+    if(fm){fm.style.height=(window.innerHeight-108)+'px';}
+    google.maps.event.trigger(findMap,'resize');
+  }
+  if(planMap){
+    var pm=document.getElementById('plan-map');
+    if(pm){pm.style.height=(window.innerHeight-106)+'px';}
+    google.maps.event.trigger(planMap,'resize');
+  }
+});
 </script>
 </body></html>
