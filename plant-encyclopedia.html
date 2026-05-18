@@ -8,98 +8,121 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;color:#1b1c1a;padding-bottom:80px;overflow-x:hidden;}
-.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-family:'Material Symbols Outlined';display:inline-block;line-height:1;}
+.mi{font-family:'Material Symbols Outlined';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;display:inline-block;line-height:1;font-size:24px;}
+.mi.fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+
+/* ── Nav drawer ── */
+#nov{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:50;display:none;}
+#ndr{position:fixed;top:0;left:0;bottom:0;width:min(320px,85vw);background:#faf9f5;z-index:51;transform:translateX(-100%);pointer-events:none;transition:transform 0.3s ease;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,0.15);}
+.nav-head{background:#2d5a27;padding:48px 16px 16px;display:flex;align-items:center;gap:12px;}
+.nav-head img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #bcf0ae;flex-shrink:0;}
+.nav-head p{font-weight:700;color:white;font-size:16px;}
+.nav-head small{font-size:12px;color:rgba(255,255,255,0.7);display:block;}
+.nli{display:flex;align-items:center;gap:12px;padding:10px 16px;cursor:pointer;border-radius:12px;margin:2px 8px;text-decoration:none;color:#1b1c1a;font-size:14px;font-weight:600;}
+.nli:hover{background:#efeeea;}
+.nli.cur{background:#bcf0ae;color:#002201;}
+.nsep{border-top:1px solid rgba(194,201,187,0.4);margin:8px 16px;}
+.nsub{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 32px;text-decoration:none;color:#42493e;font-size:13px;border-radius:8px;margin:1px 8px;}
+.nsub:hover{background:#efeeea;}
+.nsub.cur{color:#154212;font-weight:700;}
+.nav-foot{padding:12px 16px;border-top:1px solid rgba(194,201,187,0.4);font-size:12px;color:#72796e;text-align:center;}
+
+/* ── Header ── */
 #hdr{position:sticky;top:0;z-index:40;background:rgba(250,249,245,0.97);border-bottom:1px solid rgba(194,201,187,0.4);backdrop-filter:blur(8px);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.hbtn{color:#154212;padding:6px;border-radius:50%;display:flex;align-items:center;background:none;border:none;cursor:pointer;text-decoration:none;flex-shrink:0;}
+.hbtn{color:#154212;padding:6px;border-radius:50%;display:flex;align-items:center;background:none;border:none;cursor:pointer;text-decoration:none;flex-shrink:0;transition:background 0.15s;}
 .hbtn:hover{background:#efeeea;}
-#hdr-title{font-size:20px;font-weight:700;color:#154212;letter-spacing:-0.01em;}
-#hdr-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #2d5a27;cursor:pointer;flex-shrink:0;}
+#hdr-av{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #2d5a27;cursor:pointer;flex-shrink:0;}
+
+/* ── Page content ── */
 #main{max-width:1024px;margin:0 auto;padding:24px 20px 0;}
-#search-wrap{position:relative;margin-bottom:20px;}
-#search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#72796e;pointer-events:none;font-size:20px;}
+#sw{position:relative;margin-bottom:20px;}
+#si{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#72796e;pointer-events:none;font-size:20px;}
 #q{width:100%;padding:12px 16px 12px 46px;border:1.5px solid #c2c9bb;border-radius:14px;background:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.15s;}
 #q:focus{border-color:#154212;}
 #chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px;scrollbar-width:none;}
 #chips::-webkit-scrollbar{display:none;}
-.chip{flex-shrink:0;padding:8px 18px;border-radius:50px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;}
-.chip.on{background:#154212;color:#bcf0ae;}
-.chip.off{background:#e9e8e4;color:#42493e;}
-#statusbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.chip{flex-shrink:0;padding:8px 18px;border-radius:50px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.on{background:#154212;color:#bcf0ae;}
+.off{background:#e9e8e4;color:#42493e;}
+#sb{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 #lbl{font-size:14px;font-weight:600;color:#72796e;}
-#more-btn{display:none;background:none;border:none;color:#154212;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
+#mb{display:none;background:none;border:none;color:#154212;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
 #grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(min-width:600px){#grid{grid-template-columns:repeat(3,1fr);}}
 @media(min-width:900px){#grid{grid-template-columns:repeat(4,1fr);}}
 .sk{background:linear-gradient(90deg,#efeeea 25%,#e3e2df 50%,#efeeea 75%);background-size:200% 100%;animation:sh 1.4s infinite;border-radius:16px;height:240px;}
 @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.pcard{background:white;border-radius:16px;overflow:hidden;border:1px solid rgba(194,201,187,0.3);box-shadow:0 1px 4px rgba(0,0,0,0.07);display:flex;flex-direction:column;}
-.pcard a{text-decoration:none;display:block;}
-.pcard-img{width:100%;height:150px;object-fit:cover;display:block;background:#efeeea;}
-.pcard-ph{width:100%;height:150px;background:#efeeea;display:flex;align-items:center;justify-content:center;}
-.pcard-name{font-size:14px;font-weight:700;color:#1b1c1a;line-height:1.3;margin-bottom:3px;}
-.pcard-sci{font-size:11px;color:#72796e;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:50px;display:inline-block;margin:2px 2px 2px 0;}
-.bw{background:#dbeafe;color:#1e40af;}.bwf{background:#fde68a;color:#92400e;}.bwm{background:#dcfce7;color:#166534;}
-.be{background:#dcfce7;color:#166534;}.bm{background:#fef9c3;color:#854d0e;}.bh{background:#fee2e2;color:#991b1b;}
-.add-btn{width:100%;background:#154212;color:white;border:none;border-radius:12px;padding:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.add-btn:active{opacity:0.75;}
-#empty{display:none;text-align:center;padding:60px 0;}
-#bnav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid rgba(194,201,187,0.4);display:flex;justify-content:space-around;align-items:center;padding:6px 0;z-index:30;box-shadow:0 -2px 8px rgba(0,0,0,0.06);}
+.pc{background:white;border-radius:16px;overflow:hidden;border:1px solid rgba(194,201,187,0.3);box-shadow:0 1px 4px rgba(0,0,0,0.07);display:flex;flex-direction:column;}
+.pc a{text-decoration:none;display:block;}
+.pc-img{width:100%;height:150px;object-fit:cover;display:block;}
+.pc-ph{width:100%;height:150px;background:#efeeea;display:flex;align-items:center;justify-content:center;}
+.pc-n{font-size:14px;font-weight:700;color:#1b1c1a;line-height:1.3;margin-bottom:3px;}
+.pc-s{font-size:11px;color:#72796e;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bdg{font-size:11px;font-weight:600;padding:2px 8px;border-radius:50px;display:inline-block;margin:2px 2px 0 0;}
+.bw{background:#dbeafe;color:#1e40af;}.bf{background:#fde68a;color:#92400e;}.bwm{background:#dcfce7;color:#166534;}
+.be{background:#dcfce7;color:#166534;}.bmo{background:#fef9c3;color:#854d0e;}.bh{background:#fee2e2;color:#991b1b;}
+.ab{width:100%;background:#154212;color:white;border:none;border-radius:12px;padding:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.ab:active{opacity:0.75;}
+#emp{display:none;text-align:center;padding:60px 0;}
+
+/* ── Bottom nav ── */
+#bn{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid rgba(194,201,187,0.4);display:flex;justify-content:space-around;align-items:center;padding:6px 0;z-index:30;}
 .bni{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:#72796e;font-size:11px;font-weight:500;gap:2px;padding:4px 12px;border-radius:50px;}
-.bni .material-symbols-outlined{font-size:22px;}
-.bni.active{background:#bcf0ae;color:#002201;}
-.bni.active .material-symbols-outlined{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+.bni .mi{font-size:22px;}
+.bni.act{background:#bcf0ae;color:#002201;}
+.bni.act .mi{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
 </style>
 </head>
 <body>
 
-<div id="nav-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:50;" onclick="closeNav()"></div>
-<aside id="nav-drawer" style="position:fixed;top:0;left:0;bottom:0;width:min(320px,85vw);background:#faf9f5;z-index:51;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,0.15);">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
-<nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl" id="nav-home"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item" id="nav-my-garden"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
-<div id="garden-group" class="nav-sub-list collapsed pl-md">
-<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" id="nav-garden-health"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">map</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div></div>
-<div class="mx-sm"><a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
-<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item active flex items-center gap-md px-md py-sm rounded-xl" id="nav-community"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
-<div id="learn-group" class="nav-sub-list collapsed pl-md">
-<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-<a href="article-detail.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">article</span><span class="font-label-lg text-label-lg text-on-surface-variant">Articles</span></a>
-</div></div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
-</div>
-</nav>
-<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
-</aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+<!-- Nav overlay -->
+<div id="nov" onclick="closeNav()"></div>
 
+<!-- Nav drawer - written from scratch, no Tailwind classes -->
+<div id="ndr">
+  <div class="nav-head">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt=""/>
+    <div><p>Gardener</p><small id="nav-loc">Gold Coast, AU</small></div>
+  </div>
+  <div style="padding:8px 0;">
+    <a href="index.html" class="nli"><span class="mi">home</span>Home</a>
+    <div class="nsep"></div>
+    <a href="my-garden.html" class="nli"><span class="mi">psychology_alt</span>My Garden</a>
+    <a href="garden-health.html" class="nsub"><span class="mi" style="font-size:18px;">favorite</span>Garden Health</a>
+    <a href="garden-planner.html" class="nsub"><span class="mi" style="font-size:18px;">map</span>Garden Planner</a>
+    <a href="garden-diary.html" class="nsub"><span class="mi" style="font-size:18px;">book_2</span>Garden Diary</a>
+    <a href="add-plant.html" class="nsub"><span class="mi" style="font-size:18px;">add_circle</span>Add New Plant</a>
+    <div class="nsep"></div>
+    <a href="scanner.html" class="nli"><span class="mi">filter_center_focus</span>Identify Plant</a>
+    <a href="community.html" class="nli"><span class="mi">group</span>Community</a>
+    <div class="nsep"></div>
+    <a href="learn.html" class="nli"><span class="mi">school</span>Learn</a>
+    <a href="plant-encyclopedia.html" class="nsub cur"><span class="mi" style="font-size:18px;">menu_book</span>Plant Encyclopedia</a>
+    <a href="search-guides.html" class="nsub"><span class="mi" style="font-size:18px;">search</span>Search Guides</a>
+    <div class="nsep"></div>
+    <a href="recommendations.html" class="nli"><span class="mi">star</span>Recommendations</a>
+    <a href="calendar.html" class="nli"><span class="mi">calendar_month</span>Task Calendar</a>
+    <div class="nsep"></div>
+    <a href="profile.html" class="nli"><span class="mi">account_circle</span>Profile</a>
+    <a href="settings.html" class="nli"><span class="mi">settings</span>Settings</a>
+  </div>
+  <div class="nav-foot">Greenthumb v0.1 · Made with 🌿</div>
+</div>
+
+<!-- Header -->
 <div id="hdr">
-  <a href="learn.html" class="hbtn"><span class="material-symbols-outlined">arrow_back</span></a>
-  <span id="hdr-title">Greenthumb</span>
-  <img id="hdr-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" onclick="openNav()"/>
+  <a href="learn.html" class="hbtn"><span class="mi">arrow_back</span></a>
+  <span style="font-size:20px;font-weight:700;color:#154212;">Greenthumb</span>
+  <img id="hdr-av" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" onclick="openNav()"/>
 </div>
 
+<!-- Main -->
 <div id="main">
-  <h2 style="font-size:36px;font-weight:700;color:#154212;margin-bottom:6px;">Plant Encyclopedia</h2>
+  <h2 style="font-size:34px;font-weight:700;color:#154212;margin-bottom:6px;">Plant Encyclopedia</h2>
   <p style="font-size:17px;color:#72796e;margin-bottom:24px;">Discover care guides for thousands of plants.</p>
 
-  <div id="search-wrap">
-    <span class="material-symbols-outlined" id="search-icon">search</span>
+  <div id="sw">
+    <span class="mi" id="si">search</span>
     <input id="q" type="text" placeholder="Search 5,000+ plants…"/>
   </div>
 
@@ -113,9 +136,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;color:#1b1c1a
     <button onclick="setCat('indoor')" id="c-indoor" class="chip off">🪴 Indoor</button>
   </div>
 
-  <div id="statusbar">
+  <div id="sb">
     <span id="lbl">Loading…</span>
-    <button id="more-btn" onclick="loadMore()">Load more</button>
+    <button id="mb" onclick="loadMore()">Load more</button>
   </div>
 
   <div id="grid">
@@ -123,132 +146,117 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;color:#1b1c1a
     <div class="sk"></div><div class="sk"></div>
   </div>
 
-  <div id="empty">
-    <span class="material-symbols-outlined" style="font-size:56px;color:#c2c9bb;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;">search_off</span>
+  <div id="emp">
+    <span class="mi fill" style="font-size:56px;color:#c2c9bb;">search_off</span>
     <p style="font-size:18px;font-weight:600;color:#72796e;margin-top:16px;">No plants found</p>
     <p style="font-size:14px;color:#c2c9bb;margin-top:8px;">Try a different search or category</p>
   </div>
 </div>
 
-<nav id="bnav">
-  <a href="index.html" class="bni"><span class="material-symbols-outlined">home</span>Home</a>
-  <a href="my-garden.html" class="bni"><span class="material-symbols-outlined">psychology_alt</span>My Garden</a>
-  <a href="scanner.html" class="bni"><span class="material-symbols-outlined">filter_center_focus</span>Identify</a>
-  <a href="community.html" class="bni"><span class="material-symbols-outlined">group</span>Community</a>
-  <a href="learn.html" class="bni active"><span class="material-symbols-outlined">school</span>Learn</a>
+<!-- Bottom nav -->
+<nav id="bn">
+  <a href="index.html" class="bni"><span class="mi">home</span>Home</a>
+  <a href="my-garden.html" class="bni"><span class="mi">psychology_alt</span>My Garden</a>
+  <a href="scanner.html" class="bni"><span class="mi">filter_center_focus</span>Identify</a>
+  <a href="community.html" class="bni"><span class="mi">group</span>Community</a>
+  <a href="learn.html" class="bni act"><span class="mi">school</span>Learn</a>
 </nav>
 
 <script>
-// Nav - uses display:none/block not .hidden class
 function openNav(){
-    var d=document.getElementById('nav-drawer');
-    var o=document.getElementById('nav-overlay');
-    if(d)d.style.transform='translateX(0)';
-    if(o)o.style.display='block';
+    var d=document.getElementById('ndr');
+    d.style.transform='translateX(0)';d.style.pointerEvents='all';
+    document.getElementById('nov').style.display='block';
     document.body.style.overflow='hidden';
 }
 function closeNav(){
-    var d=document.getElementById('nav-drawer');
-    var o=document.getElementById('nav-overlay');
-    if(d)d.style.transform='translateX(-100%)';
-    if(o)o.style.display='none';
+    var d=document.getElementById('ndr');
+    d.style.transform='translateX(-100%)';d.style.pointerEvents='none';
+    document.getElementById('nov').style.display='none';
     document.body.style.overflow='';
 }
-function toggleGroup(id){
-    var l=document.getElementById(id);if(!l)return;
-    var c=l.classList.contains('collapsed');
-    l.classList.toggle('collapsed',!c);
-    l.style.maxHeight=c?l.scrollHeight+'px':'0px';
-    var b=l.previousElementSibling;
-    if(b)b.classList.toggle('open',c);
-}
-try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
+try{var _l=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(_l&&_l.name)document.getElementById('nav-loc').textContent=_l.name;}catch(e){}
 document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
 document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
 
-// App
-var KEY =  + PERENUAL_KEY + ;
-var cat='all', page=1, lastQ='', searchTimer;
-var CAT_Q={all:'',flower:'flowering',succulent:'succulent',tree:'tree',vegetable:'vegetable',herb:'herb',indoor:'indoor'};
+var KEY= + PERENUAL_KEY + ;
+var cat='all',page=1,lastQ='',st;
+var CQ={all:'',flower:'flowering',succulent:'succulent',tree:'tree',vegetable:'vegetable',herb:'herb',indoor:'indoor'};
 
-function doXHR(url,onOK,onFail){
-    var xhr=new XMLHttpRequest();
-    xhr.open('GET',url,true);xhr.timeout=12000;
-    xhr.ontimeout=function(){if(onFail)onFail('Timeout');};
-    xhr.onerror=function(){if(onFail)onFail('Network error');};
-    xhr.onload=function(){if(xhr.status===200)onOK(xhr.responseText);else if(onFail)onFail('HTTP '+xhr.status);};
-    xhr.send();
+function doXHR(url,ok,fail){
+    var x=new XMLHttpRequest();
+    x.open('GET',url,true);x.timeout=12000;
+    x.ontimeout=function(){if(fail)fail('Timeout');};
+    x.onerror=function(){if(fail)fail('Network error');};
+    x.onload=function(){if(x.status===200)ok(x.responseText);else if(fail)fail('HTTP '+x.status);};
+    x.send();
 }
 
-function fetchPlants(q,p,append){
-    if(!append){
+function fetch2(q,p,app){
+    if(!app){
         document.getElementById('grid').innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
-        document.getElementById('empty').style.display='none';
-        document.getElementById('more-btn').style.display='none';
+        document.getElementById('emp').style.display='none';
+        document.getElementById('mb').style.display='none';
         document.getElementById('lbl').textContent='Loading...';
     }
     var url='https://perenual.com/api/species-list?key='+KEY+'&page='+p+'&per_page=12';
     if(q)url+='&q='+encodeURIComponent(q);
-    doXHR(url,function(text){
+    doXHR(url,function(t){
         try{
-            var data=JSON.parse(text);
-            var plants=data.data||[];
-            var hasMore=p<(data.last_page||1);
-            document.getElementById('more-btn').style.display=hasMore?'block':'none';
-            document.getElementById('lbl').textContent=q?(data.total+' results for "'+q+'"'):(data.total+' plants');
-            if(!plants.length&&!append){document.getElementById('grid').innerHTML='';document.getElementById('empty').style.display='block';return;}
-            render(plants,append);
-        }catch(e){document.getElementById('lbl').textContent='Error loading';}
-    },function(err){document.getElementById('lbl').textContent='Error: '+err;});
+            var d=JSON.parse(t);var pl=d.data||[];
+            document.getElementById('mb').style.display=p<(d.last_page||1)?'block':'none';
+            document.getElementById('lbl').textContent=q?(d.total+' results for "'+q+'"'):(d.total+' plants');
+            if(!pl.length&&!app){document.getElementById('grid').innerHTML='';document.getElementById('emp').style.display='block';return;}
+            render(pl,app);
+        }catch(e){document.getElementById('lbl').textContent='Load error';}
+    },function(e){document.getElementById('lbl').textContent='Error: '+e;});
 }
 
-function render(plants,append){
-    var html=plants.map(function(p){
-        var name=p.common_name?p.common_name.charAt(0).toUpperCase()+p.common_name.slice(1):(p.scientific_name&&p.scientific_name[0]||'Unknown');
-        var sci=(p.scientific_name&&p.scientific_name[0])||'';
-        var img=p.default_image&&(p.default_image.medium_url||p.default_image.regular_url||p.default_image.thumbnail)||'';
-        var water=p.watering||'Regular';
-        var diff=p.care_level||'';
-        var wc=water.toLowerCase().includes('frequent')?'bwf':water.toLowerCase().includes('minimum')||water.toLowerCase().includes('none')?'bwm':'bw';
-        var dc=diff.toLowerCase().includes('easy')?'be':diff.toLowerCase().includes('hard')?'bh':'bm';
-        var artUrl='article-detail.html?topic='+encodeURIComponent(sci||name)+'&category=Plants';
-        var nm=name.replace(/'/g,"\'");var sc=sci.replace(/'/g,"\'");var im=img.replace(/'/g,"\'");var wa=water.replace(/'/g,"\'");
-        return '<div class="pcard">'+
-            '<a href="'+artUrl+'">'+
-            (img?'<img class="pcard-img" src="'+img+'" loading="lazy" onerror="this.style.display='none'" alt="'+name+'"/>':
-                 '<div class="pcard-ph"><span class="material-symbols-outlined" style="font-size:48px;color:#c2c9bb;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">local_florist</span></div>')+
-            '<div style="padding:10px 10px 4px;"><div class="pcard-name">'+name+'</div><div class="pcard-sci">'+sci+'</div></div></a>'+
-            '<div style="padding:4px 10px 6px;"><span class="badge '+wc+'">'+water+'</span>'+(diff?'<span class="badge '+dc+'">'+diff+'</span>':'')+'</div>'+
-            '<div style="padding:0 10px 10px;"><button class="add-btn" onclick="addPlant(''+nm+'',''+sc+'',''+im+'',''+wa+'')">+ Add to Garden</button></div>'+
-            '</div>';
+function render(pl,app){
+    var h=pl.map(function(p){
+        var n=p.common_name?p.common_name.charAt(0).toUpperCase()+p.common_name.slice(1):(p.scientific_name&&p.scientific_name[0]||'Unknown');
+        var s=(p.scientific_name&&p.scientific_name[0])||'';
+        var i=p.default_image&&(p.default_image.medium_url||p.default_image.regular_url||p.default_image.thumbnail)||'';
+        var w=p.watering||'Regular';var df=p.care_level||'';
+        var wc=w.toLowerCase().includes('frequent')?'bf':w.toLowerCase().includes('minimum')||w.toLowerCase().includes('none')?'bwm':'bw';
+        var dc=df.toLowerCase().includes('easy')?'be':df.toLowerCase().includes('hard')?'bh':'bmo';
+        var url='article-detail.html?topic='+encodeURIComponent(s||n)+'&category=Plants';
+        var nn=n.replace(/'/g,"\'");var ss=s.replace(/'/g,"\'");var ii=i.replace(/'/g,"\'");var ww=w.replace(/'/g,"\'");
+        return '<div class="pc">'+
+        '<a href="'+url+'">'+
+        (i?'<img class="pc-img" src="'+i+'" loading="lazy" onerror="this.style.display='none'" alt=""/>':
+           '<div class="pc-ph"><span class="mi fill" style="font-size:48px;color:#c2c9bb;">local_florist</span></div>')+
+        '<div style="padding:10px 10px 4px;"><div class="pc-n">'+n+'</div><div class="pc-s">'+s+'</div></div></a>'+
+        '<div style="padding:4px 10px 6px;"><span class="bdg '+wc+'">'+w+'</span>'+(df?'<span class="bdg '+dc+'">'+df+'</span>':'')+'</div>'+
+        '<div style="padding:0 10px 10px;"><button class="ab" onclick="addP(''+nn+'',''+ss+'',''+ii+'',''+ww+'')">+ Add to Garden</button></div>'+
+        '</div>';
     }).join('');
     var g=document.getElementById('grid');
-    if(append)g.innerHTML+=html;else g.innerHTML=html;
+    if(app)g.innerHTML+=h;else g.innerHTML=h;
 }
 
 document.getElementById('q').addEventListener('input',function(){
-    clearTimeout(searchTimer);
-    var v=this.value.trim();
-    if(!v){lastQ='';page=1;fetchPlants(CAT_Q[cat],1,false);return;}
+    clearTimeout(st);var v=this.value.trim();
+    if(!v){lastQ='';page=1;fetch2(CQ[cat],1,false);return;}
     if(v.length<2)return;
-    searchTimer=setTimeout(function(){lastQ=v;page=1;fetchPlants(v,1,false);},400);
+    st=setTimeout(function(){lastQ=v;page=1;fetch2(v,1,false);},400);
 });
 
 function setCat(c){
     cat=c;page=1;lastQ='';
     document.getElementById('q').value='';
     document.querySelectorAll('.chip').forEach(function(b){b.className='chip off';});
-    var btn=document.getElementById('c-'+c);if(btn)btn.className='chip on';
-    fetchPlants(CAT_Q[c],1,false);
+    var b=document.getElementById('c-'+c);if(b)b.className='chip on';
+    fetch2(CQ[c],1,false);
 }
 
-function loadMore(){page++;fetchPlants(lastQ||CAT_Q[cat],page,true);}
+function loadMore(){page++;fetch2(lastQ||CQ[cat],page,true);}
 
-function addPlant(name,species,img,water){
-    localStorage.setItem('gt_prefill_plant',JSON.stringify({name:name,species:species,img:img,water:water}));
+function addP(n,s,i,w){
+    localStorage.setItem('gt_prefill_plant',JSON.stringify({name:n,species:s,img:i,water:w}));
     window.location.href='add-plant.html';
 }
 
-fetchPlants('',1,false);
+fetch2('',1,false);
 </script>
 </body></html>
