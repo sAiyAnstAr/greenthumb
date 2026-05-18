@@ -374,7 +374,7 @@ function saveProgress(p){ localStorage.setItem('gt_learn_progress',JSON.stringif
 
 function getAllModules(){
     var all=[];
-    Object.values(JOURNEYS).forEach(function(j){ j.modules.forEach(function(m){ all.push(m); }); });
+    Object.keys(JOURNEYS).forEach(function(k){ JOURNEYS[k].modules.forEach(function(m){ all.push(m); }); });
     return all;
 }
 
@@ -467,7 +467,7 @@ function renderJourney(key){
     var html='<div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant/20 shadow-sm mb-md">';
     html+='<div class="flex items-center gap-md mb-sm">';
     html+='<div class="w-10 h-10 rounded-xl '+j.color+' flex items-center justify-center flex-shrink-0">';
-    html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">'+j.icon+'</span></div>';
+    html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:\'FILL\' 1">'+j.icon+'</span></div>';
     html+='<div class="flex-1 min-w-0"><p class="font-label-lg text-on-surface">'+j.title+'</p>';
     html+='<p class="font-label-sm text-outline">'+j.desc+'</p></div>';
     html+='<span class="font-label-sm text-outline">'+completedCount+'/'+j.modules.length+'</span></div>';
@@ -491,7 +491,7 @@ function renderJourney(key){
         if(isDone) html+='bg-primary">';
         else if(isLocked) html+='bg-surface-container">';
         else html+='bg-primary-fixed">';
-        html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">';
+        html+='<span class="material-symbols-outlined text-[20px]" style="font-variation-settings:\'FILL\' 1">';
         if(isDone) html+='check_circle';
         else if(isLocked) html+='lock';
         else html+='play_circle';
@@ -503,7 +503,7 @@ function renderJourney(key){
         html+='</div>';
         html+='<p class="font-label-sm text-outline">'+m.desc+'</p>';
         html+='<div class="flex items-center gap-md mt-xs"><span class="font-label-sm text-outline flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]">schedule</span>'+m.mins+' min</span>';
-        html+='<span class="font-label-sm text-primary flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]" style="font-variation-settings:'FILL' 1">star</span>'+m.xp+' XP</span></div>';
+        html+='<span class="font-label-sm text-primary flex items-center gap-xs"><span class="material-symbols-outlined text-[13px]" style="font-variation-settings:\'FILL\' 1">star</span>'+m.xp+' XP</span></div>';
         html+='</div>';
         if(!isLocked&&!isDone) html+='<span class="material-symbols-outlined text-outline flex-shrink-0">chevron_right</span>';
         html+='</'+(isLocked?'div':'a')+'>';
@@ -563,7 +563,7 @@ showJourney('fundamentals');
 renderArticles();
 
 // If returning from article-detail with module completion
-var urlP=new URLSearchParams(window.location.search);
+var urlP; try{urlP=new URLSearchParams(window.location.search);}catch(e){urlP={get:function(){return null;}};}
 if(urlP.get('completed')){
     var modId=urlP.get('completed');
     var xpEarned=parseInt(urlP.get('xp')||'0');
