@@ -394,20 +394,74 @@ window.addEventListener('scroll', () => {
     document.getElementById('reading-progress').style.width = Math.min(pct, 100) + '%';
 });
 
+
+function showModuleComplete(moduleId, xp) {
+    // Check if already completed
+    var progress = {};
+    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
+    var already = progress[moduleId] === 'done';
+    
+    var banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;bottom:80px;left:16px;right:16px;background:white;border-radius:20px;padding:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:50;display:flex;align-items:center;gap:12px;border:2px solid #bcf0ae;';
+    if (already) {
+        banner.innerHTML = '<div style="width:40px;height:40px;border-radius:50%;background:#bcf0ae;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="material-symbols-outlined" style="color:#154212;font-variation-settings:'FILL' 1">check_circle</span></div>' +
+            '<div style="flex:1;min-width:0;"><p style="font-weight:700;font-size:14px;color:#154212;margin:0;">Already completed!</p><p style="font-size:12px;color:#72796e;margin:2px 0 0;">You've earned the XP for this module.</p></div>' +
+            '<a href="learn.html" style="background:#154212;color:white;border:none;border-radius:12px;padding:8px 16px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;">Back</a>';
+    } else {
+        banner.innerHTML = '<div style="width:40px;height:40px;border-radius:50%;background:#2d5a27;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="material-symbols-outlined" style="color:#bcf0ae;font-variation-settings:'FILL' 1">school</span></div>' +
+            '<div style="flex:1;min-width:0;"><p style="font-weight:700;font-size:14px;color:#154212;margin:0;">Mark as Complete</p><p style="font-size:12px;color:#72796e;margin:2px 0 0;">Earn ' + xp + ' XP for this module</p></div>' +
+            '<button onclick="completeModule('' + moduleId + '',' + xp + ',this.closest('div[style]'))" style="background:#154212;color:white;border:none;border-radius:12px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Complete ✓</button>';
+    }
+    document.body.appendChild(banner);
+    // Auto-show with animation
+    banner.style.transform = 'translateY(20px)';
+    banner.style.opacity = '0';
+    banner.style.transition = 'all 0.3s ease';
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; banner.style.opacity = '1'; }, 100);
+}
+
+function completeModule(moduleId, xp, banner) {
+    var progress = {};
+    try { progress = JSON.parse(localStorage.getItem('gt_learn_progress') || '{}'); } catch(e) {}
+    progress[moduleId] = 'done';
+    localStorage.setItem('gt_learn_progress', JSON.stringify(progress));
+    // Update XP (stored separately for simplicity)
+    // Navigate back to learn page with completion param
+    window.location.href = 'learn.html?completed=' + moduleId + '&xp=' + xp;
+}
+
 async function loadArticle() {
     document.getElementById('article-loading').classList.remove('hidden');
     document.getElementById('article-content').classList.add('hidden');
     document.getElementById('article-error').classList.add('hidden');
     
     try {
-        // 1. Wikipedia summary
+        // 1. Search Wikipedia for best matching article
+        let wikiData, sectData;
         const wikiSlug = TOPIC.replace(/ /g, '_');
-        const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiSlug)}`);
-        const wikiData = await wikiRes.json();
+        
+        // Try direct slug first
+        const directRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiSlug)}`);
+        if (directRes.ok) {
+            wikiData = await directRes.json();
+        } else {
+            // Fall back to Wikipedia search
+            const searchRes = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(TOPIC)}&format=json&origin=*&srlimit=1`);
+            const searchData = await searchRes.json();
+            const firstResult = searchData.query?.search?.[0];
+            if (firstResult) {
+                const slug = firstResult.title.replace(/ /g, '_');
+                const res2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(slug)}`);
+                wikiData = await res2.json();
+            } else {
+                throw new Error('No Wikipedia article found');
+            }
+        }
 
         // 2. Wikipedia full sections
-        const sectRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/mobile-sections/${encodeURIComponent(wikiSlug)}`);
-        const sectData = await sectRes.json();
+        const slug2 = (wikiData.title || TOPIC).replace(/ /g, '_');
+        const sectRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/mobile-sections/${encodeURIComponent(slug2)}`);
+        sectData = sectRes.ok ? await sectRes.json() : {};
 
         // 3. OpenFarm data
         fetchOpenFarm(TOPIC);
@@ -445,6 +499,13 @@ async function loadArticle() {
         
         // Related articles
         renderRelated();
+
+        // Module completion - show button if opened from a Learning Journey
+        const MODULE_ID = params.get('module');
+        const MODULE_XP = parseInt(params.get('xp') || '0');
+        if (MODULE_ID) {
+            showModuleComplete(MODULE_ID, MODULE_XP);
+        }
         
     } catch(e) {
         document.getElementById('article-loading').classList.add('hidden');
