@@ -3,46 +3,49 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Garden Planner - Greenthumb</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #faf9f5; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
 #app { display: flex; flex-direction: column; height: 100vh; }
 
 #hdr {
   flex-shrink: 0;
-  height: 56px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid #c2c9bb40;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 10px 16px;
   gap: 10px;
   z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
 #srch {
   flex-shrink: 0;
   padding: 8px 12px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid #c2c9bb40;
   position: relative;
   z-index: 10;
 }
 
 #srch input {
   width: 100%;
-  padding: 9px 12px 9px 34px;
-  border-radius: 10px;
-  border: 1.5px solid #ccc;
-  background: #f5f5f5;
+  padding: 10px 12px 10px 34px;
+  border-radius: 12px;
+  border: 1.5px solid #c2c9bb;
+  background: #efeeea;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   outline: none;
+  transition: border-color 0.15s;
 }
+#srch input:focus { border-color: #154212; background: white; }
 
 #srch-icon {
   position: absolute;
@@ -78,16 +81,18 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 /* Step 2 toolbar */
 #toolbar {
   flex-shrink: 0;
-  height: 50px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid #c2c9bb40;
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 0 10px;
+  padding: 8px 10px;
   overflow-x: auto;
   z-index: 10;
+  scrollbar-width: none;
+  backdrop-filter: blur(8px);
 }
+#toolbar::-webkit-scrollbar { display: none; }
 
 /* Panels slide up from bottom */
 .panel {
@@ -121,7 +126,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
 /* Tool buttons */
-.tb { background: white; border: 1.5px solid #ccc; border-radius: 8px; padding: 5px 10px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 600; color: #42493e; flex-shrink: 0; }
+.tb { background: white; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 8px; padding: 6px 10px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 600; color: #42493e; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .tb.on { background: #154212; color: white; border-color: #154212; }
 .zt { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; flex-shrink: 0; }
 .zt.on { outline: 3px solid #154212; outline-offset: 2px; }
@@ -130,7 +135,13 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
 /* Step 2 hidden initially */
 #s2 { display: none; }
+/* Plan map needs same flex treatment as #map */
+#plan-map { flex: 1; min-height: 0; }
+#toolbar { flex-shrink: 0; }
 </style>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
+</script>
 </head>
 <body>
 
@@ -139,14 +150,15 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 <div id="app">
 
   <div id="hdr">
-    <a href="my-garden.html" style="color:#154212;display:flex;text-decoration:none;flex-shrink:0;">
+    <a href="my-garden.html" style="color:#154212;display:flex;text-decoration:none;flex-shrink:0;padding:8px;border-radius:50%;">
       <span class="material-symbols-outlined">arrow_back</span>
     </a>
-    <div style="flex:1;text-align:center;">
-      <div style="font-size:15px;font-weight:700;color:#154212;">Garden Planner</div>
-      <div style="font-size:11px;color:#72796e;">Step 1 — Find your property</div>
-    </div>
-    <div style="width:28px;"></div>
+    <h1 style="flex:1;text-align:center;font-size:20px;font-weight:700;color:#154212;font-family:'Plus Jakarta Sans',sans-serif;">Greenthumb</h1>
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" onclick="void(0)" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #2d5a27;flex-shrink:0;cursor:pointer;"/>
+  </div>
+  <div style="padding:8px 16px 0;background:white;">
+    <p style="font-size:13px;font-weight:600;color:#154212;">Garden Planner</p>
+    <p style="font-size:11px;color:#72796e;margin-bottom:8px;">Step 1 — Find your property</p>
   </div>
 
   <div id="srch">
@@ -160,13 +172,11 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 </div>
 
 <!-- Property card -->
-<div class="panel" id="prop-card">
+<div class="panel" id="prop-card" style="padding-bottom:max(20px,env(safe-area-inset-bottom));">
   <div style="width:36px;height:4px;background:#ccc;border-radius:2px;margin:0 auto 14px;"></div>
   <p id="prop-name" style="font-size:16px;font-weight:700;color:#1b1c1a;margin-bottom:4px;"></p>
   <p id="prop-coords" style="font-size:12px;color:#72796e;margin-bottom:16px;"></p>
-  <button onclick="goStep2()" style="width:100%;background:#154212;color:white;border:none;border-radius:14px;padding:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;">
-    Plan This Property →
-  </button>
+  <button onclick="goStep2()" style="width:100%;background:#154212;color:white;border:none;border-radius:16px;padding:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;font-size:20px;">map</span>Plan This Property</button>
   <button onclick="clearProp()" style="width:100%;background:none;border:none;color:#72796e;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;cursor:pointer;padding:10px 0 0;">
     Choose a different location
   </button>
@@ -178,12 +188,12 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 <div id="app" style="height:100vh;">
 
   <div id="hdr">
-    <button onclick="goStep1()" style="background:none;border:none;cursor:pointer;color:#154212;display:flex;flex-shrink:0;">
+    <button onclick="goStep1()" style="background:none;border:none;cursor:pointer;color:#154212;display:flex;flex-shrink:0;padding:8px;border-radius:50%;">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
     <div style="flex:1;min-width:0;text-align:center;">
       <div id="plan-title" style="font-size:14px;font-weight:700;color:#154212;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">My Property</div>
-      <div style="font-size:11px;color:#72796e;">Step 2 — Draw your garden zones</div>
+      <div style="font-size:11px;color:#72796e;">Step 2 — Draw zones &amp; place plants</div>
     </div>
     <button onclick="savePlan()" id="save-btn" style="background:#154212;color:white;border:none;border-radius:50px;padding:6px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;flex-shrink:0;white-space:nowrap;">
       <span class="material-symbols-outlined" style="font-size:16px;">save</span>Save
@@ -203,8 +213,10 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
     <button onclick="setZT('patio')" id="z-patio" class="zt" style="background:#94a3b8;"></button>
     <button onclick="setZT('tree')" id="z-tree" class="zt" style="background:#166534;"></button>
     <div class="sp"></div>
-    <button onclick="undoLast()" class="tb"><span class="material-symbols-outlined" style="font-size:15px;">undo</span></button>
-    <button onclick="clearAll()" class="tb" style="color:#ba1a1a;"><span class="material-symbols-outlined" style="font-size:15px;">delete_sweep</span></button>
+    <button onclick="undoLast()" class="tb" title="Undo"><span class="material-symbols-outlined" style="font-size:15px;">undo</span></button>
+    <button onclick="clearAll()" class="tb" style="color:#ba1a1a;" title="Clear all"><span class="material-symbols-outlined" style="font-size:15px;">delete_sweep</span></button>
+    <div class="sp"></div>
+    <button onclick="toggleLegend()" class="tb" id="legend-btn" title="Zone legend"><span class="material-symbols-outlined" style="font-size:15px;">info</span></button>
   </div>
 
   <div id="plan-map"></div>
@@ -231,6 +243,17 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 <div id="picker-bg" onclick="closePicker()"></div>
 </div>
 
+<div id="legend-panel" style="display:none;position:fixed;bottom:80px;right:12px;background:white;border-radius:16px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:30;min-width:160px;border:1px solid #e0e0e0;">
+  <p style="font-size:13px;font-weight:700;color:#1b1c1a;margin-bottom:8px;">Zone Types</p>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#4ade80;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Garden Bed</span></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#86efac;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Lawn</span></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#ca8a04;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Veggie Patch</span></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#38bdf8;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Water Feature</span></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#94a3b8;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Patio</span></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;border-radius:50%;background:#166534;flex-shrink:0;"></div><span style="font-size:12px;color:#42493e;">Tree</span></div>
+  </div>
+</div>
 <div id="draw-hint" class="hint">Click to place points · Double-click to finish</div>
 <div id="pin-hint" class="hint">Tap the map to place a plant</div>
 <div id="toast"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>Plan saved!</div>
@@ -491,6 +514,11 @@ function loadSaved(){
   var plants=[]; try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
   (s.zones||[]).forEach(function(z){ if(!z.coords||!z.coords.length)return; var zt2=ZT[z.type]||ZT.bed; var poly=new google.maps.Polygon({paths:z.coords,fillColor:zt2.c,fillOpacity:zt2.o,strokeColor:zt2.c,strokeWeight:2.5,editable:true,map:map2,zIndex:5}); var zo={poly:poly,type:z.type,name:z.name,photos:z.photos||[],lbl:null}; zones.push(zo); addLbl(zo); poly.addListener('click',function(){openZP(zo);}); });
   (s.pins||[]).forEach(function(pin){ var plant=plants.find(function(p){return String(p.id)===String(pin.plantId);}); if(!plant)return; var svg='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="18" fill="white" stroke="#154212" stroke-width="3"/><text x="20" y="27" text-anchor="middle" font-size="20">🌿</text></svg>'); var m=new google.maps.Marker({position:{lat:pin.lat,lng:pin.lng},map:map2,draggable:true,icon:{url:svg,scaledSize:new google.maps.Size(40,40),anchor:new google.maps.Point(20,20)},zIndex:20}); var iw=new google.maps.InfoWindow({content:'<div style="font-family:\'Plus Jakarta Sans\',sans-serif;text-align:center;padding:4px;"><p style="font-weight:700;">'+(plant.nickname||plant.name)+'</p><a href="plant-detail.html?id='+pin.plantId+'" style="font-size:12px;font-weight:700;color:#154212;">View profile →</a></div>'}); m.addListener('click',function(){iw.open(map2,m);}); pins.push({marker:m,plantId:pin.plantId}); });
+}
+
+function toggleLegend(){
+  var l=document.getElementById('legend-panel');
+  if(l) l.style.display = l.style.display==='none' ? 'block' : 'none';
 }
 
 function undoLast(){ if(!zones.length)return; var l=zones.pop(); l.poly.setMap(null); if(l.lbl)l.lbl.setMap(null); }
