@@ -17,7 +17,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;}
 #srchbar{height:52px;background:white;border-bottom:1px solid #ddd;padding:8px 12px;position:sticky;top:56px;z-index:20;}
 
 /* MAP - explicit height using vh minus the two bars above */
-#find-map{width:100%;height:calc(100vh - 108px);}
+#find-map{width:100%;height:calc(100vh - 108px);background:#e8f5e8;}
 
 /* Step 2 toolbar */
 #toolbar{height:50px;background:white;border-bottom:1px solid #ddd;padding:6px 10px;display:flex;align-items:center;gap:5px;overflow-x:auto;position:sticky;top:56px;z-index:20;}
@@ -154,9 +154,12 @@ function getSaved(){try{return JSON.parse(localStorage.getItem('gt_garden_plan')
 window.gm_authFailure=function(){document.getElementById('find-map').innerHTML='<p style="padding:20px;color:red;">Maps auth failure — check API key</p>';};
 
 window.initMapCallback=function(){
-  initFindMap();
-  var s=getSaved();
-  if(s&&s.property){prop=s.property;goToPlan(true);}
+  // Small delay to ensure DOM is fully laid out before Map init
+  setTimeout(function(){
+    initFindMap();
+    var s=getSaved();
+    if(s&&s.property){prop=s.property;goToPlan(true);}
+  }, 100);
 };
 
 // Load Maps
@@ -187,6 +190,11 @@ function initFindMap(){
       selectProp(e.latLng,(s==='OK'&&r[0])?r[0].formatted_address:(e.latLng.lat().toFixed(5)+', '+e.latLng.lng().toFixed(5)));
     });
   });
+  // Force resize to ensure tiles render after layout
+  setTimeout(function(){
+    google.maps.event.trigger(findMap,'resize');
+    findMap.setCenter(findMap.getCenter());
+  }, 200);
 }
 
 function selectProp(ll,addr){
