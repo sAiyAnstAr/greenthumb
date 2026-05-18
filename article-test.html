@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Article Test</title>
+<style>
+body{margin:0;font-family:sans-serif;padding:16px;background:#f5f5f5;}
+#status{background:white;padding:16px;border-radius:8px;margin-bottom:12px;font-weight:bold;font-size:16px;}
+#log{background:#1b1c1a;color:#bcf0ae;padding:16px;border-radius:8px;font-size:12px;font-family:monospace;white-space:pre-wrap;min-height:100px;margin-bottom:12px;}
+#result{background:white;padding:16px;border-radius:8px;display:none;}
+#result h2{font-size:20px;margin:0 0 8px;}
+#result p{font-size:14px;line-height:1.6;color:#333;}
+button{background:#154212;color:white;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;margin:4px;}
+</style>
+</head>
+<body>
+
+<div id="status">🔄 Ready to test</div>
+<div id="log">Tap a button to test...\n</div>
+<div id="result">
+  <h2 id="r-title"></h2>
+  <p id="r-extract"></p>
+</div>
+
+<button onclick="test1()">1. Test XHR works (httpbin)</button>
+<button onclick="test2()">2. Wikipedia direct (Soil science)</button>
+<button onclick="test3()">3. Wikipedia search (Soil Basics)</button>
+<button onclick="test4()">4. Full topic from URL param</button>
+
+<p style="font-size:12px;color:#666;margin-top:8px;">
+URL: <span id="url-display"></span><br/>
+Topic param: <span id="topic-display"></span>
+</p>
+
+<script>
+document.getElementById('url-display').textContent = window.location.href;
+
+// Parse URL params manually
+var PARAMS = {};
+var search = window.location.search.slice(1);
+if (search) {
+    search.split('&').forEach(function(p) {
+        var eq = p.indexOf('=');
+        if (eq > 0) {
+            var k = decodeURIComponent(p.slice(0, eq));
+            var v = decodeURIComponent(p.slice(eq+1).replace(/\+/g, ' '));
+            PARAMS[k] = v;
+        }
+    });
+}
+document.getElementById('topic-display').textContent = PARAMS.topic || '(none)';
+
+function log(msg) {
+    var el = document.getElementById('log');
+    el.textContent += new Date().toLocaleTimeString() + ': ' + msg + '\n';
+}
+function setStatus(msg, color) {
+    var el = document.getElementById('status');
+    el.textContent = msg;
+    el.style.background = color || 'white';
+}
+
+function doXHR(url, callback) {
+    log('XHR: ' + url.slice(0, 80) + '...');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = function() { log('ERROR: Timeout after 10s'); setStatus('❌ Timeout', '#ffdad6'); };
+    xhr.onerror = function() { log('ERROR: Network error (onerror fired)'); setStatus('❌ Network error', '#ffdad6'); };
+    xhr.onreadystatechange = function() {
+        log('readyState=' + xhr.readyState + (xhr.readyState===4?' status='+xhr.status:''));
+    };
+    xhr.onload = function() {
+        log('onload: status=' + xhr.status + ' length=' + xhr.responseText.length);
+        callback(xhr.status, xhr.responseText);
+    };
+    xhr.send();
+    log('XHR sent');
+}
+
+function test1() {
+    setStatus('🔄 Testing basic XHR...', '#fff3cd');
+    log('\n--- TEST 1: httpbin ---');
+    doXHR('https://httpbin.org/get', function(status, text) {
+        if (status === 200) {
+            setStatus('✅ XHR works! Status: ' + status, '#d4edda');
+            log('SUCCESS: Got ' + text.length + ' bytes');
+        } else {
+            setStatus('❌ Got status: ' + status, '#ffdad6');
+        }
+    });
+}
+
+function test2() {
+    setStatus('🔄 Testing Wikipedia direct...', '#fff3cd');
+    log('\n--- TEST 2: Wikipedia Action API ---');
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&format=json&origin=*&titles=Soil_science';
+    doXHR(url, function(status, text) {
+        log('Status: ' + status);
+        if (status !== 200) { setStatus('❌ HTTP ' + status, '#ffdad6'); return; }
+        try {
+            var data = JSON.parse(text);
+            var pages = data.query && data.query.pages;
+            var page = pages && pages[Object.keys(pages)[0]];
+            if (page && page.extract) {
+                setStatus('✅ Wikipedia works!', '#d4edda');
+                log('Title: ' + page.title);
+                log('Extract: ' + page.extract.slice(0, 100) + '...');
+                document.getElementById('r-title').textContent = page.title;
+                document.getElementById('r-extract').textContent = page.extract.slice(0, 500);
+                document.getElementById('result').style.display = 'block';
+            } else {
+                setStatus('❌ No extract in response', '#ffdad6');
+                log('Response: ' + text.slice(0, 200));
+            }
+        } catch(e) {
+            setStatus('❌ Parse error: ' + e.message, '#ffdad6');
+            log('Raw response: ' + text.slice(0, 200));
+        }
+    });
+}
+
+function test3() {
+    setStatus('🔄 Testing Wikipedia search...', '#fff3cd');
+    log('\n--- TEST 3: Wikipedia Search ---');
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Soil+Basics+gardening&format=json&origin=*&srlimit=3';
+    doXHR(url, function(status, text) {
+        if (status !== 200) { setStatus('❌ HTTP ' + status, '#ffdad6'); return; }
+        try {
+            var data = JSON.parse(text);
+            var results = data.query && data.query.search;
+            if (results && results.length) {
+                setStatus('✅ Search works! Found: ' + results[0].title, '#d4edda');
+                results.forEach(function(r, i) { log('Result ' + i + ': ' + r.title); });
+            } else {
+                setStatus('❌ No search results', '#ffdad6');
+            }
+        } catch(e) {
+            setStatus('❌ Parse error: ' + e.message, '#ffdad6');
+        }
+    });
+}
+
+function test4() {
+    var topic = PARAMS.topic || 'Compost';
+    setStatus('🔄 Loading: ' + topic, '#fff3cd');
+    log('\n--- TEST 4: Full topic: ' + topic + ' ---');
+    var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&format=json&origin=*&titles=' + encodeURIComponent(topic);
+    doXHR(url, function(status, text) {
+        if (status !== 200) { setStatus('❌ HTTP ' + status, '#ffdad6'); return; }
+        try {
+            var data = JSON.parse(text);
+            var pages = data.query && data.query.pages;
+            var page = pages && pages[Object.keys(pages)[0]];
+            if (page && page.extract) {
+                setStatus('✅ Loaded: ' + page.title, '#d4edda');
+                document.getElementById('r-title').textContent = page.title;
+                document.getElementById('r-extract').textContent = page.extract.slice(0, 800);
+                document.getElementById('result').style.display = 'block';
+            } else {
+                log('No extract — trying search fallback...');
+                var url2 = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + encodeURIComponent(topic) + '&format=json&origin=*&srlimit=1';
+                doXHR(url2, function(s2, t2) {
+                    var d2 = JSON.parse(t2);
+                    var hit = d2.query && d2.query.search && d2.query.search[0];
+                    if (hit) {
+                        setStatus('✅ Found via search: ' + hit.title, '#d4edda');
+                        log('Search hit: ' + hit.title);
+                    } else {
+                        setStatus('❌ Nothing found for: ' + topic, '#ffdad6');
+                    }
+                });
+            }
+        } catch(e) {
+            setStatus('❌ Parse error: ' + e.message, '#ffdad6');
+        }
+    });
+}
+
+log('Page loaded. URL: ' + window.location.href);
+log('Params: ' + JSON.stringify(PARAMS));
+</script>
+</body></html>
