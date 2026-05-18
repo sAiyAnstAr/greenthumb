@@ -64,7 +64,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;}
   <div style="position:relative;">
     <span class="material-symbols-outlined" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#72796e;font-size:16px;pointer-events:none;">search</span>
     <input id="find-search" type="text" placeholder="Search your address…" autocomplete="off"
-      style="width:100%;padding:9px 12px 9px 32px;border-radius:10px;border:1.5px solid #ccc;background:#f5f5f5;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;"/>
+      style="width:100%;padding:9px 12px 9px 32px;border-radius:10px;border:1.5px solid #ccc;background:#f5f5f5;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;"
+      oninput="onSearchInput(this.value)" onkeydown="if(event.key==='Enter'){doSearch(this.value);}"/>
+    <div id="search-drop" style="display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid #ccc;border-radius:10px;margin-top:4px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:50;max-height:220px;overflow-y:auto;"></div>
   </div>
 </div>
 
@@ -184,12 +186,7 @@ function initFindMap(){
     center:c,zoom:16,mapTypeId:'hybrid',
     zoomControl:true,mapTypeControl:false,streetViewControl:false,fullscreenControl:false,gestureHandling:'greedy'
   });
-  autocomplete=new google.maps.places.Autocomplete(document.getElementById('find-search'),{types:['address'],fields:['geometry','formatted_address']});
-  autocomplete.addListener('place_changed',function(){
-    var p=autocomplete.getPlace();if(!p.geometry)return;
-    findMap.panTo(p.geometry.location);findMap.setZoom(20);
-    selectProp(p.geometry.location,p.formatted_address);
-  });
+  // Search handled by manual Nominatim dropdown (see onSearchInput/doSearch)
   findMap.addListener('click',function(e){
     new google.maps.Geocoder().geocode({location:e.latLng},function(r,s){
       selectProp(e.latLng,(s==='OK'&&r[0])?r[0].formatted_address:(e.latLng.lat().toFixed(5)+', '+e.latLng.lng().toFixed(5)));
@@ -348,6 +345,46 @@ function loadSaved(){
 function undoLast(){if(!zones.length)return;var l=zones.pop();l.poly.setMap(null);if(l.lbl)l.lbl.setMap(null);}
 function clearAll(){if(!confirm('Clear all?'))return;zones.forEach(function(z){z.poly.setMap(null);if(z.lbl)z.lbl.setMap(null);});pins.forEach(function(p){p.marker.setMap(null);});zones=[];pins=[];closeZP();}
 
+
+var _searchTimer;
+function onSearchInput(q){
+  clearTimeout(_searchTimer);
+  if(q.length < 3){ document.getElementById('search-drop').style.display='none'; return; }
+  _searchTimer = setTimeout(function(){ doSearch(q); }, 400);
+}
+
+function doSearch(q){
+  if(!q || q.length < 2) return;
+  fetch('https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=au&q='+encodeURIComponent(q))
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var drop = document.getElementById('search-drop');
+    if(!data.length){ drop.style.display='none'; return; }
+    drop.innerHTML = data.map(function(r){
+      var short = r.display_name.split(',').slice(0,3).join(',');
+      return '<div onclick="pickResult('+r.lat+','+r.lon+',''+r.display_name.replace(/'/g,"\'").substring(0,80)+'')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">'+
+      '<div style="font-size:14px;font-weight:600;color:#1b1c1a;">'+short.split(',')[0]+'</div>'+
+      '<div style="font-size:12px;color:#72796e;">'+short.split(',').slice(1).join(',')+'</div></div>';
+    }).join('');
+    drop.style.display='block';
+  }).catch(function(){});
+}
+
+function pickResult(lat,lng,addr){
+  document.getElementById('find-search').value = addr.split(',')[0];
+  document.getElementById('search-drop').style.display='none';
+  var ll = {lat:parseFloat(lat), lng:parseFloat(lng)};
+  findMap.panTo(ll); findMap.setZoom(19);
+  selectProp(ll, addr);
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', function(e){
+  if(!e.target.closest || !e.target.closest('#srchbar')){
+    var drop = document.getElementById('search-drop');
+    if(drop) drop.style.display='none';
+  }
+});
 window.addEventListener('resize',function(){
   if(findMap){
     var fm=document.getElementById('find-map');
