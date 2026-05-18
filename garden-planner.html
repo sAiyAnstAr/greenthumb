@@ -1,642 +1,336 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
+<html><head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Garden Planner - Greenthumb</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdbd0","secondary-container":"#fed3c7","primary-fixed-dim":"#a1d494","surface-container-low":"#f4f4f0","on-error-container":"#93000a","inverse-on-surface":"#f2f1ed","surface-container-high":"#e9e8e4","secondary-fixed-dim":"#e7bdb1","primary-fixed":"#bcf0ae","background":"#faf9f5","on-tertiary-container":"#ffaf9e","on-secondary-fixed-variant":"#5d4037","error-container":"#ffdad6","tertiary-fixed":"#ffdad3","surface-bright":"#faf9f5","primary-container":"#2d5a27","on-background":"#1b1c1a","on-secondary-fixed":"#2c160e","on-primary-fixed-variant":"#23501e","surface-variant":"#e3e2df","outline-variant":"#c2c9bb","surface-container-lowest":"#ffffff","primary":"#154212","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-fixed-variant":"#802918","surface":"#faf9f5","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffb4a5","on-surface":"#1b1c1a","surface-container-highest":"#e3e2df","surface-container":"#efeeea","on-secondary-container":"#795950","tertiary":"#6e1c0c","on-tertiary-fixed":"#3e0500","inverse-surface":"#2f312e","surface-tint":"#3b6934","tertiary-container":"#8d3220","outline":"#72796e","on-primary-container":"#9dd090","on-error":"#ffffff","on-primary":"#ffffff","on-surface-variant":"#42493e","surface-dim":"#dbdad6","secondary":"#77574d","inverse-primary":"#a1d494","on-primary-fixed":"#002201"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"xl":"64px","lg":"40px","base":"8px","gutter":"16px","xs":"4px","md":"24px","sm":"12px","container-margin":"20px"},"fontFamily":{"label-sm":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}
-</script>
 <style>
-*{box-sizing:border-box;}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#faf9f5;overflow:hidden;height:100dvh;margin:0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Plus Jakarta Sans',sans-serif;}
 .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
-.active-icon{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
-#nav-overlay{transition:opacity 0.25s ease;}
-#nav-overlay.hidden{opacity:0;pointer-events:none;}
-#nav-drawer{transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);width:min(320px,85vw);}
-#nav-drawer.open{transform:translateX(0);}
-.nav-item{transition:background 0.15s ease;}
-.nav-item.active{background:#bcf0ae;color:#002201;}
-.nav-item:not(.active):hover{background:#efeeea;}
-.nav-sub-item:hover{background:#efeeea;}
-.nav-section{border-top:1px solid #c2c9bb40;}
-.nav-chevron{transition:transform 0.2s ease;}
-.nav-group-toggle.open .nav-chevron{transform:rotate(180deg);}
-.nav-sub-list{overflow:hidden;transition:max-height 0.25s ease;}
-.nav-sub-list.collapsed{max-height:0!important;}
-#swipe-zone{position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45;}
-#screen-find,#screen-plan{position:fixed;inset:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
-#screen-find{z-index:10;}
-#screen-plan{transform:translateX(100%);z-index:10;}
-#screen-plan.active{transform:translateX(0);}
-#screen-find.exit{transform:translateX(-30%);}
-#find-map,#plan-map{width:100%;height:100%;}
-.tool-btn{transition:all 0.15s ease;background:white;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#42493e;box-shadow:0 1px 3px rgba(0,0,0,0.12);flex-shrink:0;}
-.tool-btn.active{background:#154212;color:white;border-color:#154212;}
-.tool-btn:hover:not(.active){background:#f4f4f0;}
-.zt-btn{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.15s ease;flex-shrink:0;}
-.zt-btn.selected{outline:3px solid #154212;outline-offset:2px;}
-#zone-panel{position:absolute;bottom:70px;left:10px;right:10px;background:white;border-radius:20px;padding:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);max-height:55vh;overflow-y:auto;transform:translateY(130%);transition:transform 0.3s ease;z-index:25;}
-#zone-panel.open{transform:translateY(0);}
-#plant-picker{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:24px 24px 0 0;padding:20px 20px 32px;box-shadow:0 -4px 24px rgba(0,0,0,0.2);max-height:65vh;overflow-y:auto;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);z-index:60;}
-#plant-picker.open{transform:translateY(0);}
-#save-toast{position:fixed;top:120px;left:50%;transform:translateX(-50%) translateY(-80px);opacity:0;background:#154212;color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;z-index:100;transition:transform 0.3s ease,opacity 0.3s ease;box-shadow:0 4px 16px rgba(0,0,0,0.25);display:flex;align-items:center;gap:6px;white-space:nowrap;pointer-events:none;}
+
+/* HEADER - fixed height, normal flow */
+#hdr{height:56px;background:white;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 16px;gap:10px;position:sticky;top:0;z-index:20;}
+
+/* SEARCH BAR - fixed height, normal flow */
+#srchbar{height:52px;background:white;border-bottom:1px solid #ddd;padding:8px 12px;position:sticky;top:56px;z-index:20;}
+
+/* MAP - explicit height using vh minus the two bars above */
+#find-map{width:100%;height:calc(100vh - 108px);}
+
+/* Step 2 toolbar */
+#toolbar{height:50px;background:white;border-bottom:1px solid #ddd;padding:6px 10px;display:flex;align-items:center;gap:5px;overflow-x:auto;position:sticky;top:56px;z-index:20;}
+#plan-map{width:100%;height:calc(100vh - 106px);}
+
+/* Panels */
+#property-card{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -4px 24px rgba(0,0,0,0.2);transform:translateY(100%);transition:transform 0.3s;z-index:30;}
+#property-card.show{transform:translateY(0);}
+#zone-panel{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:24px 24px 0 0;padding:16px;max-height:60vh;overflow-y:auto;box-shadow:0 -4px 24px rgba(0,0,0,0.18);transform:translateY(100%);transition:transform 0.3s;z-index:30;}
+#zone-panel.show{transform:translateY(0);}
+#plant-picker{position:fixed;bottom:0;left:0;right:0;background:white;border-radius:24px 24px 0 0;padding:20px;max-height:65vh;overflow-y:auto;box-shadow:0 -4px 24px rgba(0,0,0,0.2);transform:translateY(100%);transition:transform 0.3s;z-index:35;}
+#plant-picker.show{transform:translateY(0);}
+#picker-bg{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:34;display:none;}
+#save-toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-50px);opacity:0;background:#154212;color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:14px;z-index:40;transition:all 0.3s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
 #save-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-.hide-scrollbar::-webkit-scrollbar{display:none;}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
-@keyframes spin{to{transform:rotate(360deg);}}
+#step-plan{display:none;}
+
+/* Tool/zone buttons */
+.tb{background:white;border:1.5px solid #ccc;border-radius:8px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:#42493e;box-shadow:0 1px 2px rgba(0,0,0,0.1);flex-shrink:0;}
+.tb.on{background:#154212;color:white;border-color:#154212;}
+.zt{width:24px;height:24px;border-radius:50%;border:2px solid transparent;cursor:pointer;flex-shrink:0;}
+.zt.on{outline:3px solid #154212;outline-offset:2px;}
+.sep{width:1px;height:22px;background:#ccc;flex-shrink:0;margin:0 2px;}
+.hint{position:fixed;top:120px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.9);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;z-index:25;white-space:nowrap;display:none;pointer-events:none;}
 </style>
 </head>
 <body>
 
-<!-- Nav Drawer -->
-<div id="nav-overlay" class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 hidden" onclick="closeNav()"></div>
-<aside id="nav-drawer" class="fixed top-0 left-0 bottom-0 z-50 bg-background flex flex-col shadow-2xl overflow-hidden">
-<div class="bg-primary-container px-md pt-xl pb-md flex-shrink-0"><div class="flex items-center gap-md"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-primary-fixed flex-shrink-0"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" alt="Profile" class="w-full h-full object-cover"/></div><div class="min-w-0"><p class="font-headline-md text-headline-md text-on-primary-container truncate">Gardener</p><p id="nav-location" class="font-label-sm text-on-primary-container/70 truncate">Gold Coast, AU</p></div></div></div>
-<nav class="flex-1 overflow-y-auto py-sm">
-<a href="index.html" class="nav-item flex items-center gap-md px-md py-sm mx-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">home</span><span class="font-label-lg text-label-lg text-on-surface">Home</span></a>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('garden-group')" class="nav-group-toggle open w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">psychology_alt</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">My Garden</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
-<div id="garden-group" class="nav-sub-list pl-md" style="max-height:500px">
-<a href="garden-health.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">favorite</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Health</span></a>
-<a href="garden-planner.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl" style="color:#154212;font-weight:700"><span class="material-symbols-outlined text-[18px]" style="color:#154212">map</span><span class="font-label-lg">Garden Planner</span></a>
-<a href="garden-diary.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">book_2</span><span class="font-label-lg text-label-lg text-on-surface-variant">Garden Diary</span></a>
-<a href="add-plant.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">add_circle</span><span class="font-label-lg text-label-lg text-on-surface-variant">Add New Plant</span></a>
-</div></div>
-<div class="mx-sm"><a href="scanner.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">filter_center_focus</span><span class="font-label-lg text-label-lg text-on-surface">Identify Plant</span></a></div>
-<div class="nav-section pt-sm mt-sm mx-sm"><a href="community.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">group</span><span class="font-label-lg text-label-lg text-on-surface">Community</span></a></div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<button onclick="toggleGroup('learn-group')" class="nav-group-toggle w-full flex items-center gap-md px-md py-sm rounded-xl nav-item"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">school</span><span class="font-label-lg text-label-lg text-on-surface flex-1 text-left">Learn</span><span class="material-symbols-outlined text-outline text-[18px] nav-chevron">expand_more</span></button>
-<div id="learn-group" class="nav-sub-list collapsed pl-md" style="max-height:0">
-<a href="plant-encyclopedia.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">menu_book</span><span class="font-label-lg text-label-lg text-on-surface-variant">Plant Encyclopedia</span></a>
-<a href="search-guides.html" class="nav-sub-item flex items-center gap-sm px-md py-2 rounded-xl"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-label-lg text-label-lg text-on-surface-variant">Search Guides</span></a>
-</div></div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="recommendations.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">star</span><span class="font-label-lg text-label-lg text-on-surface">Recommendations</span></a>
-<a href="calendar.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">calendar_month</span><span class="font-label-lg text-label-lg text-on-surface">Task Calendar</span></a>
-</div>
-<div class="nav-section pt-sm mt-sm mx-sm">
-<a href="profile.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">account_circle</span><span class="font-label-lg text-label-lg text-on-surface">Profile</span></a>
-<a href="settings.html" class="nav-item flex items-center gap-md px-md py-sm rounded-xl"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">settings</span><span class="font-label-lg text-label-lg text-on-surface">Settings</span></a>
-</div>
-</nav>
-<div class="flex-shrink-0 px-md py-md border-t border-outline-variant/40"><p class="font-label-sm text-outline text-center">Greenthumb v0.1 · Made with 🌿</p></div>
-</aside>
-<div id="swipe-zone" style="position:fixed;left:0;top:0;bottom:0;width:20px;z-index:45"></div>
+<!-- STEP 1: FIND PROPERTY -->
+<div id="step-find">
 
-<!-- SCREEN 1: FIND YOUR PROPERTY -->
-<div id="screen-find">
-<div style="position:absolute;top:0;left:0;right:0;z-index:20;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(194,201,187,0.4);">
-<div style="display:flex;align-items:center;gap:12px;padding:10px 16px;max-width:1024px;margin:0 auto;">
-<a href="my-garden.html" style="padding:8px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#154212;flex-shrink:0;"><span class="material-symbols-outlined">arrow_back</span></a>
-<div style="flex:1;text-align:center;"><p style="font-size:17px;font-weight:700;color:#154212;line-height:1;">Garden Planner</p><p style="font-size:11px;color:#72796e;margin-top:2px;">Step 1 — Find your property</p></div>
-<div style="width:38px;height:38px;border-radius:50%;overflow:hidden;border:2px solid #2d5a27;cursor:pointer;flex-shrink:0;" onclick="openNav()"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgJqIeXySJNhWaz3gdkNLVMUhLZ0Ub5bfhf3w-RZO8M61x4J8AEvpRuoFfQQcrTj59RY23TQvQj4rcN1J4v7zixexbrqf8ySPTGW39uB9VzK8v33E6PQx85t6ve4oTkmiyH7lg2W7QhpIYy8NS3lK3nrL-UgHvhxdlr1FYVpkEaQ18PY39cDsfzMhYoSu2oKJjF_q-Ax_DiMew5CeySii6P1YcKX4pUsrhd3XwdSyfHPI29EFRz3sfKX5NJeI6brN2jr2onIKHHY" style="width:100%;height:100%;object-fit:cover;"/></div>
-</div>
-<div style="padding:0 16px 12px;max-width:1024px;margin:0 auto;">
-<div style="position:relative;">
-<span class="material-symbols-outlined" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#72796e;font-size:18px;pointer-events:none;">search</span>
-<input id="find-search" type="text" placeholder="Search your address…" autocomplete="off"
-style="width:100%;padding:11px 12px 11px 36px;border-radius:12px;border:1.5px solid #c2c9bb;background:#f4f4f0;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;"
-onfocus="this.style.borderColor='#154212'" onblur="this.style.borderColor='#c2c9bb'"/>
-</div>
-</div>
-</div>
-<div id="find-map" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
-<div id="find-instruction" style="position:absolute;top:140px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);backdrop-filter:blur(6px);color:white;padding:9px 20px;border-radius:50px;font-size:13px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;transition:opacity 0.3s;">
-    Tap your property on the map
-</div>
-<div id="property-card" style="display:none;position:absolute;bottom:0;left:0;right:0;z-index:20;background:white;border-radius:24px 24px 0 0;padding:20px 20px 40px;box-shadow:0 -4px 32px rgba(0,0,0,0.18);">
-<div style="width:40px;height:4px;background:#c2c9bb;border-radius:2px;margin:0 auto 16px;"></div>
-<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-<div style="width:48px;height:48px;border-radius:14px;background:#bcf0ae;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-<span class="material-symbols-outlined" style="color:#154212;font-size:24px;font-variation-settings:'FILL' 1;">home</span>
-</div>
-<div style="flex:1;min-width:0;">
-<p id="property-name" style="font-weight:700;font-size:16px;color:#1b1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;">Selected Property</p>
-<p id="property-coords" style="font-size:12px;color:#72796e;margin:2px 0 0;"></p>
-</div>
-</div>
-<button onclick="goToPlanScreen()" style="width:100%;background:#154212;color:white;border:none;border-radius:16px;padding:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
-<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;font-size:20px;">map</span>
-Plan This Property
-</button>
-<button onclick="clearProperty()" style="width:100%;background:none;border:none;color:#72796e;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;cursor:pointer;padding:12px 0 0;display:block;">
-Choose a different location
-</button>
-</div>
+<div id="hdr">
+  <a href="my-garden.html" style="color:#154212;display:flex;flex-shrink:0;text-decoration:none;"><span class="material-symbols-outlined">arrow_back</span></a>
+  <div style="flex:1;text-align:center;">
+    <div style="font-size:15px;font-weight:700;color:#154212;">Garden Planner</div>
+    <div style="font-size:11px;color:#72796e;">Step 1 — Find your property</div>
+  </div>
+  <div style="width:36px;"></div>
 </div>
 
-<!-- SCREEN 2: PLAN YOUR GARDEN -->
-<div id="screen-plan">
-<div style="position:absolute;top:0;left:0;right:0;z-index:20;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(194,201,187,0.4);">
-<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;max-width:1024px;margin:0 auto;">
-<button onclick="goToFindScreen()" style="background:none;border:none;padding:8px;border-radius:50%;cursor:pointer;display:flex;align-items:center;color:#154212;flex-shrink:0;"><span class="material-symbols-outlined">arrow_back</span></button>
-<div style="flex:1;min-width:0;text-align:center;">
-<p id="plan-title" style="font-size:15px;font-weight:700;color:#154212;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;line-height:1.2;">My Property</p>
-<p style="font-size:11px;color:#72796e;margin:1px 0 0;">Step 2 — Draw your garden zones</p>
+<div id="srchbar">
+  <div style="position:relative;">
+    <span class="material-symbols-outlined" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#72796e;font-size:16px;pointer-events:none;">search</span>
+    <input id="find-search" type="text" placeholder="Search your address…" autocomplete="off"
+      style="width:100%;padding:9px 12px 9px 32px;border-radius:10px;border:1.5px solid #ccc;background:#f5f5f5;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;"/>
+  </div>
 </div>
-<button onclick="savePlan()" id="save-btn" style="background:#154212;color:white;border:none;border-radius:50px;padding:7px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;flex-shrink:0;white-space:nowrap;">
-<span class="material-symbols-outlined" style="font-size:16px;">save</span>Save
-</button>
+
+<div id="find-map"></div>
+
+</div><!-- end step-find -->
+
+<!-- STEP 2: PLAN GARDEN -->
+<div id="step-plan">
+
+<div id="hdr" style="position:sticky;top:0;z-index:20;">
+  <button onclick="backToFind()" style="background:none;border:none;cursor:pointer;color:#154212;display:flex;flex-shrink:0;"><span class="material-symbols-outlined">arrow_back</span></button>
+  <div style="flex:1;min-width:0;text-align:center;">
+    <div id="plan-title" style="font-size:14px;font-weight:700;color:#154212;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">My Property</div>
+    <div style="font-size:11px;color:#72796e;">Step 2 — Draw your garden zones</div>
+  </div>
+  <button onclick="savePlan()" id="save-btn" style="background:#154212;color:white;border:none;border-radius:50px;padding:6px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;flex-shrink:0;">
+    <span class="material-symbols-outlined" style="font-size:16px;">save</span>Save
+  </button>
 </div>
-<!-- Toolbar -->
-<div style="display:flex;align-items:center;gap:5px;padding:0 10px 10px;overflow-x:auto;scrollbar-width:none;" class="hide-scrollbar">
-<button onclick="setTool('polygon')" id="tool-polygon" class="tool-btn" title="Draw zone polygon">
-<span class="material-symbols-outlined" style="font-size:18px;">pentagon</span><span style="font-size:12px;">Zone</span>
-</button>
-<button onclick="setTool('rectangle')" id="tool-rectangle" class="tool-btn" title="Draw rectangle zone">
-<span class="material-symbols-outlined" style="font-size:18px;">rectangle</span>
-</button>
-<button onclick="setTool('pan')" id="tool-pan" class="tool-btn active" title="Pan map">
-<span class="material-symbols-outlined" style="font-size:18px;">pan_tool</span>
-</button>
-<button onclick="setTool('pin')" id="tool-pin" class="tool-btn" title="Place plant pin">
-<span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1">eco</span><span style="font-size:12px;">Plant</span>
-</button>
-<div style="width:1px;height:24px;background:#c2c9bb;flex-shrink:0;margin:0 2px;"></div>
-<button onclick="setZoneType('bed')" id="zt-bed" class="zt-btn selected" style="background:#4ade80;" title="Garden Bed"></button>
-<button onclick="setZoneType('lawn')" id="zt-lawn" class="zt-btn" style="background:#86efac;" title="Lawn"></button>
-<button onclick="setZoneType('veg')" id="zt-veg" class="zt-btn" style="background:#ca8a04;" title="Veggie Patch"></button>
-<button onclick="setZoneType('water')" id="zt-water" class="zt-btn" style="background:#38bdf8;" title="Water Feature"></button>
-<button onclick="setZoneType('patio')" id="zt-patio" class="zt-btn" style="background:#94a3b8;" title="Patio"></button>
-<button onclick="setZoneType('tree')" id="zt-tree" class="zt-btn" style="background:#166534;" title="Tree"></button>
-<div style="width:1px;height:24px;background:#c2c9bb;flex-shrink:0;margin:0 2px;"></div>
-<button onclick="undoLast()" class="tool-btn" title="Undo last zone"><span class="material-symbols-outlined" style="font-size:18px;">undo</span></button>
-<button onclick="clearAll()" class="tool-btn" style="color:#ba1a1a;" title="Clear all"><span class="material-symbols-outlined" style="font-size:18px;">delete_sweep</span></button>
+
+<div id="toolbar">
+  <button onclick="setTool('polygon')" id="t-polygon" class="tb"><span class="material-symbols-outlined" style="font-size:16px;">pentagon</span>Zone</button>
+  <button onclick="setTool('rectangle')" id="t-rectangle" class="tb"><span class="material-symbols-outlined" style="font-size:16px;">rectangle</span></button>
+  <button onclick="setTool('pan')" id="t-pan" class="tb on"><span class="material-symbols-outlined" style="font-size:16px;">pan_tool</span></button>
+  <button onclick="setTool('pin')" id="t-pin" class="tb"><span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 1">eco</span>Plant</button>
+  <div class="sep"></div>
+  <button onclick="setZT('bed')" id="z-bed" class="zt on" style="background:#4ade80;"></button>
+  <button onclick="setZT('lawn')" id="z-lawn" class="zt" style="background:#86efac;"></button>
+  <button onclick="setZT('veg')" id="z-veg" class="zt" style="background:#ca8a04;"></button>
+  <button onclick="setZT('water')" id="z-water" class="zt" style="background:#38bdf8;"></button>
+  <button onclick="setZT('patio')" id="z-patio" class="zt" style="background:#94a3b8;"></button>
+  <button onclick="setZT('tree')" id="z-tree" class="zt" style="background:#166534;"></button>
+  <div class="sep"></div>
+  <button onclick="undoLast()" class="tb"><span class="material-symbols-outlined" style="font-size:16px;">undo</span></button>
+  <button onclick="clearAll()" class="tb" style="color:#ba1a1a;"><span class="material-symbols-outlined" style="font-size:16px;">delete_sweep</span></button>
 </div>
+
+<div id="plan-map"></div>
+
+</div><!-- end step-plan -->
+
+<!-- Overlays -->
+<div id="draw-hint" class="hint">Click points · Double-click to finish</div>
+<div id="pin-hint" class="hint">Tap map to place plant pin</div>
+
+<div id="property-card">
+  <div style="width:36px;height:4px;background:#ccc;border-radius:2px;margin:0 auto 14px;"></div>
+  <p id="prop-name" style="font-size:16px;font-weight:700;color:#1b1c1a;margin-bottom:4px;"></p>
+  <p id="prop-coords" style="font-size:12px;color:#72796e;margin-bottom:16px;"></p>
+  <button onclick="goToPlan()" style="width:100%;background:#154212;color:white;border:none;border-radius:14px;padding:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">map</span>Plan This Property
+  </button>
+  <button onclick="clearProp()" style="width:100%;background:none;border:none;color:#72796e;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;cursor:pointer;padding:10px 0 0;">Choose a different location</button>
 </div>
-<div id="plan-map" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
-<!-- Hints -->
-<div id="draw-hint" style="display:none;position:absolute;top:110px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;">Click to place points · Double-click to finish</div>
-<div id="pin-hint" style="display:none;position:absolute;top:110px;left:50%;transform:translateX(-50%);background:rgba(21,66,18,0.88);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;z-index:20;white-space:nowrap;pointer-events:none;">Tap the map to place a plant</div>
-<!-- Zone panel -->
+
 <div id="zone-panel">
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-<h3 id="zp-title" style="font-size:17px;font-weight:700;color:#1b1c1a;margin:0;">Zone Details</h3>
-<button onclick="closeZonePanel()" style="background:none;border:none;cursor:pointer;padding:4px;"><span class="material-symbols-outlined" style="color:#72796e;">close</span></button>
-</div>
-<div id="zp-body"></div>
-</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <h3 id="zp-title" style="font-size:16px;font-weight:700;color:#1b1c1a;">Zone Details</h3>
+    <button onclick="closeZP()" style="background:none;border:none;cursor:pointer;"><span class="material-symbols-outlined" style="color:#72796e;">close</span></button>
+  </div>
+  <div id="zp-body"></div>
 </div>
 
-<!-- Plant picker -->
 <div id="plant-picker">
-<div style="width:40px;height:4px;background:#c2c9bb;border-radius:2px;margin:0 auto 16px;"></div>
-<h3 style="font-size:18px;font-weight:700;color:#1b1c1a;margin:0 0 6px;">Place a Plant</h3>
-<p style="font-size:14px;color:#72796e;margin:0 0 16px;">Select a plant from your garden.</p>
-<div id="picker-list" style="display:flex;flex-direction:column;gap:8px;"></div>
-<button onclick="closePicker()" style="width:100%;margin-top:14px;padding:13px;border-radius:12px;border:1.5px solid #c2c9bb;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#72796e;cursor:pointer;">Cancel</button>
+  <div style="width:36px;height:4px;background:#ccc;border-radius:2px;margin:0 auto 14px;"></div>
+  <p style="font-size:16px;font-weight:700;color:#1b1c1a;margin-bottom:4px;">Place a Plant</p>
+  <p style="font-size:13px;color:#72796e;margin-bottom:14px;">Select from your garden.</p>
+  <div id="picker-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+  <button onclick="closePicker()" style="width:100%;margin-top:12px;padding:12px;border-radius:12px;border:1.5px solid #ccc;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#72796e;cursor:pointer;">Cancel</button>
 </div>
-<div id="picker-overlay" onclick="closePicker()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:59;"></div>
+<div id="picker-bg" onclick="closePicker()"></div>
 
-<div id="save-toast"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span> Plan saved!</div>
-
-<!-- Bottom nav (screen 1) -->
-<nav id="bottom-nav" class="fixed bottom-0 w-full z-30 rounded-t-xl bg-surface-container-lowest shadow-[0_-4px_10px_rgba(45,90,39,0.06)]">
-<div class="flex justify-around items-center w-full max-w-screen-lg mx-auto px-base py-sm">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="index.html"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-label-sm">Home</span></a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="my-garden.html"><span class="material-symbols-outlined active-icon">psychology_alt</span><span class="font-label-sm text-label-sm whitespace-nowrap">My Garden</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="scanner.html"><span class="material-symbols-outlined">filter_center_focus</span><span class="font-label-sm text-label-sm">Identify</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="community.html"><span class="material-symbols-outlined">group</span><span class="font-label-sm text-label-sm">Community</span></a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full" href="learn.html"><span class="material-symbols-outlined">school</span><span class="font-label-sm text-label-sm">Learn</span></a>
-</div>
-</nav>
+<div id="save-toast"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>Plan saved!</div>
 
 <script>
-// ── Nav ──────────────────────────────────────────────────────────────────
-function openNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.add('open');if(o)o.classList.remove('hidden');document.body.style.overflow='hidden';}
-function closeNav(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay');if(d)d.classList.remove('open');if(o)o.classList.add('hidden');document.body.style.overflow='';}
-function toggleGroup(id){var l=document.getElementById(id);if(!l)return;var b=l.previousElementSibling,c=l.classList.contains('collapsed');l.classList.toggle('collapsed',!c);if(b)b.classList.toggle('open',c);l.style.maxHeight=c?l.scrollHeight+'px':null;}
-try{var nl=JSON.parse(localStorage.getItem('gt_weather_loc')||'null');if(nl&&nl.name){var nle=document.getElementById('nav-location');if(nle)nle.textContent=nl.name;}}catch(e){}
-document.addEventListener('touchstart',function(e){if(e.touches[0].clientX<30)window._sx=e.touches[0].clientX;},{passive:true});
-document.addEventListener('touchend',function(e){if(window._sx!==undefined&&e.changedTouches[0].clientX-window._sx>60)openNav();window._sx=undefined;},{passive:true});
-</script>
-
-<script>
-// ── Google Maps ──────────────────────────────────────────────────────────
-var GMAPS_KEY = 'AIzaSyA8xmhJJDELgPlAcAAZv-NIRnC_SWui8qw';
-function loadGoogleMaps(){
-    document.getElementById('find-map').innerHTML='<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#e8f5e8;gap:12px;"><div style="width:40px;height:40px;border:3px solid #154212;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></div><p style="font-size:14px;font-weight:600;color:#154212;">Loading map...</p></div>';
-    // Use the recommended bootstrap loader
-    var s=document.createElement('script');
-    s.src='https://maps.googleapis.com/maps/api/js?key='+GMAPS_KEY+'&loading=async&libraries=places,drawing&callback=onGoogleMapsReady&v=weekly';
-    s.async=true;
-    s.onerror=function(){ showMapError('Script failed to load. Check your internet connection and that Maps JavaScript API is enabled.'); };
-    document.head.appendChild(s);
-}
-function onGoogleMapsReady(){
-    clearTimeout(window._mapsTimeout);
-    window._mapCallbackFired = true;
-    initFindMap();
-    var saved=getSaved();
-    if(saved&&saved.property){
-        selectedProperty=saved.property;
-        goToPlanScreen(true);
-    }
-}
-loadGoogleMaps();
-
-// Track if callback fired
-window._mapCallbackFired = false;
-
-// Capture any Google Maps errors
-window.gm_authFailure = function() {
-    window._gmAuthFailed = true;
-    showMapError('Authentication failed. Check: 1) Maps JavaScript API is enabled in Google Cloud Console, 2) API key HTTP referrer restrictions include your domain.');
+var KEY =  + GMAPS_KEY + ;
+var ZT = {
+  bed:{l:'Garden Bed',c:'#4ade80',o:0.4}, lawn:{l:'Lawn',c:'#86efac',o:0.35},
+  veg:{l:'Veggie Patch',c:'#ca8a04',o:0.4}, water:{l:'Water Feature',c:'#38bdf8',o:0.45},
+  patio:{l:'Patio',c:'#94a3b8',o:0.35}, tree:{l:'Tree',c:'#166534',o:0.5}
 };
-
-function showMapError(msg) {
-    clearTimeout(window._mapsTimeout);
-    document.getElementById('find-map').innerHTML =
-        '<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff3cd;gap:12px;padding:20px;text-align:center;">' +
-        '<span style="font-size:40px;">⚠️</span>' +
-        '<p style="font-size:15px;font-weight:700;color:#664d03;">Maps failed to load</p>' +
-        '<p style="font-size:12px;color:#664d03;max-width:280px;">' + msg + '</p>' +
-        '<a href="https://console.cloud.google.com/apis/library/maps-backend.googleapis.com" target="_blank" style="font-size:12px;color:#154212;font-weight:700;">Open Google Cloud Console →</a>' +
-        '<button onclick="loadGoogleMaps();" style="background:#154212;color:white;border:none;border-radius:12px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;margin-top:4px;">Retry</button>' +
-        '</div>';
-}
-
-// Timeout — fires if callback never called after 10s
-window._mapsTimeout = setTimeout(function() {
-    if (!window._mapCallbackFired) {
-        var gmError = window._gmAuthFailed ? 'API key auth failure.' :
-            (window.google && window.google.maps) ? 'API loaded but callback did not fire. Check API key referrer restrictions allow this domain.' :
-            'Script did not load. Check internet connection and that Maps JavaScript API is enabled.';
-        showMapError(gmError);
-    }
-}, 10000);
-</script>
-
-<script>
-// ── Constants & State ────────────────────────────────────────────────────
-var ZONE_TYPES={
-    bed:  {label:'Garden Bed',    color:'#4ade80',opacity:0.4},
-    lawn: {label:'Lawn',          color:'#86efac',opacity:0.35},
-    veg:  {label:'Veggie Patch',  color:'#ca8a04',opacity:0.4},
-    water:{label:'Water Feature', color:'#38bdf8',opacity:0.45},
-    patio:{label:'Patio',         color:'#94a3b8',opacity:0.35},
-    tree: {label:'Tree',          color:'#166534',opacity:0.5},
-};
-
-var findMap,planMap,autocomplete,drawingManager;
-var selectedProperty=null,propertyMarker=null;
-var currentTool='pan',currentZoneType='bed';
-var pendingPinLatLng=null,selectedPolygon=null;
-var drawnPolygons=[],drawnPins=[];
+var findMap, planMap, autocomplete, dm;
+var prop=null, propMarker=null, tool='pan', zt='bed';
+var pendingLL=null, selZone=null, zones=[], pins=[];
 
 function getSaved(){try{return JSON.parse(localStorage.getItem('gt_garden_plan')||'null');}catch(e){return null;}}
 
-// ── SCREEN 1: Find map ───────────────────────────────────────────────────
+window.gm_authFailure=function(){document.getElementById('find-map').innerHTML='<p style="padding:20px;color:red;">Maps auth failure — check API key</p>';};
+
+window.initMapCallback=function(){
+  initFindMap();
+  var s=getSaved();
+  if(s&&s.property){prop=s.property;goToPlan(true);}
+};
+
+// Load Maps
+(function(){
+  var s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key='+KEY+'&libraries=places,drawing&callback=initMapCallback&v=weekly';
+  s.async=true;
+  s.onerror=function(){document.getElementById('find-map').innerHTML='<p style="padding:20px;color:red;">Script load failed</p>';};
+  document.head.appendChild(s);
+})();
+
 function initFindMap(){
-    var sl=null;try{sl=JSON.parse(localStorage.getItem('gt_weather_loc'));}catch(e){}
-    var center=sl?{lat:sl.lat,lng:sl.lon}:{lat:-28.0167,lng:153.4000};
-    // Force map container to be visible before init
-    var fm = document.getElementById('find-map');
-    fm.innerHTML = '';
-    findMap=new google.maps.Map(fm,{
-        center:center,zoom:16,mapTypeId:'hybrid',
-        disableDefaultUI:false,zoomControl:true,mapTypeControl:false,
-        streetViewControl:false,fullscreenControl:false,gestureHandling:'greedy'
+  var c={lat:-28.0167,lng:153.4};
+  try{var l=JSON.parse(localStorage.getItem('gt_weather_loc'));if(l)c={lat:l.lat,lng:l.lon};}catch(e){}
+  if(prop)c={lat:prop.lat,lng:prop.lng};
+  findMap=new google.maps.Map(document.getElementById('find-map'),{
+    center:c,zoom:16,mapTypeId:'hybrid',
+    zoomControl:true,mapTypeControl:false,streetViewControl:false,fullscreenControl:false,gestureHandling:'greedy'
+  });
+  autocomplete=new google.maps.places.Autocomplete(document.getElementById('find-search'),{types:['address'],fields:['geometry','formatted_address']});
+  autocomplete.addListener('place_changed',function(){
+    var p=autocomplete.getPlace();if(!p.geometry)return;
+    findMap.panTo(p.geometry.location);findMap.setZoom(20);
+    selectProp(p.geometry.location,p.formatted_address);
+  });
+  findMap.addListener('click',function(e){
+    new google.maps.Geocoder().geocode({location:e.latLng},function(r,s){
+      selectProp(e.latLng,(s==='OK'&&r[0])?r[0].formatted_address:(e.latLng.lat().toFixed(5)+', '+e.latLng.lng().toFixed(5)));
     });
-    autocomplete=new google.maps.places.Autocomplete(
-        document.getElementById('find-search'),
-        {types:['address'],fields:['geometry','formatted_address','name']}
-    );
-    autocomplete.addListener('place_changed',function(){
-        var p=autocomplete.getPlace();
-        if(!p.geometry)return;
-        findMap.panTo(p.geometry.location);
-        findMap.setZoom(20);
-        selectProperty(p.geometry.location,p.formatted_address||p.name);
-    });
-    findMap.addListener('click',function(e){reverseGeocode(e.latLng);});
-    // Force resize to ensure tiles render
-    google.maps.event.trigger(findMap, 'resize');
+  });
 }
 
-function reverseGeocode(latLng){
-    new google.maps.Geocoder().geocode({location:latLng},function(r,s){
-        var addr=(s==='OK'&&r[0])?r[0].formatted_address:latLng.lat().toFixed(5)+', '+latLng.lng().toFixed(5);
-        selectProperty(latLng,addr);
-    });
+function selectProp(ll,addr){
+  prop={lat:typeof ll.lat==='function'?ll.lat():ll.lat,lng:typeof ll.lng==='function'?ll.lng():ll.lng,address:addr};
+  if(propMarker)propMarker.setMap(null);
+  propMarker=new google.maps.Marker({position:{lat:prop.lat,lng:prop.lng},map:findMap,animation:google.maps.Animation.DROP,
+    icon:{path:google.maps.SymbolPath.CIRCLE,scale:11,fillColor:'#154212',fillOpacity:1,strokeColor:'white',strokeWeight:2.5}});
+  document.getElementById('prop-name').textContent=addr.split(',')[0];
+  document.getElementById('prop-coords').textContent=prop.lat.toFixed(5)+', '+prop.lng.toFixed(5);
+  document.getElementById('property-card').classList.add('show');
+  if(findMap.getZoom()<19)findMap.setZoom(19);
 }
 
-function selectProperty(latLng,address){
-    selectedProperty={
-        lat:typeof latLng.lat==='function'?latLng.lat():latLng.lat,
-        lng:typeof latLng.lng==='function'?latLng.lng():latLng.lng,
-        address:address
-    };
-    if(propertyMarker)propertyMarker.setMap(null);
-    propertyMarker=new google.maps.Marker({
-        position:{lat:selectedProperty.lat,lng:selectedProperty.lng},
-        map:findMap,animation:google.maps.Animation.DROP,
-        icon:{path:google.maps.SymbolPath.CIRCLE,scale:11,fillColor:'#154212',fillOpacity:1,strokeColor:'white',strokeWeight:2.5}
-    });
-    var short=(address.split(',')[0]||address).trim();
-    document.getElementById('property-name').textContent=short;
-    document.getElementById('property-coords').textContent=selectedProperty.lat.toFixed(5)+', '+selectedProperty.lng.toFixed(5);
-    document.getElementById('property-card').style.display='block';
-    document.getElementById('find-instruction').style.opacity='0';
-    findMap.panTo({lat:selectedProperty.lat,lng:selectedProperty.lng});
-    if(findMap.getZoom()<19)findMap.setZoom(19);
+function clearProp(){
+  prop=null;if(propMarker){propMarker.setMap(null);propMarker=null;}
+  document.getElementById('property-card').classList.remove('show');
+  document.getElementById('find-search').value='';
 }
 
-function clearProperty(){
-    selectedProperty=null;
-    if(propertyMarker){propertyMarker.setMap(null);propertyMarker=null;}
-    document.getElementById('property-card').style.display='none';
-    document.getElementById('find-instruction').style.opacity='1';
-    document.getElementById('find-search').value='';
+function goToPlan(skipAnim){
+  if(!prop&&!skipAnim)return;
+  var s=getSaved()||{};s.property=prop;localStorage.setItem('gt_garden_plan',JSON.stringify(s));
+  document.getElementById('step-find').style.display='none';
+  document.getElementById('step-plan').style.display='block';
+  document.getElementById('property-card').classList.remove('show');
+  document.getElementById('plan-title').textContent=(prop.address||'').split(',')[0]||'My Property';
+  if(!planMap)setTimeout(initPlanMap,50);
+  else{google.maps.event.trigger(planMap,'resize');planMap.setCenter({lat:prop.lat,lng:prop.lng});}
 }
 
-// ── Screen transitions ───────────────────────────────────────────────────
-function goToPlanScreen(skipAnim){
-    if(!selectedProperty&&!skipAnim)return;
-    var saved=getSaved()||{};
-    saved.property=selectedProperty;
-    localStorage.setItem('gt_garden_plan',JSON.stringify(saved));
-    var short=(selectedProperty.address||'').split(',')[0]||'My Property';
-    document.getElementById('plan-title').textContent=short;
-    if(!skipAnim)document.getElementById('screen-find').classList.add('exit');
-    document.getElementById('screen-plan').classList.add('active');
-    document.getElementById('bottom-nav').style.display='none';
-    if(!planMap)setTimeout(function(){initPlanMap();},skipAnim?0:420);
+function backToFind(){
+  document.getElementById('step-plan').style.display='none';
+  document.getElementById('step-find').style.display='block';
+  setTool('pan');closeZP();
+  if(findMap)google.maps.event.trigger(findMap,'resize');
 }
 
-function goToFindScreen(){
-    document.getElementById('screen-plan').classList.remove('active');
-    document.getElementById('screen-find').classList.remove('exit');
-    document.getElementById('bottom-nav').style.display='';
-    setTool('pan');closeZonePanel();
-}
-
-// ── SCREEN 2: Plan map ───────────────────────────────────────────────────
 function initPlanMap(){
-    var center=selectedProperty?{lat:selectedProperty.lat,lng:selectedProperty.lng}:{lat:-28.0167,lng:153.4000};
-    var pm = document.getElementById('plan-map');
-    pm.innerHTML = '';
-    planMap=new google.maps.Map(pm,{
-        center:center,zoom:20,mapTypeId:'satellite',tilt:0,
-        disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'
-    });
-    drawingManager=new google.maps.drawing.DrawingManager({
-        drawingMode:null,drawingControl:false,
-        polygonOptions:getPolyOpts(),rectangleOptions:getPolyOpts()
-    });
-    drawingManager.setMap(planMap);
-    google.maps.event.addListener(drawingManager,'overlaycomplete',function(e){
-        drawingManager.setDrawingMode(null);
-        setTool('pan');
-        var zt=ZONE_TYPES[currentZoneType]||ZONE_TYPES.bed;
-        e.overlay.setOptions({fillColor:zt.color,fillOpacity:zt.opacity,strokeColor:zt.color,strokeWeight:2.5,strokeOpacity:0.9});
-        var zo={polygon:e.overlay,type:currentZoneType,name:zt.label,photos:[],label:null};
-        drawnPolygons.push(zo);
-        addZoneLabel(zo);
-        e.overlay.addListener('click',function(){openZonePanel(zo);});
-        showSaveHint();
-    });
-    planMap.addListener('click',function(e){
-        if(currentTool!=='pin')return;
-        pendingPinLatLng=e.latLng;openPicker();
-    });
-    loadSavedPlan();
+  planMap=new google.maps.Map(document.getElementById('plan-map'),{
+    center:{lat:prop.lat,lng:prop.lng},zoom:20,mapTypeId:'satellite',tilt:0,
+    disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'
+  });
+  dm=new google.maps.drawing.DrawingManager({drawingMode:null,drawingControl:false,polygonOptions:opts(),rectangleOptions:opts()});
+  dm.setMap(planMap);
+  google.maps.event.addListener(dm,'overlaycomplete',function(e){
+    dm.setDrawingMode(null);setTool('pan');
+    var z=ZT[zt]||ZT.bed;
+    e.overlay.setOptions({fillColor:z.c,fillOpacity:z.o,strokeColor:z.c,strokeWeight:2.5,strokeOpacity:0.9});
+    var zo={poly:e.overlay,type:zt,name:z.l,photos:[],lbl:null};
+    zones.push(zo);addLbl(zo);
+    e.overlay.addListener('click',function(){openZP(zo);});
+  });
+  planMap.addListener('click',function(e){if(tool==='pin'){pendingLL=e.latLng;openPicker();}});
+  loadSaved();
 }
 
-function getPolyOpts(){
-    var zt=ZONE_TYPES[currentZoneType]||ZONE_TYPES.bed;
-    return {fillColor:zt.color,fillOpacity:zt.opacity,strokeColor:zt.color,strokeWeight:2.5,strokeOpacity:0.9,editable:true,draggable:false,zIndex:5};
+function opts(){var z=ZT[zt]||ZT.bed;return{fillColor:z.c,fillOpacity:z.o,strokeColor:z.c,strokeWeight:2.5,strokeOpacity:0.9,editable:true,zIndex:5};}
+
+function addLbl(zo){
+  if(zo.lbl)zo.lbl.setMap(null);
+  var b=new google.maps.LatLngBounds();
+  var p=zo.poly.getPath?zo.poly.getPath():null;
+  if(p)p.forEach(function(pt){b.extend(pt);});else if(zo.poly.getBounds)b=zo.poly.getBounds();
+  zo.lbl=new google.maps.Marker({position:b.getCenter(),map:planMap,icon:{path:'M 0 0',scale:0},zIndex:10,
+    label:{text:zo.name,color:'#154212',fontSize:'11px',fontWeight:'700',fontFamily:"'Plus Jakarta Sans',sans-serif"}});
 }
 
-function addZoneLabel(zo){
-    if(zo.label)zo.label.setMap(null);
-    var bounds=new google.maps.LatLngBounds();
-    var path=zo.polygon.getPath?zo.polygon.getPath():null;
-    if(path){path.forEach(function(p){bounds.extend(p);});}
-    else if(zo.polygon.getBounds){bounds=zo.polygon.getBounds();}
-    zo.label=new google.maps.Marker({
-        position:bounds.getCenter(),map:planMap,
-        icon:{path:'M 0 0',scale:0},zIndex:10,
-        label:{text:zo.name,color:'#154212',fontSize:'11px',fontWeight:'700',fontFamily:"'Plus Jakarta Sans',sans-serif"}
-    });
+function setTool(t){
+  tool=t;
+  ['polygon','rectangle','pan','pin'].forEach(function(x){var b=document.getElementById('t-'+x);if(b)b.classList.toggle('on',x===t);});
+  document.getElementById('draw-hint').style.display='none';
+  document.getElementById('pin-hint').style.display='none';
+  if(!dm)return;
+  if(t==='polygon'){dm.setOptions({polygonOptions:opts()});dm.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);document.getElementById('draw-hint').style.display='block';}
+  else if(t==='rectangle'){dm.setOptions({rectangleOptions:opts()});dm.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);document.getElementById('draw-hint').style.display='block';}
+  else{dm.setDrawingMode(null);if(t==='pin')document.getElementById('pin-hint').style.display='block';}
 }
 
-// ── Tools ────────────────────────────────────────────────────────────────
-function setTool(tool){
-    currentTool=tool;
-    ['polygon','rectangle','pan','pin'].forEach(function(t){
-        var b=document.getElementById('tool-'+t);if(b)b.classList.toggle('active',t===tool);
-    });
-    document.getElementById('draw-hint').style.display='none';
-    document.getElementById('pin-hint').style.display='none';
-    if(!drawingManager)return;
-    if(tool==='polygon'){
-        drawingManager.setOptions({polygonOptions:getPolyOpts()});
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
-        document.getElementById('draw-hint').style.display='block';
-    }else if(tool==='rectangle'){
-        drawingManager.setOptions({rectangleOptions:getPolyOpts()});
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
-        document.getElementById('draw-hint').style.display='block';
-    }else{
-        drawingManager.setDrawingMode(null);
-        if(tool==='pin')document.getElementById('pin-hint').style.display='block';
-    }
+function setZT(t){
+  zt=t;
+  document.querySelectorAll('.zt').forEach(function(b){b.classList.remove('on');b.style.outline='';b.style.outlineOffset='';});
+  var b=document.getElementById('z-'+t);if(b){b.classList.add('on');b.style.outline='3px solid #154212';b.style.outlineOffset='2px';}
+  if(dm)dm.setOptions({polygonOptions:opts(),rectangleOptions:opts()});
 }
 
-function setZoneType(type){
-    currentZoneType=type;
-    document.querySelectorAll('.zt-btn').forEach(function(b){b.classList.remove('selected');b.style.outline='';b.style.outlineOffset='';});
-    var btn=document.getElementById('zt-'+type);
-    if(btn){btn.classList.add('selected');btn.style.outline='3px solid #154212';btn.style.outlineOffset='2px';}
-    if(drawingManager)drawingManager.setOptions({polygonOptions:getPolyOpts(),rectangleOptions:getPolyOpts()});
+function openZP(zo){
+  selZone=zo;document.getElementById('zp-title').textContent=zo.name;
+  var ph=(zo.photos||[]).map(function(u){return'<img src="'+u+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #ccc;"/>';}).join('');
+  document.getElementById('zp-body').innerHTML=
+    '<div style="margin-bottom:10px;"><label style="font-size:13px;font-weight:600;color:#42493e;display:block;margin-bottom:4px;">Zone Name</label>'+
+    '<input id="zp-n" value="'+zo.name+'" style="width:100%;padding:8px 12px;border-radius:10px;border:1.5px solid #ccc;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;"/></div>'+
+    '<div style="margin-bottom:10px;"><label style="font-size:13px;font-weight:600;color:#42493e;display:block;margin-bottom:6px;">Type</label>'+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">'+
+    Object.entries(ZT).map(function(e){var k=e[0],v=e[1];return'<button onclick="chgZT(''+k+'')" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;border-radius:10px;border:2px solid '+(zo.type===k?'#154212':'#ccc')+';background:'+(zo.type===k?'#bcf0ae':'white')+';cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;"><div style="width:16px;height:16px;border-radius:50%;background:'+v.c+';"></div><span style="font-size:10px;font-weight:600;text-align:center;">'+v.l+'</span></button>';}).join('')+
+    '</div></div>'+
+    '<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><label style="font-size:13px;font-weight:600;color:#42493e;">Photos</label><button onclick="document.getElementById('zp-fi').click()" style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:700;color:#154212;font-family:'Plus Jakarta Sans',sans-serif;">+ Add</button></div>'+
+    '<div id="zp-ph" style="display:flex;flex-wrap:wrap;gap:6px;">'+(ph||'<p style="font-size:12px;color:#72796e;">No photos yet</p>')+'</div>'+
+    '<input type="file" id="zp-fi" accept="image/*" style="display:none;" onchange="onZPh(event)"/></div>'+
+    '<div style="display:flex;gap:8px;">'+
+    '<button onclick="applyZP()" style="flex:1;background:#154212;color:white;border:none;border-radius:12px;padding:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Apply</button>'+
+    '<button onclick="delZone()" style="background:#ffdad6;color:#93000a;border:none;border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;"><span class="material-symbols-outlined" style="font-size:18px;">delete</span></button></div>';
+  document.getElementById('zone-panel').classList.add('show');
 }
+function applyZP(){if(!selZone)return;var n=document.getElementById('zp-n').value.trim()||selZone.name;selZone.name=n;document.getElementById('zp-title').textContent=n;addLbl(selZone);closeZP();}
+function chgZT(t){if(!selZone)return;var z=ZT[t]||ZT.bed;selZone.type=t;selZone.name=z.l;selZone.poly.setOptions({fillColor:z.c,fillOpacity:z.o,strokeColor:z.c});openZP(selZone);}
+function delZone(){if(!selZone||!confirm('Delete?'))return;selZone.poly.setMap(null);if(selZone.lbl)selZone.lbl.setMap(null);zones=zones.filter(function(z){return z!==selZone;});selZone=null;closeZP();}
+function onZPh(e){var f=e.target.files[0];if(!f||!selZone)return;e.target.value='';var r=new FileReader();r.onload=function(ev){selZone.photos.push(ev.target.result);var w=document.getElementById('zp-ph');if(w)w.innerHTML=selZone.photos.map(function(u){return'<img src="'+u+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #ccc;"/>';}).join('');};r.readAsDataURL(f);}
+function closeZP(){document.getElementById('zone-panel').classList.remove('show');selZone=null;}
 
-// ── Zone panel ───────────────────────────────────────────────────────────
-function openZonePanel(zo){
-    selectedPolygon=zo;
-    document.getElementById('zp-title').textContent=zo.name;
-    var photosHtml=(zo.photos||[]).length
-        ?zo.photos.map(function(u){return '<img src="'+u+'" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid #c2c9bb;"/>';
-        }).join('')
-        :'<p style="font-size:12px;color:#72796e;">No photos yet</p>';
-    document.getElementById('zp-body').innerHTML=
-        '<div style="margin-bottom:12px;"><label style="font-size:13px;font-weight:600;color:#42493e;display:block;margin-bottom:4px;">Zone Name</label>'+
-        '<input id="zp-name" type="text" value="'+zo.name+'" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid #c2c9bb;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;"/></div>'+
-        '<div style="margin-bottom:12px;"><label style="font-size:13px;font-weight:600;color:#42493e;display:block;margin-bottom:6px;">Zone Type</label>'+
-        '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">'+
-        Object.entries(ZONE_TYPES).map(function(e2){
-            var k=e2[0],v=e2[1];
-            return '<button onclick="changeZoneType(''+k+'')" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:10px;border:2px solid '+(zo.type===k?'#154212':'#c2c9bb')+';background:'+(zo.type===k?'#bcf0ae':'white')+';cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;">'+
-            '<div style="width:18px;height:18px;border-radius:50%;background:'+v.color+';"></div>'+
-            '<span style="font-size:10px;font-weight:600;color:#1b1c1a;text-align:center;line-height:1.2;">'+v.label+'</span></button>';
-        }).join('')+'</div></div>'+
-        '<div style="margin-bottom:14px;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'+
-        '<label style="font-size:13px;font-weight:600;color:#42493e;">Photos</label>'+
-        '<button onclick="addZonePhoto()" style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:700;color:#154212;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:2px;">+ Add</button></div>'+
-        '<div id="zp-photos" style="display:flex;flex-wrap:wrap;gap:6px;">'+photosHtml+'</div>'+
-        '<input type="file" id="zp-photo-input" accept="image/*" style="display:none;" onchange="handleZonePhoto(event)"/></div>'+
-        '<div style="display:flex;gap:8px;">'+
-        '<button onclick="applyZone()" style="flex:1;background:#154212;color:white;border:none;border-radius:12px;padding:13px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Apply</button>'+
-        '<button onclick="deleteZone()" style="background:#ffdad6;color:#93000a;border:none;border-radius:12px;padding:13px 16px;cursor:pointer;display:flex;align-items:center;"><span class="material-symbols-outlined" style="font-size:18px;">delete</span></button></div>';
-    document.getElementById('zone-panel').classList.add('open');
-}
-
-function applyZone(){
-    if(!selectedPolygon)return;
-    var n=document.getElementById('zp-name').value.trim()||selectedPolygon.name;
-    selectedPolygon.name=n;
-    document.getElementById('zp-title').textContent=n;
-    addZoneLabel(selectedPolygon);
-    showSaveHint();closeZonePanel();
-}
-
-function changeZoneType(type){
-    if(!selectedPolygon)return;
-    var zt=ZONE_TYPES[type]||ZONE_TYPES.bed;
-    selectedPolygon.type=type;selectedPolygon.name=zt.label;
-    selectedPolygon.polygon.setOptions({fillColor:zt.color,fillOpacity:zt.opacity,strokeColor:zt.color});
-    openZonePanel(selectedPolygon);
-}
-
-function deleteZone(){
-    if(!selectedPolygon||!confirm('Delete this zone?'))return;
-    selectedPolygon.polygon.setMap(null);
-    if(selectedPolygon.label)selectedPolygon.label.setMap(null);
-    drawnPolygons=drawnPolygons.filter(function(z){return z!==selectedPolygon;});
-    selectedPolygon=null;closeZonePanel();showSaveHint();
-}
-
-function addZonePhoto(){document.getElementById('zp-photo-input').click();}
-
-function handleZonePhoto(e){
-    var file=e.target.files[0];if(!file||!selectedPolygon)return;
-    e.target.value='';
-    var r=new FileReader();
-    r.onload=function(ev){
-        selectedPolygon.photos.push(ev.target.result);
-        var w=document.getElementById('zp-photos');
-        if(w)w.innerHTML=selectedPolygon.photos.map(function(u){return '<img src="'+u+'" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid #c2c9bb;"/>';
-        }).join('');
-        showSaveHint();
-    };
-    r.readAsDataURL(file);
-}
-
-function closeZonePanel(){document.getElementById('zone-panel').classList.remove('open');selectedPolygon=null;}
-
-// ── Plant pins ───────────────────────────────────────────────────────────
 function openPicker(){
-    var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
-    var list=document.getElementById('picker-list');
-    if(!plants.length){
-        list.innerHTML='<div style="text-align:center;padding:20px 0;"><span class="material-symbols-outlined" style="font-size:40px;color:#c2c9bb;">eco</span><p style="font-size:14px;color:#72796e;margin-top:8px;">No plants added yet.</p><a href="add-plant.html" style="font-size:14px;font-weight:700;color:#154212;display:block;margin-top:8px;">Add a plant first →</a></div>';
-    }else{
-        list.innerHTML=plants.map(function(p){
-            return '<button onclick="placePlantPin(''+p.id+'')" style="display:flex;align-items:center;gap:12px;width:100%;padding:12px;border-radius:12px;border:1.5px solid #e3e2df;background:white;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:2px;">'+
-            (p.img?'<img src="'+p.img+'" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #bcf0ae;"/>':'<div style="width:44px;height:44px;border-radius:50%;background:#bcf0ae;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;">🌿</div>')+
-            '<div style="min-width:0;"><p style="font-size:14px;font-weight:700;color:#1b1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;">'+(p.nickname||p.name)+'</p>'+
-            '<p style="font-size:12px;color:#72796e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px 0 0;">'+(p.species||'')+'</p></div></button>';
-        }).join('');
-    }
-    document.getElementById('plant-picker').classList.add('open');
-    document.getElementById('picker-overlay').style.display='block';
+  var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
+  var list=document.getElementById('picker-list');
+  if(!plants.length){list.innerHTML='<div style="text-align:center;padding:16px;"><p style="color:#72796e;">No plants yet.</p><a href="add-plant.html" style="font-weight:700;color:#154212;">Add a plant →</a></div>';}
+  else{list.innerHTML=plants.map(function(p){return'<button onclick="placePin(''+p.id+'')" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:12px;border:1.5px solid #e0e0e0;background:white;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;">'+(p.img?'<img src="'+p.img+'" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;"/>':'<div style="width:40px;height:40px;border-radius:50%;background:#bcf0ae;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🌿</div>')+'<div style="min-width:0;"><p style="font-size:14px;font-weight:700;color:#1b1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;">'+(p.nickname||p.name)+'</p><p style="font-size:12px;color:#72796e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px 0 0;">'+(p.species||'')+'</p></div></button>';}).join('');}
+  document.getElementById('plant-picker').classList.add('show');
+  document.getElementById('picker-bg').style.display='block';
+}
+function closePicker(){document.getElementById('plant-picker').classList.remove('show');document.getElementById('picker-bg').style.display='none';pendingLL=null;setTool('pan');}
+function placePin(id){
+  if(!pendingLL||!planMap){closePicker();return;}
+  var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
+  var plant=plants.find(function(p){return String(p.id)===String(id);});if(!plant){closePicker();return;}
+  var svg='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="18" fill="white" stroke="#154212" stroke-width="3"/><text x="20" y="27" text-anchor="middle" font-size="20">🌿</text></svg>');
+  var m=new google.maps.Marker({position:pendingLL,map:planMap,draggable:true,icon:{url:svg,scaledSize:new google.maps.Size(40,40),anchor:new google.maps.Point(20,20)},title:plant.nickname||plant.name,zIndex:20});
+  var iw=new google.maps.InfoWindow({content:'<div style="font-family:'Plus Jakarta Sans',sans-serif;text-align:center;padding:4px;min-width:120px;">'+(plant.img?'<img src="'+plant.img+'" style="width:50px;height:50px;border-radius:8px;object-fit:cover;display:block;margin:0 auto 6px;"/>':'')+'<p style="font-weight:700;font-size:14px;margin:0;">'+(plant.nickname||plant.name)+'</p><a href="plant-detail.html?id='+id+'" style="font-size:12px;font-weight:700;color:#154212;">View profile →</a></div>'});
+  m.addListener('click',function(){iw.open(planMap,m);});
+  pins.push({marker:m,plantId:id});closePicker();
 }
 
-function closePicker(){
-    document.getElementById('plant-picker').classList.remove('open');
-    document.getElementById('picker-overlay').style.display='none';
-    pendingPinLatLng=null;setTool('pan');
-}
-
-function placePlantPin(plantId){
-    if(!pendingPinLatLng||!planMap){closePicker();return;}
-    var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
-    var plant=plants.find(function(p){return String(p.id)===String(plantId);});
-    if(!plant){closePicker();return;}
-    var svgIcon='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">'+
-        '<circle cx="21" cy="21" r="19" fill="white" stroke="#154212" stroke-width="3"/>'+
-        '<text x="21" y="28" text-anchor="middle" font-size="20">🌿</text></svg>'
-    );
-    var marker=new google.maps.Marker({
-        position:pendingPinLatLng,map:planMap,draggable:true,
-        icon:{url:svgIcon,scaledSize:new google.maps.Size(42,42),anchor:new google.maps.Point(21,21)},
-        title:plant.nickname||plant.name,zIndex:20
-    });
-    var iw=new google.maps.InfoWindow({
-        content:'<div style="font-family:'Plus Jakarta Sans',sans-serif;padding:4px;min-width:140px;">'+
-        (plant.img?'<img src="'+plant.img+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;display:block;margin:0 auto 8px;"/>':'')+
-        '<p style="font-size:14px;font-weight:700;color:#1b1c1a;text-align:center;margin:0;">'+(plant.nickname||plant.name)+'</p>'+
-        '<p style="font-size:12px;color:#72796e;text-align:center;font-style:italic;margin:2px 0 0;">'+(plant.species||'')+'</p>'+
-        '<a href="plant-detail.html?id='+plantId+'" style="display:block;text-align:center;margin-top:8px;font-size:13px;font-weight:700;color:#154212;">View profile →</a></div>'
-    });
-    marker.addListener('click',function(){iw.open(planMap,marker);});
-    drawnPins.push({marker:marker,plantId:plantId});
-    closePicker();showSaveHint();
-}
-
-// ── Save / Load ──────────────────────────────────────────────────────────
 function savePlan(){
-    var zones=drawnPolygons.map(function(z){
-        var coords=[];
-        var path=z.polygon.getPath?z.polygon.getPath():null;
-        if(path){path.forEach(function(p){coords.push({lat:p.lat(),lng:p.lng()});});}
-        else if(z.polygon.getBounds){
-            var b=z.polygon.getBounds(),ne=b.getNorthEast(),sw=b.getSouthWest();
-            coords=[{lat:ne.lat(),lng:sw.lng()},{lat:ne.lat(),lng:ne.lng()},{lat:sw.lat(),lng:ne.lng()},{lat:sw.lat(),lng:sw.lng()}];
-        }
-        return {type:z.type,name:z.name,coords:coords,photos:z.photos||[]};
-    });
-    var pins=drawnPins.map(function(p){var pos=p.marker.getPosition();return {plantId:p.plantId,lat:pos.lat(),lng:pos.lng()};});
-    localStorage.setItem('gt_garden_plan',JSON.stringify({property:selectedProperty,zones:zones,pins:pins}));
-    var t=document.getElementById('save-toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);
-    var b=document.getElementById('save-btn');b.innerHTML='<span class="material-symbols-outlined" style="font-size:16px;">check</span>Saved';
-    setTimeout(function(){b.innerHTML='<span class="material-symbols-outlined" style="font-size:16px;">save</span>Save';},2200);
+  var zd=zones.map(function(z){var c=[];var p=z.poly.getPath?z.poly.getPath():null;if(p)p.forEach(function(pt){c.push({lat:pt.lat(),lng:pt.lng()});});else if(z.poly.getBounds){var b=z.poly.getBounds(),ne=b.getNorthEast(),sw=b.getSouthWest();c=[{lat:ne.lat(),lng:sw.lng()},{lat:ne.lat(),lng:ne.lng()},{lat:sw.lat(),lng:ne.lng()},{lat:sw.lat(),lng:sw.lng()}];}return{type:z.type,name:z.name,coords:c,photos:z.photos||[]};});
+  var pd=pins.map(function(p){var pos=p.marker.getPosition();return{plantId:p.plantId,lat:pos.lat(),lng:pos.lng()};});
+  localStorage.setItem('gt_garden_plan',JSON.stringify({property:prop,zones:zd,pins:pd}));
+  var t=document.getElementById('save-toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);
+  var b=document.getElementById('save-btn');b.innerHTML='<span class="material-symbols-outlined" style="font-size:16px;">check</span>Saved';
+  setTimeout(function(){b.innerHTML='<span class="material-symbols-outlined" style="font-size:16px;">save</span>Save';},2200);
 }
-
-function loadSavedPlan(){
-    var saved=getSaved();if(!saved)return;
-    var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
-    (saved.zones||[]).forEach(function(z){
-        if(!z.coords||!z.coords.length)return;
-        var zt=ZONE_TYPES[z.type]||ZONE_TYPES.bed;
-        var poly=new google.maps.Polygon({paths:z.coords,fillColor:zt.color,fillOpacity:zt.opacity,strokeColor:zt.color,strokeWeight:2.5,editable:true,map:planMap,zIndex:5});
-        var zo={polygon:poly,type:z.type,name:z.name,photos:z.photos||[],label:null};
-        drawnPolygons.push(zo);addZoneLabel(zo);
-        poly.addListener('click',function(){openZonePanel(zo);});
-    });
-    (saved.pins||[]).forEach(function(pin){
-        var plant=plants.find(function(p){return String(p.id)===String(pin.plantId);});
-        if(!plant)return;
-        var svgIcon='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42"><circle cx="21" cy="21" r="19" fill="white" stroke="#154212" stroke-width="3"/><text x="21" y="28" text-anchor="middle" font-size="20">🌿</text></svg>');
-        var marker=new google.maps.Marker({position:{lat:pin.lat,lng:pin.lng},map:planMap,draggable:true,icon:{url:svgIcon,scaledSize:new google.maps.Size(42,42),anchor:new google.maps.Point(21,21)},title:plant.nickname||plant.name,zIndex:20});
-        var iw=new google.maps.InfoWindow({content:'<div style="font-family:'Plus Jakarta Sans',sans-serif;text-align:center;padding:4px;"><p style="font-weight:700;">'+(plant.nickname||plant.name)+'</p><a href="plant-detail.html?id='+pin.plantId+'" style="font-size:13px;font-weight:700;color:#154212;">View profile →</a></div>'});
-        marker.addListener('click',function(){iw.open(planMap,marker);});
-        drawnPins.push({marker:marker,plantId:pin.plantId});
-    });
+function loadSaved(){
+  var s=getSaved();if(!s)return;
+  var plants=[];try{plants=JSON.parse(localStorage.getItem('gt_plants')||'[]');}catch(e){}
+  (s.zones||[]).forEach(function(z){if(!z.coords||!z.coords.length)return;var zt2=ZT[z.type]||ZT.bed;var poly=new google.maps.Polygon({paths:z.coords,fillColor:zt2.c,fillOpacity:zt2.o,strokeColor:zt2.c,strokeWeight:2.5,editable:true,map:planMap,zIndex:5});var zo={poly:poly,type:z.type,name:z.name,photos:z.photos||[],lbl:null};zones.push(zo);addLbl(zo);poly.addListener('click',function(){openZP(zo);});});
+  (s.pins||[]).forEach(function(pin){var plant=plants.find(function(p){return String(p.id)===String(pin.plantId);});if(!plant)return;var svg='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="18" fill="white" stroke="#154212" stroke-width="3"/><text x="20" y="27" text-anchor="middle" font-size="20">🌿</text></svg>');var m=new google.maps.Marker({position:{lat:pin.lat,lng:pin.lng},map:planMap,draggable:true,icon:{url:svg,scaledSize:new google.maps.Size(40,40),anchor:new google.maps.Point(20,20)},zIndex:20});var iw=new google.maps.InfoWindow({content:'<div style="font-family:'Plus Jakarta Sans',sans-serif;text-align:center;padding:4px;"><p style="font-weight:700;">'+(plant.nickname||plant.name)+'</p><a href="plant-detail.html?id='+pin.plantId+'" style="font-size:12px;font-weight:700;color:#154212;">View profile →</a></div>'});m.addListener('click',function(){iw.open(planMap,m);});pins.push({marker:m,plantId:pin.plantId});});
 }
-
-function undoLast(){
-    if(!drawnPolygons.length)return;
-    var last=drawnPolygons.pop();
-    last.polygon.setMap(null);if(last.label)last.label.setMap(null);showSaveHint();
-}
-
-function clearAll(){
-    if(!confirm('Clear all zones and pins?'))return;
-    drawnPolygons.forEach(function(z){z.polygon.setMap(null);if(z.label)z.label.setMap(null);});
-    drawnPins.forEach(function(p){p.marker.setMap(null);});
-    drawnPolygons=[];drawnPins=[];closeZonePanel();showSaveHint();
-}
-
-var _saveHintT;
-function showSaveHint(){
-    var b=document.getElementById('save-btn');if(b)b.style.background='#2d5a27';
-    clearTimeout(_saveHintT);_saveHintT=setTimeout(function(){if(b)b.style.background='#154212';},3000);
-}
+function undoLast(){if(!zones.length)return;var l=zones.pop();l.poly.setMap(null);if(l.lbl)l.lbl.setMap(null);}
+function clearAll(){if(!confirm('Clear all?'))return;zones.forEach(function(z){z.poly.setMap(null);if(z.lbl)z.lbl.setMap(null);});pins.forEach(function(p){p.marker.setMap(null);});zones=[];pins=[];closeZP();}
 </script>
 </body></html>
